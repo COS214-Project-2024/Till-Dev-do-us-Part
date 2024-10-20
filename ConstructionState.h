@@ -8,8 +8,8 @@ class ConstructionState: public BuildingState
     public:
         ConstructionState();
         virtual ~ConstructionState();
-        virtual ConstructionState* demolish(BuildingState* prevState);
-        virtual ConstructionState *renovate(BuildingState *prevState);
-        virtual ConstructionState *maintenance(BuildingState *prevState);
+        virtual BuildingState* demolish(BuildingState* prevState);
+        virtual BuildingState* renovate(BuildingState *prevState);
+        virtual BuildingState* maintenance(BuildingState *prevState);
 };
 #endif
