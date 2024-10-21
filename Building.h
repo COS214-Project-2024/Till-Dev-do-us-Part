@@ -18,15 +18,15 @@ class Building
         // MaintenanceState* maintenance; //i think we should add this under BuildingState 
 
     public:
-        Building();
+        Building(string name);
         ~Building();
         bool isOccupied();
-        virtual void renovate() =0;
-        virtual void demolish() =0;
-        virtual void useElectricity();
+        virtual void renovate()=0;
+        virtual void demolish()=0;
+        virtual void useElectricity()=0;
+        virtual void useWater()=0;
         virtual void getElectricity();
-        virtual void useWater();
-        void addOccupant(Citizen* c);
+        bool addOccupant(Citizen* c);
 
 };
 #endif
