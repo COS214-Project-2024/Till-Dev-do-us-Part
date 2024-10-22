@@ -1,8 +1,8 @@
 #include "SocialAffairsDept.h"
 
-SocialAffairsDept:: SocialAffairsDept(float budget) : Department(budget)
+SocialAffairsDept:: SocialAffairsDept(float budget)
 {
-    
+    this.budget=budget;
 }
 void SocialAffairsDept:: addCitizen(Citizen* citizen)
 {
