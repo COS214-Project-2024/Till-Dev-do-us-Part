@@ -5,6 +5,8 @@
 #include <list>
 #include "Department.h"
 #include "Citizen.h"
+#include "Population.h"
+#include "Business.h"
 
 using namespace std;
 
@@ -12,14 +14,17 @@ class SocialAffairsDept: public Department{
 
     private:
 
-        //Use of citizens lsit??
+        //What is the use of citizens list??
         list<Citizen> citizens;
         queue<Citizen*> unemployed;
+        Population* factory;
 
     public:
         SocialAffairsDept(float);
-        Citizen* employ();
+        Citizen* employ(Business*);
+        void addCitizen(Citizen*);
         int getNumCitizens();
+        void growPopulation();
         ~SocialAffairsDept();
 
 };

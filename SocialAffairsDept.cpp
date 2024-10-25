@@ -6,14 +6,23 @@ SocialAffairsDept::SocialAffairsDept(float b){
 }
 
 //Return a citizen to be employed where needed
-Citizen* SocialAffairsDept::employ(){
+Citizen* SocialAffairsDept::employ(Business* employer){
 
     if(!unemployed.empty()){
         Citizen* employee = unemployed.front();
+        employee->setEmployer(employer);
         unemployed.pop();
         // cout<<"Successfully employed " << employee.getName() << endl; //Should cout in class that is employing 
         return employee;
     }
+}
+
+void SocialAffairsDept::addCitizen(Citizen* person){
+    // citizens.pushback(person);
+
+    // if(person->employmentStatus)
+
+    //Most effective way to implement??
 }
 
 //Get number of citizens
@@ -28,4 +37,8 @@ SocialAffairsDept::~SocialAffairsDept(){
         delete employee;
         unemployed.pop();
     }
+}
+
+void SocialAffairsDept::growPopulation(){
+    //call on factory to create mmore people
 }
