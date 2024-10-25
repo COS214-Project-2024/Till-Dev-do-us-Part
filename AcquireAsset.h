@@ -1,9 +1,10 @@
 #ifndef ACQUIREASSET_H
 #define ACQUIREASSET_H
 
-#include "Citizen.h"
+#include "Adult.h"
 
-class AcquireAsset:public Citizen{
+//Public adult or citizen, check with UML too
+class AcquireAsset:public Adult{
 
     private:
         Citizen* adult;
