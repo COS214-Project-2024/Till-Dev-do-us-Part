@@ -5,28 +5,28 @@
 using namespace std;
 
 class Citizen; //for now since Citizen is not defined
+class BuildingState; // for now since Citizen is not defined
 
 class Building
 {
     protected:
+        BuildingState* state;
         string type;
         float area;
+        float value;
+        int floor; //dk how im going to use it now, 'cause im planning on adding a floor decorator
         float electricityUnits;
         float waterUnits;
         int capacity;
-        vector<Citizen*> occupants;
-        // MaintenanceState* maintenance; //i think we should add this under BuildingState 
-
     public:
-        Building(string name);
+        Building(string type);
         ~Building();
-        bool isOccupied();
-        virtual void renovate()=0;
+        virtual void loadElectricity(int units); //needs utilities
+        virtual void loadWater(int units); //needs utilities
+        virtual bool useElectricity(int units);
+        virtual bool useWater(int units);
         virtual void demolish()=0;
-        virtual void useElectricity()=0;
-        virtual void useWater()=0;
-        virtual void getElectricity();
-        bool addOccupant(Citizen* c);
+        // virtual bool addOccupant(Citizen* c);
 
 };
 #endif
