@@ -17,5 +17,6 @@ class Estate : public Residential
         virtual bool clean();
         bool addOccupant(Citizen *c);
         bool addHouse(Residential *); // if capacity is reached, return false
+    
 };
 #endif

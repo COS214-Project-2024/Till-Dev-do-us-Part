@@ -1,6 +1,6 @@
 #include "House.h"
 
-House::House():Residential("Hoose")
+House::House():Residential("House")
 {
 
 }
@@ -30,4 +30,13 @@ bool House::clean(){
     return useWater(200) && useElectricity(40);
 }
 
+bool House::addOccupant(Citizen *c)
+{
+    if (c != nullptr && occupants.size() < capacity)
+    {
+        occupants.push_back(c);
+        return true;
+    }
 
+    return false;
+}

@@ -32,3 +32,14 @@ bool Townhouse::clean()
 {
     return useWater(300) && useElectricity(70);
 }
+
+bool Townhouse::addOccupant(Citizen *c)
+{
+    if (c != nullptr && occupants.size() < capacity)
+    {
+        occupants.push_back(c);
+        return true;
+    }
+
+    return false;
+}

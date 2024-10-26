@@ -79,6 +79,7 @@ bool Estate::clean()
 
 bool Estate::addOccupant(Citizen *c)
 {
+    //TODO if type == House, then check that occupants.size == 0. If so, add
     if (c != nullptr)
     {
         for (vector<Residential*>::iterator it = buildings.begin(); it!= buildings.end(); it++)

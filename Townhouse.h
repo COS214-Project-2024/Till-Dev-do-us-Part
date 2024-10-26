@@ -5,7 +5,7 @@
 class Townhouse : public Residential
 {
     private:
-        /* data */
+        vector<Citizen *> occupants;
     public:
         Townhouse(/* args */);
         ~Townhouse();
@@ -14,5 +14,6 @@ class Townhouse : public Residential
         virtual bool useToilet(); // why boolean, because when there isnt enough water/electricity it must affect the citizen
         virtual bool useStove();  // why boolean, because when there isnt enough water/electricity it must affect the citizen
         virtual bool clean();
+        bool addOccupant(Citizen *c);
 };
 #endif

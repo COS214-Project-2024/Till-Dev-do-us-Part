@@ -25,8 +25,10 @@ class Building
         virtual void loadWater(int units); //needs utilities
         virtual bool useElectricity(int units);
         virtual bool useWater(int units);
+        virtual float getPrice();
         virtual void demolish()=0;
-        // virtual bool addOccupant(Citizen* c);
-
+        virtual bool clean()=0;
+        virtual bool addOccupant(Citizen* c)=0;
+        // virtual bool useToilet(); // why boolean, because when there isnt enough water/electricity it must affect the citizen
 };
 #endif
