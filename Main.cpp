@@ -5,6 +5,7 @@
     #include "Wellness.h"
 #include "CRS.h"
 #include "FinanceDept.h"
+#include "Government.h"
 #include "TaxCalculator.h"
     #include "CorporateTax.h"
     #include "Customs.h"
@@ -44,6 +45,9 @@ int main()
     for (int i=0; i<6; i++)
         cout << i+1 <<". " << apps[i]->getTaxType() << endl; 
     cout << endl;
+
+//MAKING THE GOVERNMENT
+    Government* Gov = Government::getInstance(); 
 
     //checking amount in taxfund before calculations
     // CRS::getTax(0); 
@@ -126,6 +130,9 @@ int main()
 
     delete foodShop1; 
     foodShop1 = nullptr; 
+
+    delete Gov; 
+    Gov = nullptr; 
 
     for (int i=0; i<6; i++)
     {
