@@ -36,6 +36,18 @@ void Government::revertPolicy(const std::string& name) {
         }
     }
 }
+void Government::addDepartment(std::string name, Department* department)
+{
+    departments[name]=department;
+}
+void Government::removeDepartment(std::string name)
+{
+    auto it = departments.find(name);
+    if (it != departments.end()) {
+       departments.erase(it) ;
+    } 
+
+}
 
 
 

@@ -21,8 +21,9 @@ public:
     Department* getDepartment(const std::string& name);
     void enactPolicy(const Policy& policy);
     void revertPolicy(const std::string& name);
+    void addDepartment(std::string name, Department* department);
+    void removeDepartment(std:: string name);
     // void notifyCitizens();
-
 };
 
 #endif 
