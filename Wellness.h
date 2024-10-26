@@ -20,7 +20,8 @@ class Wellness : public Business
             numEmployees[1] = 8; 
             initialIncome = 700000; 
             income = 700000;
-            name = "Some Wellness Shop";  
+            name = "Some Wellness Shop";
+            //owner =  
         }
 
         Wellness(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Wellness : public Business
             initialIncome = maxEmployess*700000/8;
             income = maxEmployess*700000/8;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

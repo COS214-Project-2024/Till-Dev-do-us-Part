@@ -4,6 +4,9 @@
 
     Pattern: Strategy
     Participant: Context
+
+    Pattern: Command
+    Participant: Invoker
 */
 
 #ifndef WISEBUCKS_H

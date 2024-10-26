@@ -21,6 +21,7 @@ class Retail : public Business
             initialIncome = 600000; 
             income = 600000;
             name = "Some Retail Shop";  
+            //owner =
         }
 
         Retail(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Retail : public Business
             initialIncome = maxEmployess*600000/12;
             income = maxEmployess*600000/12;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

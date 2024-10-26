@@ -21,6 +21,7 @@ class Hospitality : public Business
             initialIncome = 250000; 
             income = initialIncome;
             name = "Some Hospitality Shop";  
+            //owner =
         }
 
         Hospitality(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Hospitality : public Business
             initialIncome = maxEmployess*250000/5;
             income = maxEmployess*250000/5;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

@@ -21,6 +21,7 @@ class Consulting : public Business
             initialIncome = 300000; 
             income = initialIncome;
             name = "Some Consulting Shop";  
+            //owner =
         }
 
         Consulting(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Consulting : public Business
             initialIncome = maxEmployess*300000/5;
             income = maxEmployess*300000/5;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

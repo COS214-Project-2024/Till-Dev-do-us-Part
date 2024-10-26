@@ -21,6 +21,7 @@ class Automotive : public Business
             initialIncome = 450000; 
             income = initialIncome;
             name = "Some Automotive Shop";  
+            //owner =
         }
 
         Automotive(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Automotive : public Business
             initialIncome = maxEmployess*450000/6;
             income = maxEmployess*450000/6;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

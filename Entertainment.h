@@ -21,6 +21,7 @@ class Entertainment : public Business
             initialIncome = 700000; 
             income = 700000;
             name = "Some Entertainment Shop";  
+            //owner =
         }
 
         Entertainment(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Entertainment : public Business
             initialIncome = maxEmployess*700000/10;
             income = maxEmployess*700000/10;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

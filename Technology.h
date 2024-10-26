@@ -20,7 +20,8 @@ class Technology : public Business
             numEmployees[1] = 5; 
             initialIncome = 350000; 
             income = initialIncome;
-            name = "Some Technology Shop";  
+            name = "Some Technology Shop";
+            //owner =  
         }
 
         Technology(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Technology : public Business
             initialIncome = maxEmployess*350000/5;
             income = maxEmployess*350000/5;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

@@ -20,7 +20,8 @@ class Food : public Business
             numEmployees[1] = 10; 
             initialIncome = 500000; 
             income = 500000;
-            name = "Some Food Shop";  
+            name = "Some Food Shop"; 
+            //owner = 
         }
 
         Food(string shopName, int maxEmployess)
@@ -31,6 +32,7 @@ class Food : public Business
             initialIncome = maxEmployess*500000/10;
             income = maxEmployess*500000/10;
             name = shopName;  
+            //owner =
         }
 
         virtual string getBusinessType()

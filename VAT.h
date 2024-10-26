@@ -1,6 +1,9 @@
 /*
     Pattern: Strategy
     Participant: ConcreteStrategy
+
+    Pattern: Command
+    Participant: ConcreteCommand
 */
 
 #ifndef VAT_H

@@ -1,6 +1,9 @@
 /*
     Pattern: Strategy
     Participant: Strategy
+
+    Pattern: Command
+    Participant: Command
 */
 
 #ifndef TAXCALCULATOR
@@ -13,7 +16,7 @@ class TaxCalculator
 {
     public: 
         virtual string getTaxType() = 0; 
-        //strategy function (algorithm)
+        //strategy function (algorithm) and command function (execute)
         virtual float calculateTax(float income) = 0; 
 };
 
