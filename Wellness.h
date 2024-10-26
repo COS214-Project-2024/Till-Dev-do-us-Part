@@ -22,6 +22,9 @@ class Wellness : public Business
             income = 700000;
             name = "Some Wellness Shop";
             //owner =  
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         Wellness(string shopName, int maxEmployess)
@@ -33,6 +36,9 @@ class Wellness : public Business
             income = maxEmployess*700000/8;
             name = shopName;  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         virtual string getBusinessType()

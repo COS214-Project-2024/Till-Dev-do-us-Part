@@ -3,6 +3,8 @@
     #include "Food.h"
     #include "Retail.h"
     #include "Wellness.h"
+#include "CRS.h"
+#include "FinanceDept.h"
 #include "TaxCalculator.h"
     #include "CorporateTax.h"
     #include "Customs.h"

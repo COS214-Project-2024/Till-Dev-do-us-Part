@@ -22,6 +22,9 @@ class Technology : public Business
             income = initialIncome;
             name = "Some Technology Shop";
             //owner =  
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         Technology(string shopName, int maxEmployess)
@@ -33,6 +36,9 @@ class Technology : public Business
             income = maxEmployess*350000/5;
             name = shopName;  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         virtual string getBusinessType()

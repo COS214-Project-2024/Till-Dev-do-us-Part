@@ -22,6 +22,9 @@ class Retail : public Business
             income = 600000;
             name = "Some Retail Shop";  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         Retail(string shopName, int maxEmployess)
@@ -33,6 +36,9 @@ class Retail : public Business
             income = maxEmployess*600000/12;
             name = shopName;  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         virtual string getBusinessType()

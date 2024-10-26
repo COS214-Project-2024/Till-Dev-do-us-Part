@@ -22,6 +22,9 @@ class Automotive : public Business
             income = initialIncome;
             name = "Some Automotive Shop";  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         Automotive(string shopName, int maxEmployess)
@@ -33,6 +36,9 @@ class Automotive : public Business
             income = maxEmployess*450000/6;
             name = shopName;  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         virtual string getBusinessType()

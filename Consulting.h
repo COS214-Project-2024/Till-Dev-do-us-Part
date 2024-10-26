@@ -22,6 +22,9 @@ class Consulting : public Business
             income = initialIncome;
             name = "Some Consulting Shop";  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         Consulting(string shopName, int maxEmployess)
@@ -33,6 +36,9 @@ class Consulting : public Business
             income = maxEmployess*300000/5;
             name = shopName;  
             //owner =
+
+            //add to dept vector of businesses
+            FinanceDept::newBusiness(this);
         }
 
         virtual string getBusinessType()

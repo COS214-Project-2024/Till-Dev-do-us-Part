@@ -8,6 +8,7 @@
 
 #include "Building.h"
 #include "Citizen.h"
+#include "FinanceDept.h"
 #include "WiseBucks.h"
 
 #include <string>
