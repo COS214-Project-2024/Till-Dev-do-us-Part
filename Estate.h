@@ -5,7 +5,7 @@
 class Estate : public Residential
 {
     private:
-        vector<Residential *> houses;
+        vector<Residential *> buildings;
 
     public:
         Estate();
@@ -15,6 +15,7 @@ class Estate : public Residential
         virtual bool useToilet();
         virtual bool useStove();
         virtual bool clean();
+        bool addOccupant(Citizen *c);
         bool addHouse(Residential *); // if capacity is reached, return false
 };
 #endif

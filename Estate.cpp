@@ -6,20 +6,20 @@ Estate::Estate():Residential("Estate"){
 
 Estate::~Estate()
 {
-    for (int i = 0; i < houses.size(); ++i)
+    for (int i = 0; i < buildings.size(); ++i)
     {
-        delete houses.at(i);
-        houses[i] = nullptr;
+        delete buildings.at(i);
+        buildings[i] = nullptr;
     }
 
-    houses.clear();
+    buildings.clear();
 }
 
 bool Estate::addHouse(Residential *building)
 {
-    if(building != nullptr && houses.size() < capacity)
+    if(building != nullptr && buildings.size() < capacity)
     {
-        houses.push_back(building);
+        buildings.push_back(building);
         return true;
     }
     return false;
@@ -32,9 +32,9 @@ void Estate::demolish()
 
 bool Estate::useShower()
 {
-    for (int i = 0; i < houses.size(); i++)
+    for (int i = 0; i < buildings.size(); i++)
     {
-        if(!houses[i]->useShower()){
+        if(!buildings[i]->useShower()){
             return false;
         }
     }
@@ -43,9 +43,9 @@ bool Estate::useShower()
 
 bool Estate::useToilet()
 {
-    for (int i = 0; i < houses.size(); i++)
+    for (int i = 0; i < buildings.size(); i++)
     {
-        if (!houses[i]->useToilet())
+        if (!buildings[i]->useToilet())
         {
             return false;
         }
@@ -55,9 +55,9 @@ bool Estate::useToilet()
 
 bool Estate::useStove()
 {
-    for (int i = 0; i < houses.size(); i++)
+    for (int i = 0; i < buildings.size(); i++)
     {
-        if (!houses[i]->useStove())
+        if (!buildings[i]->useStove())
         {
             return false;
         }
@@ -67,12 +67,28 @@ bool Estate::useStove()
 
 bool Estate::clean()
 {
-    for (int i = 0; i < houses.size(); i++)
+    for (int i = 0; i < buildings.size(); i++)
     {
-        if (!houses[i]->clean())
+        if (!buildings[i]->clean())
         {
             return false;
         }
     }
     return true;
+}
+
+bool Estate::addOccupant(Citizen *c)
+{
+    if (c != nullptr)
+    {
+        for (vector<Residential*>::iterator it = buildings.begin(); it!= buildings.end(); it++)
+        {
+            if((*it)->addOccupant(c)){
+                return true;
+            }
+        }
+        
+    }
+
+    return false;
 }
