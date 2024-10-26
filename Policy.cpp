@@ -1,17 +1,17 @@
-#include "Policy.h"
+// #include "Policy.h"
 
-Policy::Policy(const std::string& name, const std::string& code)
-    : name(name), code(code) {}
+// Policy::Policy(std::string name, std::string code)
+//     : name(name), code(code) {}
 
-Memento Policy::createMemento() {
-    return Memento();
-}
+// Memento* Policy::createMemento() {
+//     return new Memento();
+// }
 
-void Policy::setMemento(const Memento& memento) {
-    this->memento = memento;
-}
+// void Policy::setMemento(Memento* memento) {
+//     this->memento = memento;
+// }
 
-std::string Policy:: getName()
-{
-    return name;
-}
+// std::string Policy:: getName()
+// {
+//     return name;
+// }

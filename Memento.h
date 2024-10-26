@@ -9,7 +9,7 @@ class Policy;  // Forward declaration
 class Memento {
 private:
     float budget;
-    std::vector<Policy> activePolicies;
+    std::vector<Policy*> activePolicies;
 
 public:
     float getBudget() const;
