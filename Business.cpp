@@ -19,6 +19,16 @@ using namespace std;
     WiseBucks* wiseBucksApp; 
 */
 
+void buyProperty()
+{
+
+}
+
+void sellProperty()
+{
+    
+}
+
 void Business::hireEmployee()
 {
     if (employees[0] != employees[1])
@@ -106,7 +116,7 @@ void Business::handleAccounts()
     {
         //cannot pay if there is no work being done
         // SHOULD WE CHECK IF ONLY THE OWNER WORKS I.E MAX EMPLOYEES IS 1 OR 0
-        if (numEmployees[0] != 0)
+        if (numEmployees[0] != 0 || property == nullptr)
         {
             //get income after tax paid
             income = wiseBucksApp->payTax(income);
@@ -139,5 +149,7 @@ void Business::handleAccounts()
 
 Business::~Business()
 {
+    if (property != nullptr)
+        property = nullptr; 
     // FinanceDept::removeBusiness(this); 
 } 

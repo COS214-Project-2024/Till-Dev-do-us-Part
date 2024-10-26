@@ -7,7 +7,6 @@
 #define AUTOMOTIVE_H
 
 #include "Business.h"
-#include "Government.h"
 
 // Automotive = Petrol Station, Car Dealership, Mechanic, Accessories, Car Rental, Car Wash
 
@@ -26,7 +25,6 @@ class Automotive : public Business
 
             //add to dept vector of businesses
             ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
-            // FinanceDept::newBusiness(this);
         }
 
         Automotive(string shopName, int maxEmployess)
@@ -40,7 +38,7 @@ class Automotive : public Business
             //owner =
 
             //add to dept vector of businesses
-            // FinanceDept::newBusiness(this);
+            ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
         }
 
         virtual string getBusinessType()
