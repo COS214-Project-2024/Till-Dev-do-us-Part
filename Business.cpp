@@ -19,6 +19,26 @@ using namespace std;
     WiseBucks* wiseBucksApp; 
 */
 
+void Business::hireEmployee()
+{
+    if (employees[0] != employees[1])
+    {
+        //hire employee by adding to vector 
+        employees[0]++; 
+    }
+    else cout << "Maximum employess reached for " << this->getBusinessName() << endl; 
+}
+
+void Business::fireEmployee()
+{
+    if (employees[0] != 0)
+    {
+        //remove employee from vector and add to list of unemployed citizens
+        employees[0]--; 
+    }
+    else cout << this->getBusinessName() << " has no employees" << endl; 
+}
+
 string Business::getBusinessName()
 {
     return name; 

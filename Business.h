@@ -30,6 +30,8 @@ class Business
     public: 
         virtual string getBusinessType() = 0; 
 
+        void hireEmployee(); 
+        void fireEmployee(); 
         string getBusinessName(); 
         void earnMoney(float money); 
         string getBusinessDetails(); 
