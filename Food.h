@@ -7,6 +7,7 @@
 #define FOOD_H
 
 #include "Business.h"
+#include "Government.h"
 
 // Food = Restaurants, Coffee Shops, Fast Food Chains, Bakeries
 
@@ -24,7 +25,8 @@ class Food : public Business
             //owner = 
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
+            // FinanceDept::newBusiness(this);
         }
 
         Food(string shopName, int maxEmployess)
@@ -38,7 +40,7 @@ class Food : public Business
             //owner =
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
         }
 
         virtual string getBusinessType()

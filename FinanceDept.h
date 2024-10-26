@@ -5,17 +5,18 @@
 #include <algorithm>
 using namespace std; 
 
+#include "Department.h"
 class Business;
 
-class FinanceDept
+class FinanceDept : public Department
 {
     private:
-        static vector<Business*> businesses;  
+        vector<Business*> businesses;  
     
     public: 
-        static void newBusiness(Business* business);
-        static void removeBusiness(Business* business);
-        static vector<Business*> getBusinesses(); 
+        void newBusiness(Business* business);
+        void removeBusiness(Business* business);
+        vector<Business*> getBusinesses(); 
         
 };
 

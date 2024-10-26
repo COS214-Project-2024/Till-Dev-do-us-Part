@@ -1,5 +1,7 @@
 #include "Government.h"
 
+#include <iostream>
+
 Government* Government::instance = nullptr;
 
 Government::Government() {
@@ -22,23 +24,24 @@ Department* Government::getDepartment(const std::string& name) {
 }
 
 void Government::enactPolicy(const Policy& policy) {
-    policies.push_back(policy);
+    // policies.push_back(policy);
     
 }
 
 void Government::revertPolicy(const std::string& name) {
    
-    for (auto it = policies.begin(); it != policies.end(); ) {
-        if (it->getName() == name) {
-            it = policies.erase(it);  
-        } else {
-            ++it;  
-        }
-    }
+    // for (auto it = policies.begin(); it != policies.end(); ) {
+    //     if (it->getName() == name) {
+    //         it = policies.erase(it);  
+    //     } else {
+    //         ++it;  
+    //     }
+    // }
 }
 void Government::addDepartment(std::string name, Department* department)
 {
     departments[name]=department;
+    std::cout << "Added " << name << " Department to Government" << std::endl; 
 }
 void Government::removeDepartment(std::string name)
 {

@@ -4,6 +4,7 @@
     #include "Retail.h"
     #include "Wellness.h"
 #include "CRS.h"
+#include "Department.h"
 #include "FinanceDept.h"
 #include "Government.h"
 #include "TaxCalculator.h"
@@ -46,12 +47,6 @@ int main()
         cout << i+1 <<". " << apps[i]->getTaxType() << endl; 
     cout << endl;
 
-//MAKING THE GOVERNMENT
-    Government* Gov = Government::getInstance(); 
-
-    //checking amount in taxfund before calculations
-    // CRS::getTax(0); 
-
     //testing tax calculations 
     cout << "WiseBucks Apps Pay Tax Function : " << endl;
     cout << "(returns amount after tax has been paid on CB 100 income)" << endl;  
@@ -64,6 +59,11 @@ int main()
     for (int i=0; i<6; i++)
         cout << i+1 <<". CB " << apps[i]->payTax(1000000) << endl; 
     cout << endl;
+
+//MAKING THE GOVERNMENT
+    Government* Gov = Government::getInstance(); 
+    Department* FinDept = new FinanceDept(); 
+    Gov->addDepartment("Finance", FinDept); 
     
     //testing businesses
     Business* foodShop1 = new Food(); 
@@ -80,9 +80,14 @@ int main()
     // cout << foodShop1->getBusinessDetails() << endl; 
 
     kfc->unlinkWiseBucks(); 
-    cout << endl; 
+    cout << "end" << endl; 
 
-    //testing other businesses
+    for (Business* business : ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->getBusinesses()) 
+    {
+        cout << business->getBusinessName() << endl; 
+    }
+
+/*    //testing other businesses
     Business* retailShop1 = new Retail(); 
     cout << retailShop1->getBusinessDetails() << endl;  
     Business* woolworths = new Retail("Woolworths", 30);
@@ -130,6 +135,10 @@ int main()
 
     delete foodShop1; 
     foodShop1 = nullptr; 
+*/
+    Gov->removeDepartment("Finance");
+    delete FinDept; 
+    FinDept = nullptr; 
 
     delete Gov; 
     Gov = nullptr; 

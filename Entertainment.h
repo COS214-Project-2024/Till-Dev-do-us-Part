@@ -24,7 +24,7 @@ class Entertainment : public Business
             //owner =
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            // FinanceDept::newBusiness(this);
         }
 
         Entertainment(string shopName, int maxEmployess)
@@ -38,7 +38,7 @@ class Entertainment : public Business
             //owner =
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            // FinanceDept::newBusiness(this);
         }
 
         virtual string getBusinessType()

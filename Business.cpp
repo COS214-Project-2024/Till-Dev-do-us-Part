@@ -139,5 +139,5 @@ void Business::handleAccounts()
 
 Business::~Business()
 {
-    FinanceDept::removeBusiness(this); 
+    // FinanceDept::removeBusiness(this); 
 } 

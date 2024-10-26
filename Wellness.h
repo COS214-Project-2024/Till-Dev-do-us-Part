@@ -24,7 +24,7 @@ class Wellness : public Business
             //owner =  
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            // FinanceDept::newBusiness(this);
         }
 
         Wellness(string shopName, int maxEmployess)
@@ -38,7 +38,7 @@ class Wellness : public Business
             //owner =
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            // FinanceDept::newBusiness(this);
         }
 
         virtual string getBusinessType()
