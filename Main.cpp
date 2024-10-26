@@ -45,6 +45,9 @@ int main()
         cout << i+1 <<". " << apps[i]->getTaxType() << endl; 
     cout << endl;
 
+    //checking amount in taxfund before calculations
+    // CRS::getTax(0); 
+
     //testing tax calculations 
     cout << "WiseBucks Apps Pay Tax Function : " << endl;
     cout << "(returns amount after tax has been paid on CB 100 income)" << endl;  
@@ -68,9 +71,9 @@ int main()
     foodShop1->linkWiseBucks(apps[2]);
     cout << foodShop1->getBusinessDetails() << endl; 
     foodShop1->linkWiseBucks(apps[3]);
-    foodShop1->handleAccounts();
-    cout << "After handling accounts: " << endl; 
-    cout << foodShop1->getBusinessDetails() << endl; 
+    // foodShop1->handleAccounts();
+    // cout << "After handling accounts: " << endl; 
+    // cout << foodShop1->getBusinessDetails() << endl; 
 
     kfc->unlinkWiseBucks(); 
     cout << endl; 
@@ -95,6 +98,9 @@ int main()
     Business* virginActive = new Wellness("Virgin Active", 20);
     virginActive->linkWiseBucks(apps[3]); 
     cout << virginActive->getBusinessDetails() << endl;  
+
+    //testing crs settle tax
+    CRS::settleTax(); 
 
     //deletes 
     delete virginActive; 
