@@ -26,9 +26,9 @@ class Resources{
         virtual ~Resources();
         float getCurrentAmount() const;
        float getInitialAmount() const ;
-        void setCurrentAmount(float amount);
+       // void setCurrentAmount(float amount);
     string getName() const;
-
+        bool consume(float amount);
 
     
     // void attachObserver(ResourceObserver* observer);

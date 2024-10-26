@@ -51,11 +51,27 @@ void Resources::notifyObservers() {
              << " units (" << percentage << "%)" << endl;
 }
 
-void Resources::setCurrentAmount(float amount) {
-    currentAmount = amount;
-    trackResources();
-}
+// void Resources::setCurrentAmount(float amount) {
+//     currentAmount = amount;
+//     trackResources();
+// }
 
 string Resources::getName() const {
     return resourceName;
 }
+
+bool Resources:: consume(float amount) {
+        if (amount <= 0) {
+            cout << "Invalid consumption amount" << endl;
+            return false;
+        }
+        if (amount > currentAmount) {
+            cout << "Insufficient " << resourceName << " available" << endl;
+            return false;
+        }
+        
+        currentAmount -= amount;
+        cout << amount << " units of " << resourceName << " consumed" << endl;
+        trackResources();
+        return true;
+    }
