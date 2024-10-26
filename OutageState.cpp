@@ -1,10 +1,14 @@
 #include "OutageState.h"
 #include "Utility.h"
 
-void OutageState::startProduction(Utility* utility) {
-    utility->setCurrentProduction(0);
-    std::cout << "Utility is in an outage. No production." << std::endl;
-}
+void startProduction(Utility* utility) override {
+        std::cout << "Utility is in outage. No production." << std::endl;
+        utility->setCurrentProduction(0); // No production during outage
+
+        // Notify suburbs and update citizens' mood to "angry"
+        utility->notifySuburbs("The utility is in outage. Expect service disruption.");
+        utility->updateSuburbCitizensMood("angry");
+    }
 
 std::string OutageState::getStateName() {
     return "Outage";

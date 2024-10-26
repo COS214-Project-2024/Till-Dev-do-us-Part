@@ -16,6 +16,7 @@ Utility::~Utility() {
 }
 
 void Utility::startProduction() {
+    checkForBreakdowns(); // Check for random breakdowns before starting production
     currentState->startProduction(this); // Delegate production to current state
 }
 
@@ -43,4 +44,32 @@ Resource* Utility::getResource() const {
 
 int Utility::getWorkers() const {
     return workers;
+}
+
+void Utility::requestResource(float amount) {
+    if (resourceManager->hasSufficientResource(resource, amount)) {
+        resourceManager->consumeResource(resource, amount);
+        currentProduction += amount;
+    } else {
+        notifyResourceDivision("Insufficient resources for " + name);
+        setState(new OutageState());
+    }
+}
+
+// Randomly check for breakdowns and switch to MaintenanceState
+void Utility::checkForBreakdowns() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 100);
+
+    int randomValue = dis(gen);
+    if (randomValue <= 10) { // 10% chance of breakdown
+        std::cout << name << " is experiencing a breakdown!" << std::endl;
+        setState(new MaintenanceState());
+    }
+}
+
+// Notify ResourceDivision if there are issues
+void Utility::notifyResourceDivision(const std::string& message) {
+    std::cout << "Notification to ResourceDivision: " << message << std::endl;
 }

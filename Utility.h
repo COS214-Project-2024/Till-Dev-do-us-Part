@@ -4,19 +4,15 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <random>
 #include "UtilityState.h"
-#include "Resource.h"
-#include "Building.h"
-#include "Citizen.h"
+#include "ResourceDepartment.h"
 
-// Forward declarations for state classes
+
 class UtilityState;
-class OperationalState;
-class MaintenanceState;
-class OutageState;
 
 class Utility {
-private:
+protected:
     std::string name;
     float totalProduction;
     float currentProduction;
@@ -25,19 +21,19 @@ private:
     int workers;
 
     Resource* resource; // Link to the resource being managed (e.g., energy, water)
+    UtilityState* currentState; // Current state of the utility
 
-    // Current state of the utility
-    UtilityState* currentState;
-
-    std::vector<Building*> connectedBuildings; // Buildings connected to this utility
-    std::vector<Citizen*> affectedCitizens;    // Citizens affected by this utility
+    
 
 public:
     Utility(std::string name, Resource* resource, float totalProduction, int workers);
-    ~Utility();
+    virtual ~Utility();
 
     // State-related behavior
     void startProduction();
+
+    // Handle breakdowns
+    void checkForBreakdowns();
 
     // Change the current state of the utility
     void setState(UtilityState* newState);
@@ -48,6 +44,13 @@ public:
     float getCurrentProduction() const;
     Resource* getResource() const;
     int getWorkers() const;
+
+    // Interactions with Resources
+    void requestResource(float amount);
+    void notifyResourceDivision(const std::string& message);
+
+    // Overridable function for specific utilities like PowerPlant
+    virtual void serviceDelivery() = 0;
 };
 
 #endif

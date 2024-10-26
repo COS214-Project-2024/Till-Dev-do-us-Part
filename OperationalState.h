@@ -6,6 +6,7 @@
 class OperationalState : public UtilityState {
 public:
     void startProduction(Utility* utility) ;
+    
     std::string getStateName() ;
 };
 
