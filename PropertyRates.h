@@ -25,6 +25,8 @@ class PropertyRates : public TaxCalculator
             float taxRate = 0.02; 
             //calculate tax amount
             float tax = income * taxRate; 
+            //send tax amount to crs
+            CRS::getTax(tax); 
             //return amount after tax
             return income - tax; 
         }

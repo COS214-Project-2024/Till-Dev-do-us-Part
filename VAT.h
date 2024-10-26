@@ -46,6 +46,8 @@ class VAT : public TaxCalculator
             float tax2 = income * taxRate; 
             //combine tax
             float tax = tax1 + tax2; 
+            //send tax amount to crs
+            CRS::getTax(tax); 
             //return amount after tax
             return income - tax2; 
         }
