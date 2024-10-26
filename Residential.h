@@ -4,12 +4,10 @@
 
 class Residential : public Building
 {
-    protected:
-        vector<Citizen *> occupants;
 
     public:
         Residential(string type);
-        virtual bool addOccupant(Citizen *c);
+        virtual bool addOccupant(Citizen *c)=0;
         // virtual void demolish() = 0; //inherited from Building, hence this class is abstract
         virtual bool useShower() = 0; // 
         virtual bool useToilet() = 0; // why boolean, because when there isnt enough water/electricity it must affect the citizen
