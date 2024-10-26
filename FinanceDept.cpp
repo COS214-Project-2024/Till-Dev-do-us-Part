@@ -1,7 +1,5 @@
 #include "FinanceDept.h"
 
-vector<Business*> FinanceDept::businesses;
-
 void FinanceDept::newBusiness(Business* business)
 {
     businesses.push_back(business); 

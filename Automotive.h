@@ -24,7 +24,7 @@ class Automotive : public Business
             //owner =
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
         }
 
         Automotive(string shopName, int maxEmployess)
@@ -38,7 +38,7 @@ class Automotive : public Business
             //owner =
 
             //add to dept vector of businesses
-            FinanceDept::newBusiness(this);
+            ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
         }
 
         virtual string getBusinessType()
