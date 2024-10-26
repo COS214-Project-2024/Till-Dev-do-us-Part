@@ -45,6 +45,11 @@ float Building::getPrice()
     return this->value;
 }
 
+string Building::getType()
+{
+    return this->type;
+}
+
 
 //a citizen calls the utilities.getWater(units,building) which calls building.loadWater(units). Same applies with elec
 //when a citizen goes to work, the citizen calls useShower() which calls useWater(100) and useElectricity(50)
