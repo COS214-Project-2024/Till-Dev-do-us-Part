@@ -18,6 +18,7 @@ public:
     void addToEmployed(Citizen* citizen);
     void addToUnemployed(Citizen* citizen);
     void addToMinors(Citizen* citizen);
+    ///send everyone to work
 
 };
 
