@@ -6,13 +6,8 @@ Estate::Estate():Residential("Estate"){
 
 Estate::~Estate()
 {
-    for (int i = 0; i < buildings.size(); ++i)
-    {
-        delete buildings.at(i);
-        buildings[i] = nullptr;
-    }
-
-    buildings.clear();
+    demolish();
+    cout << "Estate demolished" << endl;
 }
 
 bool Estate::addHouse(Residential *building)
@@ -27,53 +22,96 @@ bool Estate::addHouse(Residential *building)
 
 void Estate::demolish()
 {
-    // this->~Estate();
+    cout << "Clearing and demolishing all the buildings in the Plant:" << endl;
+    for (int i = 0; i < buildings.size(); ++i)
+    {
+        delete buildings.at(i);
+        buildings[i] = nullptr;
+    }
+    buildings.clear();
+    cout << "All buildings in the plant cleared" << endl;
 }
 
 bool Estate::useShower()
 {
-    for (int i = 0; i < buildings.size(); i++)
+    bool usedAll = true;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        if(!buildings[i]->useShower()){
-            return false;
+        if (!(*it)->useShower())
+        {
+            usedAll = false;
         }
     }
+
+    if (!usedAll)
+    {
+        cout << "Could not use all showers" << endl;
+        return false;
+    }
+
+    cout << "Used all showers in the Estate" << endl;
     return true;
 }
 
 bool Estate::useToilet()
 {
-    for (int i = 0; i < buildings.size(); i++)
+    bool usedAll = true;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        if (!buildings[i]->useToilet())
+        if (!(*it)->useToilet())
         {
-            return false;
+            usedAll = false;
         }
     }
+
+    if (!usedAll)
+    {
+        cout << "Could not use all toilets" << endl;
+        return false;
+    }
+
+    cout << "Used all toilets in the Estate" << endl;
     return true;
 }
 
 bool Estate::useStove()
 {
-    for (int i = 0; i < buildings.size(); i++)
+    bool usedAll = true;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        if (!buildings[i]->useStove())
+        if (!(*it)->useStove())
         {
-            return false;
+            usedAll = false;
         }
     }
+
+    if (!usedAll)
+    {
+        cout << "Could not use all stoves" << endl;
+        return false;
+    }
+
+    cout << "Used all stoves in the Estate" << endl;
     return true;
 }
 
 bool Estate::clean()
 {
-    for (int i = 0; i < buildings.size(); i++)
+    bool cleanedAll=true;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        if (!buildings[i]->clean())
+        if (!(*it)->clean())
         {
-            return false;
+            cleanedAll = false;
         }
     }
+
+    if (!cleanedAll)
+    {
+        cout << "Could not clean all buildings " << endl;
+        return false;
+    }
+    cout << "Cleaned all buildings in the Plant" << endl;
     return true;
 }
 

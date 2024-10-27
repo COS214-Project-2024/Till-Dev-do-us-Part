@@ -26,7 +26,23 @@ void Warehouse::demolish(){
 
 bool Warehouse::clean(){
 
-    return useWater(500) && useElectricity(300);
+    if (this->state->canUseWater() && this->state->canUseElectricity())
+    {
+        if (useWater(500) && useElectricity(300))
+        {
+            cout << "Warehouse cleaned.";
+            return true;
+        }
+        cout << "Not enough water or electricity to clean the Warehouse:" << endl;
+        cout << "Required water to clean: 500" << endl;
+        cout << "Required electricity to clean: 300" << endl;
+        cout << "Current water: " << waterUnits << endl;
+        cout << "Current electricity: " << electricityUnits << endl;
+        return false;
+    }
+
+    cout << "Warehouse is in " << this->state->getName() << " and cannot be cleaned" << endl;
+    return false;
 }
 
 Warehouse::~Warehouse(){

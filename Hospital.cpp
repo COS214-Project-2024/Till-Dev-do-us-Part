@@ -32,7 +32,7 @@ void Hospital::demolish(){
 }
 
 bool Hospital::clean(){
-    if(this->state->useWater() && this->state->useElectricity()){
+    if(this->state->canUseWater() && this->state->canUseElectricity()){
         if (useWater(1000) && useElectricity(600)){
             cout << "Hospital cleaned.";
             return true;

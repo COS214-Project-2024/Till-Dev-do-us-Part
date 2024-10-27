@@ -36,13 +36,18 @@ void Plant::demolish()
 
 bool Plant::clean()
 {
+    bool cleanedAll = true;
     for (vector<Industrial*>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         if (!(*it)->clean())
         {
-            cout << "Could not clean building " << (*it) << ": Not enough water or electricity for the building" << endl;
-            return false;
+            cleanedAll = false;
         }
+    }
+
+    if(!cleanedAll){
+        cout << "Could not clean all buildings "<< endl;
+        return false;
     }
 
     cout << "Cleaned all buildings in the Plant" << endl;

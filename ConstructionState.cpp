@@ -10,7 +10,7 @@ ConstructionState::ConstructionState():BuildingState("Construction"){
 
 bool ConstructionState::canUseElectricity()
 {
-    return true;
+    return false;
 }
 
 bool ConstructionState::canUseWater()
