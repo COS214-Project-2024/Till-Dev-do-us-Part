@@ -4,7 +4,6 @@
 
 class Industrial : public Building
 {
-
     public:
         Industrial(string type);
         virtual bool addOccupant(Citizen *c) = 0; // inherited from Building, hence this class is abstract

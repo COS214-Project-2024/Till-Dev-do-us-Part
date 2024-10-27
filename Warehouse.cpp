@@ -2,6 +2,7 @@
 
 Warehouse::Warehouse() : Industrial("Warehouse")
 {
+    cout << "Warehouse created!"  << endl;
 }
 
 bool Warehouse::addOccupant(Citizen *c)
@@ -18,7 +19,9 @@ bool Warehouse::addOccupant(Citizen *c)
 }
 
 void Warehouse::demolish(){
+    cout << "Removing everyone from the warehouse" << endl;
     occupants.clear();
+    cout << "Everyone removed from the warehouse" << endl;
 }
 
 bool Warehouse::clean(){
@@ -28,4 +31,5 @@ bool Warehouse::clean(){
 
 Warehouse::~Warehouse(){
     demolish();
+    cout << "Warehouse demolished!" << endl;
 }

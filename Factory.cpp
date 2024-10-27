@@ -2,6 +2,7 @@
 
 Factory::Factory() : Industrial("Factory")
 {
+    cout << "Factory created" << endl;
 }
 
 bool Factory::addOccupant(Citizen *c)
@@ -18,13 +19,21 @@ bool Factory::addOccupant(Citizen *c)
 }
 
 void Factory::demolish(){
+    cout << "Removing everyone from the Factory" << endl;
     occupants.clear();
 }
 
 bool Factory::clean(){
-    return useWater(1200) && useElectricity(700);
+    if(this->state->useWater() && this->state->useElectricity()){
+        if (useWater(1200) && useElectricity(700)){
+            cout << "Factory cleaned!" << endl;
+            return true;
+        }
+    }
+    return false;
 }
 
 Factory::~Factory(){
     demolish();
+    cout << "Factory demolished!" << endl;
 }

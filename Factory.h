@@ -6,7 +6,6 @@ class Factory : public Industrial
 {
     private:
         vector<Citizen*> occupants;
-
     public:
         Factory();
         ~Factory();

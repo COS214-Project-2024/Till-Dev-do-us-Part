@@ -3,9 +3,8 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
+#include "BuildingState.h"
 class Citizen; //for now since Citizen is not defined
-class BuildingState; // for now since Citizen is not defined
 
 class Building
 {
