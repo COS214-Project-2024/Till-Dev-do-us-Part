@@ -7,8 +7,6 @@ class CulturalCenter : public Landmark
     
     public:
         CulturalCenter();
-        // virtual void demolish();
         virtual bool clean();
-        // virtual bool addOccupant(Citizen *c);
 };
 #endif
