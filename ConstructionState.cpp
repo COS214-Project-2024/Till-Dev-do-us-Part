@@ -1,32 +1,19 @@
 #include "ConstructionState.h"
 
-ConstructionState::ConstructionState(){
-
+ConstructionState::ConstructionState():BuildingState("Construction"){
 }
 
-ConstructionState::~ConstructionState(){
+// BuildingState *ConstructionState::change()
+// {
+//     return new CompleteState();
+// }
 
+bool ConstructionState::canUseElectricity()
+{
+    return true;
 }
 
-BuildingState* ConstructionState::demolish(BuildingState *prevState){
-    
-
+bool ConstructionState::canUseWater()
+{
+    return true;
 }
-
-BuildingState* ConstructionState::renovate(BuildingState *prevState){
-    if (prevState != NULL)
-    {
-        if (prevState->getName() == "construction"){
-            return prevState; // if we are in the construction state
-        }
-        
-        if (prevState->getName() == "dilapidated"){
-            return this;
-        }
-    }
-}
-
-BuildingState* ConstructionState::maintenance(BuildingState *prevState){
-
-}
-

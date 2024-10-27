@@ -1,15 +1,13 @@
 #ifndef CONSTRUCTIONSTATE_H
 #define CONSTRUCTIONSTATE_H
 #include "BuildingState.h"
+#include "CompleteState.h"
 
-class ConstructionState: public BuildingState
-{
-    private:
+class ConstructionState: public BuildingState{
     public:
         ConstructionState();
-        virtual ~ConstructionState();
-        virtual BuildingState* demolish(BuildingState* prevState);
-        virtual BuildingState* renovate(BuildingState *prevState);
-        virtual BuildingState* maintenance(BuildingState *prevState);
+        virtual bool canUseElectricity();
+        virtual bool canUseWater();
+        virtual BuildingState* change();
 };
 #endif

@@ -8,12 +8,12 @@ class BuildingState
     protected:
         string name;
     public:
-        BuildingState();
+        BuildingState(string name);
         virtual ~BuildingState();
+        virtual bool canUseElectricity()=0;
+        virtual bool canUseWater()=0;
+        virtual BuildingState* change() =0;
         virtual string getName();
-        virtual BuildingState* demolish(BuildingState* prevState) = 0;
-        virtual BuildingState* renovate(BuildingState* prevState) = 0;
-        virtual BuildingState* maintenance(BuildingState* prevState) = 0;
 };
 #endif
 
