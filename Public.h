@@ -2,7 +2,7 @@
 #define PUBLIC_H
 #include "Building.h"
 
-class Public:public Building
+class Public : public Building
 {
     public:
         Public(string type);
