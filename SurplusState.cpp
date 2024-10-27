@@ -21,7 +21,7 @@ void SurplusState::checkAvailability(Resources* resource)
      
     
      else {
-            resource->notifyObservers();  // Log even when staying in surplus
+            resource->alert();  
         }
 }
 

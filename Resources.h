@@ -14,9 +14,8 @@ class Resources{
     private:
      ResourceState* resState;
      float currentAmount;
-    const float INITIAL_AMOUNT;  // >=100% level
+    const float INITIAL_AMOUNT;  
     string resourceName;
-    //vector<ResourceObserver*> observers;
 
     public :
         Resources(string name, float initialAmount);
@@ -26,13 +25,9 @@ class Resources{
         virtual ~Resources();
         float getCurrentAmount() const;
        float getInitialAmount() const ;
-       // void setCurrentAmount(float amount);
-    string getName() const;
+        string getName() const;
         bool consume(float amount);
-
-    
-    // void attachObserver(ResourceObserver* observer);
-     void notifyObservers();
+        void alert();
 };
 
 #endif

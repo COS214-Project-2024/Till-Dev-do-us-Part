@@ -17,8 +17,8 @@ void CriticalState::checkAvailability(Resources* resource)
         resource->setState(new SurplusState());
     }
       else {
-            resource->notifyObservers();  // Log even when staying in surplus
-        }
+            resource->alert(); 
+      }
     }
 
 string CriticalState::getStatus()

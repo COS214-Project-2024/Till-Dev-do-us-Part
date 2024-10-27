@@ -26,7 +26,7 @@ void Resources::setState(ResourceState* resourceState)
     	if (resState != nullptr)
 		delete resState;
     resState = resourceState ;
-    notifyObservers();
+    alert();
 }
 
 float Resources::getCurrentAmount() const
@@ -39,11 +39,8 @@ float Resources::getInitialAmount() const
     return INITIAL_AMOUNT;
 }
 
-// void Resources::attachObserver(ResourceObserver* observer) {
-//     observers.push_back(observer);
-// }
 
-void Resources::notifyObservers() {
+void Resources::alert() {
     float percentage = (currentAmount / INITIAL_AMOUNT) * 100;
         cout << "ALERT: " << resourceName 
              << " is now in " << resState->getStatus() 
@@ -51,10 +48,6 @@ void Resources::notifyObservers() {
              << " units (" << percentage << "%)" << endl;
 }
 
-// void Resources::setCurrentAmount(float amount) {
-//     currentAmount = amount;
-//     trackResources();
-// }
 
 string Resources::getName() const {
     return resourceName;

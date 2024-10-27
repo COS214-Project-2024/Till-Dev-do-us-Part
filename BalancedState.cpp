@@ -15,7 +15,7 @@ void BalancedState::checkAvailability(Resources* resource)
         resource->setState(new CriticalState());
     }
       else {
-            resource->notifyObservers();  // Log even when staying in surplus
+            resource->alert();  
         }
 }
 
