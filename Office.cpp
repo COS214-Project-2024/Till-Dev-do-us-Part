@@ -1,7 +1,9 @@
 #include "Office.h"
 
 Office::Office():Commercial("Office"){
-
+    area = 800;
+    value = 12000;
+    floor =0;
 }
 
 Office::~Office(){
@@ -27,3 +29,13 @@ bool Office::addOccupant(Citizen *c){
     return false;
 }
 
+Building *Office::clone()
+{
+    Office *newBuilding = new Office();
+
+    newBuilding->electricityUnits = this->electricityUnits;
+    newBuilding->waterUnits = this->waterUnits;
+    newBuilding->capacity = this->capacity;
+
+    return newBuilding;
+}

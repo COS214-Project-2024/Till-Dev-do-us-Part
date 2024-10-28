@@ -1,7 +1,9 @@
 #include "Shop.h"
 
 Shop::Shop():Commercial("Shop"){
-
+    area = 200;
+    value = 300000;
+    floor = 1;
 }
 
 Shop::~Shop(){
@@ -43,3 +45,12 @@ bool Shop::addOccupant(Citizen *c){
     return false;
 }
 
+Building *Shop::clone()
+{
+    Shop *newBuilding = new Shop();
+    newBuilding->electricityUnits = this->electricityUnits;
+    newBuilding->waterUnits = this->waterUnits;
+    newBuilding->capacity = this->capacity;
+
+    return newBuilding;
+}
