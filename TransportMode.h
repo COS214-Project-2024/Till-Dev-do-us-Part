@@ -30,8 +30,8 @@ public:
 
     void changeState(TransState newState);
     void alertAccident();
-    virtual void pickUpPassengers()=0;
-    virtual void dropOffPassengers()=0;
+    virtual void pickUpPassengers();
+    virtual void dropOffPassengers();
     void notifySchedule();
     void registerCitizen(CitizenObserver* observer);
     void removeCitizen(CitizenObserver* observer);

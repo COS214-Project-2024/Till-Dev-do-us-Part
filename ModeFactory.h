@@ -1,6 +1,8 @@
 // Abstract Creators
 #pragma once
 #include "TransportMode.h"
+#include <algorithm>
+
 class ModeFactory {
 public:
     virtual ~ModeFactory() = default;
