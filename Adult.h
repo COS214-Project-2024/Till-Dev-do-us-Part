@@ -24,7 +24,6 @@ class Adult: public Citizen{
 
         //will implement when combining and attributes added
         void observeTransport();
-        void observeTransport();
         void chooseMode(TransportStrategy*);
         void update();
 

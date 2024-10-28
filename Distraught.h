@@ -6,18 +6,18 @@
 #include <stdlib.h>
 
 //Forward declaration to avoid circular dependencies
-class Neutral;
+// class Neutral;
 
-class Distruaght: public Feeling{
+class Distraught: public Feeling{
 
     public:
-        virtual Feeling* reaction(){
+        Feeling* reaction(){
             int num = rand();
 
             /*Attempt to randomize feeling changes in citizens
             Citizen class(Context) to handle setting new State*/
 
-            if((num%2)==0)
+            if ((num%2)==0)
                 return new Content();
             else    
                 return new Neutral();

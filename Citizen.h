@@ -4,14 +4,14 @@
 #include <string>
 #include "Feeling.h"
 #include "Business.h"
-#include "Health.h"
+// #include "Health.h"
 #include "TransportStrategy.h"
 
 class Citizen{
 
     protected:
         Feeling* mood;
-        Health* health;
+        // Health* health;
         //To keep or not to keep
         std::string name;
         Business* employer;
