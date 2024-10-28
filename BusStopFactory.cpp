@@ -4,7 +4,10 @@
 #include "BusStop.h"
 
 TransportStation* BusStopFactory:: createStation(const std::string& type) {
-        return new BusStop();
+        // return new BusStop();
+        auto station = new BusStop();
+        stations.push_back(station);
+        return station;
     }
 
 StationFactory::~StationFactory() {

@@ -11,6 +11,6 @@ private:
 
 public:
     BusMode();
-    void operateStation() override;
-    void useTransport() override;
+    void operateStation();
+    void useTransport();
 };

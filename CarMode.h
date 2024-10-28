@@ -2,6 +2,7 @@
 #pragma once
 #include "TransportMode.h"
 #include "Road.h"
+#include "ModeFactory.h"
 
 class CarMode : public TransportMode {
 private:

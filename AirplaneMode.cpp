@@ -3,6 +3,7 @@
 #include <iostream>
 
 
+
 // AirplaneMode implementation
 void AirplaneMode::useTransport() {
     // Check flight conditions

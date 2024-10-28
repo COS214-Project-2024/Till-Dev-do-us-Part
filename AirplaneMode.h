@@ -4,6 +4,7 @@
 #include "TransportFacilities.h"
 #include "Airport.h"
 #include "TransState.h"
+#include "ModeFactory.h"
 
 
 class AirplaneMode : public TransportMode {
