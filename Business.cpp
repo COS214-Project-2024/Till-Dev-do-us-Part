@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std; 
 
-//SEE LINES 88+
+//SEE LINES 88+   ??? who added this comment
 
 /*
     Building* property; 
