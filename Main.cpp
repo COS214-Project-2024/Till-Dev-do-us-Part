@@ -140,6 +140,12 @@ int main()
     delete foodShop1; 
     foodShop1 = nullptr; 
 */
+
+    Gov->removeDepartment("Development"); 
+    // DEVELOPMENT DESTRUCTOR IS NOT IMPLEMENTED 
+    delete DevDept; 
+    DevDept = nullptr;
+
     Gov->removeDepartment("Finance");
     delete FinDept; 
     FinDept = nullptr; 

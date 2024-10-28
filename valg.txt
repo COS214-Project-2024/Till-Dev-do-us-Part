@@ -1,15 +1,43 @@
-==13248== Memcheck, a memory error detector
-==13248== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==13248== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==13248== Command: ./main
-==13248== Parent PID: 13204
-==13248== 
-==13248== 
-==13248== HEAP SUMMARY:
-==13248==     in use at exit: 0 bytes in 0 blocks
-==13248==   total heap usage: 23 allocs, 23 frees, 74,225 bytes allocated
-==13248== 
-==13248== All heap blocks were freed -- no leaks are possible
-==13248== 
-==13248== For lists of detected and suppressed errors, rerun with: -s
-==13248== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2837== Memcheck, a memory error detector
+==2837== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2837== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2837== Command: ./main
+==2837== Parent PID: 2697
+==2837== 
+==2837== 
+==2837== HEAP SUMMARY:
+==2837==     in use at exit: 760 bytes in 10 blocks
+==2837==   total heap usage: 77 allocs, 67 frees, 79,317 bytes allocated
+==2837== 
+==2837== 112 (16 direct, 96 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 9
+==2837==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2837==    by 0x11002E: DevelopmentDept::DevelopmentDept(float) (DevelopmentDept.cpp:6)
+==2837==    by 0x11B2DD: main (Main.cpp:68)
+==2837== 
+==2837== 112 (16 direct, 96 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 9
+==2837==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2837==    by 0x11009B: DevelopmentDept::DevelopmentDept(float) (DevelopmentDept.cpp:7)
+==2837==    by 0x11B2DD: main (Main.cpp:68)
+==2837== 
+==2837== 120 (16 direct, 104 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 9
+==2837==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2837==    by 0x110108: DevelopmentDept::DevelopmentDept(float) (DevelopmentDept.cpp:8)
+==2837==    by 0x11B2DD: main (Main.cpp:68)
+==2837== 
+==2837== 208 (104 direct, 104 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==2837==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2837==    by 0x11B35B: main (Main.cpp:72)
+==2837== 
+==2837== 208 (104 direct, 104 indirect) bytes in 1 blocks are definitely lost in loss record 9 of 9
+==2837==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2837==    by 0x11B3AD: main (Main.cpp:73)
+==2837== 
+==2837== LEAK SUMMARY:
+==2837==    definitely lost: 256 bytes in 5 blocks
+==2837==    indirectly lost: 504 bytes in 5 blocks
+==2837==      possibly lost: 0 bytes in 0 blocks
+==2837==    still reachable: 0 bytes in 0 blocks
+==2837==         suppressed: 0 bytes in 0 blocks
+==2837== 
+==2837== For lists of detected and suppressed errors, rerun with: -s
+==2837== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)
