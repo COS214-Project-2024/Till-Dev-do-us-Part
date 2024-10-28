@@ -14,22 +14,19 @@ class Adult: public Citizen{
     
     public:
         Adult();
-        void react();
-        Citizen* clone();
+        virtual Citizen* clone();
         void goToWork();
         bool employmentStatus();
         void salary(float);
         void setEmployer(Business*);
 
-
         //will implement when combining and attributes added
-        void observeTransport();
-        void observeTransport();
-        void chooseMode(TransportStrategy*);
-        void update();
+        // void observeTransport();
+        // void chooseMode(TransportStrategy*);
+        // void update();
 
         //Will update with Utilities
-        void requestElectricity(int amount);
+        // void requestElectricity(int amount);
 
 };
 

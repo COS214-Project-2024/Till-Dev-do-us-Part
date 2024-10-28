@@ -25,6 +25,8 @@ class BuyCar : public AcquireAsset{
             //Not sure if this is the correct way to do it
         }
 
+        virtual Citizen* clone(){}
+
 };
 
 #endif
