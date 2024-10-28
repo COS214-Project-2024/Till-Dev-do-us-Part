@@ -15,5 +15,6 @@ bool CompleteState::canUseWater()
 
 BuildingState *CompleteState::change()
 {
-    return new CompleteState();
+    return nullptr; 
+    // return new CompleteState();
 }

@@ -1,5 +1,6 @@
 #ifndef BUILDING_H
 #define BUILDING_H
+
 #include <iostream>
 #include <vector>
 using namespace std;

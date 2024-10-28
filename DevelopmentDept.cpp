@@ -22,19 +22,19 @@ bool DevelopmentDept::allocateLand(int landsize)
 float DevelopmentDept::getPrice(std::string buildingType)
 {
     auto building = priceList.find(buildingType);
-    return building->getPrice();
+    return building->second;
 }
 
-void DevelopmentDept::addFactory(const std::string &buildingType, BuildingFactory *factory)
+void DevelopmentDept::addFactory(const std::string buildingType, BuildingFactory *factory)
 {
     factories[buildingType] = factory;
 }
 
-Building *DevelopmentDept::build(std::string buildingType)
+Building* DevelopmentDept::build(std::string buildingType)
 {
     for (vector<Building*>::iterator it = unOccupiedBuildings.begin(); it != unOccupiedBuildings.end(); it++)
     {
-        if((*it)->getType == buildingType){
+        if((*it)->getType() == buildingType){
             Building* building = (*it);
             unOccupiedBuildings.erase(it);
             return building; //citizen will have to add themselves to the building
@@ -49,5 +49,5 @@ Building *DevelopmentDept::build(std::string buildingType)
 
         return factory->build();
     }
-    return nullptr
+    return nullptr;
 }
