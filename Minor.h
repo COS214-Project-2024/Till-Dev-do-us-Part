@@ -11,14 +11,13 @@ class Minor: public Citizen{
 
     public:
         Minor();
-        void react();
-        Citizen* clone();
+        virtual Citizen* clone();
         void goToSchool();
         bool employmentStatus();
 
-        void observeTransport();
-        void chooseMode(TransportStrategy*);
-        void update();
+        // void observeTransport();
+        // void chooseMode(TransportStrategy*);
+        // void update();
 
 };
 

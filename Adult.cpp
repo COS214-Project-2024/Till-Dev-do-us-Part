@@ -1,14 +1,10 @@
 #include "Adult.h"
 #include "Neutral.h"
-// #include 
 
 Adult::Adult(){
     mood = new Neutral();
     balance = 1000;
     netWorth, employer = 0;
-
-
-    
 }
 
 Citizen* Adult::clone(){
@@ -26,4 +22,8 @@ void Adult::salary(float salary){
 //Used in department
 void Adult::setEmployer(Business* employer){
     this->employer = employer;
+}
+
+void Adult::goToWork(){
+    
 }

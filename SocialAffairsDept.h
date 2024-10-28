@@ -4,7 +4,7 @@
 #include <queue>
 #include <list>
 #include "Department.h"
-#include "Citizen.h"
+// #include "Citizen.h"
 #include "Population.h"
 #include "Business.h"
 
@@ -15,7 +15,7 @@ class SocialAffairsDept: public Department{
     private:
 
         //What is the use of citizens list??
-        list<Citizen> citizens;
+        list<Citizen*> citizens;
         queue<Citizen*> unemployed;
         Population* factory;
 
