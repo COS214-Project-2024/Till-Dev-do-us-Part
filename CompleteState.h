@@ -7,9 +7,8 @@ class CompleteState : public BuildingState
     private:
     public:
         CompleteState();
-        virtual ~CompleteState();
-        virtual BuildingState* demolish(BuildingState *prevState);
-        virtual BuildingState* renovate(BuildingState *prevState);
-        virtual BuildingState* maintenance(BuildingState *prevState);
+        virtual bool canUseElectricity();
+        virtual bool canUseWater();
+        virtual BuildingState *change();
 };
 #endif

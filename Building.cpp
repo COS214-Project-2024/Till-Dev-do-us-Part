@@ -24,7 +24,7 @@ void Building::loadWater(int units)
 
 bool Building::useElectricity(int units) //units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage 
 {
-    if (this->electricityUnits - units < 0 || !this->state->useWater())
+    if (this->electricityUnits - units < 0 || !this->state->canUseElectricity())
         return false;
     
     electricityUnits-=units;
@@ -33,7 +33,7 @@ bool Building::useElectricity(int units) //units will always be > 0 'cause this 
 
 bool Building::useWater(int units) // units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage
 {
-    if (this->waterUnits - units < 0 ||! this->state->useWater())
+    if(this->waterUnits - units < 0 ||! this->state->canUseWater())
         return false;
 
     waterUnits -= units;
@@ -43,6 +43,11 @@ bool Building::useWater(int units) // units will always be > 0 'cause this is us
 float Building::getPrice()
 {
     return this->value;
+}
+
+string Building::getType()
+{
+    return this->type;
 }
 
 
