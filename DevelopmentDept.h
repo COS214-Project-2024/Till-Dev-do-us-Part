@@ -14,7 +14,7 @@
 #include "MallFactory.h"
 // #include "FactoryFactory.h"
 // #include "WarehouseFactory.h"
-// #include "Department.h"
+#include "Department.h"
 
 
 class DevelopmentDept : public Department
