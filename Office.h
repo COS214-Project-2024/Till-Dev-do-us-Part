@@ -6,6 +6,7 @@ class Office : public Commercial
 {
     private:
         vector<Citizen *> occupants;
+        
     public:
         Office();
         ~Office();

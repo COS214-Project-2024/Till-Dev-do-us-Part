@@ -5,7 +5,8 @@
     #include "Wellness.h"
 #include "CRS.h"
 #include "Department.h"
-#include "FinanceDept.h"
+    #include "DevelopmentDept.h"
+    #include "FinanceDept.h"
 #include "Government.h"
 #include "TaxCalculator.h"
     #include "CorporateTax.h"
@@ -64,6 +65,8 @@ int main()
     Government* Gov = Government::getInstance(); 
     Department* FinDept = new FinanceDept(); 
     Gov->addDepartment("Finance", FinDept); 
+    Department* DevDept = new DevelopmentDept(100000); 
+    Gov->addDepartment("Development", DevDept); 
     
     //testing businesses
     Business* foodShop1 = new Food(); 
@@ -85,6 +88,7 @@ int main()
     for (Business* business : ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->getBusinesses()) 
     {
         cout << business->getBusinessName() << endl; 
+        business->buyProperty("Mall"); 
     }
 
 /*    //testing other businesses

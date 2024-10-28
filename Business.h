@@ -8,7 +8,9 @@
 
 #include "Building.h"
 #include "Citizen.h"
+#include "Department.h"
 #include "FinanceDept.h"
+#include "DevelopmentDept.h"
 #include "Government.h"
 #include "WiseBucks.h"
 
@@ -31,7 +33,7 @@ class Business
     public: 
         virtual string getBusinessType() = 0; 
 
-        void buyProperty(); 
+        void buyProperty(string propertyType); 
         void sellProperty(); 
         void hireEmployee(); 
         void fireEmployee(); 

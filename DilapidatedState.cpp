@@ -2,6 +2,7 @@
 
 DilapidatedState::DilapidatedState() : BuildingState("Dilapidated")
 {
+    
 }
 
 bool DilapidatedState::canUseElectricity()

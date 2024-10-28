@@ -19,14 +19,17 @@ using namespace std;
     WiseBucks* wiseBucksApp; 
 */
 
-void buyProperty()
+void Business::buyProperty(string propertyType)
 {
-
+    property = ((DevelopmentDept*)(Government::getInstance()->getDepartment("Development")))->build(propertyType);
+    if (property != nullptr)
+        cout << "Bought property: " << propertyType << endl;  
+    else cout << "Property is null" << endl; 
 }
 
-void sellProperty()
+void Business::sellProperty()
 {
-    
+    property = nullptr; 
 }
 
 void Business::hireEmployee()
