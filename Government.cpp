@@ -6,6 +6,13 @@ Government::Government() {
     
     
 }
+Memento* Government::createMemento() {
+    return new Memento();
+}
+
+void Government::setMemento(Memento* memento) {
+    this->memento = memento;
+}
 
 Government* Government::getInstance() {
     if (instance == nullptr) {
@@ -14,22 +21,23 @@ Government* Government::getInstance() {
     return instance;
 }
 
-Department* Government::getDepartment(const std::string& name) {
+Department* Government::getDepartment(std::string name) {
     if (departments.find(name) != departments.end()) {
         return departments[name];
     }
     return nullptr;
 }
 
-void Government::enactPolicy(const Policy& policy) {
+void Government::enactPolicy(Policy* policy) {
     policies.push_back(policy);
     
 }
 
-void Government::revertPolicy(const std::string& name) {
+void Government::revertPolicy(std::string name) {
    
     for (auto it = policies.begin(); it != policies.end(); ) {
-        if (it->getName() == name) {
+        if ((*it)->getName() == name) {
+            delete *it;////yes?
             it = policies.erase(it);  
         } else {
             ++it;  

@@ -8,8 +8,8 @@ private:
     Memento memento;
 
 public:
-    void saveMemento(const Memento& memento);
-    Memento getMemento() const;
+    void saveMemento(Memento* memento);
+    Memento* getMemento();
 };
 
 #endif 

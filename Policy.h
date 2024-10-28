@@ -9,12 +9,11 @@ class Policy {
 private:
     std::string name;
     std::string code;
-    Memento memento;
+    Memento* memento;
 
 public:
-    Policy(const std::string& name, const std::string& code);
-    Memento createMemento();
-    void setMemento(const Memento& memento);
+    Policy(std::string name, std::string code);
+    
     std:: string getName();
 };
 
