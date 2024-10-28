@@ -13,6 +13,7 @@ class Mall: public Commercial
         virtual void demolish();
         virtual bool clean();
         virtual bool addOccupant(Citizen *c);
+        virtual Building* clone();
 };
 #endif
 

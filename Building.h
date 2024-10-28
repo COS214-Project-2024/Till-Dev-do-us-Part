@@ -29,7 +29,7 @@ class Building
         virtual void demolish()=0;
         virtual bool clean()=0;
         virtual bool addOccupant(Citizen* c)=0;
-
+        virtual Building* clone() =0;
         // virtual bool useToilet(); // why boolean, because when there isnt enough water/electricity it must affect the citizen
 };
 #endif
