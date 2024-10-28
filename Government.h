@@ -14,6 +14,7 @@ private:
     std::vector<Policy*> policies;
     std::map<std::string, Department*> departments;
     Memento* memento;
+    float budget;
 
     Government();  // Private constructor for singleton 
 
