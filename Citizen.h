@@ -4,18 +4,24 @@
 #include <string>
 #include "Feeling.h"
 #include "Business.h"
+#include "Health.h"
 #include "TransportStrategy.h"
 
 class Citizen{
 
     protected:
         Feeling* mood;
+        Health* health;
         //To keep or not to keep
         std::string name;
         Business* employer;
 
     public:
         virtual Citizen* clone() = 0;
+        virtual void react(){
+            delete mood;
+            mood = mood->reaction();
+        }
         virtual void observeTransport() = 0;
         virtual void chooseMode(TransportStrategy*) = 0;
         virtual void update() = 0;

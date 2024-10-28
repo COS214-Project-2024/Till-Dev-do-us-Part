@@ -1,18 +1,18 @@
 #include "Adult.h"
 #include "Neutral.h"
+#include 
 
 Adult::Adult(){
     mood = new Neutral();
-    balance, netWorth, employer = 0;
-    //If name will be used, need to pass in as parameter
+    balance = 1000;
+    netWorth, employer = 0;
+
+
+    
 }
 
 Citizen* Adult::clone(){
     return new Adult();
-}
-
-void Adult::react(){
-    mood->reaction();
 }
 
 bool Adult::employmentStatus(){

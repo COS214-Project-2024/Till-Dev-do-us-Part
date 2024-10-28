@@ -10,10 +10,6 @@ Citizen* Minor::clone(){
     return new Minor();
 }
 
-void Minor::react(){
-    mood->reaction();
-}
-
 void Minor::goToSchool(){
     //Need to decide on implementation
 }
