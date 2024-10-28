@@ -1,4 +1,6 @@
 #include "SocialAffairsDept.h"
+#include <iostream>
+
 
 //Budget value to be allocated by government 
 SocialAffairsDept::SocialAffairsDept(float b){
@@ -9,11 +11,16 @@ SocialAffairsDept::SocialAffairsDept(float b){
 Citizen* SocialAffairsDept::employ(Business* employer){
 
     if(!unemployed.empty()){
+        
         Citizen* employee = unemployed.front();
         employee->setEmployer(employer);
         unemployed.pop();
         // cout<<"Successfully employed " << employee.getName() << endl; //Should cout in class that is employing 
         return employee;
+    }
+    else{
+        std::cout<< "There are no available citizens to employ " << std::endl; 
+        return nullptr;
     }
 }
 
