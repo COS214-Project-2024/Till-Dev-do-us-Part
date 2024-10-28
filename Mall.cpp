@@ -2,6 +2,9 @@
 
 Mall::Mall():Commercial("Mall")
 {
+    area = 2000;
+    value = 1200000;
+    floor = 1;
 }
 
 bool Mall::addStore(Commercial* building){
@@ -50,6 +53,17 @@ bool Mall::addOccupant(Citizen *c)
     return false;
 }
 
+Building *Mall::clone()
+{
+    Mall *newBuilding = new Mall();
+
+    newBuilding->electricityUnits = this->electricityUnits;
+    newBuilding->waterUnits = this->waterUnits;
+    newBuilding->capacity = this->capacity;
+
+    return newBuilding;
+}
+
 Mall::~Mall()
 {
     for (int i = 0; i < stores.size(); ++i)
@@ -57,3 +71,4 @@ Mall::~Mall()
         delete stores.at(i);
     }
 }
+

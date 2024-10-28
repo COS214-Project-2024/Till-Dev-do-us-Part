@@ -14,7 +14,7 @@ DevelopmentDept::DevelopmentDept(float budget)
     // factories["Warehouse"]= new WarehouseFactory();
 }
 
-bool DevelopmentDept::allocateLand(int Landsize)
+bool DevelopmentDept::allocateLand(int landsize)
 {
     land = landsize;
 }
