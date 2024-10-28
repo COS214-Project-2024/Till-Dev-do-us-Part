@@ -19,7 +19,7 @@ TransportMode* ConcreteTransportFactory::createMode(const std::string& type) {
 TransportStation* ConcreteTransportFactory::createStation(const std::string& type) {
     if (type == "bus") return new BusStop();
     if (type == "train") return new TrainStation();
-    if (type == "airport") return new Airport();
+    if (type == "airport") return new Airport(); //airport under facilities
     return nullptr;
 }
 

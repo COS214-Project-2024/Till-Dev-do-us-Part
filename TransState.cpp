@@ -3,7 +3,7 @@
 #include <iostream>
 
 // Additional TransportState implementations
-void NormalState::handleState() {
+void NormalState:: handleState() {
     std::cout << "Operating under normal conditions" << std::endl;
 }
 

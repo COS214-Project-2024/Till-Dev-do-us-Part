@@ -1,4 +1,6 @@
-#include "Bus.h"
+#include "BusMode.h"
+#include <string>
+#include <iostream>
 
 void BusMode::useTransport() {
     // Check if state is valid for transport

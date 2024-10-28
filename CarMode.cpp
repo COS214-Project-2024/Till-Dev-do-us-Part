@@ -20,3 +20,25 @@ void CarMode:: useTransport() {
     // Update mediator
     mediator->notify(this, state);
 }
+
+void alertAccident() {
+        std::cout << "Car accident reported!" << std::endl;
+        setState(new CongestedState(this));
+        mediator->notify(this, state);
+    }
+
+    void pickUpPassengers() override {
+        if (passengers.size() < maxPassengers && isAvailable) {
+            std::cout << "Car ready for pickup" << std::endl;
+        } else {
+            std::cout << "Car is full or unavailable" << std::endl;
+        }
+    }
+
+    void dropOffPassengers() override {
+        if (!passengers.empty()) {
+            std::cout << "Dropping off car passengers" << std::endl;
+            passengers.clear();
+            isAvailable = true;
+        }
+    }

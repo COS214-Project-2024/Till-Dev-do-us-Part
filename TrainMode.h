@@ -2,6 +2,8 @@
 #pragma once
 #include "TransportMode.h"
 #include "Railway.h"
+#include <string>
+#include <iostream>
 
 class TrainMode : public TransportMode {
 private:

@@ -1,3 +1,4 @@
+// Abstract Products
 // TransportMode.h
 #pragma once
 #include <vector>
@@ -29,8 +30,8 @@ public:
 
     void changeState(TransState newState);
     void alertAccident();
-    void pickUpPassengers();
-    void dropOffPassengers();
+    virtual void pickUpPassengers()=0;
+    virtual void dropOffPassengers()=0;
     void notifySchedule();
     void registerCitizen(CitizenObserver* observer);
     void removeCitizen(CitizenObserver* observer);

@@ -1,6 +1,7 @@
 // BusStop.h
 #pragma once
 #include "TransportStation.h"
+#include "TransportMode.h"
 #include <list>
 
 class BusStop : public TransportStation {
