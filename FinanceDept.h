@@ -14,6 +14,7 @@ class FinanceDept : public Department
         vector<Business*> businesses;  
     
     public: 
+        FinanceDept(float); 
         void newBusiness(Business* business);
         void removeBusiness(Business* business);
         vector<Business*> getBusinesses(); 

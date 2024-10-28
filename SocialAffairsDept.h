@@ -4,7 +4,7 @@
 #include <queue>
 #include <list>
 #include "Department.h"
-// #include "Citizen.h"
+#include "Citizen.h"
 #include "Population.h"
 #include "Business.h"
 

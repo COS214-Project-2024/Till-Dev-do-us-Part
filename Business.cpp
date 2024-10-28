@@ -34,10 +34,15 @@ void Business::sellProperty()
 
 void Business::hireEmployee()
 {
-    if (employees[0] != employees[1])
+    if (numEmployees[0] != numEmployees[1])
     {
-        //hire employee by adding to vector 
-        employees[0]++; 
+        //hire employee by adding to vector (NOT FINALISED)
+        Citizen* newEmployee = ((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->employ(this); 
+        if (newEmployee != nullptr)
+        {
+            employees.push_back(newEmployee);
+            numEmployees[0]++; 
+        }
     }
     else cout << "Maximum employess reached for " << this->getBusinessName() << endl; 
 }

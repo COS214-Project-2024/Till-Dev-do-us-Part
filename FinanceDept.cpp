@@ -1,5 +1,10 @@
 #include "FinanceDept.h"
 
+FinanceDept::FinanceDept(float budget)
+{
+    this->budget = budget; 
+}
+
 void FinanceDept::newBusiness(Business* business)
 {
     businesses.push_back(business); 

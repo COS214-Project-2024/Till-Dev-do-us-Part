@@ -7,6 +7,7 @@
 #include "Department.h"
     #include "DevelopmentDept.h"
     #include "FinanceDept.h"
+    #include "SocialAffairsDept.h"
 #include "Government.h"
 #include "TaxCalculator.h"
     #include "CorporateTax.h"
@@ -63,11 +64,13 @@ int main()
 
 //MAKING THE GOVERNMENT
     Government* Gov = Government::getInstance(); 
-    Department* FinDept = new FinanceDept(); 
+    Department* FinDept = new FinanceDept(100000); 
     Gov->addDepartment("Finance", FinDept); 
     Department* DevDept = new DevelopmentDept(100000); 
     Gov->addDepartment("Development", DevDept); 
-    
+    Department* SAD = new SocialAffairsDept(100000);
+    Gov->addDepartment("SocialAffairs", SAD);  
+
     //testing businesses
     Business* foodShop1 = new Food(); 
     Business* kfc = new Food("KFC", 12); 
@@ -89,7 +92,7 @@ int main()
     {
         cout << business->getBusinessName() << endl; 
         business->buyProperty("Mall"); 
-    }
+    }  
 
 /*    //testing other businesses
     Business* retailShop1 = new Retail(); 

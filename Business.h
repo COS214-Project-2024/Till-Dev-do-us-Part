@@ -12,6 +12,7 @@
 #include "FinanceDept.h"
 #include "DevelopmentDept.h"
 #include "Government.h"
+#include "SocialAffairsDept.h"
 #include "WiseBucks.h"
 
 #include <string>
