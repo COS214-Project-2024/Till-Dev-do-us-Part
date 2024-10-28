@@ -5,8 +5,8 @@
 class Mall: public Commercial
 {
     private:
-        // vector<Commercial*> stores;
-        vector<Citizen *> occupants;
+        vector<Commercial*> stores;
+        // vector<Citizen *> occupants;
         int maxOccupants = 15; 
 
     public:
