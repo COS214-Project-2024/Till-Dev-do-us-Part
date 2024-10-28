@@ -2,14 +2,22 @@
 #define POWERPLANT_H
 
 #include "Utility.h"
+#include "Energy.h"
 
-class PowerPlant : public Utility {
+
+class PowerPlant : public Utility
+{
+private:
+    Energy *energy;
+    ResourceDepartment *department;
+
 public:
-    PowerPlant(std::string name, Resource* resource, float totalProduction, int workers);
+    PowerPlant();
+    PowerPlant(std::string name, ResourceDepartment *department, Resources *energy, float totalProduction, int workers);
     ~PowerPlant();
 
     // Override serviceDelivery for PowerPlant-specific production
-    void serviceDelivery() override;
+    void serviceDelivery();
 };
 
 #endif

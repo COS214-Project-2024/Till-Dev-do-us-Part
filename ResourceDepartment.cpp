@@ -1,171 +1,103 @@
-// #include "ResourceDepartment.h"
-// #include <iostream>
-
-// void ResourceDepartment::addUtility(Utility* utility) {
-//     utilities.push_back(utility);
-// }
-
-// void ResourceDepartment::addResource(Resource* resource) {
-//     resources.push_back(resource);
-// }
-
-// void ResourceDepartment::addBuilding(Building* building) {
-//     buildings.push_back(building);
-// }
-
-// void ResourceDepartment::addCitizen(Citizen* citizen) {
-//     citizens.push_back(citizen);
-// }
-
-// // Utility requests a certain amount of resource
-// void ResourceDepartment::requestResource(Utility* utility, float amount) {
-//     Resource* resource = utility->getResource();
-//     if (allocateResource(resource, amount)) {
-//         std::cout << "Allocated " << amount << " units of " << resource->getName() 
-//                   << " to " << utility->getName() << std::endl;
-//     } else {
-//         std::cout << "Insufficient resources for " << utility->getName() << ". Initiating outage." << std::endl;
-//         utility->setState(new OutageState());
-//         notifyBuildingsUtilityState("Utility outage: " + utility->getName());
-//         notifyCitizensUtilityState("Utility outage: " + utility->getName(), "angry");
-//     }
-// }
-
-// // Notify all registered buildings of utility state change
-// void ResourceDepartment::notifyBuildingsUtilityState(const std::string& message) {
-//     for (Building* building : buildings) {
-//         std::cout << "Notifying building: " << building->getType() << " - " << message << std::endl;
-//     }
-// }
-
-// // Notify all registered citizens of utility state change and update their mood
-// void ResourceDepartment::notifyCitizensUtilityState(const std::string& message, const std::string& mood) {
-//     for (Citizen* citizen : citizens) {
-//         std::cout << "Notifying citizen of utility change: " << message << std::endl;
-//         citizen->updateMood(mood);
-//     }
-// }
-
-// // Allocate a certain amount of resource if available
-// bool ResourceDepartment::allocateResource(Resource* resource, float amount) {
-//     if (resource->getAvailableAmount() >= amount) {
-//         resource->consume(amount);
-//         return true;
-//     }
-//     return false;
-// }
-
-// // Release a certain amount of resource back to the pool
-// void ResourceDepartment::releaseResource(Resource* resource, float amount) {
-//     resource->replenish(amount);
-// }
-
-// ResourceDepartment::~ResourceDepartment() {
-//     // Clean-up if necessary (in actual implementation)
-// }
-
-//// New Resource department
-class ResourceDepartment {
-private:
-    std::vector<Utility*> utilities;   // List of utility services (e.g., Power, Water)
-    int totalElectricity;              // Total electricity available
-    int totalWater;                    // Total water available
-    int totalWasteCapacity;            // Total capacity for waste management
-    int totalSewageCapacity;           // Total capacity for sewage management
-
-public:
-    ResourceDepartment(int electricity, int water, int wasteCapacity, int sewageCapacity)
-        : totalElectricity(electricity), totalWater(water), totalWasteCapacity(wasteCapacity), totalSewageCapacity(sewageCapacity) {}
-
-    // Methods to request resources for a building
-    bool requestElectricity(int amount);
-    bool requestWater(int amount);
-    bool manageWaste(int wasteAmount);
-    bool manageSewage(int sewageAmount);
-
-    // Methods to clear waste and sewage
-    void clearWaste(Building* building);
-    void clearSewage(Building* building);
-
-    // Regular update cycle for resource management
-    void update();
-
-    // Register and manage utilities
-    void addUtility(Utility* utility);
-};
-
-#endif
-
 #include "ResourceDepartment.h"
 
-bool ResourceDepartment::requestElectricity(int amount) {
-    if (totalElectricity >= amount) {
-        totalElectricity -= amount;
-        std::cout << "ResourceDepartment: Allocated " << amount << " units of electricity.\n";
-        return true;
-    } else {
-        std::cout << "ResourceDepartment: Insufficient electricity!\n";
-        return false;
+// Destructor to clean up Resourcess
+ResourceDepartment::~ResourceDepartment()
+{
+    for (Resources *Resources : resources)
+    {
+        delete Resources;
+    }
+    for (Utility *utility : utilities)
+    {
+        delete utility;
     }
 }
 
-bool ResourceDepartment::requestWater(int amount) {
-    if (totalWater >= amount) {
-        totalWater -= amount;
-        std::cout << "ResourceDepartment: Allocated " << amount << " units of water.\n";
-        return true;
-    } else {
-        std::cout << "ResourceDepartment: Insufficient water!\n";
-        return false;
+// Add a Resources to the department
+void ResourceDepartment::addResource(Resources *resource)
+{
+    resources.push_back(resource);
+    std::cout << "ResourcesDepartment: Added Resources " << std::endl;
+}
+
+// Check if a specific Resources has sufficient amount available
+bool ResourceDepartment::hasSufficientResource(Resources *resource, float amount)
+{
+    // for (Resources* res : resources) {
+    //     if (res == resources && res->getAvailableAmount() >= amount) {
+    //         return true;
+    //     }
+    // }
+    // return false;
+}
+
+// Consume a specified amount of a Resources
+void ResourceDepartment::consumeResource(Resources *resource, float amount)
+{
+    for (Resources *res : resources)
+    {
+        // if (res == resource) {
+        //     res->consume(amount);
+        //     std::cout << "ResourcesDepartment: Consumed " << amount << " units of " << res->getName() << std::endl;
+        //     return;
+        // }
     }
+    std::cout << "ResourcesDepartment: Resources not found!" << std::endl;
 }
 
-bool ResourceDepartment::manageWaste(int wasteAmount) {
-    if (wasteAmount <= totalWasteCapacity) {
-        totalWasteCapacity -= wasteAmount;
-        std::cout << "ResourceDepartment: Managed " << wasteAmount << " units of waste.\n";
-        return true;
-    } else {
-        std::cout << "ResourceDepartment: Waste capacity exceeded!\n";
-        return false;
+// Release or add back a specified amount of a Resources
+void ResourceDepartment::releaseResource(Resources *resource, float amount)
+{
+    for (Resources *res : resources)
+    {
+        // if (res == resources) {
+        //     res->release(amount);
+        //     std::cout << "ResourcesDepartment: Released " << amount << " units of " << res->getName() << std::endl;
+        //     return;
+        // }
     }
+    std::cout << "ResourcesDepartment: Resources not found!" << std::endl;
 }
 
-bool ResourceDepartment::manageSewage(int sewageAmount) {
-    if (sewageAmount <= totalSewageCapacity) {
-        totalSewageCapacity -= sewageAmount;
-        std::cout << "ResourceDepartment: Managed " << sewageAmount << " units of sewage.\n";
-        return true;
-    } else {
-        std::cout << "ResourceDepartment: Sewage capacity exceeded!\n";
-        return false;
-    }
-}
-
-// Clears waste for a specific building
-void ResourceDepartment::clearWaste(Building* building) {
-    int wasteCleared = building->getWasteAmount();
-    totalWasteCapacity += wasteCleared; // Assume full capacity after clearing
-    building->clearWaste();
-    std::cout << "ResourceDepartment: Cleared waste from building.\n";
-}
-
-// Clears sewage for a specific building
-void ResourceDepartment::clearSewage(Building* building) {
-    int sewageCleared = building->getSewageAmount();
-    totalSewageCapacity += sewageCleared; // Assume full capacity after clearing
-    building->clearSewage();
-    std::cout << "ResourceDepartment: Cleared sewage from building.\n";
-}
-
-// Add utilities such as power, water supply, waste management, etc.
-void ResourceDepartment::addUtility(Utility* utility) {
+// Add a utility to the department for management and tracking
+void ResourceDepartment::addUtility(Utility *utility)
+{
     utilities.push_back(utility);
+    std::cout << "ResourcesDepartment: Added utility " << std::endl;
 }
 
-// Routine update method to simulate scheduled resource management
-void ResourceDepartment::update() {
-    for (auto utility : utilities) {
-        utility->serviceDelivery();
+// Notify utilities in case of outages or issues with Resourcess
+void ResourceDepartment::notifyUtilityOutage(const std::string &message)
+{
+    for (Utility *utility : utilities)
+    {
+        // utility->notifyResourcesDivision(message);
+    }
+}
+
+// Update utilities based on Resources availability or scheduled checks
+void ResourceDepartment::updateUtilities()
+{
+    for (Utility *utility : utilities)
+    {
+        if (utility->getCurrentProduction() < utility->getTotalProduction())
+        {
+            utility->startProduction();
+        }
+    }
+}
+
+// Check total levels of Resourcess and notify in case of shortages
+void ResourceDepartment::checkResourceLevels()
+{
+    for (Resources *res : resources)
+    {
+        //     std::cout << "ResourcesDepartment: Checking level of " << res->getName() << " - Available: "
+        //               << res->getAvailableAmount() << std::endl;
+
+        //     if (res->getAvailableAmount() < (res->getTotalCapacity() * 0.1)) { // Alert if below 10% capacity
+        //         std::cout << "ResourcesDepartment Alert: " << res->getName() << " levels critically low!" << std::endl;
+        //         notifyUtilityOutage(res->getName() + " Resources critically low.");
+        //     }
     }
 }

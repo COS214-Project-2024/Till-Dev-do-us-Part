@@ -2,55 +2,46 @@
 #define UTILITY_H
 
 #include <iostream>
-#include <vector>
 #include <string>
 #include <random>
+#include "Resources.h"
 #include "UtilityState.h"
 #include "ResourceDepartment.h"
 
-
-class UtilityState;
-
 class Utility {
-protected:
+private:
     std::string name;
+    ResourceDepartment* resourceDepartment; // Pointer to ResourceDepartment
+    Resources* resource;
+    UtilityState* currentState;
     float totalProduction;
     float currentProduction;
-    float totalDemand;
     float revenue;
+    float totalDemand;
     int workers;
 
-    Resource* resource; // Link to the resource being managed (e.g., energy, water)
-    UtilityState* currentState; // Current state of the utility
-
-    
-
 public:
-    Utility(std::string name, Resource* resource, float totalProduction, int workers);
-    virtual ~Utility();
+    // Constructors and Destructor
+    Utility();
+    Utility(std::string name, ResourceDepartment* resourceDepartment, Resources* resource, float totalProduction, int workers);
+    ~Utility();
 
-    // State-related behavior
+    // Production and State Management
     void startProduction();
-
-    // Handle breakdowns
-    void checkForBreakdowns();
-
-    // Change the current state of the utility
     void setState(UtilityState* newState);
 
-    // Getters and Setters for Utility Data
+    // Resource Requests and Breakdown Handling
+    void requestResource(float amount);
+    void checkForBreakdowns();
+    void notifyResourceDivision(const std::string& message);
+
+    // Getters and Setters
     float getTotalProduction() const;
     void setCurrentProduction(float production);
     float getCurrentProduction() const;
-    Resource* getResource() const;
+    Resources* getResource() const;
     int getWorkers() const;
-
-    // Interactions with Resources
-    void requestResource(float amount);
-    void notifyResourceDivision(const std::string& message);
-
-    // Overridable function for specific utilities like PowerPlant
-    virtual void serviceDelivery() = 0;
+    std::string getName() const;
 };
 
-#endif
+#endif // UTILITY_H
