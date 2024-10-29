@@ -29,3 +29,13 @@ void HealthDept::admitPatient(Citizen* c)
     }
         
 }
+void HealthDept:: totalDeaths()
+{
+    int totaldeaths;
+    for(auto& facilityPair:facilities)
+    {
+        HealthcareFacility* facility = facilityPair.second;
+        totaldeaths+=facility->getDeathToll();
+    }
+    std::cout<<"The Health Department has reported a total deathtoll of "<<totaldeaths<<"int 2024\n\n";
+}

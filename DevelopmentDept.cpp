@@ -7,11 +7,11 @@ DevelopmentDept::DevelopmentDept(float budget)
     factories["Office"] = new OfficeFactory();
     factories["Mall"]= new MallFactory();
 
-    // factories["House"]= new HouseFactory();
-    // factories["Townhouse"] = new TownhouseFactory();
-    // factories["Estate"] = new EstateFactory();
-    // factories["Factory"]= new FactoryFactory();
-    // factories["Warehouse"]= new WarehouseFactory();
+    factories["House"]= new HouseFactory();
+    factories["Townhouse"] = new TownhouseFactory();
+    factories["Estate"] = new EstateFactory();
+    factories["Factory"]= new FactoryFactory();
+    factories["Warehouse"]= new WarehouseFactory();
 }
 
 bool DevelopmentDept::allocateLand(int landsize)

@@ -35,11 +35,7 @@ void HealthcareFacility::treatPatient(Citizen* c)
 
 void HealthcareFacility:: dischargePatient(Citizen* c) {
 
-    static std::random_device rd; 
-    static std::mt19937 gen(rd());
-    static std::uniform_int_distribution<int> dist(50, 100);
-
-    c.setHealth(dist(gen));
+    c->setHealth(100);
 }
 
 int HealthcareFacility:: generateRandomValue() {

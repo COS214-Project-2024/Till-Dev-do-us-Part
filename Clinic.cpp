@@ -10,7 +10,11 @@ Clinic:: Clinic()
 }
 
 void Clinic:: admitPatient(Citizen* c) {///take in citizen
-    if (c.getHealth()<50 && c.getHealth()>=30) {
+    if(c->getHealth()<=0)
+    {
+        delete c;///dead!!
+    }
+    if (c->getHealth()<50 && c->getHealth()>=30) {
         std::cout << "Patient admitted\n";
         treatPatient(c);
     } else {

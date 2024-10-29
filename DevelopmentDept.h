@@ -6,14 +6,14 @@
 #include <vector>
 #include "Building.h"
 #include "BuildingFactory.h"
-// #include "HouseFactory.h"
-// #include "TownhouseFactory.h"
-// #include "EstateFactory.h"
+#include "HouseFactory.h"
+#include "TownhouseFactory.h"
+#include "EstateFactory.h"
 #include "ShopFactory.h"
 #include "OfficeFactory.h"
 #include "MallFactory.h"
-// #include "FactoryFactory.h"
-// #include "WarehouseFactory.h"
+#include "FactoryFactory.h"
+#include "WarehouseFactory.h"
 #include "Department.h"
 
 

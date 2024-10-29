@@ -12,6 +12,7 @@ public:
     HealthDept(float budget);
     void addFacility(std:: string name,HealthcareFacility* facility);
     void admitPatient(Citizen* c);
+    void totalDeaths();
     
 };
 
