@@ -2,7 +2,7 @@
 #include "Water.h"
 #include "Energy.h"
 #include "Materials.h"
-#include "Budget.h"
+
 
 
 int main() {
@@ -11,7 +11,7 @@ int main() {
     Energy* energy = new Energy();
     Materials* steel = new Materials("Steel");
     Materials* wood = new Materials("Wood");
-    Budget* budget = new Budget();
+   
 
 
      // Test different scenarios
@@ -29,13 +29,13 @@ int main() {
    cout << "\n--- Testing Other Resources ---" << endl;
    cout<<"Steel's state: "<<steel->getState()<<endl;
    cout<<"Wood's state: "<<wood->getState()<<endl;
-   cout<<"Budget's state: "<<budget->getState()<<" and it's amount: R"<<budget->getCurrentAmount()<<endl;
+
     // Cleanup
     delete water;
     delete energy;
     delete steel;
     delete wood;
-    delete budget;
+   
 
     return 0;
 }
