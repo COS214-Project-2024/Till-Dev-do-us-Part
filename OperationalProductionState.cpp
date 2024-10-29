@@ -1,13 +1,8 @@
-#ifndef OPERATIONALSTATE_H
-#define OPERATIONALSTATE_H
+#include "OperationalProductionState.h"
+#include <iostream>
 
-#include "UtilityState.h"
-
-class OperationalState : public UtilityState {
-public:
-    void startProduction(Utility* utility) ;
-    
-    std::string getStateName() ;
-};
-
-#endif
+void OperationalProductionState::startProduction(ProductionUtility* utility) {
+    // Logic for normal production operation
+    std::cout << utility->getName() << " is in operational state and producing resources." << std::endl;
+    utility->setCurrentProduction(utility->getProductionCap()); // Set production to full capacity
+}

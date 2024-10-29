@@ -1,13 +1,13 @@
-#ifndef OPERATIONALSTATE_H
-#define OPERATIONALSTATE_H
+#ifndef OPERATIONALSERVICESTATE_H
+#define OPERATIONALSERVICESTATE_H
 
-#include "UtilityState.h"
+#include "ServiceState.h"
+#include "ServiceUtility.h"
 
-class OperationalState : public UtilityState {
+class OperationalServiceState : public ServiceState {
 public:
-    void startProduction(Utility* utility) ;
-    
-    std::string getStateName() ;
+    void startService(ServiceUtility* utility) override;
+    std::string getStateName() const override { return "Operational"; }
 };
 
-#endif
+#endif // OPERATIONALSERVICESTATE_H
