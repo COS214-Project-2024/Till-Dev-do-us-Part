@@ -3,8 +3,10 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "TransportMode.h"
+// #include "TransportMode.h"
 #include "TransState.h"
+
+class TransportMode;
 
 class TransportFacilities {
 protected:
@@ -24,4 +26,7 @@ public:
     int getVehicleCount();
     int getTrainCount();
     int getPlaneCount();
+
+    //Mediator
+    virtual void changeState(const std::string& state) = 0;
 };
