@@ -40,7 +40,7 @@ void DevelopmentDept::addFactory(const std::string buildingType, BuildingFactory
     factories[buildingType] = factory;
 }
 
-Building *DevelopmentDept::build(std::string buildingType)
+Building* DevelopmentDept::build(std::string buildingType)
 {
     for (vector<Building*>::iterator it = unOccupiedBuildings.begin(); it != unOccupiedBuildings.end(); it++)
     {
