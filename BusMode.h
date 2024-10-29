@@ -1,6 +1,7 @@
 // BusMode.h
 #pragma once
 #include "TransportMode.h"
+#include "TransState.h"
 #include "Road.h"
 #include <string>
 

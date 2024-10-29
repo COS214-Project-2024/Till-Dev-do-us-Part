@@ -9,8 +9,10 @@
 class TransportFacilities {
 protected:
     TransState* currentState;
-    TransportFacilities(TransState* state);
+    TransportFacilities(TransState* state) : currentState(state) {};
     // std::unique_ptr<TransState> currentState;
+    
+    
 
 public:
     virtual ~TransportFacilities() = default;   
@@ -18,4 +20,8 @@ public:
     virtual void useTransport() = 0;
     void setState(TransState* state);
     void handleState();
+    // Methods to access vehicle counts
+    int getVehicleCount();
+    int getTrainCount();
+    int getPlaneCount();
 };

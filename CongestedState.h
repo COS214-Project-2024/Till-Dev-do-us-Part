@@ -6,7 +6,8 @@
 
 class CongestedState : public TransState {
 public:
-    void handleState(TransportFacilities* facility) override;
+    void handleState(TransportFacilities* facility);
+    void changeState(TransState newState);
 };
 
 #endif // CONGESTED_STATE_H

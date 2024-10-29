@@ -11,6 +11,8 @@ class TransState {
 public:
     virtual ~TransState() = default;
     virtual void handleState(TransportFacilities* facility) = 0;
+    void changeState(TransState newState);
+
 };
 
 #endif // TRANS_STATE_H

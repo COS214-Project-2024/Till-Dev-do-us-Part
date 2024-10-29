@@ -1,5 +1,6 @@
 // Abstract Products
 // TransportMode.h
+#include "TransState.h"
 #pragma once
 #include <vector>
 #include <string>
@@ -18,14 +19,19 @@ enum class TransState {
 
 class TransportMode {
 protected:
+    std::string name;
+    double speed;
+    double capacity;
     TransportationMediator* mediator;
-    TransState state;
+    TransState* state;
     TransportIterator* iterator;
     std::vector<CitizenObserver*> passengers;
     std::vector<TransportStation*> schedule;
 
 public:
     TransportMode();
+    TransportMode(const std::string& name, double speed, double capacity); // Constructor
+
     virtual ~TransportMode();
 
     void changeState(TransState newState);

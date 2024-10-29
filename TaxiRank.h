@@ -1,15 +1,22 @@
 // TaxiRank.h
 #pragma once
 #include "TransportStation.h"
+#include "TransportMode.h"
+
 #include <list>
 #include <string>
 #include <iostream>
 
-class TrainStation : public TransportStation {
+class TaxiRank : public TransportStation {
+
+private:
+    std::list<TransportMode*> taxis;
+
 public:
     void handlePassengers() override;
     void manageFreight() override;
     void maintain() override;
+    void addTaxi(TransportMode* taxi);
 };
 
 // class TaxiRank : public TransportStation {
@@ -21,7 +28,7 @@ public:
 // public:
 //     TaxiRank() : capacity(10), isOccupied(false) {}
     
-//     void maintain() override {
+//     void maintain() {
 //         handlePassengers();
 //         manageFreight();
 //         // Maintain taxi rank facilities

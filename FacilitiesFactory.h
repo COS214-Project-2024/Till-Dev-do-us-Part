@@ -5,7 +5,7 @@
 class FacilitiesFactory {
 public:
     virtual ~FacilitiesFactory() = default;
-    virtual TransportFacilities* createFacilities() = 0;  // Factory Method
+    virtual TransportFacilities* createFacilities(const std::string& type) = 0;  // Factory Method
     virtual void removeFacility(TransportFacilities* facility);
     virtual std::vector<TransportFacilities*>& getFacilities();
 protected:

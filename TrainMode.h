@@ -11,6 +11,8 @@ private:
 
 public:
     TrainMode();
+    TrainMode(Railway* railway, const std::string& name, double speed, double capacity);
     void operateStation() override;
     void useTransport() override;
+     ~TrainMode(); // Destructor to handle removal from railway
 };
