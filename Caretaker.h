@@ -5,7 +5,7 @@
 
 class Caretaker {
 private:
-    Memento memento;
+    Memento* memento;
 
 public:
     void saveMemento(Memento* memento);

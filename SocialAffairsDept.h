@@ -1,6 +1,6 @@
 #ifndef SOCIALAFFAIRSDEPT_H
 #define SOCIALAFFAIRSDEPT_H
-
+#include <vector>
 #include "Department.h"
 #include "Citizen.h"
 

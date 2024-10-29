@@ -2,7 +2,7 @@
 
 SocialAffairsDept:: SocialAffairsDept(float budget)
 {
-    this.budget=budget;
+    this->budget=budget;
 }
 void SocialAffairsDept:: addCitizen(Citizen* citizen)
 {
@@ -14,7 +14,7 @@ void SocialAffairsDept:: addToEmployed(Citizen* citizen)
 }
 void SocialAffairsDept:: addToUnemployed(Citizen* citizen)
 {
-    unmeployed.push_back(citizen);
+    unemployed.push_back(citizen);
 }
 void SocialAffairsDept:: addToMinors(Citizen* citizen)
 {
