@@ -1,97 +1,31 @@
 #include "Utility.h"
-#include "OperationalState.h"
-#include "MaintenanceState.h"
-#include "OutageState.h"
+#include <iostream>
 
-Utility::Utility() {}
+Utility::Utility() : name("Unnamed Utility"), resDept(nullptr), resource(nullptr), revenue(0.0), workers(0) {}
 
-Utility::Utility(std::string name, ResourceDepartment* resourceDepartment, Resources* resource, float totalProduction, int workers)
-    : name(name), resourceDepartment(resourceDepartment), resource(resource), totalProduction(totalProduction), workers(workers)
-{
-    currentState = new OperationalState(); // Initially operational
-    revenue = 0;
-    currentProduction = 0;
-    totalDemand = 0;
+Utility::Utility(const std::string& name, ResourceDepartment* resDept, Resources* resource, int workers)
+    : name(name), resDept(resDept), resource(resource), revenue(0.0), workers(workers) {}
+
+Utility::~Utility() = default;
+
+void Utility::checkForBreakdowns() {
+    // Logic to check for breakdowns in utility service
+    std::cout << name << " is checking for breakdowns..." << std::endl;
 }
 
-Utility::~Utility()
-{
-    delete currentState; // Clean up state object
+void Utility::notifyResourceDept(const std::string& message) {
+    // Notify the Resource Department with a specific message
+    std::cout << "Notifying Resource Department: " << message << std::endl;
 }
-std::string Utility::getName () const
-{
+
+std::string Utility::getName() const {
     return name;
 }
-void Utility::startProduction()
-{
-    checkForBreakdowns();                // Check for random breakdowns before starting production
-    currentState->startProduction(this); // Delegate production to current state
-}
 
-void Utility::setState(UtilityState* newState)
-{
-    delete currentState;     // Delete the previous state
-    currentState = newState; // Assign the new state
-    std::cout << name << " is now in state: " << currentState->getStateName() << std::endl;
-}
-
-float Utility::getTotalProduction() const
-{
-    return totalProduction;
-}
-
-void Utility::setCurrentProduction(float production)
-{
-    currentProduction = production;
-}
-
-float Utility::getCurrentProduction() const
-{
-    return currentProduction;
-}
-
-Resources* Utility::getResource() const
-{
-    return resource;
-}
-
-int Utility::getWorkers() const
-{
+int Utility::getWorkers() const {
     return workers;
 }
 
-// Request resources from ResourceDepartment instead of ResourceManager
-void Utility::requestResource(float amount)
-{
-    if (resourceDepartment->hasSufficientResource(resource, amount))
-    {
-        resourceDepartment->consumeResource(resource, amount);
-        currentProduction += amount;
-    }
-    else
-    {
-        notifyResourceDivision("Insufficient resources for " + name);
-        setState(new OutageState());
-    }
-}
-
-// Randomly check for breakdowns and switch to MaintenanceState
-void Utility::checkForBreakdowns()
-{
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 100);
-
-    int randomValue = dis(gen);
-    if (randomValue <= 10)
-    { // 10% chance of breakdown
-        std::cout << name << " is experiencing a breakdown!" << std::endl;
-        setState(new MaintenanceState());
-    }
-}
-
-// Notify ResourceDepartment if there are issues
-void Utility::notifyResourceDivision(const std::string& message)
-{
-    std::cout << "Notification to ResourceDepartment: " << message << std::endl;
+std::string Utility::getStatus() const {
+    return "Utility: " + name + ", Revenue: " + std::to_string(revenue) + ", Workers: " + std::to_string(workers);
 }

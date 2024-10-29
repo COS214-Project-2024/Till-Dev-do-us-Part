@@ -1,47 +1,36 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
-#include <iostream>
 #include <string>
-#include <random>
-#include "Resources.h"
-#include "UtilityState.h"
 #include "ResourceDepartment.h"
+#include "Resources.h"
 
 class Utility {
-private:
+protected:
     std::string name;
-    ResourceDepartment* resourceDepartment; // Pointer to ResourceDepartment
-    Resources* resource;
-    UtilityState* currentState;
-    float totalProduction;
-    float currentProduction;
+    ResourceDepartment* resDept; // Pointer to the Resource Department
+    Resources* resource;         // Pointer to the resources used by the utility
     float revenue;
-    float totalDemand;
     int workers;
 
 public:
-    // Constructors and Destructor
+    // Constructors and destructor
     Utility();
-    Utility(std::string name, ResourceDepartment* resourceDepartment, Resources* resource, float totalProduction, int workers);
-    ~Utility();
+    Utility(const std::string& name, ResourceDepartment* resDept, Resources* resource, int workers);
+    virtual ~Utility();
 
-    // Production and State Management
-    void startProduction();
-    void setState(UtilityState* newState);
+    // Basic utility operations
+    virtual void checkForBreakdowns();
+    void notifyResourceDept(const std::string& message);
 
-    // Resource Requests and Breakdown Handling
-    void requestResource(float amount);
-    void checkForBreakdowns();
-    void notifyResourceDivision(const std::string& message);
+    // Pure virtual functions to be implemented in derived classes
+    virtual void startProduction() = 0;  // For ProductionUtility
+    virtual void startService() = 0;     // For ServiceUtility
 
-    // Getters and Setters
-    float getTotalProduction() const;
-    void setCurrentProduction(float production);
-    float getCurrentProduction() const;
-    Resources* getResource() const;
-    int getWorkers() const;
+    // Getters and setters
     std::string getName() const;
+    int getWorkers() const;
+    std::string getStatus() const;
 };
 
 #endif // UTILITY_H
