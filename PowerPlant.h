@@ -1,23 +1,16 @@
 #ifndef POWERPLANT_H
 #define POWERPLANT_H
 
-#include "Utility.h"
+#include "ProductionUtility.h"
 #include "Energy.h"
 
-
-class PowerPlant : public Utility
-{
-private:
-    Energy *energy;
-    ResourceDepartment *department;
-
+class PowerPlant : public ProductionUtility {
 public:
-    PowerPlant();
-    PowerPlant(std::string name, ResourceDepartment *department, Resources *energy, float totalProduction, int workers);
+    PowerPlant(std::string name, ResourceDepartment* department, Resources* resource, float capacity, int workers);
     ~PowerPlant();
 
-    // Override serviceDelivery for PowerPlant-specific production
-    void serviceDelivery();
+    void startProduction() override;          // Starts power production
+    
 };
 
-#endif
+#endif // POWERPLANT_H

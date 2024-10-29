@@ -1,20 +1,16 @@
 #ifndef WATERSUPPLY_H
 #define WATERSUPPLY_H
 
-#include "Utility.h"
+#include "ProductionUtility.h"
+// #include "Water.h"
 
-class WaterSupply : public Utility
-{
+class WaterSupply : public ProductionUtility {
 public:
-    WaterSupply();
-    WaterSupply(Resources *resource, ResourceDepartment *department, float totalProduction, int workers)
-        : Utility("WaterSupply", department, resource, totalProduction, workers) {}
+    WaterSupply(std::string name, ResourceDepartment* department, Resources* resource, float capacity, int workers);
+    ~WaterSupply();
 
-    void serviceDelivery()
-    {
-        std::cout << "WaterSupply: Distributing water at " << getCurrentProduction() << " units capacity.\n";
-        // Additional specific logic for water distribution
-    }
+    void startProduction() override;             // Starts water supply production
+   
 };
 
-#endif
+#endif // WATERSUPPLY_H
