@@ -19,3 +19,41 @@
 //     notifySchedule();
 //     mediator->notify(this, state);
 // }
+
+BusMode::BusMode(TransportationMediator* mediator, TransportFacilities* facility)
+    : TransportMode(mediator), facility(facility) {}
+
+void BusMode::alertAccident() {
+    std::cout << "BusMode: Accident reported. Notifying other road users.\n";
+    mediator->notify(this, "accident");
+}
+
+void BusMode::manageTraffic(const std::string& state) {
+    if (state == "accident") {
+        std::cout << "BusMode: Responding to accident. Slowing down traffic.\n";
+    }
+    // Additional traffic management logic
+}
+
+void BusMode::set(const std::string& state) {
+    manageTraffic(state);
+}
+
+void BusMode::changed(const std::string& state) {
+    mediator->notify(this, state);
+}
+
+std::string BusMode:: getName() const {
+     return "BusMode"; }
+
+TransportFacilities* BusMode:: getFacility() const { 
+    return facility; }
+
+bool BusMode:: isRoadMode() const{
+    return true; }
+
+bool BusMode::isRailwayMode() const { 
+    return false; }
+
+bool BusMode:: isAirportMode() const { 
+    return false; }
