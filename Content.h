@@ -13,7 +13,8 @@ class Distraught;
 class Content: public Feeling{
 
     public:
-        Feeling* reaction();
+        Content();
+        virtual Feeling* reaction();
 
 };
 

@@ -11,8 +11,10 @@ class Neutral;
 class Content;
 
 class Distraught : public Feeling {
-public:
-    Feeling* reaction();
+
+    public:
+        Distraught();
+        virtual Feeling* reaction();
 };
 
 #endif // DISTRAUGHT_H

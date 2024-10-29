@@ -2,6 +2,10 @@
 #include "Content.h"  
 #include "Distraught.h"
 
+Content::Content(){
+    name = "Content";
+}
+
 Feeling* Content:: reaction(){
     int num = rand();
 

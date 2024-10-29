@@ -2,6 +2,10 @@
 #include "Content.h"  
 #include "Distraught.h"
 
+Neutral::Neutral(){
+    name = "Neutral";
+}
+
 Feeling* Neutral::reaction() {
     int num = rand();
 

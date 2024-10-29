@@ -12,7 +12,8 @@ class Content;
 class Neutral: public Feeling{
 
     public:
-        Feeling* reaction();
+        Neutral();
+        virtual Feeling* reaction();
 
 };
 
