@@ -13,6 +13,7 @@ public:
     ResourcesDept(float budget);
     void adddUtility();
     void processResourceRequest(float amount);
+    ///destructor
     
 };
 

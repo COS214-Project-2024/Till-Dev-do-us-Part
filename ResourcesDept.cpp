@@ -12,9 +12,9 @@ void ResourcesDept:: adddUtility()
 }
 void ResourcesDept:: processResourceRequest(float amount)
 {
-    budget-=amount
-    if(budget<0)
-    {
-        budget=0;
-    }
+    // budget-=amount
+    // if(budget<0)
+    // {
+    //     budget=0;
+    // }
 }

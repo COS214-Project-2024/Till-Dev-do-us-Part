@@ -39,3 +39,9 @@ void HealthDept:: totalDeaths()
     }
     std::cout<<"The Health Department has reported a total deathtoll of "<<totaldeaths<<"int 2024\n\n";
 }
+HealthDept::~HealthDept() {
+    for (auto& facilityPair : facilities) {
+        delete facilityPair.second; 
+    }
+    facilities.clear(); // Clear the map
+}

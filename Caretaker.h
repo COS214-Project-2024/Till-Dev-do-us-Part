@@ -10,6 +10,8 @@ private:
 public:
     void saveMemento(Memento* memento);
     Memento* getMemento();
+    ~Caretaker();
+    
 };
 
 #endif 

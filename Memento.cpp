@@ -15,3 +15,12 @@ std::vector<Policy*> Memento::getActivePolicies(){
 void Memento::setActivePolicies(const std::vector<Policy*> policies) {
     activePolicies = policies;
 }
+
+Memento:: ~Memento()
+{
+    // for(auto policy:activePolicies)
+    // {
+    //     delete policy;
+    // }//not sure about this
+    activePolicies.clear();
+}

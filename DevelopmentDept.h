@@ -32,6 +32,7 @@ class DevelopmentDept : public Department
         float getPrice(std::string buildingType);
         void addFactory(const std::string buildingType, BuildingFactory *factory);
         Building *build(std::string buildingType);
+        ~DevelopmentDept();
 };
 
 #endif

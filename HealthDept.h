@@ -13,6 +13,7 @@ public:
     void addFacility(std:: string name,HealthcareFacility* facility);
     void admitPatient(Citizen* c);
     void totalDeaths();
+    ~HealthDept();
     
 };
 

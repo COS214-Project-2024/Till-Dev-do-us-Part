@@ -51,3 +51,10 @@ Building* DevelopmentDept::build(std::string buildingType)
     }
     return nullptr;
 }
+
+DevelopmentDept::~DevelopmentDept() {
+    for (auto& factoryPair : factories) {
+        delete factoryPair.second; 
+    }
+    factories.clear(); // Clear the map
+}

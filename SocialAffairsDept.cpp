@@ -20,3 +20,14 @@ void SocialAffairsDept:: addToMinors(Citizen* citizen)
 {
     minors.push_back(citizen);
 }
+
+SocialAffairsDept:: ~SocialAffairsDept()
+{
+    
+    citizens.clear();
+    unemployed.clear();
+    minors.clear();
+    employed.clear();
+    //////fix
+}
+

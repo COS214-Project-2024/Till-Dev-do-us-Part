@@ -14,6 +14,7 @@ private:
 public:
     std::vector<Policy*> getActivePolicies();
     void setActivePolicies(const std::vector<Policy*> policies);
+    ~Memento();
 };
 
 #endif 

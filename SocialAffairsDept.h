@@ -19,6 +19,7 @@ public:
     void addToUnemployed(Citizen* citizen);
     void addToMinors(Citizen* citizen);
     ///send everyone to work
+    ~SocialAffairsDept();
 
 };
 
