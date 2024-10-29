@@ -2,19 +2,14 @@
 #define NEUTRAL_H
 
 #include "Feeling.h"
-#include <iostream>
-#include <stdlib.h>
+#include "Content.h"
+#include "Distraught.h"
+#include <cstdlib>
 
-//Forward declaration to avoid circular dependencies
-class Distraught;
-class Content;
-
-class Neutral: public Feeling{
-
+class Neutral : public Feeling {
     public:
         Neutral();
-        virtual Feeling* reaction();
-
+        virtual Feeling* reaction() override; 
 };
 
-#endif;
+#endif 

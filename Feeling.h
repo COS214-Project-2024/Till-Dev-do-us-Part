@@ -3,20 +3,16 @@
 
 #include <string>
 
-using namespace std;
+class Feeling {
+protected:
+    std::string name;
 
-class Feeling{
-
-    protected:
-        string name;
-
-    public:
-        virtual Feeling* reaction() = 0;
-        virtual std::string getName(){
-            return name;
-        }
-        virtual ~Feeling() {}
-
+public:
+    virtual Feeling* reaction() = 0; // Pure virtual function for reaction
+    virtual std::string getName() const {
+        return name;
+    }
+    virtual ~Feeling() {}
 };
 
-#endif
+#endif // FEELING_H

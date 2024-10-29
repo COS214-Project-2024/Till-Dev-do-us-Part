@@ -1,20 +1,15 @@
 #ifndef DISTRAUGHT_H
 #define DISTRAUGHT_H
 
-#include <iostream>
-#include <stdlib.h>
-
 #include "Feeling.h"
-
-// Forward declarations to avoid circular dependencies
-class Neutral;
-class Content;
+#include "Content.h"
+#include "Neutral.h"
+#include <cstdlib>
 
 class Distraught : public Feeling {
-
     public:
         Distraught();
-        virtual Feeling* reaction();
+        virtual Feeling* reaction(); 
 };
 
-#endif // DISTRAUGHT_H
+#endif 
