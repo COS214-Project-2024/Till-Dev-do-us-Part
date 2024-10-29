@@ -78,13 +78,6 @@ void ResourceDepartment::notifyUtilityOutage(const std::string &message)
 // Update utilities based on Resources availability or scheduled checks
 void ResourceDepartment::updateUtilities()
 {
-    for (Utility *utility : utilities)
-    {
-        if (utility->getCurrentProduction() < utility->getTotalProduction())
-        {
-            utility->startProduction();
-        }
-    }
 }
 
 // Check total levels of Resourcess and notify in case of shortages
@@ -92,12 +85,5 @@ void ResourceDepartment::checkResourceLevels()
 {
     for (Resources *res : resources)
     {
-        //     std::cout << "ResourcesDepartment: Checking level of " << res->getName() << " - Available: "
-        //               << res->getAvailableAmount() << std::endl;
-
-        //     if (res->getAvailableAmount() < (res->getTotalCapacity() * 0.1)) { // Alert if below 10% capacity
-        //         std::cout << "ResourcesDepartment Alert: " << res->getName() << " levels critically low!" << std::endl;
-        //         notifyUtilityOutage(res->getName() + " Resources critically low.");
-        //     }
-    }
+        }
 }
