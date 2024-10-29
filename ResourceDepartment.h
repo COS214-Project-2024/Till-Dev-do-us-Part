@@ -6,6 +6,9 @@
 #include "Resources.h"
 #include "Utility.h"
 
+
+class Utility;
+
 class ResourceDepartment
 {
 private:

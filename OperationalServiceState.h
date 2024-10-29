@@ -7,7 +7,8 @@
 class OperationalServiceState : public ServiceState {
 public:
     void startService(ServiceUtility* utility) override;
-    std::string getStateName() const override { return "Operational"; }
+    std::string getStateName() const override;
+    
 };
 
 #endif // OPERATIONALSERVICESTATE_H

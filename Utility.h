@@ -5,6 +5,7 @@
 #include "ResourceDepartment.h"
 #include "Resources.h"
 
+class ResourceDepartment;
 class Utility {
 protected:
     std::string name;

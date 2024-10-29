@@ -6,3 +6,5 @@ void OperationalServiceState::startService(ServiceUtility* utility) {
     std::cout << utility->getName() << " is operational and providing service at full capacity." << std::endl;
     utility->setCurrentServiceLevel(utility->getServiceCap()); // Full service capacity
 }
+
+   std::string OperationalServiceState::getStateName() const  { return "Operational"; }
