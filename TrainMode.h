@@ -5,9 +5,14 @@
 #include <string>
 #include <iostream>
 
+class TransportFacilities;
+class TransportationMediator;
+
 class TrainMode : public TransportMode {
 private:
     Railway* railway;
+    TransportFacilities* facility;
+
 
 public:
     TrainMode();
@@ -15,4 +20,18 @@ public:
     void operateStation() override;
     void useTransport() override;
      ~TrainMode(); // Destructor to handle removal from railway
+
+    //Mediator 
+    TrainMode(TransportationMediator* mediator, TransportFacilities* facility);
+
+    std::string getName() const override;
+    void alertAccident() override;
+    void manageTraffic(const std::string& state) override;
+    void set(const std::string& state) override;
+    void changed(const std::string& state) override;
+
+    TransportFacilities* getFacility() const override;
+    bool isRoadMode() const override;
+    bool isRailwayMode() const override;
+    bool isAirportMode() const override;
 };

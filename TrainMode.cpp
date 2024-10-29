@@ -1,5 +1,6 @@
 #include "TrainMode.h"
 #include "TransState.h"
+#include "TransportFacilities.h"
 #include <string>
 #include <iostream>
 
@@ -41,3 +42,42 @@ void TrainMode::useTransport() {
 //     notifySchedule();
 //     mediator->notify(this, state);
 // }
+
+TrainMode::TrainMode(TransportationMediator* mediator, TransportFacilities* facility)
+    : TransportMode(mediator), facility(facility) {}
+
+
+void TrainMode::alertAccident() {
+    std::cout << "TrainMode: Accident reported on the railway. Notifying other train users.\n";
+    mediator->notify(this, "accident");
+}
+
+void TrainMode::manageTraffic(const std::string& state) {
+    if (state == "accident") {
+        std::cout << "TrainMode: Responding to accident. Slowing down trains.\n";
+    }
+    // Additional traffic management logic specific to trains
+}
+
+void TrainMode::set(const std::string& state) {
+    manageTraffic(state);
+}
+
+void TrainMode::changed(const std::string& state) {
+    mediator->notify(this, state);
+}
+
+std::string TrainMode:: getName() const {
+     return "TrainMode"; }
+
+TransportFacilities* TrainMode:: getFacility() const { 
+    return facility; }
+
+bool TrainMode:: isRoadMode() const{
+    return false; }
+
+bool TrainMode::isRailwayMode() const { 
+    return true; }
+
+bool TrainMode:: isAirportMode() const { 
+    return false; }
