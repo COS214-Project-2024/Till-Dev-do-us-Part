@@ -3,8 +3,18 @@
 
 Adult::Adult(){
     mood = new Neutral();
+    ///check dept money
     balance = 1000;
-    netWorth, employer = 0;
+    health = 100;
+    netWorth = 0;
+    job = nullptr;
+}
+
+void Adult::react() {
+    Feeling* newMood = mood->reaction();  
+    delete mood;  
+    mood = newMood;  
+    std::cout << "Person is feeling " << mood->getName() << std::endl;
 }
 
 Citizen* Adult::clone(){
@@ -12,16 +22,19 @@ Citizen* Adult::clone(){
 }
 
 bool Adult::employmentStatus(){
-    return employer ? true:false;
+    return job ? true:false;
+}
+
+bool Adult::hasChild(){
+    return false;
 }
 
 void Adult::salary(float salary){
     balance += salary;
 }
 
-//Used in department
-void Adult::setEmployer(Business* employer){
-    this->employer = employer;
+void Adult::setJob(Business* job){
+    this->job = job;
 }
 
 void Adult::goToWork(){
