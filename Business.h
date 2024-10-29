@@ -33,7 +33,6 @@ class Business
 
     public: 
         virtual string getBusinessType() = 0; 
-
         void buyProperty(string propertyType); 
         void sellProperty(); 
         void hireEmployee(); 

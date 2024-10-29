@@ -13,6 +13,7 @@
 class Automotive : public Business
 {
     public:
+        //need to add Citizen*
         Automotive()
         {
             wiseBucksApp = nullptr; 

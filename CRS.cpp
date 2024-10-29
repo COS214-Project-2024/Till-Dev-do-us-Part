@@ -24,5 +24,10 @@ void CRS::getTax(float tax)  //adds tax money to taxFund
 
 void CRS::distributeTax()
 {
-    
+    //RESOURCES = 15%
+    //TRANSPORT = 20%
+    //DEVELOPMENT = 25%
+    //SOCIAL AFFAIRS = 30%
+    //HEALTH = 10%
+    //FINANCE = 
 }
