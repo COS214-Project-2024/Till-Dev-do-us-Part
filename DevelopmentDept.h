@@ -23,6 +23,7 @@ class DevelopmentDept : public Department
     private:
         int land;
         map<std::string, float> priceList;
+        map<std::string, float> buildingAreaList;
         map<std::string, BuildingFactory *> factories;
         vector<Building *> unOccupiedBuildings;
 

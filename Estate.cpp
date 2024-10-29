@@ -131,3 +131,7 @@ bool Estate::addOccupant(Citizen *c)
 
     return false;
 }
+
+void Residential::goToWork(){
+
+}

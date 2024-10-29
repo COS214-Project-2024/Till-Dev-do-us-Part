@@ -3,6 +3,16 @@
 DevelopmentDept::DevelopmentDept(float budget)
 {
     this->budget = budget;
+
+    buildingAreaList["House"] = 200;
+    buildingAreaList["Townhouse"] = 180;
+    buildingAreaList["Estate"] = 500;
+    buildingAreaList["Office"] = 180;
+    buildingAreaList["Shop"] = 200;
+    buildingAreaList["Mall"] = 1000;
+    buildingAreaList["Warehouse"] = 500;
+    buildingAreaList["Factory"] = 1200;
+
     factories["Shop"] = new ShopFactory();
     factories["Office"] = new OfficeFactory();
     factories["Mall"]= new MallFactory();
@@ -21,11 +31,11 @@ bool DevelopmentDept::allocateLand(int landsize)
 
 float DevelopmentDept::getPrice(std::string buildingType)
 {
-    auto building = priceList.find(buildingType);
-    return building->getPrice();
+    float price = priceList.find(buildingType)->second;
+    return price;
 }
 
-void DevelopmentDept::addFactory(const std::string &buildingType, BuildingFactory *factory)
+void DevelopmentDept::addFactory(const std::string buildingType, BuildingFactory *factory)
 {
     factories[buildingType] = factory;
 }
@@ -34,13 +44,12 @@ Building *DevelopmentDept::build(std::string buildingType)
 {
     for (vector<Building*>::iterator it = unOccupiedBuildings.begin(); it != unOccupiedBuildings.end(); it++)
     {
-        if((*it)->getType == buildingType){
+        if((*it)->getType() == buildingType){
             Building* building = (*it);
             unOccupiedBuildings.erase(it);
             return building; //citizen will have to add themselves to the building
         }
     }
-    
 
     map<string,BuildingFactory *>::iterator it = factories.find(buildingType);
     if (it != factories.end())
@@ -49,5 +58,5 @@ Building *DevelopmentDept::build(std::string buildingType)
 
         return factory->build();
     }
-    return nullptr
+    return nullptr;
 }

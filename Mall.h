@@ -1,11 +1,13 @@
 #ifndef MALL_H
 #define MALL_H
 #include "Commercial.h"
-
+class Citizen;
 class Mall: public Commercial
 {
     private:
         vector<Commercial*> stores;
+        vector<Citizen*> owners;
+
     public:
         Mall();
         ~Mall();

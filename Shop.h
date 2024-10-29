@@ -5,7 +5,7 @@
 class Shop : public Commercial
 {
     private:
-        vector<Citizen *> occupants;
+        Citizen * occupants;
 
     public:
         Shop();

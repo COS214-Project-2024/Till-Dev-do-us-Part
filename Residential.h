@@ -13,9 +13,10 @@ class Residential : public Building
         virtual bool useShower() = 0; // 
         virtual bool useToilet() = 0;  // why boolean, because when there isnt enough water/electricity it must affect the citizen
         virtual bool useStove() = 0;  // why boolean, because when there isnt enough water/electricity it must affect the citizen
-    // virtual void loadElectricity(int units); inherited from Building
-    // virtual void loadWater(int units); inherited from Building
-    // virtual bool useElectricity(int units); inherited from Building
-    // virtual bool useWater(int units); inherited from Building
+        virtual void goToWork();
+        // virtual void loadElectricity(int units); inherited from Building
+        // virtual void loadWater(int units); inherited from Building
+        // virtual bool useElectricity(int units); inherited from Building
+        // virtual bool useWater(int units); inherited from Building
 };
 #endif
