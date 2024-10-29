@@ -16,13 +16,14 @@ int main() {
 
      // Test different scenarios
     cout << "--- Testing Water Resource ---" << endl;
-     cout<<water->getState()<<endl;
+    water->getAvailableQuantity();
     water->consume(18000); 
     water->consume(40000);  
     water->consume(40000);  
     
   
     cout << "\n--- Testing Energy Resource ---" << endl;
+    energy->getAvailableQuantity();
     energy->consume(100002); 
     energy->consume(800);  
 

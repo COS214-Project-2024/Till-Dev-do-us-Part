@@ -4,8 +4,11 @@
 #include "Resources.h"
 
 class Water : public Resources {
+
 public:
     Water();
+    void getAvailableQuantity() ;
+    
 };
 
 #endif
