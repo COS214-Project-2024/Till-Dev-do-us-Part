@@ -2,23 +2,22 @@
 #define MINOR_H
 
 #include "Citizen.h"
+#include "Adult.h"
 #include "School.h"
 
 class Minor: public Citizen{
 
     private:
         School* school;
+        Adult* parent;
 
     public:
         Minor();
         virtual Citizen* clone();
+        virtual void react();
         void goToSchool();
-        bool employmentStatus();
-
-        // void observeTransport();
-        // void chooseMode(TransportStrategy*);
-        // void update();
-
+        void setParent(Adult*);
+        virtual ~Minor(){}
 };
 
 #endif

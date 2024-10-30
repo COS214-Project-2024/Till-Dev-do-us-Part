@@ -1,21 +1,15 @@
 #ifndef ADULTPOP_H
 #define ADULTPOP_H
 
-#include "Citizen.h"
+#include "Population.h"
 #include "Adult.h"
 
+class AdultPop: public Population{
 
-class AdultPop{
-
-    // public:
-    //     Citizen* createPerson(){
-    //         return new Adult();
-    //     }
-    //     Citizen** reproduce(int num){
-    //         for(int i=0; i<num; i++){
-                
-    //         }
-    //     }
+    public:
+        virtual Citizen* createPerson(){
+            return new Adult();
+        }
 
 };
 
