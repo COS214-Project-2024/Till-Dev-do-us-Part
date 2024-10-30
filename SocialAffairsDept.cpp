@@ -4,8 +4,6 @@
 #include "Citizen.h"      
 #include "HaveChild.h"
 #include "SocialAffairsDept.h"
-#include <iostream>
-
 
 using namespace std;
 
@@ -27,10 +25,6 @@ Citizen* SocialAffairsDept::employ(Business* job) {
         return (Citizen*) employee;
     } else {
         std::cout << "There are no citizens to employ " << std::endl;
-        return nullptr;
-    }
-    else{
-        std::cout<< "There are no available citizens to employ " << std::endl; 
         return nullptr;
     }
 }

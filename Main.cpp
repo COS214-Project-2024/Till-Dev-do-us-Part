@@ -1,167 +1,98 @@
-#include "Business.h"
-    #include "Entertainment.h"
-    #include "Food.h"
-    #include "Retail.h"
-    #include "Wellness.h"
-#include "CRS.h"
-#include "Department.h"
-    #include "DevelopmentDept.h"
-    #include "FinanceDept.h"
-    #include "SocialAffairsDept.h"
-#include "Government.h"
-#include "TaxCalculator.h"
-    #include "CorporateTax.h"
-    #include "Customs.h"
-    #include "IncomeTax.h"
-    #include "PAYE.h"
-    #include "PropertyRates.h"
-    #include "VAT.h"
-#include "WiseBucks.h"
-
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
-using namespace std; 
 
-int main()
-{
-    TaxCalculator* taxes [6]; 
-    taxes[0] = new CorporateTax(); 
-    taxes[1] = new Customs(); 
-    taxes[2] = new IncomeTax(); 
-    taxes[3] = new PAYE(); 
-    taxes[4] = new PropertyRates(); 
-    taxes[5] = new VAT(); 
+#include "Adult.h"
+#include "Citizen.h"
+#include "Department.h"
+#include "Government.h"
+#include "Population.h"
+#include "AdultPop.h"
+#include "MinorPop.h"
+#include "SocialAffairsDept.h"
 
-    cout << endl << "Available Tax Strategies: " << endl; 
-    for (int i=0; i<6; i++)
-        cout << i+1 <<". " << taxes[i]->getTaxType() << endl; 
-    cout << endl; 
+using namespace std;
 
-    WiseBucks* apps [6]; 
-    apps[0] = new WiseBucks(taxes[0]); 
-    apps[1] = new WiseBucks(taxes[1]);
-    apps[2] = new WiseBucks(taxes[2]); 
-    apps[3] = new WiseBucks(taxes[3]); 
-    apps[4] = new WiseBucks(taxes[4]); 
-    apps[5] = new WiseBucks(taxes[5]); 
+int main(){
 
-    cout << "WiseBucks Apps Available: " << endl; 
-    for (int i=0; i<6; i++)
-        cout << i+1 <<". " << apps[i]->getTaxType() << endl; 
+    cout << "====================================================================================================================================================================================================" << endl;
+
+    std::srand(std::time(0));
+
+    Government* Gov = Government::getInstance();
+    Department* SA = new SocialAffairsDept(50000);
+    Gov->addDepartment("SocialAffairs", SA);
+
+    Population* AdultFactory = new AdultPop();
+    Citizen* personPrototype = AdultFactory->getPerson();
+    Citizen* person = AdultFactory->getPerson();
+    cout << "Created a new adult " << endl;
+
+    Population* MinorFactory = new MinorPop();
+    Citizen* child = MinorFactory->getPerson();
+    cout << "Created a new child " << endl;
+
     cout << endl;
 
-    //testing tax calculations 
-    cout << "WiseBucks Apps Pay Tax Function : " << endl;
-    cout << "(returns amount after tax has been paid on CB 100 income)" << endl;  
-    for (int i=0; i<6; i++)
-        cout << i+1 <<". CB " << apps[i]->payTax(100) << endl; 
+    person->react();
+    child->react();
+    person->react();
+
     cout << endl;
 
-    cout << "WiseBucks Apps Pay Tax Function : " << endl;
-    cout << "(returns amount after tax has been paid on CB 1 000 000 income)" << endl;  
-    for (int i=0; i<6; i++)
-        cout << i+1 <<". CB " << apps[i]->payTax(1000000) << endl; 
+    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addCitizen(person);
+    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addChild(child);
+    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(person);
+    Business* shop = new Business();
+    Citizen* person1 =  ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->employ(shop);
+
     cout << endl;
 
-//MAKING THE GOVERNMENT
-    Government* Gov = Government::getInstance(); 
-    Department* FinDept = new FinanceDept(100000); 
-    Gov->addDepartment("Finance", FinDept); 
-    Department* DevDept = new DevelopmentDept(100000); 
-    Gov->addDepartment("Development", DevDept); 
-    Department* SAD = new SocialAffairsDept(100000);
-    Gov->addDepartment("SocialAffairs", SAD);  
+    Citizen* person2 = personPrototype->clone();
+    person2->react();
 
-    //testing businesses
-    Business* foodShop1 = new Food(); 
-    Business* kfc = new Food("KFC", 12); 
-    cout << foodShop1->getBusinessDetails() << endl; 
-    cout << kfc->getBusinessDetails() << endl; 
+    cout << endl;
 
-    //testing observer
-    foodShop1->linkWiseBucks(apps[2]);
-    cout << foodShop1->getBusinessDetails() << endl; 
-    foodShop1->linkWiseBucks(apps[3]);
-    // foodShop1->handleAccounts();
-    // cout << "After handling accounts: " << endl; 
-    // cout << foodShop1->getBusinessDetails() << endl; 
+    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->growPopulation(10);
 
-    kfc->unlinkWiseBucks(); 
-    cout << "end" << endl; 
+    cout << "Currently the city consists of " << ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->getNumCitizens() << " citizens " << endl;  
 
-    for (Business* business : ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->getBusinesses()) 
+    cout << endl;
+
+    if(((Adult*) person1)->employmentStatus())
     {
-        cout << business->getBusinessName() << endl; 
-        business->buyProperty("Mall"); 
-    }  
-
-/*    //testing other businesses
-    Business* retailShop1 = new Retail(); 
-    cout << retailShop1->getBusinessDetails() << endl;  
-    Business* woolworths = new Retail("Woolworths", 30);
-    cout << woolworths->getBusinessDetails() << endl; 
-    woolworths->linkWiseBucks(apps[5]); 
-    woolworths->handleAccounts(); 
-    cout << woolworths->getBusinessDetails() << endl; 
-
-    Business* entertainment = new Entertainment(); 
-    cout << entertainment->getBusinessDetails() << endl; 
-    Business* numetro = new Entertainment("Nu Metro", 25); 
-    numetro->linkWiseBucks(apps[0]); 
-    cout << numetro->getBusinessDetails() << endl; 
-
-    Business* wellness = new Wellness(); 
-    cout << wellness->getBusinessDetails() << endl; 
-    Business* virginActive = new Wellness("Virgin Active", 20);
-    virginActive->linkWiseBucks(apps[3]); 
-    cout << virginActive->getBusinessDetails() << endl;  
-
-    //testing crs settle tax
-    CRS::settleTax(); 
-
-    //deletes 
-    delete virginActive; 
-    virginActive = nullptr; 
-    
-    delete wellness; 
-    wellness = nullptr; 
-
-    delete numetro; 
-    numetro = nullptr; 
-
-    delete entertainment; 
-    entertainment = nullptr; 
-
-    delete woolworths;
-    woolworths = nullptr;
-
-    delete retailShop1; 
-    retailShop1 = nullptr; 
-
-    delete kfc; 
-    kfc = nullptr; 
-
-    delete foodShop1; 
-    foodShop1 = nullptr; 
-*/
-    Gov->removeDepartment("Finance");
-    delete FinDept; 
-    FinDept = nullptr; 
-
-    delete Gov; 
-    Gov = nullptr; 
-
-    for (int i=0; i<6; i++)
-    {
-        delete apps[i];
-        apps[i] = nullptr; 
+        cout << "Person1 is employed " << endl;
     }
 
-    for (int i=0; i<6; i++)
+    if(((Adult*) person)->employmentStatus())
     {
-        delete taxes[i];
-        taxes[i] = nullptr; 
+        cout << "Person is employed " << endl;
     }
 
-    return 0; 
+    delete person2;
+    person2 = nullptr;
+   
+    delete shop;
+    shop = nullptr;
 
+    delete MinorFactory;
+    MinorFactory = nullptr;
+
+    delete personPrototype;
+    personPrototype = nullptr;
+
+    delete AdultFactory;
+    AdultFactory = nullptr;
+
+    Gov->removeDepartment("SocialAffairs");
+
+    delete SA;
+    SA = nullptr;
+
+    delete Gov;
+    Gov = nullptr;
+
+    cout << "====================================================================================================================================================================================================" << endl;
+
+    return 0;
 }

@@ -1,13 +1,14 @@
 #ifndef DEPARTMENT_H
 #define DEPARTMENT_H
 
-class Department {
-protected:
-    float budget;
+class Department{
 
-public:
-    // Department(float budget) : budget(budget) {}
-    virtual ~Department(){}
+    protected:
+        float budget;
+
+    public:
+        virtual ~Department(){} 
+
 };
 
-#endif 
+#endif
