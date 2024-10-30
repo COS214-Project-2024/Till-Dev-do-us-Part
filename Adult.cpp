@@ -1,5 +1,6 @@
 #include "Adult.h"
 #include "Neutral.h"
+#include <iostream>
 
 Adult::Adult(){
     mood = new Neutral();
@@ -39,4 +40,11 @@ void Adult::setJob(Business* job){
 
 void Adult::goToWork(){
     
+}
+
+// CitizenObserver
+Adult::Adult(const std::string& name) : name(name) {}
+
+void Adult::update(const std::string& message) {
+    std::cout << "Notification for Adult " << name << ": " << message << std::endl;
 }

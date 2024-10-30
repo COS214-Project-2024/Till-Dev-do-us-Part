@@ -4,12 +4,15 @@
 #include "Citizen.h"
 #include "Adult.h"
 #include "School.h"
+#include "CitizenObserver.h"
+#include <string>
 
 class Minor: public Citizen{
 
     private:
         School* school;
         Adult* parent;
+        std::string name;//citizenobserver
 
     public:
         Minor();
@@ -18,6 +21,10 @@ class Minor: public Citizen{
         void goToSchool();
         void setParent(Adult*);
         virtual ~Minor(){}
+
+        // CitizenObserver
+        Minor(const std::string& name);
+    void update(const std::string& message);
 };
 
 #endif

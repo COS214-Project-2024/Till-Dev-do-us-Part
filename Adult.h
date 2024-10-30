@@ -2,8 +2,13 @@
 #define ADULT_H
 
 #include "Citizen.h"
+#include "CitizenObserver.h"
+#include <string>
 
 class Adult: public Citizen{
+
+    private:
+    std::string name; //CitizenObserver
 
     protected:
         float balance;
@@ -20,6 +25,9 @@ class Adult: public Citizen{
         virtual void salary(float);
         virtual void setJob(Business*);
         virtual ~Adult(){};
+        // CitizenObserver
+        Adult(const std::string& name);
+        void update(const std::string& message);
 
 };
 

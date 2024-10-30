@@ -5,6 +5,9 @@
 #include "Road.h"
 #include "ModeFactory.h"
 #include "BusIterator.h"
+#include "CitizenObserver.h"
+#include <vector>
+#include <string>
 #include <list>
 #include <memory>
 
@@ -17,6 +20,8 @@ private:
     Road* road;
     TransportFacilities* facility; //mediator
     std::list<TransportStation*> busStops; //iterator
+    std::string schedule; //observer
+
 
 public:
     BusMode();
@@ -42,4 +47,10 @@ public:
 
     // Overridden method to create a BusIterator
     TransportationIterator* createIterator() override;
+
+    // CitizenObserver
+    void setSchedule(const std::string& newSchedule) override;
+    std::string getSchedule() const override;
+    void notifyScheduleChange();
+
 };

@@ -83,3 +83,19 @@ bool CarMode::isRailwayMode() const {
 
 bool CarMode:: isAirportMode() const { 
     return false; }
+
+ //Iterator???
+
+//CitizenObserver
+void CarMode::setSchedule(const std::string& newSchedule) {
+    schedule = newSchedule;
+    notifyScheduleChange();
+}
+
+std::string CarMode::getSchedule() const {
+    return schedule;
+}
+
+void CarMode::notifyScheduleChange() {
+    notifyObservers("Car schedule updated: " + schedule);
+}

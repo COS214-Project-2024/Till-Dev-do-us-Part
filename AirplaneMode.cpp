@@ -61,3 +61,19 @@ bool AirplaneMode::isRailwayMode() const {
 
 bool AirplaneMode:: isAirportMode() const { 
     return true; }
+
+// Iterator???
+
+// CitizenObserver
+void AirplaneMode::setSchedule(const std::string& newSchedule) {
+    schedule = newSchedule;
+    notifyScheduleChange();
+}
+
+std::string AirplaneMode::getSchedule() const {
+    return schedule;
+}
+
+void AirplaneMode::notifyScheduleChange() {
+    notifyObservers("Airplane schedule updated: " + schedule);
+}

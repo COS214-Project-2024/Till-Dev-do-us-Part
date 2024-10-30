@@ -13,6 +13,7 @@ class AirplaneMode : public TransportMode {
 private:
     Airport* airport;
     TransportFacilities* facility;
+    std::string schedule; //observer
 
 public:
     AirplaneMode();
@@ -32,6 +33,13 @@ public:
     bool isRoadMode() const override;
     bool isRailwayMode() const override;
     bool isAirportMode() const override;
+
+    // Iterator???
+
+    // CitizenObserver
+    void setSchedule(const std::string& newSchedule) override;
+    std::string getSchedule() const override;
+    void notifyScheduleChange();
     
 };
 

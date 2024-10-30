@@ -75,3 +75,17 @@ void BusMode::addBusStop(TransportStation* stop) {
 TransportationIterator* BusMode::createIterator() {
     return new BusIterator(busStops);
 }
+
+//CitizenObserver
+void BusMode::setSchedule(const std::string& newSchedule) {
+    schedule = newSchedule;
+    notifyScheduleChange();
+}
+
+std::string BusMode::getSchedule() const {
+    return schedule;
+}
+
+void BusMode::notifyScheduleChange() {
+    notifyObservers("Bus schedule updated: " + schedule);
+}

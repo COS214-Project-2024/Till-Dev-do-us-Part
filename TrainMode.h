@@ -12,6 +12,8 @@ class TrainMode : public TransportMode {
 private:
     Railway* railway;
     TransportFacilities* facility;
+    std::string schedule; //observer
+
 
 
 public:
@@ -34,4 +36,9 @@ public:
     bool isRoadMode() const override;
     bool isRailwayMode() const override;
     bool isAirportMode() const override;
+
+    //CitizenObserver
+    void setSchedule(const std::string& newSchedule) override;
+    std::string getSchedule() const override;
+    void notifyScheduleChange();
 };

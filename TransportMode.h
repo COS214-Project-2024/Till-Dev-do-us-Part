@@ -24,8 +24,10 @@ protected:
     TransportFacilities* facility;
     TransState* state;
     TransportIterator* iterator;
-    std::vector<CitizenObserver*> passengers;
+    // std::vector<CitizenObserver*> passengers;
     std::vector<TransportStation*> schedule;
+    std::vector<CitizenObserver*> observers;  // List of observers (citizens)
+
 
 public:
     TransportMode();
@@ -69,4 +71,13 @@ public:
     // Optional: method to add transport stations to the mode
     virtual void addStation(TransportStation* station) = 0;
 
+    // CitizenObserver
+     // Methods to manage observers
+    void addObserver(CitizenObserver* observer);
+    void removeObserver(CitizenObserver* observer);
+    void notifyObservers(const std::string& message);
+
+    // Pure virtual functions for schedule management
+    virtual void setSchedule(const std::string& schedule) = 0;
+    virtual std::string getSchedule() const = 0;
 };

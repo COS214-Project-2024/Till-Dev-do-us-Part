@@ -60,3 +60,19 @@ bool TaxiMode::isRailwayMode() const {
 
 bool TaxiMode:: isAirportMode() const { 
     return false; }
+
+// Iterator??
+
+// CitizenObserver
+void TaxiMode::setSchedule(const std::string& newSchedule) {
+    schedule = newSchedule;
+    notifyScheduleChange();
+}
+
+std::string TaxiMode::getSchedule() const {
+    return schedule;
+}
+
+void TaxiMode::notifyScheduleChange() {
+    notifyObservers("Taxi schedule updated: " + schedule);
+}

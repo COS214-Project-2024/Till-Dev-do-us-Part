@@ -43,6 +43,7 @@ void TrainMode::useTransport() {
 //     mediator->notify(this, state);
 // }
 
+//Mediator
 TrainMode::TrainMode(TransportationMediator* mediator, TransportFacilities* facility)
     : TransportMode(mediator), facility(facility) {}
 
@@ -81,3 +82,19 @@ bool TrainMode::isRailwayMode() const {
 
 bool TrainMode:: isAirportMode() const { 
     return false; }
+
+// Iterator ????
+
+// CitizenObserver
+void TrainMode::setSchedule(const std::string& newSchedule) {
+    schedule = newSchedule;
+    notifyScheduleChange();
+}
+
+std::string TrainMode::getSchedule() const {
+    return schedule;
+}
+
+void TrainMode::notifyScheduleChange() {
+    notifyObservers("Train schedule updated: " + schedule);
+}
