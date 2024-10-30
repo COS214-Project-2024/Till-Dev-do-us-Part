@@ -1,7 +1,10 @@
 #include "Estate.h"
 
 Estate::Estate():Residential("Estate"){
-
+    noBuildings = 0;
+    value = 200000;
+    area = 500;
+    capacity = 9;
 }
 
 Estate::~Estate()
@@ -12,12 +15,41 @@ Estate::~Estate()
 
 bool Estate::addHouse(Residential *building)
 {
-    if(building != nullptr && buildings.size() < capacity)
+    if(building != nullptr)
     {
-        buildings.push_back(building);
-        return true;
+        if(building->getType() == "Estate")
+        {
+            int estateBuildings = ((Estate *)building)->getNoBuildings();
+            if (estateBuildings + noBuildings <= capacity){
+                buildings.push_back(building);
+                noBuildings += estateBuildings;
+                value += building->getValue();
+                return true;
+            }
+            else{
+                cout << "Estate could not be added to the Estate" << endl;
+                return false;
+            }
+        }
+        else
+        {
+            if (noBuildings + 1 <= capacity){
+                buildings.push_back(building);
+                noBuildings++;
+                value += building->getValue();
+                cout << "Building added to the Estate" << endl;
+                return true;
+            }
+            else{
+                cout << "Building could not be added to the Estate" << endl;
+                return false;
+            }
+        }
     }
+
+    cout << "Building is non-existent" << endl;
     return false;
+
 }
 
 void Estate::demolish()
@@ -117,21 +149,76 @@ bool Estate::clean()
 
 bool Estate::addOccupant(Citizen *c)
 {
-    //TODO if type == House, then check that occupants.size == 0. If so, add
-    if (c != nullptr)
+    if(c != nullptr)
     {
         for (vector<Residential*>::iterator it = buildings.begin(); it!= buildings.end(); it++)
         {
-            if((*it)->addOccupant(c)){
-                return true;
+            if(!(Residential*)(*it)->isOccupied())
+            {
+                if((*it)->addOccupant(c)){
+                    cout << "Citizen added to Estate\n";
+                    return true;
+                }
             }
         }
-        
+
+        cout << "Citizen could not be added to Estate\n";
     }
 
     return false;
 }
 
-void Residential::goToWork(){
+void Estate::goToWork(){
+    cout << "Taking citizens in estate to work\n" ;
+    for(vector<Residential*>::iterator it = buildings.begin(); it != buildings.end(); it++){
+        (*it)->goToWork();
+    }
+    cout << "Citizens are at work!";
+}
 
+int Estate::getNoBuildings(){
+    return noBuildings;
+}
+
+Building* Estate::clone()
+{
+    Estate* newEstate = new Estate();
+    newEstate->cleanliness = this->cleanliness;
+    newEstate->electricityUnits = this->electricityUnits;
+    newEstate->waterUnits = this->waterUnits;
+    newEstate->area = this->area;
+    newEstate->capacity = this->capacity;
+
+    for (vector<Residential*>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    {
+        newEstate->addHouse((Residential*)(*it)->clone());
+    }
+    
+    return newEstate;
+
+}
+
+bool Estate::removeOccupant(Citizen *c)
+{
+    for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+    {
+        if((*it)->removeOccupant(c)){
+            cout << "Occupant removed!\n";
+            return true;
+        }
+    }
+    cout << "Occupant not found in any of the buildings in the estate\n";
+    return false;
+}
+
+bool Estate::isOccupied()
+{
+    for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+    {
+        if((*it)->isOccupied()){
+            return false;
+        }
+    }
+    
+    return true;
 }

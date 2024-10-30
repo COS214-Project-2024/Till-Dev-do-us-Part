@@ -3,7 +3,8 @@
 
 class Citizen
 {
-
+    public:
+        void goToWork();
 };
 
 #endif

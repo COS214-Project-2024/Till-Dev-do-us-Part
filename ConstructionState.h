@@ -8,6 +8,5 @@ class ConstructionState: public BuildingState{
         ConstructionState();
         virtual bool canUseElectricity();
         virtual bool canUseWater();
-        virtual BuildingState* change();
 };
 #endif

@@ -6,6 +6,7 @@ class Estate : public Residential
 {
     private:
         vector<Residential *> buildings;
+        int noBuildings;
 
     public:
         Estate();
@@ -16,7 +17,11 @@ class Estate : public Residential
         virtual bool useStove();
         virtual bool clean();
         bool addOccupant(Citizen *c);
-        bool addHouse(Residential *); // if capacity is reached, return false
-    
+        bool addHouse(Residential *);
+        virtual void goToWork();
+        virtual int getNoBuildings();
+        virtual bool removeOccupant(Citizen *c);
+        virtual Building* clone();
+        virtual bool isOccupied();
 };
 #endif

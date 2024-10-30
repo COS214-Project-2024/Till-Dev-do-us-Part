@@ -3,12 +3,6 @@
 ConstructionState::ConstructionState():BuildingState("Construction"){
 }
 
-BuildingState *ConstructionState::change()
-{
-    return nullptr; 
-    // return new CompleteState();
-}
-
 bool ConstructionState::canUseElectricity()
 {
     return false;
