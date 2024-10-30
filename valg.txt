@@ -1,0 +1,14 @@
+==2844== Memcheck, a memory error detector
+==2844== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2844== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2844== Command: ./main
+==2844== Parent PID: 2802
+==2844== 
+==2844== 
+==2844== HEAP SUMMARY:
+==2844==     in use at exit: 0 bytes in 0 blocks
+==2844==   total heap usage: 79 allocs, 79 frees, 77,225 bytes allocated
+==2844== 
+==2844== All heap blocks were freed -- no leaks are possible
+==2844== 
+==2844== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

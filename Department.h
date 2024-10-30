@@ -6,7 +6,9 @@ class Department{
     protected:
         float budget;
 
-};
+    public:
+        virtual ~Department(){} 
 
+};
 
 #endif

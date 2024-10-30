@@ -5,7 +5,8 @@
 #include <list>
 #include "Department.h"
 #include "Citizen.h"
-#include "Population.h"
+#include "AdultPop.h"
+#include "MinorPop.h"
 #include "Business.h"
 
 using namespace std;
@@ -13,9 +14,8 @@ using namespace std;
 class SocialAffairsDept: public Department{
 
     private:
-
-        //What is the use of citizens list??
-        list<Citizen> citizens;
+        list<Citizen*> adults;
+        list<Citizen*> children;
         queue<Citizen*> unemployed;
         Population* factory;
 
@@ -23,9 +23,11 @@ class SocialAffairsDept: public Department{
         SocialAffairsDept(float);
         Citizen* employ(Business*);
         void addCitizen(Citizen*);
+        void addChild(Citizen*);
+        void addToUnemployed(Citizen*);
         int getNumCitizens();
-        void growPopulation();
-        ~SocialAffairsDept();
+        void growPopulation(int);
+        virtual ~SocialAffairsDept();
 
 };
 
