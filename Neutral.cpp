@@ -1,12 +1,13 @@
 #include "Neutral.h"
-#include "Content.h"  
-#include "Distraught.h"
+
+Neutral::Neutral() {
+    name = "Neutral";
+}
 
 Feeling* Neutral::reaction() {
     int num = rand();
-
     if ((num % 2) == 0)
-        return (Feeling*) new Content();
+        return new Content();
     else
-        return (Feeling*) new Distraught();
+        return new Distraught();
 }

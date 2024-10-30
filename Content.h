@@ -2,19 +2,14 @@
 #define CONTENT_H
 
 #include "Feeling.h"
-#include <iostream>
-#include <stdlib.h>
+#include "Neutral.h"
+#include "Distraught.h"
+#include <cstdlib>
 
-class Neutral;
-class Distraught;
-
-//Forward declaration to avoid circular dependencies
-
-class Content: public Feeling{
-
+class Content : public Feeling {
     public:
-        Feeling* reaction();
-
+        Content();
+        virtual Feeling* reaction(); 
 };
 
-#endif
+#endif 

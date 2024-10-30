@@ -3,15 +3,16 @@
 
 #include "Citizen.h"
 
-//Not sure about implementation of Population factory, will consult group - Add Minor pop
-class Population{
+class Population {
 
     private:
-        Citizen** citizens;
+        Citizen* citizen;
 
-    protected:
+    public:
+        virtual Citizen* getPerson();
         virtual Citizen* createPerson() = 0;
-        virtual Citizen reproduce() = 0;
+        virtual Citizen** reproduce();
+        virtual ~Population(){}
 
 };
 
