@@ -8,6 +8,10 @@
 #include <algorithm>
 #include <string>
 
+Road:: Road(){
+    std::cout << "Building Road." << std::endl;
+}
+
 Road::Road(TransState* state) : TransportFacilities(state) {}
 
 Road::~Road() {

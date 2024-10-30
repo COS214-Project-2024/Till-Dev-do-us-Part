@@ -6,6 +6,10 @@
 #include <iostream>
 #include <algorithm>
 
+Airport::Airport(){
+    std::cout << "Building Airport." << std::endl;
+}
+
 Airport::Airport(TransState* state) : TransportFacilities(state) {}
 
 Airport::~Airport() {

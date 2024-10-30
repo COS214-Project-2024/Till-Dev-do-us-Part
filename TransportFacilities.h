@@ -17,7 +17,8 @@ protected:
     
 
 public:
-    virtual ~TransportFacilities() = default;   
+    virtual ~TransportFacilities() = default;  
+    TransportFacilities(); 
     virtual void maintain() = 0;
     virtual void useTransport() = 0;
     void setState(TransState* state);
