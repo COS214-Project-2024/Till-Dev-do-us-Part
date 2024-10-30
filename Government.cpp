@@ -1,4 +1,5 @@
 #include "Government.h"
+#include <iostream>
 
 Government* Government::instance = nullptr;
 
