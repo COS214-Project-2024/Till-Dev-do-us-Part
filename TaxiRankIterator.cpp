@@ -1,22 +1,30 @@
 #include "TaxiRankIterator.h"
-#include "TransportStation.h"
 
-TaxiRankIterator::TaxiRankIterator(const std::vector<TransportStation*>& ranks) 
-    : taxis(ranks), current(0) {}
+// Constructor
+TaxiRankIterator::TaxiRankIterator(const std::list<TransportStation*>& taxis)
+    : taxis(taxis), current(this->taxis.begin()) {}
 
 bool TaxiRankIterator::hasNext() const {
-    return current < taxis.size();
+    return current != taxis.end();
 }
 
 TransportStation* TaxiRankIterator::next() {
-    return hasNext() ? taxis[current++] : nullptr;
+    if (hasNext()) {
+        TransportStation* station = *current;
+        ++current;
+        return station;
+    }
+    return nullptr;
 }
 
 TransportStation* TaxiRankIterator::first() {
-    current = 0;
-    return taxis.empty() ? nullptr : taxis[0];
+    current = taxis.begin();
+    return currItem();
 }
 
 TransportStation* TaxiRankIterator::currItem() const {
-    return (current < taxis.size() && current >= 0) ? taxis[current] : nullptr;
+    if (current != taxis.end()) {
+        return *current;
+    }
+    return nullptr;
 }
