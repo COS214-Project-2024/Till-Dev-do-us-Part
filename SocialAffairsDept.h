@@ -7,6 +7,7 @@
 #include "Citizen.h"
 #include "AdultPop.h"
 #include "MinorPop.h"
+#include "Population.h"
 #include "Business.h"
 
 using namespace std;
