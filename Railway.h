@@ -10,6 +10,7 @@ private:
 
 public:
     Railway(TransState* state);
+    Railway();
     ~Railway();
     void maintain() override;
     void useTransport() override;

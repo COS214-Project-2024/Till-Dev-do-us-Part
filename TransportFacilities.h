@@ -28,5 +28,5 @@ public:
     int getPlaneCount();
 
     //Mediator
-    virtual void changeState(const std::string& state) = 0;
+    virtual void changeState(const std::string& state);
 };

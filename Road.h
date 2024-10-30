@@ -11,6 +11,7 @@ private:
 
 public:
     Road(TransState* state);
+    Road();
     ~Road();
     void maintain() override;
     void useTransport() override;

@@ -4,7 +4,6 @@
 #include "Citizen.h"
 #include "Adult.h"
 #include "School.h"
-#include "CitizenObserver.h"
 #include <string>
 
 class Minor: public Citizen{
@@ -24,7 +23,7 @@ class Minor: public Citizen{
 
         // CitizenObserver
         Minor(const std::string& name);
-    void update(const std::string& message);
+        void update(const std::string& message);
 };
 
 #endif

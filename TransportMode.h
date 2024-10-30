@@ -66,7 +66,7 @@ public:
 
     // Iterator
     // Method to create an iterator for the mode's specific transport stations
-    virtual TransportationIterator* createIterator() = 0;
+    virtual TransportationIterator* createIterator();
     
     // Optional: method to add transport stations to the mode
     virtual void addStation(TransportStation* station);
