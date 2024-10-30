@@ -40,6 +40,8 @@ public:
     bool isRailwayMode() const override;
     bool isAirportMode() const override;
 
+    // Road addVehicle(TransportMode* vehicle);
+
     // Iterator??
     void addTaxiRank(TransportStation* rank);
 

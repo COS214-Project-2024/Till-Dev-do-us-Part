@@ -23,7 +23,10 @@
 //     mediator->notify(this, state);
 // }
 
-
+TaxiMode::TaxiMode(){
+    TransportMode* Cab= new TaxiMode;
+    road->addVehicle(Cab);
+}
 TaxiMode::TaxiMode(TransportationMediator* mediator, TransportFacilities* facility)
     : TransportMode(mediator), facility(facility) {}
 
