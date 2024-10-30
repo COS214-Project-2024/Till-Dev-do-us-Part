@@ -203,7 +203,7 @@ void karabosTest()
     ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addCitizen(person);
     ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addChild(child);
     ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(person);
-    Business* shop = new Business();
+    Business* shop = new Food();
     Citizen* person1 =  ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->employ(shop);
 
     cout << endl;
