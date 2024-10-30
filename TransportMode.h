@@ -69,7 +69,7 @@ public:
     virtual TransportationIterator* createIterator() = 0;
     
     // Optional: method to add transport stations to the mode
-    virtual void addStation(TransportStation* station) = 0;
+    virtual void addStation(TransportStation* station);
 
     // CitizenObserver
      // Methods to manage observers

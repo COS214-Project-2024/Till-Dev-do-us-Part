@@ -4,6 +4,6 @@
 
 class BusModeFactory : public ModeFactory {
 public:
-    TransportMode* createMode();
+    TransportMode* createMode(const std::string& type);
 
 };

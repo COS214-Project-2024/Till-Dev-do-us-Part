@@ -1,98 +1,132 @@
-#include <cstdlib>
-#include <ctime>
 #include <iostream>
-
+#include <memory>
+#include "TransportMode.h"
+#include "BusMode.h"
+#include "TrainMode.h"
+#include "TaxiMode.h"
+#include "CarMode.h"
+#include "AirplaneMode.h"
+#include "CitizenObserver.h"
 #include "Adult.h"
-#include "Citizen.h"
-#include "Department.h"
-#include "Government.h"
-#include "Population.h"
-#include "AdultPop.h"
-#include "MinorPop.h"
-#include "SocialAffairsDept.h"
+#include "Minor.h"
+#include "TransState.h"
+#include "NormalState.h"
+#include "CongestedState.h"
+#include "EmptyState.h"
+#include "TransportationMediator.h"
+#include "ConcreteTransportationMediator.h"
+#include "BusIterator.h"
+#include "TrainStationIterator.h"
+#include "TaxiRankIterator.h"
+#include "AirportIterator.h"
+#include "Road.h"
+#include "Railway.h"
+#include "Airport.h"
 
-using namespace std;
+int main() {
+    // Testing Factory Method by Creating Different Transport Modes and Facilities
+    std::cout << "Factory Method Pattern - Creating Transport Modes and Facilities\n";
+    BusMode busMode;
+    TrainMode trainMode;
+    TaxiMode taxiMode;
+    CarMode carMode;
+    AirplaneMode airplaneMode;
+    
+    Road road;
+    Railway railway;
+    Airport airport;
 
-int main(){
+    // Testing State Pattern - Setting and Changing State of Facilities
+    std::cout << "\nState Pattern - Changing Facility States\n";
+    NormalState normalState;
+    CongestedState congestedState;
+    EmptyState emptyState;
 
-    cout << "====================================================================================================================================================================================================" << endl;
+    road.setState(&normalState);
+    road.handleState();
+    road.setState(&congestedState);
+    road.handleState();
+    road.setState(&emptyState);
+    road.handleState();
 
-    std::srand(std::time(0));
+    railway.setState(&normalState);
+    railway.handleState();
+    airport.setState(&congestedState);
+    airport.handleState();
 
-    Government* Gov = Government::getInstance();
-    Department* SA = new SocialAffairsDept(50000);
-    Gov->addDepartment("SocialAffairs", SA);
+    // Testing Observer Pattern - Citizens Subscribe to Transport Schedules
+    std::cout << "\nObserver Pattern - Citizens Subscribing to Schedules\n";
+    Adult adult1("John Doe");
+    Minor minor1("Jane Smith");
 
-    Population* AdultFactory = new AdultPop();
-    Citizen* personPrototype = AdultFactory->getPerson();
-    Citizen* person = AdultFactory->getPerson();
-    cout << "Created a new adult " << endl;
+    busMode.addObserver(&adult1);
+    busMode.addObserver(&minor1);
+    trainMode.addObserver(&minor1);  // Minor subscribing to train schedule
 
-    Population* MinorFactory = new MinorPop();
-    Citizen* child = MinorFactory->getPerson();
-    cout << "Created a new child " << endl;
+    busMode.setSchedule("Buses depart every 15 minutes.");
+    trainMode.setSchedule("Trains depart every 30 minutes.");
 
-    cout << endl;
+    busMode.setSchedule("Bus delay: traffic congestion.");
+    trainMode.setSchedule("Train delay: maintenance on tracks.");
 
-    person->react();
-    child->react();
-    person->react();
+    // Testing Mediator Pattern - Communication between Modes on Road, Railway, and Airport
+    std::cout << "\nMediator Pattern - Inter-Mode Communication\n";
+    ConcreteTransportationMediator mediator;
+    busMode.setMediator(&mediator);
+    taxiMode.setMediator(&mediator);
+    trainMode.setMediator(&mediator);
+    airplaneMode.setMediator(&mediator);
 
-    cout << endl;
+    mediator.registerMode(&busMode);
+    mediator.registerMode(&taxiMode);
+    mediator.registerMode(&trainMode);
+    mediator.registerMode(&airplaneMode);
 
-    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addCitizen(person);
-    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addChild(child);
-    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(person);
-    Business* shop = new Business();
-    Citizen* person1 =  ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->employ(shop);
+    busMode.alertAccident();
+    trainMode.alertAccident();
+    airplaneMode.alertAccident();
 
-    cout << endl;
+    // Testing Iterator Pattern - Iterating through Transport Stations
+    std::cout << "\nIterator Pattern - Route Navigation\n";
+    BusIterator busIterator(busMode.getBusStops());
+    TrainStationIterator trainIterator(trainMode.getTrainStations());
+    TaxiRankIterator taxiIterator(taxiMode.getTaxiRanks());
+    AirportIterator airportIterator(airplaneMode.getAirports());
 
-    Citizen* person2 = personPrototype->clone();
-    person2->react();
-
-    cout << endl;
-
-    ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->growPopulation(10);
-
-    cout << "Currently the city consists of " << ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->getNumCitizens() << " citizens " << endl;  
-
-    cout << endl;
-
-    if(((Adult*) person1)->employmentStatus())
-    {
-        cout << "Person1 is employed " << endl;
+    std::cout << "Bus Route:\n";
+    while (busIterator.hasNext()) {
+        TransportStation* station = busIterator.next();
+        station->handlePassengers();
     }
 
-    if(((Adult*) person)->employmentStatus())
-    {
-        cout << "Person is employed " << endl;
+    std::cout << "\nTrain Route:\n";
+    while (trainIterator.hasNext()) {
+        TransportStation* station = trainIterator.next();
+        station->handlePassengers();
     }
 
-    delete person2;
-    person2 = nullptr;
-   
-    delete shop;
-    shop = nullptr;
+    std::cout << "\nTaxi Route:\n";
+    while (taxiIterator.hasNext()) {
+        TransportStation* station = taxiIterator.next();
+        station->handlePassengers();
+    }
 
-    delete MinorFactory;
-    MinorFactory = nullptr;
+    std::cout << "\nAirport Itinerary:\n";
+    while (airportIterator.hasNext()) {
+        TransportStation* station = airportIterator.next();
+        station->handlePassengers();
+    }
 
-    delete personPrototype;
-    personPrototype = nullptr;
+    // Testing Specific Functions for Each Transport Mode
+    std::cout << "\nTesting Transport Mode Specific Functions\n";
+    std::cout << "Bus Mode Schedule: " << busMode.getSchedule() << "\n";
+    std::cout << "Train Mode Schedule: " << trainMode.getSchedule() << "\n";
+    std::cout << "Taxi Mode Schedule: " << taxiMode.getSchedule() << "\n";
+    std::cout << "Car Mode Schedule: " << carMode.getSchedule() << "\n";
+    std::cout << "Airplane Mode Schedule: " << airplaneMode.getSchedule() << "\n";
 
-    delete AdultFactory;
-    AdultFactory = nullptr;
-
-    Gov->removeDepartment("SocialAffairs");
-
-    delete SA;
-    SA = nullptr;
-
-    delete Gov;
-    Gov = nullptr;
-
-    cout << "====================================================================================================================================================================================================" << endl;
+    // Cleanup and Verification of Proper Destruction
+    std::cout << "\nCleaning up and finalizing the test...\n";
 
     return 0;
 }

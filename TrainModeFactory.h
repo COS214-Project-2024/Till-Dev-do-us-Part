@@ -1,8 +1,8 @@
 // Concrete Creators - Modes
-#include "StationFactory.h"
+// #include "StationFactory.h"
 #include "ModeFactory.h"
 
 class TrainModeFactory : public ModeFactory {
 public:
-    TransportMode* createMode();
+    TransportMode* createMode(const std::string& type);
 };

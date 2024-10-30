@@ -12,6 +12,7 @@ private:
 public:
     // void handlePassengers() override;
     // void manageFreight() override;
+    Airport();
     Airport(TransState* state);
     ~Airport();
     void maintain() override;
