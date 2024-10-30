@@ -24,11 +24,32 @@
 // }
 
 TaxiMode::TaxiMode(){
-    TransportMode* Cab= new TaxiMode;
-    road->addVehicle(Cab);
+    // TransportMode* Cab= new TaxiMode;
+    // road->addVehicle(Cab);
+
+    
 }
-TaxiMode::TaxiMode(TransportationMediator* mediator, TransportFacilities* facility)
-    : TransportMode(mediator), facility(facility) {}
+
+void TaxiMode::SetMediator(TransportationMediator* mediator)
+{
+    this->mediator= mediator;
+}
+
+void TaxiMode::SetRoad(Road* road){
+    this->road= road;
+}
+
+// Mediator
+
+void TaxiMode:: drive(){
+    road->addVehicle(this);
+}
+
+void TaxiMode::stopDrive(){
+    road->removeVehicle(this);
+}
+// TaxiMode::TaxiMode(TransportationMediator* mediator, Road* road)
+//     : TransportMode(mediator), road(road) {}
 
 void TaxiMode::alertAccident() {
     std::cout << "TaxiMode: Accident reported. Notifying other road users.\n";

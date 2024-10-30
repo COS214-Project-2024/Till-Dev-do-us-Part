@@ -25,9 +25,15 @@ public:
     TaxiMode();
     void operateStation() override;
     void useTransport() override;
+    void drive();
+    void stopDrive();
+
 
     //Mediator
-    TaxiMode(TransportationMediator* mediator, TransportFacilities* facility);
+    // TaxiMode(TransportationMediator* mediator, Road* road);
+    void SetMediator(TransportationMediator* mediator);
+    void SetRoad(Road* road);
+
 
     std::string getName() const override;
     void alertAccident() override;

@@ -25,8 +25,25 @@
 
 
 // Mediator
-BusMode::BusMode(TransportationMediator* mediator, TransportFacilities* facility)
-    : TransportMode(mediator), facility(facility) {}
+// BusMode::BusMode(TransportationMediator* mediator, TransportFacilities* facility)
+//     : TransportMode(mediator), facility(facility) {}
+
+void BusMode::SetMediator(TransportationMediator* mediator)
+{
+    this->mediator= mediator;
+}
+
+void BusMode::SetRoad(Road* road){
+    this->road= road;
+}
+
+void BusMode::drive(){
+    road->addVehicle(this);
+}
+
+void BusMode::stopDrive(){
+    road->removeVehicle(this);
+}
 
 void BusMode::alertAccident() {
     std::cout << "BusMode: Accident reported. Notifying other road users.\n";

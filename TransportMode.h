@@ -49,6 +49,8 @@ public:
     virtual void operateStation() = 0;
     virtual void useTransport() = 0;
 
+    void SetMediator(TransportationMediator* mediator);
+
     //Mediator
     virtual void changed(const std::string& state) = 0; // Notify mediator of changes
     virtual bool isRoadMode() const = 0;
