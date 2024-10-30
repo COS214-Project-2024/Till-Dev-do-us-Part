@@ -19,6 +19,9 @@ public:
     AirplaneMode();
     void operateStation() override;
     void useTransport() override;
+    void depart();
+    void arrive();
+    void setAirport(Airport* airport);
 
     //Mediator
     AirplaneMode(TransportationMediator* mediator, TransportFacilities* facility);
