@@ -44,8 +44,8 @@ void TrainMode::useTransport() {
 // }
 
 //Mediator
-TrainMode::TrainMode(TransportationMediator* mediator, TransportFacilities* facility)
-    : TransportMode(mediator), facility(facility) {}
+// TrainMode::TrainMode(TransportationMediator* mediator, TransportFacilities* facility)
+//     : TransportMode(mediator), facility(facility) {}
 
 
 void TrainMode::alertAccident() {

@@ -3,10 +3,10 @@
 #pragma once
 #include "BusStop.h"
 
-TransportStation* BusStopFactory:: createStation(const std::string& type) {
+TransportStation* BusStopFactory:: createStation() {
         // return new BusStop();
         auto station = new BusStop();
-        stations.push_back(station);
+        // stations.push_back(station);
         return station;
     }
 

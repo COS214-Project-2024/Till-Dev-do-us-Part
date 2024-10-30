@@ -8,12 +8,14 @@
 
 Railway:: Railway(){
     std::cout << "Building Railway." << std::endl;
+    currentState= new EmptyState;
 }
 
-Railway::Railway(TransState* state) : TransportFacilities(state) {}
+// Railway::Railway(TransState* state) : TransportFacilities(state) {}
 
 Railway::~Railway() {
     delete currentState;
+    trains.clear();
 }
 
 void Railway::addTrain(TransportMode* train) {

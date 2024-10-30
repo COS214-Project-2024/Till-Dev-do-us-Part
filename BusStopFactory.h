@@ -3,5 +3,5 @@
 
 class BusStopFactory : public StationFactory {
 public:
-    TransportStation* createStation(const std::string& type);
+    TransportStation* createStation();
 };

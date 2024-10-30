@@ -5,7 +5,7 @@
  TransportStation* TaxiRankFactory:: createStation() {
         // return new TaxiRank();
         auto station = new TaxiRank();
-        stations.push_back(station);
+        // stations.push_back(station);
         return station;
     }
 

@@ -24,10 +24,10 @@ public:
     void setState(TransState* state);
     void handleState();
     // Methods to access vehicle counts
-    int getVehicleCount();
-    int getTrainCount();
-    int getPlaneCount();
+    // int getVehicleCount();
+    // int getTrainCount();
+    // int getPlaneCount();
 
     //Mediator
-    virtual void changeState(const std::string& state);
+    // virtual void changeState(const std::string& state);
 };

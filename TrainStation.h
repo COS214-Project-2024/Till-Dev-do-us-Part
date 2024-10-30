@@ -6,7 +6,7 @@
 
 class TrainStation : public TransportStation {
 private:
-    std::list<TransportMode*> trains;
+    // std::list<TransportMode*> trains;
 
 
 public:

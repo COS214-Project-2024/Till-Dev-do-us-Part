@@ -6,7 +6,7 @@
 
 class BusStop : public TransportStation {
 private:
-    std::list<TransportMode*> buses;
+    // std::list<TransportMode*> buses;
 
 public:
     void handlePassengers() override;

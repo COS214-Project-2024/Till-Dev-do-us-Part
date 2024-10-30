@@ -4,10 +4,10 @@
 #include "BusMode.h"
 
 
-TransportMode* BusModeFactory:: createMode(const std::string& type){
+TransportMode* BusModeFactory:: createMode(){
         // return new BusMode();
         auto mode = new BusMode();
-        modes.push_back(mode);
+        // modes.push_back(mode);
         return mode;    
     }
 

@@ -9,7 +9,7 @@
 class TransportFacilities;
 class TransportationMediator;
 
-class AirplaneMode : public TransportMode {
+class AirplaneMode: public TransportMode {
 private:
     Airport* airport;
     TransportFacilities* facility;
