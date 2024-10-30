@@ -10,12 +10,12 @@
 class TaxiRank : public TransportStation {
 
 private:
-    std::list<TransportMode*> taxis;
+    // std::list<TransportMode*> taxis;
 
 public:
     void handlePassengers() override;
     void manageFreight() override;
     void maintain() override;
-    void addTaxi(TransportMode* taxi);
+    // void addTaxi(TransportMode* taxi);
 };
 

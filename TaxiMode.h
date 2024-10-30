@@ -33,6 +33,8 @@ public:
     // TaxiMode(TransportationMediator* mediator, Road* road);
     void SetMediator(TransportationMediator* mediator);
     void SetRoad(Road* road);
+    // void SetRank(TaxiRank* rank);
+
 
 
     std::string getName() const override;
