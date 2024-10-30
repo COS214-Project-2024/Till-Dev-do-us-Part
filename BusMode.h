@@ -4,6 +4,9 @@
 #include "TransportMode.h"
 #include "Road.h"
 #include "ModeFactory.h"
+#include "BusIterator.h"
+#include <list>
+#include <memory>
 
 
 class TransportFacilities;
@@ -12,7 +15,8 @@ class TransportationMediator;
 class BusMode : public TransportMode {
 private:
     Road* road;
-    TransportFacilities* facility;
+    TransportFacilities* facility; //mediator
+    std::list<TransportStation*> busStops; //iterator
 
 public:
     BusMode();
@@ -32,5 +36,10 @@ public:
     bool isRoadMode() const override;
     bool isRailwayMode() const override;
     bool isAirportMode() const override;
-    
+    //Iterator
+    // Method to add bus stops
+    void addBusStop(TransportStation* stop);
+
+    // Overridden method to create a BusIterator
+    TransportationIterator* createIterator() override;
 };

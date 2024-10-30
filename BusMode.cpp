@@ -1,4 +1,5 @@
 #include "BusMode.h"
+#include "BusIterator.h"
 #include <string>
 #include <iostream>
 
@@ -20,6 +21,10 @@
 //     mediator->notify(this, state);
 // }
 
+
+
+
+// Mediator
 BusMode::BusMode(TransportationMediator* mediator, TransportFacilities* facility)
     : TransportMode(mediator), facility(facility) {}
 
@@ -57,3 +62,16 @@ bool BusMode::isRailwayMode() const {
 
 bool BusMode:: isAirportMode() const { 
     return false; }
+
+// Iterator
+BusMode::BusMode() {
+    // Initialize bus stops if needed
+}
+
+void BusMode::addBusStop(TransportStation* stop) {
+    busStops.push_back(stop);
+}
+
+TransportationIterator* BusMode::createIterator() {
+    return new BusIterator(busStops);
+}

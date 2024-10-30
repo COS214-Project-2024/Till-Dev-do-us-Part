@@ -3,6 +3,7 @@
 #include "TransState.h"
 #include "TransportationMediator.h"
 #include "TransportFacilities.h"
+#include "TransportationIterator.h" 
 #pragma once
 #include <vector>
 #include <string>
@@ -60,5 +61,12 @@ public:
     virtual void manageTraffic(const std::string& state) = 0;
     virtual void set(const std::string& state) = 0;
     // virtual void changed(const std::string& state) = 0;
+
+    // Iterator
+    // Method to create an iterator for the mode's specific transport stations
+    virtual TransportationIterator* createIterator() = 0;
+    
+    // Optional: method to add transport stations to the mode
+    virtual void addStation(TransportStation* station) = 0;
 
 };

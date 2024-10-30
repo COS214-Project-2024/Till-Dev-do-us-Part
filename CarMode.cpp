@@ -45,6 +45,7 @@
 //         }
 //     }
 
+// Mediator
 CarMode::CarMode(TransportationMediator* mediator, TransportFacilities* facility)
     : TransportMode(mediator), facility(facility) {}
 

@@ -1,31 +1,22 @@
 #include "TaxiRankIterator.h"
-#include "TrainStation.h"
-#include <list>
+#include "TransportStation.h"
 
+TaxiRankIterator::TaxiRankIterator(const std::vector<TransportStation*>& ranks) 
+    : taxis(ranks), current(0) {}
 
-// TaxiRankIterator implementation
-class TaxiRankIterator : public TransportIterator {
-private:
-    int current;
-    std::list<TransportStation*> taxiRanks;
-public:
-    TaxiRankIterator(const std::list<TransportStation*>& ranks) 
-        : current(0), taxiRanks(ranks) {}
-    
-    TransportStation* next() override {
-        if (hasNext()) {
-            auto it = std::next(taxiRanks.begin(), current);
-            current++;
-            return *it;
-        }
-        return nullptr;
-    }
-    
-    bool hasNext() override {
-        return current < taxiRanks.size();
-    }
-    
-    void first() {
-        current = 0;
-    }
-};
+bool TaxiRankIterator::hasNext() const {
+    return current < taxis.size();
+}
+
+TransportStation* TaxiRankIterator::next() {
+    return hasNext() ? taxis[current++] : nullptr;
+}
+
+TransportStation* TaxiRankIterator::first() {
+    current = 0;
+    return taxis.empty() ? nullptr : taxis[0];
+}
+
+TransportStation* TaxiRankIterator::currItem() const {
+    return (current < taxis.size() && current >= 0) ? taxis[current] : nullptr;
+}
