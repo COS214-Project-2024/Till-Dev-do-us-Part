@@ -19,5 +19,5 @@ c:
 
 v: 
 		make debugcpp
-		valgrind --tool=memcheck --leak-check=yes --track-origins=yes -s --log-file=valg.txt ./main
+		valgrind --tool=memcheck --leak-check=yes --track-origins=yes --log-file=valg.txt ./main
 		make c
