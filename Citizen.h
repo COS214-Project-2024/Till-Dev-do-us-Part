@@ -7,6 +7,8 @@
 #include "Business.h"
 #include "TransportStrategy.h"
 
+class Business;
+
 class Citizen{
 
     protected:
