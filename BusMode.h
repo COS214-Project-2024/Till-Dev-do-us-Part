@@ -41,6 +41,7 @@ public:
     bool isRoadMode() const override;
     bool isRailwayMode() const override;
     bool isAirportMode() const override;
+
     //Iterator
     // Method to add bus stops
     void addBusStop(TransportStation* stop);

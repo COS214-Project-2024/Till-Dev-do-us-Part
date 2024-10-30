@@ -84,6 +84,13 @@ bool TrainMode:: isAirportMode() const {
     return false; }
 
 // Iterator ????
+void TrainMode::addTrainStation(TransportStation* station) {
+    trainStations.push_back(station);
+}
+
+TransportationIterator* TrainMode::createIterator() {
+    return new TrainStationIterator(trainStations);
+}
 
 // CitizenObserver
 void TrainMode::setSchedule(const std::string& newSchedule) {

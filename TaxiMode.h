@@ -2,18 +2,23 @@
 #pragma once
 #include "TransportMode.h"
 #include "Road.h"
-#include <string>
+#include "TaxiRankIterator.h"
 #include <list>
+#include <vector>
+#include <memory>
+#include <string>
 #include <iostream>
 
 class TransportFacilities;
 class TransportationMediator;
+class TransportStation;
 
 class TaxiMode : public TransportMode {
 private:
     Road* road;
     TransportFacilities* facility;
-    std::string schedule;
+    std::list<TransportStation*> taxiRanks;//iterator
+    std::string schedule;//observer
 
 
 public:
@@ -36,6 +41,9 @@ public:
     bool isAirportMode() const override;
 
     // Iterator??
+    void addTaxiRank(TransportStation* rank);
+
+    TransportationIterator* createIterator() override;
 
     // CitizenObserver
     void setSchedule(const std::string& newSchedule) override;

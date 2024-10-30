@@ -1,5 +1,6 @@
 #include "TaxiMode.h"
 #include "TransportFacilities.h"
+#include "TaxiRankIterator.h"
 #include <string>
 #include <iostream>
 #include "ModeFactory.h"
@@ -62,6 +63,13 @@ bool TaxiMode:: isAirportMode() const {
     return false; }
 
 // Iterator??
+void TaxiMode::addTaxiRank(TransportStation* rank) {
+    taxiRanks.push_back(rank);
+}
+
+TransportationIterator* TaxiMode::createIterator() {
+    return new TaxiRankIterator(taxiRanks);
+}
 
 // CitizenObserver
 void TaxiMode::setSchedule(const std::string& newSchedule) {

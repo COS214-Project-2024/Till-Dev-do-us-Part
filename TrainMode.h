@@ -2,16 +2,21 @@
 #pragma once
 #include "TransportMode.h"
 #include "Railway.h"
+#include "TrainStationIterator.h"
+#include <list>
+#include <memory>
 #include <string>
 #include <iostream>
 
 class TransportFacilities;
 class TransportationMediator;
+class TransportStation;
 
 class TrainMode : public TransportMode {
 private:
     Railway* railway;
     TransportFacilities* facility;
+    std::list<TransportStation*> trainStations; //iterator for trainstations
     std::string schedule; //observer
 
 
@@ -36,6 +41,12 @@ public:
     bool isRoadMode() const override;
     bool isRailwayMode() const override;
     bool isAirportMode() const override;
+
+    // Iterator
+    void addTrainStation(TransportStation* station);
+
+    TransportationIterator* createIterator() override;
+
 
     //CitizenObserver
     void setSchedule(const std::string& newSchedule) override;
