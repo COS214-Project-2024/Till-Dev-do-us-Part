@@ -11,7 +11,7 @@ class TransportMode;
 class TransportFacilities {
 protected:
     TransState* currentState;
-    TransportFacilities(TransState* state) : currentState(state) {};
+    TransportFacilities(TransState* state);
     // std::unique_ptr<TransState> currentState;
     
     
