@@ -10,6 +10,8 @@ void TaxiRank::manageFreight() {
 }
 
 void TaxiRank::maintain() {
+    std::cout << "Performing Taxi Rank maintenance" << std::endl;
+   
     // Maintain taxi rank facilities
         std::cout << "Maintaining taxi rank facilities" << std::endl;
         std::cout << "Checking taxi bays" << std::endl;

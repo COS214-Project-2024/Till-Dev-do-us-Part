@@ -46,7 +46,7 @@ int Airport::getPlaneCount() {
 }
 
 void Airport::maintain() {
-    std::cout << "Performing airport maintenance" << std::endl;
+    std::cout << "Performing Airport maintenance" << std::endl;
 
     // Perform maintenance tasks
     std::cout << "Inspecting runways" << std::endl;

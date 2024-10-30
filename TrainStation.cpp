@@ -10,6 +10,8 @@ void TrainStation::manageFreight() {
 }
 
 void TrainStation::maintain() {
+    std::cout << "Performing Train Station maintenance" << std::endl;
+   
     // Maintain taxi rank facilities
         std::cout << "Maintaining train station facilities" << std::endl;
         std::cout << "Checking train station" << std::endl;
