@@ -19,9 +19,16 @@ public:
     CarMode();
     void operateStation() override;
     void useTransport() override;
+    void drive();
+    void stopDrive();
+    
+
 
     //Mediator
-    CarMode(TransportationMediator* mediator, TransportFacilities* facility);
+    // CarMode(TransportationMediator* mediator, TransportFacilities* facility);
+    void SetMediator(TransportationMediator* mediator);
+    void SetRoad(Road* road);
+    
 
     std::string getName() const override;
     void alertAccident() override;

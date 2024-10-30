@@ -45,9 +45,26 @@
 //         }
 //     }
 
+void CarMode::SetMediator(TransportationMediator* mediator)
+{
+    this->mediator= mediator;
+}
+
+void CarMode::SetRoad(Road* road){
+    this->road= road;
+}
+
+void CarMode::drive(){
+    road->addVehicle(this);
+}
+
+void CarMode::stopDrive(){
+    road->removeVehicle(this);
+}
+
 // Mediator
-CarMode::CarMode(TransportationMediator* mediator, TransportFacilities* facility)
-    : TransportMode(mediator), facility(facility) {}
+// CarMode::CarMode(TransportationMediator* mediator, TransportFacilities* facility)
+    // : TransportMode(mediator), facility(facility) {}
 
 void CarMode::alertAccident() {
     std::cout << "CarMode: Accident reported. Notifying other road users.\n";

@@ -18,12 +18,12 @@ void TaxiRank::maintain() {
         std::cout << "Updating information displays" << std::endl;
 }
 
-void TaxiRank:: addTaxi(TransportMode* taxi){
-    if (taxi) { // Ensure the bus is not a null pointer
-        taxis.push_back(taxi);
-        std::cout << "Taxi added to the Taxi Rank." << std::endl;
-    } else {
-        std::cout << "Cannot add a null bus to the Taxi Rank." << std::endl;
-    }
+// void TaxiRank:: addTaxi(TransportMode* taxi){
+//     if (taxi) { // Ensure the bus is not a null pointer
+//         taxis.push_back(taxi);
+//         std::cout << "Taxi added to the Taxi Rank." << std::endl;
+//     } else {
+//         std::cout << "Cannot add a null bus to the Taxi Rank." << std::endl;
+//     }
 
-}
+// }

@@ -27,9 +27,14 @@ public:
     BusMode();
     void operateStation() override;
     void useTransport() override;
+    void drive();
+    void stopDrive();
 
     //Mediator
-    BusMode(TransportationMediator* mediator, TransportFacilities* facility);
+    // BusMode(TransportationMediator* mediator, TransportFacilities* facility);
+    void SetMediator(TransportationMediator* mediator);
+    void SetRoad(Road* road);
+
 
     std::string getName() const override;
     void alertAccident() override;

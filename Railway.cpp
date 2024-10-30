@@ -6,6 +6,10 @@
 #include <string>
 #include <algorithm>
 
+Railway:: Railway(){
+    std::cout << "Building Railway." << std::endl;
+}
+
 Railway::Railway(TransState* state) : TransportFacilities(state) {}
 
 Railway::~Railway() {
