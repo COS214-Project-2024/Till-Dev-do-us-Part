@@ -105,3 +105,12 @@ std::string TrainMode::getSchedule() const {
 void TrainMode::notifyScheduleChange() {
     notifyObservers("Train schedule updated: " + schedule);
 }
+
+void TrainMode:: drive()
+{
+    railway->addTrain(this);
+}
+void TrainMode:: stopdrive()
+{
+    railway->removeTrain(this);
+}

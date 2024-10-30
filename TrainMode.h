@@ -52,4 +52,6 @@ public:
     void setSchedule(const std::string& newSchedule) override;
     std::string getSchedule() const override;
     void notifyScheduleChange();
+    void drive();
+    void stopdrive();
 };

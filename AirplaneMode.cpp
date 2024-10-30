@@ -77,3 +77,14 @@ std::string AirplaneMode::getSchedule() const {
 void AirplaneMode::notifyScheduleChange() {
     notifyObservers("Airplane schedule updated: " + schedule);
 }
+
+void AirplaneMode::depart(){
+    airport->removePlane(this);
+}
+void AirplaneMode::arrive(){
+    airport->addPlane(this);
+}
+void AirplaneMode::setAirport(Airport* airport){
+    this->airport=airport;
+    
+}
