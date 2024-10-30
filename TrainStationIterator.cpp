@@ -1,22 +1,30 @@
 #include "TrainStationIterator.h"
-#include "TransportStation.h"
 
-TrainStationIterator::TrainStationIterator(const std::vector<TransportStation*>& stations) 
-    : trains(stations), current(0) {}
+// Constructor
+TrainStationIterator::TrainStationIterator(const std::list<TransportStation*>& trains)
+    : trains(trains), current(this->trains.begin()) {}
 
 bool TrainStationIterator::hasNext() const {
-    return current < trains.size();
+    return current != trains.end();
 }
 
 TransportStation* TrainStationIterator::next() {
-    return hasNext() ? trains[current++] : nullptr;
+    if (hasNext()) {
+        TransportStation* station = *current;
+        ++current;
+        return station;
+    }
+    return nullptr;
 }
 
 TransportStation* TrainStationIterator::first() {
-    current = 0;
-    return trains.empty() ? nullptr : trains[0];
+    current = trains.begin();
+    return currItem();
 }
 
 TransportStation* TrainStationIterator::currItem() const {
-    return (current < trains.size() && current >= 0) ? trains[current] : nullptr;
+    if (current != trains.end()) {
+        return *current;
+    }
+    return nullptr;
 }

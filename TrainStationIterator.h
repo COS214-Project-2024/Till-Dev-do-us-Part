@@ -2,17 +2,18 @@
 #define TRAINSTATIONITERATOR_H
 
 #include "TransportationIterator.h"
-#include <vector>
+#include "TransportStation.h"
+#include <list>
 
 class TransportStation;
 
 class TrainStationIterator : public TransportationIterator {
 private:
-    int current;
-    const std::vector<TransportStation*>& trains;
+    std::list<TransportStation*>::iterator current;
+    std::list<TransportStation*> trains;
 
 public:
-    TrainStationIterator(const std::vector<TransportStation*>& stations);
+    TrainStationIterator(const std::list<TransportStation*>& trains);
 
     bool hasNext() const override;
     TransportStation* next() override;
