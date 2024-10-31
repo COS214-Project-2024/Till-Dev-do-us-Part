@@ -2,7 +2,8 @@
 
 FinanceDept::FinanceDept(float budget)
 {
-    this->budget = budget; 
+    this->budget = budget/2; 
+    crs = new CRS(budget/2); 
 }
 
 void FinanceDept::newBusiness(Business* business)
@@ -22,4 +23,15 @@ void FinanceDept::removeBusiness(Business* business)
 vector<Business*> FinanceDept::getBusinesses()
 {
     return businesses; 
+}
+
+CRS* FinanceDept::getCRS()
+{
+    return crs; 
+}
+
+FinanceDept::~FinanceDept()
+{
+    delete crs; 
+    crs = nullptr; 
 }

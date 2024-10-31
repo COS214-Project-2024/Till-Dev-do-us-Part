@@ -15,11 +15,11 @@ SocialAffairsDept::SocialAffairsDept(float b){
 
 Citizen* SocialAffairsDept::employ(Business* job) {
 
-    cout << "Entering employ" << endl;
+    // cout << "Entering employ" << endl;
 
     if (!unemployed.empty()) {
 
-        cout<< "Employing citizen..." << endl;
+        // cout<< "Employing citizen..." << endl;
         Adult* employee = (Adult*) (unemployed.front());
         employee->setJob(job);
         unemployed.pop();
@@ -33,17 +33,17 @@ Citizen* SocialAffairsDept::employ(Business* job) {
 
 void SocialAffairsDept::addCitizen(Citizen* citizen) {
     adults.push_back(citizen);
-    cout << "Added new adult to adults vector " << endl;
+    // cout << "Added new adult to adults vector " << endl;
 }
 
 void SocialAffairsDept::addChild(Citizen* citizen) {
     children.push_back(citizen);
-    cout << "Added new child to children vector " << endl;
+    // cout << "Added new child to children vector " << endl;
 }
 
 void SocialAffairsDept::addToUnemployed(Citizen* person) {
     unemployed.push(person);
-    cout << "Added new adult to unemployed queue " << endl;
+    // cout << "Added new adult to unemployed queue " << endl;
 }
 
 int SocialAffairsDept::getNumCitizens() {
@@ -53,7 +53,7 @@ int SocialAffairsDept::getNumCitizens() {
 void SocialAffairsDept::growPopulation(int n) {
     
     factory = new AdultPop();
-    Citizen** community = factory->reproduce();
+    Citizen** community = factory->reproduce(n);
 
     for (int i = 0; i < n; i++) {
         addCitizen(community[i]); 
@@ -76,7 +76,6 @@ void SocialAffairsDept::growPopulation(int n) {
         HaveChild* parent = new HaveChild(*it); 
         Citizen* child = factory->getPerson();
         parent->haveChild(child); 
-        addChild(child);
         *it = (Citizen*) parent;
     }
 

@@ -2,7 +2,7 @@
 
 Warehouse::Warehouse() : Industrial("Warehouse")
 {
-    cout << "Warehouse created!"  << endl;
+    // cout << "Warehouse created!"  << endl;
 }
 
 Building* Warehouse::clone(){

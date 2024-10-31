@@ -11,7 +11,7 @@ class Population {
     public:
         virtual Citizen* getPerson();
         virtual Citizen* createPerson() = 0;
-        virtual Citizen** reproduce();
+        virtual Citizen** reproduce(int);
         virtual ~Population(){}
 
 };

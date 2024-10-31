@@ -22,9 +22,9 @@ using namespace std;
 void Business::buyProperty(string propertyType)
 {
     property = ((DevelopmentDept*)(Government::getInstance()->getDepartment("Development")))->build(propertyType);
-    if (property != nullptr)
-        cout << "Bought property: " << propertyType << endl;  
-    else cout << "Property is null" << endl; 
+    // if (property != nullptr)
+    //     cout << "Bought property: " << propertyType << endl;  
+    // else cout << "Property is null" << endl; 
 }
 
 void Business::sellProperty()
@@ -34,7 +34,11 @@ void Business::sellProperty()
 
 void Business::hireEmployee()
 {
-    if (numEmployees[0] != numEmployees[1])
+    if (owner == nullptr)
+    {
+        owner = ((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->employ(this);
+    }
+    else if (numEmployees[0] != numEmployees[1])
     {
         //hire employee by adding to vector (NOT FINALISED)
         Citizen* newEmployee = ((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->employ(this); 
@@ -52,7 +56,8 @@ void Business::fireEmployee()
     if (employees[0] != 0)
     {
         //remove employee from vector and add to list of unemployed citizens
-        employees[0]--; 
+        // ((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->addToUnemployed()
+        numEmployees[0]--; 
     }
     else cout << this->getBusinessName() << " has no employees" << endl; 
 }
@@ -123,7 +128,6 @@ void Business::handleAccounts()
     if (wiseBucksApp != nullptr)
     {
         //cannot pay if there is no work being done
-        // SHOULD WE CHECK IF ONLY THE OWNER WORKS I.E MAX EMPLOYEES IS 1 OR 0
         if (numEmployees[0] != 0 || property == nullptr)
         {
             //get income after tax paid
@@ -132,16 +136,17 @@ void Business::handleAccounts()
             //plus 2 accounts for double pay for owner
             int pay = income / (numEmployees[0] + 2); 
             // pay owner
+            ((Adult*) owner)->salary(pay+pay); 
             income -= (pay + pay); 
 
             //pay employees
             for (int i=0; i<employees.size(); i++)
             {
+                ((Adult*) employees[i])->salary(pay);
                 income -= pay; 
             }
 
             //reset income amount 
-            // SHOULD THERE BE SOME CONDITION HERE?
             income += initialIncome; 
         }
         else 

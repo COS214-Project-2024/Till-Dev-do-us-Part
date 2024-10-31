@@ -1,29 +1,29 @@
-==5161== Memcheck, a memory error detector
-==5161== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==5161== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==5161== Command: ./main_debug
-==5161== Parent PID: 4958
-==5161== 
-==5161== 
-==5161== HEAP SUMMARY:
-==5161==     in use at exit: 208 bytes in 2 blocks
-==5161==   total heap usage: 96 allocs, 94 frees, 81,053 bytes allocated
-==5161== 
-==5161== 208 bytes in 2 blocks are definitely lost in loss record 1 of 1
-==5161==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5161==    by 0x1259FE: Mall::clone() (in /mnt/c/Users/user/OneDrive - University of Pretoria/Semester 2/COS 214/Practicals/Practical 6_Project/Till-Dev-do-us-Part/main_debug)
-==5161==    by 0x126DE9: MallFactory::build() (in /mnt/c/Users/user/OneDrive - University of Pretoria/Semester 2/COS 214/Practicals/Practical 6_Project/Till-Dev-do-us-Part/main_debug)
-==5161==    by 0x1143E7: DevelopmentDept::build(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (in /mnt/c/Users/user/OneDrive - University of Pretoria/Semester 2/COS 214/Practicals/Practical 6_Project/Till-Dev-do-us-Part/main_debug)
-==5161==    by 0x110237: Business::buyProperty(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (in /mnt/c/Users/user/OneDrive - University of Pretoria/Semester 2/COS 214/Practicals/Practical 6_Project/Till-Dev-do-us-Part/main_debug)
-==5161==    by 0x123CD1: driyasTest() (in /mnt/c/Users/user/OneDrive - University of Pretoria/Semester 2/COS 214/Practicals/Practical 6_Project/Till-Dev-do-us-Part/main_debug)
-==5161==    by 0x124310: main (in /mnt/c/Users/user/OneDrive - University of Pretoria/Semester 2/COS 214/Practicals/Practical 6_Project/Till-Dev-do-us-Part/main_debug)
-==5161== 
-==5161== LEAK SUMMARY:
-==5161==    definitely lost: 208 bytes in 2 blocks
-==5161==    indirectly lost: 0 bytes in 0 blocks
-==5161==      possibly lost: 0 bytes in 0 blocks
-==5161==    still reachable: 0 bytes in 0 blocks
-==5161==         suppressed: 0 bytes in 0 blocks
-==5161== 
-==5161== For lists of detected and suppressed errors, rerun with: -s
-==5161== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==55543== Memcheck, a memory error detector
+==55543== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==55543== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==55543== Command: ./main_debug
+==55543== Parent PID: 55149
+==55543== 
+==55543== 
+==55543== HEAP SUMMARY:
+==55543==     in use at exit: 768 bytes in 8 blocks
+==55543==   total heap usage: 408 allocs, 400 frees, 92,709 bytes allocated
+==55543== 
+==55543== 768 bytes in 8 blocks are definitely lost in loss record 1 of 1
+==55543==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==55543==    by 0x12CFAA: Shop::clone() (in /mnt/c/Users/Driya/Documents/2. SECOND YEAR COMPUTER SCIENCE/2. Semester 2/COS 214/3. Practicals/Project/GitHub/Till-Dev-do-us-Part/main_debug)
+==55543==    by 0x12D147: ShopFactory::build() (in /mnt/c/Users/Driya/Documents/2. SECOND YEAR COMPUTER SCIENCE/2. Semester 2/COS 214/3. Practicals/Project/GitHub/Till-Dev-do-us-Part/main_debug)
+==55543==    by 0x1144DD: DevelopmentDept::build(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (in /mnt/c/Users/Driya/Documents/2. SECOND YEAR COMPUTER SCIENCE/2. Semester 2/COS 214/3. Practicals/Project/GitHub/Till-Dev-do-us-Part/main_debug)
+==55543==    by 0x110257: Business::buyProperty(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (in /mnt/c/Users/Driya/Documents/2. SECOND YEAR COMPUTER SCIENCE/2. Semester 2/COS 214/3. Practicals/Project/GitHub/Till-Dev-do-us-Part/main_debug)
+==55543==    by 0x1247D8: DemoMain() (in /mnt/c/Users/Driya/Documents/2. SECOND YEAR COMPUTER SCIENCE/2. Semester 2/COS 214/3. Practicals/Project/GitHub/Till-Dev-do-us-Part/main_debug)
+==55543==    by 0x123F23: main (in /mnt/c/Users/Driya/Documents/2. SECOND YEAR COMPUTER SCIENCE/2. Semester 2/COS 214/3. Practicals/Project/GitHub/Till-Dev-do-us-Part/main_debug)
+==55543== 
+==55543== LEAK SUMMARY:
+==55543==    definitely lost: 768 bytes in 8 blocks
+==55543==    indirectly lost: 0 bytes in 0 blocks
+==55543==      possibly lost: 0 bytes in 0 blocks
+==55543==    still reachable: 0 bytes in 0 blocks
+==55543==         suppressed: 0 bytes in 0 blocks
+==55543== 
+==55543== For lists of detected and suppressed errors, rerun with: -s
+==55543== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

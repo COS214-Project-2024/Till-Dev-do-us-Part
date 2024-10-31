@@ -6,12 +6,13 @@
 class CRS
 {
     private: 
-        static float taxFund;          //equals budget
+        float taxFund;          //equals budget
 
     public:
-        static void settleTax();       //collects tax money from all businesses
-        static void getTax(float);     //adds tax money to taxFund 
-        static void distributeTax();   //sends tax money to finance dept
+        CRS(float); 
+        void settleTax();       //collects tax money from all businesses
+        void getTax(float);     //adds tax money to taxFund 
+        void distributeTax();   //sends tax money to finance dept
         
 };
 

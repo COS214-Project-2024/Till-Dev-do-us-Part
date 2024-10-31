@@ -47,7 +47,7 @@ class VAT : public TaxCalculator
             //combine tax
             float tax = tax1 + tax2; 
             //send tax amount to crs
-            CRS::getTax(tax); 
+            ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->getCRS()->getTax(tax); 
             //return amount after tax
             return income - tax2; 
         }

@@ -21,7 +21,6 @@ class Entertainment : public Business
             initialIncome = 700000; 
             income = 700000;
             name = "Some Entertainment Shop";  
-            //owner =
 
             //add to dept vector of businesses
             ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
@@ -35,7 +34,6 @@ class Entertainment : public Business
             initialIncome = maxEmployess*700000/10;
             income = maxEmployess*700000/10;
             name = shopName;  
-            //owner =
 
             //add to dept vector of businesses
             ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 

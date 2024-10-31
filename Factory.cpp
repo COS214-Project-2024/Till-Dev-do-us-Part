@@ -2,7 +2,7 @@
 
 Factory::Factory() : Industrial("Factory")
 {
-    cout << "Factory created" << endl;
+    // cout << "Factory created" << endl;
 }
 
 Building* Factory::clone() {

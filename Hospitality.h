@@ -21,7 +21,6 @@ class Hospitality : public Business
             initialIncome = 250000; 
             income = initialIncome;
             name = "Some Hospitality Shop";  
-            //owner =
 
             //add to dept vector of businesses
             ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
@@ -35,7 +34,6 @@ class Hospitality : public Business
             initialIncome = maxEmployess*250000/5;
             income = maxEmployess*250000/5;
             name = shopName;  
-            //owner =
 
             //add to dept vector of businesses
             ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 

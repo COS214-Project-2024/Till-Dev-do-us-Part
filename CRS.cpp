@@ -4,7 +4,10 @@
 #include <iomanip>
 #include <iostream>
 
-float CRS::taxFund = 100000; //equals budget
+CRS::CRS(float budget)
+{
+    taxFund = budget; 
+}
 
 void CRS::settleTax()        //collects tax money from all businesses
 {

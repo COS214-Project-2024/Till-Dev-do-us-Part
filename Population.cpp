@@ -5,12 +5,12 @@ Citizen* Population::getPerson(){
     return citizen;
 }
 
-Citizen** Population::reproduce(){
+Citizen** Population::reproduce(int num){
 
-    Citizen** people = new Citizen*[10];
+    Citizen** people = new Citizen*[num];
     citizen = createPerson();
 
-    for(int i=0; i<10; i++){
+    for(int i=0; i<num; i++){
         people[i] = citizen->clone();
     }
 
