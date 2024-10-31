@@ -32,7 +32,7 @@ class Resources{
         virtual ~Resources();
         float getCurrentAmount() const; //  float getAvailable() const { return available; }
        float getInitialAmount() const ;  // float getMax() const { return maxCapacity; }
-        string getName() const;
+        virtual string getName() const;
         bool consume(float amount);
         void alert();
 

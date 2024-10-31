@@ -8,6 +8,7 @@ class Water : public Resources {
 public:
     Water();
     void getAvailableQuantity() ;
+    std::string getName() const override;
     
 };
 

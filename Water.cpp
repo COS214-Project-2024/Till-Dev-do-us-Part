@@ -6,3 +6,7 @@ void Water::getAvailableQuantity()
 {
     cout<< getCurrentAmount()<< " Litres."<<endl;
 }
+
+std::string Water::getName() const{
+    return "Water";
+}
