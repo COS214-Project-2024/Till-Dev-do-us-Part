@@ -1,7 +1,7 @@
 #ifndef SERVICESTATE_H
 #define SERVICESTATE_H
 
-
+#include <string>
 
 class ServiceUtility;
 
