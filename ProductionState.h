@@ -5,12 +5,13 @@
 
 class ProductionUtility;
 
-class ProductionState : public UtilityState {
+class ProductionState  {
 public:
     virtual ~ProductionState() = default;
 
     // Production-specific behavior for this state
-    virtual void startProduction(ProductionUtility* utility) = 0;
+    virtual void handleProduction(ProductionUtility* utility) = 0;
+    virtual std::string getStateName() const = 0;
 };
 
 #endif // PRODUCTIONSTATE_H

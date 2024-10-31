@@ -6,7 +6,7 @@
 
 class MaintenanceProductionState : public ProductionState {
 public:
-    void startProduction(ProductionUtility* utility) override;
+    void handleProduction(ProductionUtility* utility) override;
     std::string getStateName() const override { return "Maintenance"; }
 };
 

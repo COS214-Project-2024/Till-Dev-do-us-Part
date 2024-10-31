@@ -7,7 +7,7 @@ ServiceUtility::~ServiceUtility() = default;
 
 void ServiceUtility::startService() {
     if (servState) {
-        servState->startService(this);
+        servState->handleService(this);
     } else {
         std::cout << "No service state set." << std::endl;
     }

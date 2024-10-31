@@ -2,15 +2,17 @@
 #define WATERSUPPLY_H
 
 #include "ProductionUtility.h"
-// #include "Water.h"
+#include "Water.h"
 
 class WaterSupply : public ProductionUtility {
+    private: Resources * water;
 public:
-    WaterSupply(std::string name, ResourceDepartment* department, Resources* resource, float capacity, int workers);
+
+    WaterSupply(std::string name, ResourceDepartment* department, Resources* resource);
     ~WaterSupply();
 
-    void startProduction() override;             // Starts water supply production
-   
+    void startProduction() override;          // Starts power production
+    
 };
 
-#endif // WATERSUPPLY_H
+#endif // POWERPLANT_H

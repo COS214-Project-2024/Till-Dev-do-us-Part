@@ -1,20 +1,20 @@
-#ifndef UTILITYSTATE_H
-#define UTILITYSTATE_H
+// #ifndef UTILITYSTATE_H
+// #define UTILITYSTATE_H
 
-#include <string>
+// #include <string>
 
-class Utility;
+// class Utility;
 
-class UtilityState {
-public:
-    virtual ~UtilityState() = default;
+// class UtilityState {
+// public:
+//     virtual ~UtilityState() = default;
 
-    // State-specific behavior
-    virtual void startProduction(Utility* utility) = 0;
-    virtual void startService(Utility* utility) = 0;
+//     // State-specific behavior
+//     virtual void startProduction(Utility* utility) = 0;
+//     virtual void startService(Utility* utility) = 0;
 
-    // Get the name of the state
-    virtual std::string getStateName() const = 0;
-};
+//     // Get the name of the state
+//     virtual std::string getStateName() const = 0;
+// };
 
-#endif // UTILITYSTATE_H
+// #endif // UTILITYSTATE_H

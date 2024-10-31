@@ -6,7 +6,7 @@
 
 class MaintenanceServiceState : public ServiceState {
 public:
-    void startService(ServiceUtility* utility) override;
+    void handleService(ServiceUtility* utility) override;
     std::string getStateName() const override { return "Maintenance"; }
 };
 

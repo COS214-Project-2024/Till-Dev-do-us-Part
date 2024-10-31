@@ -1,17 +1,22 @@
 #include "PowerPlant.h"
 #include <iostream>
 
-PowerPlant::PowerPlant(std::string name, ResourceDepartment* department, Resources* resource, float capacity, int workers)
-    : ProductionUtility(name, department, resource, workers, capacity) {}
+PowerPlant::PowerPlant(std::string name, ResourceDepartment *department, Resources *resource)
+    : ProductionUtility(name, department, resource)
+{
+    productionCapacity = 5000;
+    currentProduction = 0;
+    
+}
 
 PowerPlant::~PowerPlant() {}
 
-void PowerPlant::startProduction() {
-    // if (currentProductionState) {
-    //     currentProductionState->handleProduction(this);
-    // } else {
-    //     std::cout << getName() << " has no production state set.\n";
-    // }
+void PowerPlant::startProduction()
+{
+    if (proState)
+    {
+        proState->handleProduction(this);
+    }
 }
 
 

@@ -1,16 +1,21 @@
 #include "WaterSupply.h"
 #include <iostream>
-
-WaterSupply::WaterSupply(std::string name, ResourceDepartment *department, Resources *resource, float capacity, int workers)
-    : ProductionUtility(name, department, resource, workers, capacity) {}
+WaterSupply::WaterSupply(std::string name, ResourceDepartment *department, Resources *resource)
+    : ProductionUtility(name, department, resource)
+{
+    productionCapacity = 5000;
+    currentProduction = 0;
+    
+}
 
 WaterSupply::~WaterSupply() {}
 
 void WaterSupply::startProduction()
 {
-    // if (currentProductionState) {
-    //     currentProductionState->handleProduction(this);
-    // } else {
-    //     std::cout << getName() << " has no production state set.\n";
-    // }
+    if (proState)
+    {
+        proState->handleProduction(this);
+    }
 }
+
+

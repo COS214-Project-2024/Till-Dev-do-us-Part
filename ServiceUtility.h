@@ -15,7 +15,7 @@ public:
     virtual ~ServiceUtility();
 
     // Service operations
-    void startService();
+    virtual void startService();
     void processRequest();
 
     // Getters and setters for service attributes
