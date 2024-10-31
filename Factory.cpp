@@ -5,6 +5,11 @@ Factory::Factory() : Industrial("Factory")
     cout << "Factory created" << endl;
 }
 
+Building* Factory::clone() {
+   
+}//Added by Karabo
+
+
 bool Factory::addOccupant(Citizen *c)
 {
     if (c != nullptr && occupants.size() < capacity)

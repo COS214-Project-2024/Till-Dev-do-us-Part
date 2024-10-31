@@ -15,6 +15,7 @@ class Estate : public Residential
         virtual bool useToilet();
         virtual bool useStove();
         virtual bool clean();
+        virtual Building* clone();
         bool addOccupant(Citizen *c);
         bool addHouse(Residential *); // if capacity is reached, return false
     

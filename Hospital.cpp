@@ -8,6 +8,10 @@ Hospital::~Hospital(){
     demolish();
 }
 
+Building* Hospital::clone(){
+    
+}
+
 bool Hospital::addOccupant(Citizen *c){
     if(c != nullptr){
         if(patients.size() < capacity){

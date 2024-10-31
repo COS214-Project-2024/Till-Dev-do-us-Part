@@ -11,6 +11,7 @@
 #include "Business.h"
 
 using namespace std;
+class Citizen;
 
 class SocialAffairsDept: public Department{
 

@@ -95,6 +95,10 @@ bool Estate::useStove()
     return true;
 }
 
+Building* Estate::clone(){
+
+}///Added by Karabo
+
 bool Estate::clean()
 {
     bool cleanedAll=true;

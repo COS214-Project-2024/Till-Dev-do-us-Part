@@ -5,6 +5,9 @@ Park::Park():Landmark("Park")
 
 }
 
+Building* Park::clone(){
+    
+}
 
 bool Park::clean()
 {

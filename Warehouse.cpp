@@ -5,6 +5,10 @@ Warehouse::Warehouse() : Industrial("Warehouse")
     cout << "Warehouse created!"  << endl;
 }
 
+Building* Warehouse::clone(){
+    return new Warehouse();
+}
+
 bool Warehouse::addOccupant(Citizen *c)
 {
     if (c != nullptr && occupants.size() < capacity)

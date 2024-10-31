@@ -4,11 +4,13 @@
 #include "Population.h"
 #include "Adult.h"
 
+class Adult;
+
 class AdultPop: public Population{
 
     public:
         virtual Citizen* createPerson(){
-            return new Adult();
+            return (Citizen*) new Adult();
         }
 
 };

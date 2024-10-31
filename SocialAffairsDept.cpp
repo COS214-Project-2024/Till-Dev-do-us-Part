@@ -29,10 +29,6 @@ Citizen* SocialAffairsDept::employ(Business* job) {
         std::cout << "There are no citizens to employ " << std::endl;
         return nullptr;
     }
-    else{
-        std::cout<< "There are no available citizens to employ " << std::endl; 
-        return nullptr;
-    }
 }
 
 void SocialAffairsDept::addCitizen(Citizen* citizen) {

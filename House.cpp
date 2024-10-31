@@ -5,6 +5,9 @@ House::House():Residential("House")
 
 }
 
+Building* House::clone(){
+
+}
 House::~House()
 {
     occupants.clear();

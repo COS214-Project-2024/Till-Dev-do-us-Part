@@ -13,7 +13,7 @@ protected:
 
 public:
     HealthcareFacility() ;
-    virtual ~HealthcareFacility() = default;
+    virtual ~HealthcareFacility(){};
 
     virtual void admitPatient(Citizen* c)=0;
     

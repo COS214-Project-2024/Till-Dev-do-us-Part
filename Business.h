@@ -19,6 +19,8 @@
 #include <vector>
 using namespace std; 
 
+// class Citizen;
+
 class Business
 {
     protected: 

@@ -6,6 +6,7 @@
 using namespace std;
 #include "BuildingState.h"
 class Citizen; //for now since Citizen is not defined
+#include "Citizen.h"
 
 class Building
 {
@@ -20,7 +21,7 @@ class Building
         int capacity;
     public:
         Building(string type);
-        ~Building();
+        virtual ~Building();
         virtual void loadElectricity(int units); //needs utilities
         virtual void loadWater(int units); //needs utilities
         virtual bool useElectricity(int units);

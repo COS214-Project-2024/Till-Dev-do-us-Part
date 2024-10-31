@@ -9,7 +9,7 @@ class MinorPop : public Population{
 
     public:
         virtual Citizen* createPerson(){
-            return new Minor();
+            return  (Citizen*) new Minor();
         }
 };
 

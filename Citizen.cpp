@@ -1,6 +1,7 @@
-#include <iostream>
-
 #include "Citizen.h"
+// #include "Feeling.h"
+
+#include <iostream>
 
 int Citizen::getHealth() {
     return health;

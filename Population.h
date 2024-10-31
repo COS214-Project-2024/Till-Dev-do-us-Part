@@ -2,7 +2,7 @@
 #define POPULATION_H
 
 #include "Citizen.h"
-
+class Citizen;
 class Population {
 
     private:

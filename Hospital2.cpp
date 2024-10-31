@@ -4,12 +4,12 @@
 #include <random>
 
 
-Hospital2:: Hospital2() 
+Hospital2::Hospital2() 
 {
     successor=nullptr;
 }
 
-void Hospital2:: admitPatient(Citizen* c) {///take in citizen
+void Hospital2::admitPatient(Citizen* c) {///take in citizen
     if (c->getHealth()<15) {
         std::cout << "Patient admitted\n";
         treatPatient(c);

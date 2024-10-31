@@ -4,15 +4,15 @@
 #include <string>
 
 class Feeling {
-protected:
-    std::string name;
+    protected:
+        std::string name;
 
-public:
-    virtual Feeling* reaction() = 0; // Pure virtual function for reaction
-    virtual std::string getName() const {
-        return name;
-    }
-    virtual ~Feeling() {}
+    public:
+        virtual Feeling* reaction() = 0; 
+        virtual std::string getName() const {
+            return name;
+        }
+        virtual ~Feeling() {}
 };
 
-#endif // FEELING_H
+#endif 

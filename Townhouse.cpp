@@ -9,6 +9,10 @@ Townhouse ::~Townhouse(){
     cout << "Townhouse demolished!" << endl;
 }
 
+Building* Townhouse::clone(){
+
+}
+
 void Townhouse::demolish()
 {
     cout << "Removing everyone from the Townhouse" << endl;

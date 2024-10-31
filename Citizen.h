@@ -4,12 +4,10 @@
 #include <iostream>
 #include <string>
 #include "Feeling.h"
-#include "Business.h"
-#include "TransportStrategy.h"
 
 class Business;
 
-class Citizen{
+class Citizen {
 
     protected:
         Feeling* mood;
@@ -20,7 +18,6 @@ class Citizen{
         virtual void react() = 0;
         virtual int getHealth();
         virtual void setHealth(int);
-        // virtual void setJob(Business*);
         virtual ~Citizen();
 
 };

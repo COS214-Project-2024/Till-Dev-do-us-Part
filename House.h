@@ -16,6 +16,7 @@ class House : public Residential
         virtual bool useToilet(); // why boolean, because when there isnt enough water/electricity it must affect the citizen
         virtual bool useStove();  // why boolean, because when there isnt enough water/electricity it must affect the citizen
         virtual bool clean();
+        virtual Building* clone();
         virtual bool addOccupant(Citizen *c);
 };
 #endif
