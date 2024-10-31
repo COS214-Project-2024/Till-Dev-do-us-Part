@@ -10,7 +10,7 @@ class Clinic: public HealthcareFacility {
 
 public:
     Clinic() ;
-    ~Clinic();
+    //~Clinic();
     void admitPatient(Citizen* c);
 
 };

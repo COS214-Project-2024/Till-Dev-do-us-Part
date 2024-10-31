@@ -13,7 +13,7 @@ private:
 
 public:
     std::vector<Policy*> getActivePolicies();
-    void setActivePolicies(const std::vector<Policy*> policies);
+    void setActivePolicies(std::vector<Policy*> policies);
     ~Memento();
 };
 

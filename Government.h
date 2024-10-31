@@ -27,7 +27,7 @@ public:
     void removeDepartment(std:: string name);
     Memento* createMemento();
     void setMemento( Memento* memento);
-    // void notifyCitizens();
+    std::vector<Policy*> getPolicies();
 };
 
 #endif 

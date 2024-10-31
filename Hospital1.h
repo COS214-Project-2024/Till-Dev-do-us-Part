@@ -10,7 +10,7 @@ class Hospital1: public HealthcareFacility {
 
 public:
     Hospital1() ;
-    ~Hospital1();
+    //~Hospital1();
 
     void admitPatient(Citizen* c);
 

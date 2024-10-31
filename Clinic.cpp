@@ -7,12 +7,13 @@
 Clinic:: Clinic() 
 {
     successor=nullptr;
+    deathtoll=0;
 }
 
 void Clinic:: admitPatient(Citizen* c) {///take in citizen
     if(c->getHealth()<=0)
     {
-        delete c;///dead!!
+        c=nullptr;///dead!!
     }
     if (c->getHealth()<50 && c->getHealth()>=30) {
         std::cout << "Patient admitted\n";
