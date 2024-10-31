@@ -1,6 +1,7 @@
 #ifndef ADULT_H
 #define ADULT_H
 
+#include "Building.h"
 #include "Citizen.h"
 
 class Adult: public Citizen{
@@ -9,6 +10,7 @@ class Adult: public Citizen{
         float balance;
         float netWorth;
         Business* job;
+        Building* house;
     
     public:
         Adult();

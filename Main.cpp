@@ -220,16 +220,22 @@ void driyasTest()
 
     delete retailShop1; 
     retailShop1 = nullptr; 
-
+*/
     delete kfc; 
     kfc = nullptr; 
 
     delete foodShop1; 
     foodShop1 = nullptr; 
-*/
+
     Gov->removeDepartment("Finance");
     delete FinDept; 
     FinDept = nullptr; 
+
+    delete DevDept;
+    DevDept = nullptr;
+
+    delete SAD;
+    SAD = nullptr;
 
     delete Gov; 
     Gov = nullptr; 
@@ -254,6 +260,6 @@ int main()
     driyasTest();
     cout << "===============================================================================================================================================================================================================================================" << endl;
     cout << "Running Karabo's test " << endl;
-    karabosTest();
+    // karabosTest();
     
 }

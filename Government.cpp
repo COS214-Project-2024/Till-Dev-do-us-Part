@@ -4,9 +4,8 @@
 Government* Government::instance = nullptr;
 
 Government::Government() {
-    
-    
 }
+
 Memento* Government::createMemento() {
     return new Memento();
 }
