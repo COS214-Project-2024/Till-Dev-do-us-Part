@@ -27,3 +27,8 @@ bool Landmark::addOccupant(Citizen *c)
     cout << "Citizen is non existent" << endl;
     return false;
 }
+
+bool Landmark::isOccupied()
+{
+    return occupants.size() > 0;
+}

@@ -18,10 +18,10 @@ Building::~Building()
 void Building::loadElectricity(float units)
 {
     if(units > 0){
-        if(this->state->getName() =="Construction" && waterUnits > 0 && cleanliness > 0 && electricityUnits <=0){
+        if(this->state->getName() =="Construction" && waterUnits > 0 && cleanliness > 0 && electricityUnits ==0){
             delete this->state;
             this->state = new CompleteState();
-
+            
         }
         electricityUnits += units;  
     }

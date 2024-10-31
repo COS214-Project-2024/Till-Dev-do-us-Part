@@ -1,17 +1,17 @@
-#ifndef SUBURB_H
-#define SUBURB_H
-#include "Residential.h"
+#ifndef CBD_H
+#define CBD_H
+#include "Commercial.h"
 #include "Building.h"
-#include "Estate.h"
-class Suburb : Residential
+#include "Mall.h"
+class CBD : public Commercial
 {
     private:
-        vector<Residential*> buildings;
+        vector<Building*> buildings;
         int noBuildings; //
         int cleanliness; //
     public:
-        Suburb();
-        ~Suburb();
+        CBD();
+        ~CBD();
         virtual void loadElectricity(float units);
         virtual void loadWater(float units);
         virtual bool useElectricity(float units);
@@ -24,16 +24,12 @@ class Suburb : Residential
         virtual Building *clone();
         virtual bool removeOccupant(Citizen *c);
         virtual int getNoBuildings();
-        virtual bool addBuilding(Residential* building);
-        bool removeBuilding(Residential *building);
-        virtual bool useShower();
-        virtual bool useToilet();
-        virtual bool useStove();
-        virtual void goToWork();
+        virtual bool addBuilding(Building* building);
+        virtual bool removeBuilding(Building *);
         virtual bool isOccupied();
         virtual float getCleanliness();
         virtual float getWater();
-        virtual float getElectricity(); 
+        virtual float getElectricity();        
 };
 #endif
 

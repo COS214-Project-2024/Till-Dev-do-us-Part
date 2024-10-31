@@ -1,17 +1,17 @@
-#ifndef SUBURB_H
-#define SUBURB_H
-#include "Residential.h"
+#ifndef INDUSTRIALSITE_H
+#define INDUSTRIALSITE_H
+#include "Industrial.h"
 #include "Building.h"
-#include "Estate.h"
-class Suburb : Residential
+#include "Plant.h"
+class IndustrialSite : public Industrial
 {
     private:
-        vector<Residential*> buildings;
+        vector<Industrial*> buildings;
         int noBuildings; //
         int cleanliness; //
     public:
-        Suburb();
-        ~Suburb();
+        IndustrialSite();
+        ~IndustrialSite();
         virtual void loadElectricity(float units);
         virtual void loadWater(float units);
         virtual bool useElectricity(float units);
@@ -24,16 +24,12 @@ class Suburb : Residential
         virtual Building *clone();
         virtual bool removeOccupant(Citizen *c);
         virtual int getNoBuildings();
-        virtual bool addBuilding(Residential* building);
-        bool removeBuilding(Residential *building);
-        virtual bool useShower();
-        virtual bool useToilet();
-        virtual bool useStove();
-        virtual void goToWork();
+        virtual bool addBuilding(Industrial* building);
+        bool removeBuilding(Industrial *building);
         virtual bool isOccupied();
         virtual float getCleanliness();
         virtual float getWater();
-        virtual float getElectricity(); 
+        virtual float getElectricity();        
 };
 #endif
 

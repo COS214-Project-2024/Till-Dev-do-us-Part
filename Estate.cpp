@@ -19,17 +19,8 @@ bool Estate::addHouse(Residential *building)
     {
         if(building->getType() == "Estate")
         {
-            int estateBuildings = ((Estate *)building)->getNoBuildings();
-            if (estateBuildings + noBuildings <= capacity){
-                buildings.push_back(building);
-                noBuildings += estateBuildings;
-                value += building->getValue();
-                return true;
-            }
-            else{
-                cout << "Estate could not be added to the Estate" << endl;
-                return false;
-            }
+            cout << "Cannot add an Estate to an Estate\n";
+            return false;
         }
         else
         {
@@ -37,6 +28,9 @@ bool Estate::addHouse(Residential *building)
                 buildings.push_back(building);
                 noBuildings++;
                 value += building->getValue();
+                waterUnits += building->getWater();
+                electricityUnits += building->getElectricity();
+                cleanliness = (cleanliness + building->getCleanliness()) / noBuildings;
                 cout << "Building added to the Estate" << endl;
                 return true;
             }
@@ -54,14 +48,14 @@ bool Estate::addHouse(Residential *building)
 
 void Estate::demolish()
 {
-    cout << "Clearing and demolishing all the buildings in the Plant:" << endl;
+    cout << "Clearing and demolishing all the buildings in the Estate:" << endl;
     for (int i = 0; i < buildings.size(); ++i)
     {
         delete buildings.at(i);
         buildings[i] = nullptr;
     }
     buildings.clear();
-    cout << "All buildings in the plant cleared" << endl;
+    cout << "All buildings in the Estate cleared" << endl;
 }
 
 bool Estate::useShower()
@@ -143,7 +137,7 @@ bool Estate::clean()
         cout << "Could not clean all buildings " << endl;
         return false;
     }
-    cout << "Cleaned all buildings in the Plant" << endl;
+    cout << "Cleaned all buildings in the Estate" << endl;
     return true;
 }
 
@@ -163,8 +157,10 @@ bool Estate::addOccupant(Citizen *c)
         }
 
         cout << "Citizen could not be added to Estate\n";
+        return false;
     }
 
+    cout << "Citizen is non-existent\n";
     return false;
 }
 
@@ -183,17 +179,16 @@ int Estate::getNoBuildings(){
 Building* Estate::clone()
 {
     Estate* newEstate = new Estate();
-    newEstate->cleanliness = this->cleanliness;
-    newEstate->electricityUnits = this->electricityUnits;
-    newEstate->waterUnits = this->waterUnits;
     newEstate->area = this->area;
     newEstate->capacity = this->capacity;
-
     for (vector<Residential*>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         newEstate->addHouse((Residential*)(*it)->clone());
     }
-    
+    newEstate->cleanliness = this->getCleanliness();
+    newEstate->electricityUnits = this->getElectricity();
+    newEstate->waterUnits = this->getWater();
+    newEstate->state = this->state->clone();
     return newEstate;
 
 }
@@ -211,14 +206,73 @@ bool Estate::removeOccupant(Citizen *c)
     return false;
 }
 
+bool Estate::removeBuilding(Residential* building){
+    vector<Residential *>::iterator first = buildings.begin();
+    vector<Residential *>::iterator last = buildings.end();
+
+    vector<Residential *>::iterator it = find(first, last, building);
+    if (it != last)
+    {
+        
+        buildings.erase(it);
+        value -= building->getValue();
+        waterUnits -= building->getWater();
+        electricityUnits -= building->getElectricity();
+        cleanliness = (cleanliness - building->getCleanliness()) / noBuildings;
+        delete building;
+        building = nullptr;
+        noBuildings--;
+        cout << "Building removed from the Estate" << endl;
+        return true;
+    }
+
+    cout << "Building not in the Estate" << endl;
+    return false;
+}
+
 bool Estate::isOccupied()
 {
     for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
     {
-        if((*it)->isOccupied()){
+        if(!(*it)->isOccupied()){
             return false;
         }
     }
     
     return true;
+}
+
+float Estate::getCleanliness()
+{
+    int count = 0;
+    int accumCleanliness = 0;
+    for (vector<Residential *>::iterator it =buildings.begin(); it !=buildings.end(); ++it)
+    {
+        accumCleanliness += (*it)->getCleanliness();
+        count++;
+    }
+    cleanliness = accumCleanliness / count;
+    return cleanliness;
+}
+
+float Estate::getWater()
+{
+    int accumWater = 0;
+    for (vector<Residential *>::iterator it =buildings.begin(); it !=buildings.end(); ++it)
+    {
+        accumWater += (*it)->getWater();
+    }
+    waterUnits = accumWater;
+    return waterUnits;
+}
+
+float Estate::getElectricity()
+{
+    int accumElec = 0;
+    for (vector<Residential *>::iterator it =buildings.begin(); it !=buildings.end(); ++it)
+    {
+        accumElec += (*it)->getElectricity();
+    }
+    electricityUnits = accumElec;
+    return electricityUnits;
 }

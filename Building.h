@@ -32,13 +32,15 @@ class Building
         virtual bool useWater(float units);
         virtual float getValue();
         virtual string getType();
+        virtual float getWater();
+        virtual float getElectricity();
+        virtual float getCleanliness();
         virtual void demolish()=0;
         virtual bool clean()=0;
         virtual bool addOccupant(Citizen* c)=0;
-        virtual Building* clone() =0;
         virtual bool removeOccupant(Citizen* c)=0;
-        virtual float getWater();
-        virtual float getElectricity();
-        float getCleanliness();
+        virtual Building* clone() =0;
+        virtual bool isOccupied() =0;
+
 };
 #endif

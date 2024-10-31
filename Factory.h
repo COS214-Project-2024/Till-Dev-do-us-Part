@@ -9,8 +9,11 @@ class Factory : public Industrial
     public:
         Factory();
         ~Factory();
-        virtual bool addOccupant(Citizen *c); // inherited from Building, hence this class is abstract
-        virtual void demolish();              // inherited from Building, hence this class is abstract
-        virtual bool clean();                 // inherited from Building, hence this class is abstract
+        virtual bool addOccupant(Citizen *c);
+        virtual bool removeOccupant(Citizen *c);
+        virtual void demolish();
+        virtual bool clean();
+        virtual Building *clone();
+        virtual bool isOccupied();
 };
 #endif

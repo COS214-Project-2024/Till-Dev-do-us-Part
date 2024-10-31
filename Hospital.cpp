@@ -48,3 +48,33 @@ bool Hospital::clean(){
     cout << "Hospital is in " << this->state->getName() << " and cannot be cleaned" << endl;
     return false;
 }
+
+bool Hospital::removeOccupant(Citizen *c)
+{
+    vector<Citizen *>::iterator first = patients.begin();
+    vector<Citizen *>::iterator last = patients.end();
+
+    vector<Citizen *>::iterator it = find(first, last, c);
+    if (it != last)
+    {
+        patients.erase(it);
+        cout << "Patient removed from the Hospital" << endl;
+        return true;
+    }
+
+    cout << "Patient not in the Hospital" << endl;
+    return false;
+}
+
+Building *Hospital::clone()
+{
+    Hospital *newHospital = new Hospital();
+    newHospital->cleanliness = this->cleanliness;
+    newHospital->electricityUnits = this->electricityUnits;
+    newHospital->waterUnits = this->waterUnits;
+    newHospital->value = this->value;
+    newHospital->area = this->area;
+    newHospital->capacity = this->capacity;
+
+    return newHospital;
+}

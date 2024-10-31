@@ -45,6 +45,41 @@ bool Warehouse::clean(){
     return false;
 }
 
+Building *Warehouse::clone()
+{
+    Warehouse *newWarehouse = new Warehouse();
+    newWarehouse->cleanliness = this->cleanliness;
+    newWarehouse->electricityUnits = this->electricityUnits;
+    newWarehouse->waterUnits = this->waterUnits;
+    newWarehouse->value = this->value;
+    newWarehouse->area = this->area;
+    newWarehouse->capacity = this->capacity;
+
+    return newWarehouse;
+}
+
+bool Warehouse::removeOccupant(Citizen *c)
+{
+    vector<Citizen *>::iterator first = occupants.begin();
+    vector<Citizen *>::iterator last = occupants.end();
+
+    vector<Citizen *>::iterator it = find(first, last, c);
+    if (it != last)
+    {
+        occupants.erase(it);
+        cout << "Occupant removed from the Warehouse" << endl;
+        return true;
+    }
+
+    cout << "Occupant not in the Warehouse" << endl;
+    return false;
+}
+
+bool Warehouse::isOccupied()
+{
+    return occupants.size() > 0;
+}
+
 Warehouse::~Warehouse(){
     demolish();
     cout << "Warehouse demolished!" << endl;

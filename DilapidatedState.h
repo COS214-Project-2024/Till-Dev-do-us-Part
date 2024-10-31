@@ -9,5 +9,6 @@ class DilapidatedState : public BuildingState
         DilapidatedState();
         virtual bool canUseElectricity();
         virtual bool canUseWater();
+        virtual BuildingState* clone();
 };
 #endif

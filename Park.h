@@ -7,8 +7,11 @@ class Park : public Landmark
 {
     public:
         Park();
-        // virtual void demolish();
-        virtual bool clean() = 0; // inherited from Building, hence this class is abstract
-        // virtual bool addOccupant(Citizen *c) = 0;
+        ~Park();
+        virtual bool addOccupant(Citizen *c);
+        virtual void demolish();
+        virtual bool clean();
+        virtual bool removeOccupant(Citizen *c);
+        virtual Building *clone();
 };
 #endif

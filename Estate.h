@@ -21,7 +21,11 @@ class Estate : public Residential
         virtual void goToWork();
         virtual int getNoBuildings();
         virtual bool removeOccupant(Citizen *c);
-        virtual Building* clone();
+        bool removeBuilding(Residential *building);
+        virtual Building *clone();
         virtual bool isOccupied();
-};
+        virtual float getCleanliness();
+        virtual float getWater();
+        virtual float getElectricity();
+    };
 #endif

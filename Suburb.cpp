@@ -141,6 +141,8 @@ bool Suburb::addBuilding(Residential *building)
                 noBuildings+=estateBuildings;
                 value += building->getValue();
                 waterUnits += building->getWater();
+                electricityUnits += building->getElectricity();
+                cleanliness = (cleanliness+building->getCleanliness())/noBuildings;
                 cout << "Estate added to the Suburb" << endl;
                 return true;
             }
@@ -154,6 +156,9 @@ bool Suburb::addBuilding(Residential *building)
                 buildings.push_back(building);
                 noBuildings++;
                 value += building->getValue();
+                waterUnits += building->getWater();
+                electricityUnits += building->getElectricity();
+                cleanliness = (cleanliness + building->getCleanliness()) / noBuildings;
                 cout << "Building added to the Suburb" << endl;
                 return true;
             }
@@ -165,6 +170,31 @@ bool Suburb::addBuilding(Residential *building)
     }
 
     cout << "Building is non-existent" << endl;
+    return false;
+}
+
+bool Suburb::removeBuilding(Residential *building)
+{
+    vector<Residential *>::iterator first = buildings.begin();
+    vector<Residential *>::iterator last = buildings.end();
+
+    vector<Residential *>::iterator it = find(first, last, building);
+    if (it != last)
+    {
+
+        buildings.erase(it);
+        value -= building->getValue();
+        waterUnits -= building->getWater();
+        electricityUnits -= building->getElectricity();
+        cleanliness = (cleanliness - building->getCleanliness()) / noBuildings;
+        delete building;
+        building = nullptr;
+        noBuildings--;
+        cout << "Building removed from the CBD" << endl;
+        return true;
+    }
+
+    cout << "Building not in the CBD" << endl;
     return false;
 }
 
@@ -257,4 +287,56 @@ bool Suburb::isOccupied()
     }
 
     return true;
+}
+Building *Suburb::clone()
+{
+    Suburb *newBuilding = new Suburb();
+    newBuilding->cleanliness = this->getCleanliness();
+    newBuilding->electricityUnits = this->getElectricity();
+    newBuilding->waterUnits = this->getWater();
+    newBuilding->area = this->area;
+    newBuilding->capacity = this->capacity;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    {
+        newBuilding->addBuilding((Residential *)(*it)->clone());
+    }
+    newBuilding->state = this->state->clone();
+    return newBuilding;
+}
+
+float Suburb::getCleanliness()
+{
+    int count = 0;
+    int accumCleanliness = 0;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); ++it)
+    {
+        accumCleanliness += (*it)->getCleanliness();
+        count++;
+    }
+    return accumCleanliness / count;
+}
+
+float Suburb::getWater()
+{
+    int accumWater = 0;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); ++it)
+    {
+        accumWater += (*it)->getWater();
+    }
+    return accumWater;
+}
+
+float Suburb::getElectricity()
+{
+    int accumElec = 0;
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); ++it)
+    {
+        accumElec += (*it)->getElectricity();
+    }
+    return accumElec;
+}
+
+int Suburb::getNoBuildings()
+{
+    return noBuildings;
 }

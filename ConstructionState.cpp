@@ -12,3 +12,8 @@ bool ConstructionState::canUseWater()
 {
     return true;
 }
+
+BuildingState *ConstructionState::clone()
+{
+    return new ConstructionState();
+}

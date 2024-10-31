@@ -23,16 +23,17 @@ bool House::useShower(){
     {
         if (useWater(80) && useElectricity(40))
         {
+            cout << "House used shower.\n";
             if (cleanliness - 10 <= 0)
             {
                 cleanliness = 0;
                 delete this->state;
                 this->state = new DilapidatedState();
+                cout << "House is now in Dilapidated state\n";
             }
             else{
                 cleanliness -= 10;
             }
-            cout << "House used shower.";
             return true;
         }
         cout << "Not enough water or electricity to use shower:" << endl;
@@ -125,6 +126,7 @@ bool House::clean(){
                 {
                     delete state;
                     state = new CompleteState();
+                    cout << "House now in Operational state\n";
                 }
                 cleanliness += 30;
             }
@@ -195,9 +197,9 @@ void House::goToWork()
 {
     for (vector<Citizen*>::iterator it = occupants.begin(); it < occupants.end(); it++)
     {
+
         (*it)->goToWork();
     }
-    
 }
 
 bool House::isOccupied(){

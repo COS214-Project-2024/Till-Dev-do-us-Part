@@ -8,5 +8,6 @@ class CompleteState : public BuildingState
         CompleteState();
         virtual bool canUseElectricity();
         virtual bool canUseWater();
+        virtual BuildingState *clone();
 };
 #endif

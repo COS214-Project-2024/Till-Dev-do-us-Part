@@ -13,3 +13,8 @@ bool DilapidatedState::canUseWater()
 {
     return false;
 }
+
+BuildingState *DilapidatedState::clone()
+{
+    return new DilapidatedState();
+}
