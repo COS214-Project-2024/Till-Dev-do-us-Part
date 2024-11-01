@@ -21,8 +21,8 @@ Citizen* SocialAffairsDept::employ(Business* job) {
         Adult* employee = (Adult*) (unemployed.front());
         employee->setJob(job);
         unemployed.pop();
-
         return (Citizen*) employee;
+
     } else {
         std::cout << "There are no citizens to employ " << std::endl;
         return nullptr;
@@ -40,6 +40,8 @@ void SocialAffairsDept::addChild(Citizen* citizen) {
 }
 
 void SocialAffairsDept::addToUnemployed(Citizen* person) {
+    if(person==nullptr)
+        cout << "PERSON IS NULL" << endl;
     unemployed.push(person);
     cout << "Added new adult to unemployed queue " << endl;
 }

@@ -2,6 +2,7 @@
 
 HaveChild::HaveChild(Citizen* adult){
     person =  adult;
+    adult = this;
 }
 
 void HaveChild::haveChild(Citizen* baby){

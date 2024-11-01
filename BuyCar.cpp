@@ -2,6 +2,7 @@
 
 BuyCar::BuyCar(Citizen* adult){
     person =  adult;
+    adult = this;
 }
 
 void BuyCar::buyCar(Transport* car){
