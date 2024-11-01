@@ -7,6 +7,9 @@ class Department{
         float budget;
 
     public:
+        float getBudget(){
+            return budget;
+        }
         virtual ~Department(){} 
 
 };

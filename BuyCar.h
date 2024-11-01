@@ -8,7 +8,6 @@
 class BuyCar : public LifeStage{
 
     private:
-        Citizen* person;
         Transport* car;
 
     public:

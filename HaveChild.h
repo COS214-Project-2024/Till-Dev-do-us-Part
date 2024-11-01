@@ -8,7 +8,6 @@
 class HaveChild : public LifeStage{
 
     private:
-        Citizen* person;
         Citizen* child;
 
     public:

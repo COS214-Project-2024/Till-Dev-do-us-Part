@@ -1,13 +1,19 @@
 #include "Adult.h"
 #include "Neutral.h"
+#include "SocialAffairsDept.h"
+#include "Government.h"
 
 Adult::Adult(){
     mood = new Neutral();
-    ///check dept money
-    balance = 1000;
-    health = 100;
-    netWorth = 0;
-    job = nullptr;
+    if(((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->getBudget() < 5000){
+        std::cout<<" Cannot accept more people into the city. There is not enough money" << std::endl;
+    }
+    else{
+        balance = 5000;
+        health = 100;
+        netWorth = 0;
+        job = nullptr;
+    }
 }
 
 void Adult::react() {
@@ -38,5 +44,5 @@ void Adult::setJob(Business* job){
 }
 
 void Adult::goToWork(){
-    
+    //TO BE IMPLEMENTED WITH EVERYTHING ELSE 
 }

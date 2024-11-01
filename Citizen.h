@@ -18,7 +18,7 @@ class Citizen{
         virtual void react() = 0;
         virtual int getHealth();
         virtual void setHealth(int);
-        // virtual void setJob(Business*);
+        virtual std::string getFeeiling();
         virtual ~Citizen();
 
 };

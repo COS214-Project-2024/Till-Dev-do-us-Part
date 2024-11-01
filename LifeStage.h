@@ -5,8 +5,8 @@
 
 class LifeStage: public Adult{
 
-    private:
-        Citizen* adult;
+    protected:
+        Citizen* person;
 
     public:
        virtual void increaseNW(float value){
