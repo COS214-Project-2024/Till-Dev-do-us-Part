@@ -1,4 +1,5 @@
 #include "Townhouse.h"
+#include "Citizen.h"
 
 Townhouse::Townhouse():Residential("Townhouse"){
     value = 80000;
@@ -7,6 +8,8 @@ Townhouse::Townhouse():Residential("Townhouse"){
 }
 
 Townhouse ::~Townhouse(){
+    delete this->state;
+    state = nullptr;
     demolish();
     cout << "Townhouse demolished!" << endl;
 }
@@ -193,4 +196,16 @@ void Townhouse::goToWork()
 bool Townhouse::isOccupied()
 {
     return occupants.size() > 0;
+}
+
+void Townhouse::display()
+{
+    std::cout << "-----------------House-------------------" << std::endl;
+    std::cout << "   - Cleanliness                   : " << cleanliness << std::endl;
+    std::cout << "   - Electricity Units             : " << electricityUnits << std::endl;
+    std::cout << "   - Water Units                   : " << waterUnits << std::endl;
+    std::cout << "   - Value Units                   : " << value << std::endl;
+    std::cout << "   - Area                          : " << area << std::endl;
+    std::cout << "   - Number of Occupants           : " << occupants.size() << std::endl;
+    std::cout << "-----------------------------------------" << std::endl;
 }

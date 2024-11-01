@@ -69,7 +69,7 @@ void Mall::demolish()
         stores[i] = nullptr;
     }
     stores.clear();
-    cout << "All buildings in the Mall cleared" << endl;
+    cout << "Demolished all buildings in the Mall" << endl;
 }
 
 bool Mall::clean()
@@ -179,7 +179,10 @@ int Mall::getNoBuildings(){
 
 Mall::~Mall()
 {
+    delete this->state;
+    state = nullptr;
     demolish();
+    cout << "Destroyed the Mall\n";
 }
 
 bool Mall::isOccupied(){

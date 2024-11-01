@@ -1,4 +1,5 @@
 #include "House.h"
+#include "Citizen.h"
 
 House::House():Residential("House")
 {
@@ -9,6 +10,8 @@ House::House():Residential("House")
 
 House::~House()
 {
+    delete this->state;
+    state = nullptr;
     demolish();
     cout << "House demolished!" << endl;
 }
@@ -197,11 +200,23 @@ void House::goToWork()
 {
     for (vector<Citizen*>::iterator it = occupants.begin(); it < occupants.end(); it++)
     {
-
         (*it)->goToWork();
     }
 }
 
 bool House::isOccupied(){
     return occupants.size()>0;
+}
+
+void House::display(){
+
+    std::cout << "-----------------House-------------------" << std::endl;
+    std::cout << "   - Cleanliness                   : " << cleanliness << std::endl;
+    std::cout << "   - Electricity Units             : " << electricityUnits << std::endl;
+    std::cout << "   - Water Units                   : " << waterUnits << std::endl;
+    std::cout << "   - Value Units                   : " << value << std::endl;
+    std::cout << "   - Area                          : " << area << std::endl;
+    std::cout << "   - Number of Occupants           : " << occupants.size() << std::endl;
+    std::cout << "-----------------------------------------" << std::endl;
+
 }

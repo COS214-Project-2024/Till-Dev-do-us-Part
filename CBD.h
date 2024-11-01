@@ -1,7 +1,7 @@
 #ifndef CBD_H
 #define CBD_H
 #include "Commercial.h"
-#include "Building.h"
+// #include "Building.h"
 #include "Mall.h"
 class CBD : public Commercial
 {

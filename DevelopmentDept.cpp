@@ -24,9 +24,24 @@ DevelopmentDept::DevelopmentDept(float budget)
     // factories["Warehouse"]= new WarehouseFactory();
 }
 
-bool DevelopmentDept::allocateLand(int landsize)
+DevelopmentDept::~DevelopmentDept()
 {
-    land = landsize;
+    priceList.clear();
+    buildingAreaList.clear();
+
+    for (map<string, BuildingFactory *>::iterator it = factories.begin(); it != factories.end(); it++)
+    {
+        delete (it)->second;
+        (it)->second = nullptr;
+        factories.erase(it->first);
+    }
+    
+    for (vector<Building *>::iterator it = unOccupiedBuildings.begin(); it != unOccupiedBuildings.end(); it++)
+    {
+        delete (*it);
+        (*it) = nullptr;
+        unOccupiedBuildings.erase(it);
+    }
 }
 
 float DevelopmentDept::getPrice(std::string buildingType)
@@ -51,12 +66,15 @@ Building* DevelopmentDept::build(std::string buildingType)
         }
     }
 
-    map<string,BuildingFactory *>::iterator it = factories.find(buildingType);
-    if (it != factories.end())
-    {
-        BuildingFactory *factory = it->second;
-
-        return factory->build();
+    if(land - buildingAreaList[buildingType] > 0){
+        land -= buildingAreaList[buildingType];
+        map<string, BuildingFactory *>::iterator it = factories.find(buildingType);
+        if (it != factories.end())
+        {
+            BuildingFactory *factory = it->second;
+            return factory->build();
+        }
     }
+
     return nullptr;
 }

@@ -7,11 +7,20 @@ CBD::CBD():Commercial("CBD"){
     value = 12000;
 }
 
+CBD::~CBD()
+{
+    delete this->state;
+    state = nullptr;
+    demolish();
+    cout << "Destroyed the CBD\n";
+}
+
 void CBD::loadElectricity(float units){
     
     for (vector<Building*>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         (*it)->loadElectricity(units);
+        electricityUnits += units;
     }
     
 }
@@ -20,41 +29,58 @@ void CBD::loadWater(float units){
     for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         (*it)->loadWater(units);
+        waterUnits += units;
     }
 }
 
 bool CBD::useElectricity(float units){
-    bool usedAll = true;
-    for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    if (this->state->canUseElectricity())
     {
-        if(!(*it)->useElectricity(units)){
-            usedAll = false;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+        {
+            if (!(*it)->useElectricity(units))
+            {
+                usedAll = false;
+            }
+            electricityUnits += (*it)->getElectricity();
         }
-    }
-    if(!usedAll)
-        cout << "Could not use "<< units<< " of electricity in all the buildings\n";
-    else
-        cout << "Used "<< units<<" of electricity in all the buildings\n";
+        if (!usedAll)
+            cout << "Could not use " << units << " of electricity in all the buildings\n";
+        else
+            cout << "Used " << units << " of electricity in all the buildings\n";
 
-    return usedAll;
+        return usedAll;
+    }
+    cout << "The CBD is in the " << this->state->getName() << " and cannot use electricity on any buildings" << endl;
+    return false;
 }
 
 bool CBD::useWater(float units){
-    bool usedAll = true;
-    for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    if (this->state->canUseWater())
     {
-        if (!(*it)->useWater(units))
+        this->waterUnits = 0;
+        bool usedAll = true;
+        for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
         {
-            usedAll = false;
+            if (!(*it)->useWater(units))
+            {
+                usedAll = false;
+            }
+            waterUnits += (*it)->getWater();
         }
+
+        if (!usedAll)
+            cout << "Could not use " << units << " units of water in all the buildings\n";
+        else
+            cout << "Used " << units << " units of water in all the buildings\n";
+
+        return usedAll;
     }
 
-    if(!usedAll)
-        cout << "Could not use " << units << " of water in all the buildings\n";
-    else
-        cout << "Used " << units << " of water in all the buildings\n";
-
-    return usedAll;
+    cout << "The CBD is in the " << this->state->getName() << " and cannot use water on any buildings" << endl;
+    return false;
 }
 
 float CBD::getPrice(){
@@ -69,29 +95,46 @@ void CBD::demolish(){
     cout << "Demolishing all the buildings in the CBD\n";
     for (vector<Building*>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        delete(*it);
+        value -= (*it)->getValue();
+        waterUnits -= (*it)->getWater();
+        electricityUnits -= (*it)->getElectricity();
+        delete (*it);
         (*it) = nullptr;
+        noBuildings--;
     }
 
     cout << "Demolished  all the buildings in the CBD\n";
 }
 
 bool CBD::clean(){
-    bool usedAll = true;
-    for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    if (state->canUseElectricity() && state->canUseWater())
     {
-        if(!(*it)->clean())
+        cleanliness = 0;
+        waterUnits = 0;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
         {
-            usedAll = false;
+            if (!(*it)->clean())
+            {
+                usedAll = false;
+            }
+            cleanliness += (*it)->getCleanliness();
+            waterUnits += (*it)->getWater();
+            electricityUnits += (*it)->getElectricity();
         }
+
+        if (!usedAll)
+            cout << "Could not clean all the buildings\n";
+        else
+            cout << "Cleaned all the buildings\n";
+
+        cleanliness /= buildings.size();
+        return usedAll;
     }
 
-    if (!usedAll)
-        cout << "Could not clean all the buildings\n";
-    else
-        cout << "Cleaned all the buildings\n";
-
-    return usedAll;
+    cout << "The CBD is in the " << this->state->getName() << " and cannot use water or electricity on any buildings" << endl;
+    return false;
 }
 
 bool CBD::addOccupant(Citizen* c){
@@ -107,22 +150,6 @@ bool CBD::addOccupant(Citizen* c){
     }
     
     return false;
-}
-
-Building *CBD::clone()
-{
-    CBD* newCBD = new CBD();
-
-    for(vector<Building* >::iterator it = buildings.begin(); it != buildings.end(); it++){
-        newCBD->addBuilding((Commercial*)(*it)->clone());
-    }
-
-    return newCBD;
-}
-
-CBD::~CBD(){
-    demolish();
-    cout << "Destroyed the CBD\n";
 }
 
 int CBD::getNoBuildings()
@@ -230,15 +257,13 @@ Building *CBD::clone()
 
 float CBD::getCleanliness()
 {
-    int count = 0;
     int accumCleanliness = 0;
     for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
-        accumCleanliness += (*it)->getCleanliness();
-        count++;
+        accumCleanliness += (*it)->getWater();
     }
-    cleanliness = accumCleanliness / count;
-    return accumCleanliness / count;
+    cleanliness = accumCleanliness / buildings.size();
+    return cleanliness;
 }
 
 float CBD::getWater()
@@ -261,11 +286,6 @@ float CBD::getElectricity()
     }
     electricityUnits = accumElec;
     return accumElec;
-}
-
-int CBD::getNoBuildings()
-{
-    return noBuildings;
 }
 
 bool CBD::isOccupied()

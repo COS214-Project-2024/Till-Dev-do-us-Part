@@ -1,10 +1,9 @@
-#ifndef RESIDENTIALBUILDING_H
-#define RESIDENTIALBUILDING_H
+#ifndef RESIDENTIAL_H
+#define RESIDENTIAL_H
 #include "Building.h"
-
+class Citizen;
 class Residential : public Building
 {
-
     public:
         Residential(string type);
         virtual bool addOccupant(Citizen *c)=0;
@@ -16,5 +15,6 @@ class Residential : public Building
         virtual void goToWork()=0;
         virtual Building *clone() = 0;
         virtual bool isOccupied()=0;
+        
 };
 #endif

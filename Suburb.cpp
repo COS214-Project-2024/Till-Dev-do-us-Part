@@ -8,53 +8,20 @@ Suburb::Suburb():Residential("Suburb"){
 }
 
 void Suburb::loadElectricity(float units){
-    
-    for (vector<Residential*>::iterator it = buildings.begin(); it != buildings.end(); it++)
+
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         (*it)->loadElectricity(units);
+        electricityUnits += units;
     }
-    
 }
 
 void Suburb::loadWater(float units){
     for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         (*it)->loadWater(units);
+        waterUnits += units;
     }
-}
-
-bool Suburb::useElectricity(float units){
-    bool usedAll = true;
-    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
-    {
-        if(!(*it)->useElectricity(units)){
-            usedAll = false;
-        }
-    }
-    if(!usedAll)
-        cout << "Could not use "<< units<< " of electricity in all the buildings\n";
-    else
-        cout << "Used "<< units<<" of electricity in all the buildings\n";
-
-    return usedAll;
-}
-
-bool Suburb::useWater(float units){
-    bool usedAll = true;
-    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
-    {
-        if (!(*it)->useWater(units))
-        {
-            usedAll = false;
-        }
-    }
-
-    if(!usedAll)
-        cout << "Could not use " << units << " of water in all the buildings\n";
-    else
-        cout << "Used " << units << " of water in all the buildings\n";
-
-    return usedAll;
 }
 
 float Suburb::getPrice(){
@@ -77,21 +44,34 @@ void Suburb::demolish(){
 }
 
 bool Suburb::clean(){
-    bool usedAll = true;
-    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    if (state->canUseElectricity() && state->canUseWater())
     {
-        if(!(*it)->clean())
+        cleanliness = 0;
+        waterUnits = 0;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
         {
-            usedAll = false;
+            if (!(*it)->clean())
+            {
+                usedAll = false;
+            }
+            cleanliness += (*it)->getCleanliness();
+            waterUnits += (*it)->getWater();
+            electricityUnits += (*it)->getElectricity();
         }
+
+        if (!usedAll)
+            cout << "Could not clean all the buildings\n";
+        else
+            cout << "Cleaned all the buildings\n";
+
+        cleanliness /= buildings.size();
+        return usedAll;
     }
 
-    if (!usedAll)
-        cout << "Could not clean all the buildings\n";
-    else
-        cout << "Cleaned all the buildings\n";
-
-    return usedAll;
+    cout << "The Suburb is in the " << this->state->getName() << " and cannot use water or electricity on any buildings" << endl;
+    return false;
 }
 
 bool Suburb::addOccupant(Citizen* c){
@@ -109,25 +89,9 @@ bool Suburb::addOccupant(Citizen* c){
     return false;
 }
 
-Building *Suburb::clone()
-{
-    Suburb* newSuburb = new Suburb();
-
-    for(vector<Residential* >::iterator it = buildings.begin(); it != buildings.end(); it++){
-        newSuburb->addBuilding((Residential*)(*it)->clone());
-    }
-
-    return newSuburb;
-}
-
 Suburb::~Suburb(){
     demolish();
     cout << "Destroyed the suburb\n";
-}
-
-int Suburb::getNoBuildings()
-{
-    return noBuildings;
 }
 
 bool Suburb::addBuilding(Residential *building)
@@ -213,66 +177,163 @@ bool Suburb::removeOccupant(Citizen *c)
     
 }
 
-bool Suburb::useShower(){
-    bool usedAll = true;
-    for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
-    {
-        if(!(*it)->useShower()){
-            usedAll = false;
+bool Suburb::useElectricity(float units)
+{
+    if(this->state->canUseElectricity()){
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+        {
+            if (!(*it)->useElectricity(units))
+            {
+                usedAll = false;
+            }
+            electricityUnits += (*it)->getElectricity();
         }
+        if (!usedAll)
+            cout << "Could not use " << units << " of electricity in all the buildings\n";
+        else
+            cout << "Used " << units << " of electricity in all the buildings\n";
+
+        return usedAll;
+    }
+    cout << "The Suburb is in the " << this->state->getName() << " and cannot use electricity on any buildings" << endl;
+    return false;
+}
+
+bool Suburb::useWater(float units)
+{
+    if (this->state->canUseWater())
+    {
+        waterUnits = 0;
+        bool usedAll = true;
+        for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+        {
+            if (!(*it)->useWater(units))
+            {
+                usedAll = false;
+            }
+            waterUnits+= (*it)->getWater();
+        }
+
+        if (!usedAll)
+            cout << "Could not use " << units << " units of water in all the buildings\n";
+        else
+            cout << "Used " << units << " units of water in all the buildings\n";
+
+        return usedAll;
     }
 
-    if(usedAll){
-        cout << "Used all Showers in the Suburb\n";
+    cout << "The Suburb is in the " << this->state->getName() << " and cannot use water on any buildings" << endl;
+    return false;
+}
+
+bool Suburb::useShower(){
+    if(state->canUseElectricity() && state->canUseWater()){
+        cleanliness = 0;
+        waterUnits = 0;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+        {
+            if(!(*it)->useShower()){
+                usedAll = false;
+            }
+            cleanliness += (*it)->getCleanliness();
+            waterUnits += (*it)->getWater();
+            electricityUnits += (*it)->getElectricity();
+        }
+
+        cleanliness /= buildings.size();
+
+        if(usedAll){
+            cout << "Used all Showers in the Suburb\n";
+        }
+        else{
+            cout << "Could not used all Showers in the Suburb\n";
+        }
+
+        return usedAll;
     }
-    else{
-        cout << "Could not used all Showers in the Suburb\n";
-    }
-    
+
+    cout << "The Suburb is in the " << this->state->getName() << " and cannot showers on any buildings" << endl;
+    return false;
 }
 
 bool Suburb::useToilet(){
-    bool usedAll = true;
-    for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
-    {
-        if(!(*it)->useToilet()){
-            usedAll = false;
+    if(state->canUseWater() && state->canUseElectricity()){
+        cleanliness = 0;
+        waterUnits = 0;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+        {
+            if(!(*it)->useToilet()){
+                usedAll = false;
+            }
+            cleanliness += (*it)->getCleanliness();
+            waterUnits += (*it)->getWater();
+            electricityUnits += (*it)->getElectricity();
         }
+
+        cleanliness /= buildings.size();
+
+        if(usedAll){
+            cout << "Used all Toilets in the Suburb\n";
+        }
+        else{
+            cout << "Could not used all Toilets in the Suburb\n";
+        }
+        return usedAll;
     }
 
-    if(usedAll){
-        cout << "Used all Toilets in the Suburb\n";
-    }
-    else{
-        cout << "Could not used all Toilets in the Suburb\n";
-    }
-    
+    cout << "The Suburb is in the " << this->state->getName() << " and cannot use toilets on any buildings" << endl;
+    return false;
 }
 
 bool Suburb::useStove(){
-    bool usedAll = true;
-    for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
-    {
-        if(!(*it)->useStove()){
-            usedAll = false;
+    if(this->state->canUseElectricity()){
+        cleanliness = 0;
+        waterUnits = 0;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+        {
+            if(!(*it)->useStove()){
+                usedAll = false;
+            }
+            cleanliness += (*it)->getCleanliness();
+            waterUnits += (*it)->getWater();
+            electricityUnits += (*it)->getElectricity();
         }
+        cleanliness /= buildings.size();
+
+        if(usedAll){
+            cout << "Used all Stoves in the Suburb\n";
+        }
+        else{
+            cout << "Could not used all Stoves in the Suburb\n";
+        }
+        return usedAll;
     }
 
-    if(usedAll){
-        cout << "Used all Stoves in the Suburb\n";
-    }
-    else{
-        cout << "Could not used all Stoves in the Suburb\n";
-    }
-    
+    cout << "The Suburb is in the " << this->state->getName() << " and cannot use stoves on any buildings" << endl;
+    return false;
 }
 
 void Suburb::goToWork(){
+    cleanliness = 0;
+    waterUnits = 0;
+    electricityUnits = 0;
     for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
     {
         (*it)->goToWork();
+        cleanliness += (*it)->getCleanliness();
+        waterUnits += (*it)->getWater();
+        electricityUnits += (*it)->getElectricity();
     }
 
+    cleanliness/= buildings.size();
     cout << "Took all citizens in the Suburb to work\n";    
 }
 
@@ -306,14 +367,13 @@ Building *Suburb::clone()
 
 float Suburb::getCleanliness()
 {
-    int count = 0;
     int accumCleanliness = 0;
     for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
-        accumCleanliness += (*it)->getCleanliness();
-        count++;
+        accumCleanliness += (*it)->getWater();
     }
-    return accumCleanliness / count;
+    cleanliness = accumCleanliness / buildings.size();
+    return cleanliness;
 }
 
 float Suburb::getWater()
@@ -323,6 +383,7 @@ float Suburb::getWater()
     {
         accumWater += (*it)->getWater();
     }
+    waterUnits = accumWater;
     return accumWater;
 }
 
@@ -333,6 +394,7 @@ float Suburb::getElectricity()
     {
         accumElec += (*it)->getElectricity();
     }
+    electricityUnits = accumElec;
     return accumElec;
 }
 

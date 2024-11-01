@@ -7,8 +7,5 @@ ShopFactory:: ShopFactory()
 
 Building* ShopFactory:: build()
 {
-    if (building!=nullptr){
-        return building-> clone();
-
-    }
+    return building-> clone();
 }

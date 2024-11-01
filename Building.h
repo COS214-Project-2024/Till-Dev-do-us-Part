@@ -5,13 +5,13 @@
 #include "ConstructionState.h"
 #include "CompleteState.h"
 #include "DilapidatedState.h"
-#include "Citizen.h"
+// #include "Citizen.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
 using namespace std;
 
-
+class Citizen;
 class Building
 {
     protected:

@@ -11,8 +11,7 @@ Building::Building(string type)
 
 Building::~Building()
 {
-    delete this->state;
-    state = nullptr;
+    
 }
 
 void Building::loadElectricity(float units)

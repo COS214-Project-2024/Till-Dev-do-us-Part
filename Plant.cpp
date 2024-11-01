@@ -6,6 +6,8 @@ Plant::Plant():Industrial("Plant"){
 
 Plant::~Plant()
 {
+    delete this->state;
+    state = nullptr;
     demolish();
     cout << "Plant demolished" << endl;
 }
@@ -77,7 +79,7 @@ void Plant::demolish()
         buildings[i] = nullptr;
     }
     buildings.clear();
-    cout << "All buildings in the plant cleared" << endl;
+    cout << "Demolished all buildings in the Plant" << endl;
 }
 
 bool Plant::clean()

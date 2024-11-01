@@ -6,6 +6,8 @@ CulturalCenter::CulturalCenter() : Landmark("CulturalCenter")
 
 CulturalCenter::~CulturalCenter()
 {
+    delete this->state;
+    state = nullptr;
     demolish();
     cout << "Cultural Center demolished!" << endl;
 }

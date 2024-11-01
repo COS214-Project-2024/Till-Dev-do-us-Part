@@ -8,6 +8,8 @@ Shop::Shop():Commercial("Shop"){
 }
 
 Shop::~Shop(){
+    delete this->state;
+    state = nullptr;
     demolish();
     cout << "Shop demolished!" << endl;
 }

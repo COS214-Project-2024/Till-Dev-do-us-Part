@@ -5,6 +5,14 @@ Warehouse::Warehouse() : Industrial("Warehouse")
     cout << "Warehouse created!"  << endl;
 }
 
+Warehouse::~Warehouse()
+{
+    delete this->state;
+    state = nullptr;
+    demolish();
+    cout << "Warehouse demolished!" << endl;
+}
+
 bool Warehouse::addOccupant(Citizen *c)
 {
     if (c != nullptr && occupants.size() < capacity)
@@ -78,9 +86,4 @@ bool Warehouse::removeOccupant(Citizen *c)
 bool Warehouse::isOccupied()
 {
     return occupants.size() > 0;
-}
-
-Warehouse::~Warehouse(){
-    demolish();
-    cout << "Warehouse demolished!" << endl;
 }

@@ -5,6 +5,14 @@ Factory::Factory() : Industrial("Factory")
     cout << "Factory created" << endl;
 }
 
+Factory::~Factory()
+{
+    delete this->state;
+    state = nullptr;
+    demolish();
+    cout << "Factory demolished!" << endl;
+}
+
 bool Factory::addOccupant(Citizen *c)
 {
     if (c != nullptr && occupants.size() < capacity)
@@ -71,11 +79,6 @@ bool Factory::removeOccupant(Citizen *c)
 
     cout << "Occupant not in the Factory" << endl;
     return false;
-}
-
-Factory::~Factory(){
-    demolish();
-    cout << "Factory demolished!" << endl;
 }
 
 bool Factory::isOccupied()

@@ -17,5 +17,6 @@ class Hospital :public Public
         virtual bool clean();
         virtual bool removeOccupant(Citizen *c);
         virtual Building *clone();
+        virtual bool isOccupied();
 };
 #endif

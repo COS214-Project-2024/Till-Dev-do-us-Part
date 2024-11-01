@@ -29,7 +29,7 @@ class DevelopmentDept : public Department
 
     public : 
         DevelopmentDept(float budget);
-        bool allocateLand(int Landsize);
+        ~DevelopmentDept();
         float getPrice(std::string buildingType);
         void addFactory(const std::string buildingType, BuildingFactory *factory);
         Building *build(std::string buildingType);

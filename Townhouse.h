@@ -19,5 +19,6 @@ class Townhouse : public Residential
         bool removeOccupant(Citizen *c);
         virtual void goToWork();
         virtual bool isOccupied();
+        virtual void display();
 };
 #endif

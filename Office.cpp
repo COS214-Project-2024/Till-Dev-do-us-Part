@@ -8,6 +8,8 @@ Office::Office():Commercial("Office"){
 }
 
 Office::~Office(){
+    delete this->state;
+    state = nullptr;
     demolish();
     cout << "Office demolished!" << endl;
 }

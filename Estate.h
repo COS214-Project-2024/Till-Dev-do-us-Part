@@ -1,6 +1,8 @@
 #ifndef ESTATE_H
 #define ESTATE_H
 #include "Residential.h"
+#include "Building.h"
+
 
 class Estate : public Residential
 {

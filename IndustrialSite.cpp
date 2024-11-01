@@ -12,6 +12,7 @@ void IndustrialSite::loadElectricity(float units){
     for (vector<Industrial*>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         (*it)->loadElectricity(units);
+        electricityUnits+= units;
     }
     
 }
@@ -20,41 +21,59 @@ void IndustrialSite::loadWater(float units){
     for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         (*it)->loadWater(units);
+        waterUnits += units;
     }
 }
 
 bool IndustrialSite::useElectricity(float units){
-    bool usedAll = true;
-    for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    if (this->state->canUseElectricity())
     {
-        if(!(*it)->useElectricity(units)){
-            usedAll = false;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+        {
+            if (!(*it)->useElectricity(units))
+            {
+                usedAll = false;
+            }
+            electricityUnits+=(*it)->getElectricity();
         }
-    }
-    if(!usedAll)
-        cout << "Could not use "<< units<< " of electricity in all the buildings\n";
-    else
-        cout << "Used "<< units<<" of electricity in all the buildings\n";
 
-    return usedAll;
+        if (!usedAll)
+            cout << "Could not use " << units << " of electricity in all the buildings\n";
+        else
+            cout << "Used " << units << " of electricity in all the buildings\n";
+
+        return usedAll;
+    }
+    cout << "The Industrial Site is in the " << this->state->getName() << " and cannot use electricity on any buildings" << endl;
+    return false;
 }
 
 bool IndustrialSite::useWater(float units){
-    bool usedAll = true;
-    for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    if (this->state->canUseWater())
     {
-        if (!(*it)->useWater(units))
+        this->waterUnits = 0;
+        bool usedAll = true;
+        for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
         {
-            usedAll = false;
+            if (!(*it)->useWater(units))
+            {
+                usedAll = false;
+            }
+            waterUnits += (*it)->getWater();
         }
+
+        if (!usedAll)
+            cout << "Could not use " << units << " units of water in all the buildings\n";
+        else
+            cout << "Used " << units << " units of water in all the buildings\n";
+
+        return usedAll;
     }
 
-    if(!usedAll)
-        cout << "Could not use " << units << " of water in all the buildings\n";
-    else
-        cout << "Used " << units << " of water in all the buildings\n";
-
-    return usedAll;
+    cout << "The Industrial Site is in the " << this->state->getName() << " and cannot use water on any buildings" << endl;
+    return false;
 }
 
 float IndustrialSite::getPrice(){
@@ -69,29 +88,46 @@ void IndustrialSite::demolish(){
     cout << "Demolishing all the buildings in the IndustrialSite\n";
     for (vector<Industrial*>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
+        value-= (*it)->getValue();
+        waterUnits-= (*it)->getWater();
+        electricityUnits-= (*it)->getElectricity();
         delete(*it);
         (*it) = nullptr;
+        noBuildings --;
     }
 
     cout << "Demolished  all the buildings in the IndustrialSite\n";
 }
 
 bool IndustrialSite::clean(){
-    bool usedAll = true;
-    for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    if (state->canUseElectricity() && state->canUseWater())
     {
-        if(!(*it)->clean())
+        cleanliness = 0;
+        waterUnits = 0;
+        electricityUnits = 0;
+        bool usedAll = true;
+        for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
         {
-            usedAll = false;
+            if (!(*it)->clean())
+            {
+                usedAll = false;
+            }
+            cleanliness += (*it)->getCleanliness();
+            waterUnits += (*it)->getWater();
+            electricityUnits += (*it)->getElectricity();
         }
+
+        if (!usedAll)
+            cout << "Could not clean all the buildings\n";
+        else
+            cout << "Cleaned all the buildings\n";
+
+        cleanliness /= buildings.size();
+        return usedAll;
     }
 
-    if (!usedAll)
-        cout << "Could not clean all the buildings\n";
-    else
-        cout << "Cleaned all the buildings\n";
-
-    return usedAll;
+    cout << "The Suburb is in the " << this->state->getName() << " and cannot use water or electricity on any buildings" << endl;
+    return false;
 }
 
 bool IndustrialSite::addOccupant(Citizen* c){
@@ -109,25 +145,9 @@ bool IndustrialSite::addOccupant(Citizen* c){
     return false;
 }
 
-Building *IndustrialSite::clone()
-{
-    IndustrialSite* newIndustrialSite = new IndustrialSite();
-
-    for(vector<Industrial* >::iterator it = buildings.begin(); it != buildings.end(); it++){
-        newIndustrialSite->addBuilding((Industrial*)(*it)->clone());
-    }
-
-    return newIndustrialSite;
-}
-
 IndustrialSite::~IndustrialSite(){
     demolish();
     cout << "Destroyed the IndustrialSite\n";
-}
-
-int IndustrialSite::getNoBuildings()
-{
-    return noBuildings;
 }
 
 bool IndustrialSite::addBuilding(Industrial *building)
@@ -215,29 +235,28 @@ bool IndustrialSite::removeOccupant(Citizen *c)
 Building *IndustrialSite::clone()
 {
     IndustrialSite *newBuilding = new IndustrialSite();
-    newBuilding->cleanliness = this->getCleanliness();
-    newBuilding->electricityUnits = this->getElectricity();
-    newBuilding->waterUnits = this->getWater();
+    
     newBuilding->area = this->area;
     newBuilding->capacity = this->capacity;
     for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         newBuilding->addBuilding((Industrial *)(*it)->clone());
     }
+    newBuilding->cleanliness = this->getCleanliness();
+    newBuilding->electricityUnits = this->getElectricity();
+    newBuilding->waterUnits = this->getWater();
     newBuilding->state = this->state->clone();
     return newBuilding;
 }
 
 float IndustrialSite::getCleanliness()
 {
-    int count = 0;
     int accumCleanliness = 0;
     for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); ++it)
     {
-        accumCleanliness += (*it)->getCleanliness();
-        count++;
+        accumCleanliness += (*it)->getWater();
     }
-    cleanliness = accumCleanliness;
+    cleanliness = accumCleanliness / buildings.size();
     return cleanliness;
 }
 
@@ -249,7 +268,7 @@ float IndustrialSite::getWater()
         accumWater += (*it)->getWater();
     }
     waterUnits = accumWater;
-    return waterUnits;
+    return accumWater;
 }
 
 float IndustrialSite::getElectricity()
@@ -260,7 +279,7 @@ float IndustrialSite::getElectricity()
         accumElec += (*it)->getElectricity();
     }
     electricityUnits = accumElec;
-    return electricityUnits;
+    return accumElec;
 }
 
 int IndustrialSite::getNoBuildings()

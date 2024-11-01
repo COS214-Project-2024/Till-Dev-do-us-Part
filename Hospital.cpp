@@ -5,7 +5,10 @@ Hospital::Hospital():Public("Hospital"){
 }
 
 Hospital::~Hospital(){
+    delete this->state;
+    state = nullptr;
     demolish();
+    cout << "Hospital demolished" << endl;
 }
 
 bool Hospital::addOccupant(Citizen *c){
@@ -77,4 +80,8 @@ Building *Hospital::clone()
     newHospital->capacity = this->capacity;
 
     return newHospital;
+}
+
+bool Hospital::isOccupied(){
+    return patients.size() > 0;
 }

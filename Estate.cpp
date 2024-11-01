@@ -9,6 +9,8 @@ Estate::Estate():Residential("Estate"){
 
 Estate::~Estate()
 {
+    delete this->state;
+    state = nullptr;
     demolish();
     cout << "Estate demolished" << endl;
 }

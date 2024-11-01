@@ -17,7 +17,25 @@
 #include "WiseBucks.h"
 
 #include <iostream>
-using namespace std; 
+using namespace std;
+
+// Building includes===Building includes===Building includes===Building includes===Building includes===Building includes===
+    #include "Suburb.h"
+    #include "House.h"
+    #include "Townhouse.h"
+    #include "Estate.h"
+    #include "CBD.h"
+    #include "Office.h"
+    #include "Shop.h"
+    #include "Mall.h"
+    #include "IndustrialSite.h"
+    #include "Factory.h"
+    #include "Warehouse.h"
+    #include "Plant.h"
+    #include "CulturalCenter.h"
+    #include "Monument.h"
+    #include "Park.h"
+// Building includes===Building includes===Building includes===Building includes===Building includes===Building includes===
 
 int main()
 {
@@ -154,6 +172,18 @@ int main()
         delete taxes[i];
         taxes[i] = nullptr; 
     }
+
+
+
+
+
+
+
+
+    cout << "\033[1;34m====Testing Buildings====Testing Buildings====Testing Buildings====Testing Buildings==\033[0m\n";
+
+    House *h = new House();
+    h->display();
 
     return 0; 
 }
