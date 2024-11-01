@@ -30,8 +30,7 @@ public:
     int getWorkers() const;
     std::string getStatus() const;
     Resources * getResource() const;
-    virtual void startProduction();
-    virtual void startService();
+   
 
 };
 
