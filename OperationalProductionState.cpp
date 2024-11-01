@@ -5,14 +5,22 @@ void OperationalProductionState::handleProduction(ProductionUtility *utility)
 {
     // Calculate maximum possible production based on resources and workers
     float resourceFactor = utility->getResource()->getCurrentAmount() / utility->getResource()->getInitialAmount();
-    float workerEfficiency = utility->getWorkers() * 0.1; // Assume each worker contributes 10% to efficiency
-    float capacity = utility->getProductionCapacity();
-    float yield = capacity * resourceFactor * workerEfficiency; // Final yield based on resource and worker efficiency
+    float workerEfficiency = 100; // Assume 100% efficiency for simplification, or set as needed
 
+    float capacity = utility->getProductionCapacity();
+    float yield = capacity * resourceFactor * (workerEfficiency / 100.0f); // Adjusted yield calculation
+
+    // Cap yield to the maximum production capacity
+    if (yield > capacity) {
+        yield = capacity;
+    }
+
+    // Set the current production to the capped yield value
     utility->setCurrentProduction(yield);
+    
 
     std::cout << utility->getName() << " is in Operational State. "
-              << "Producing at full capacity: " << yield << " units based on resources and worker efficiency.\n";
+              << "Producing at capacity: " << yield << " units based on resources and worker efficiency.\n";
 
     // Consume resources based on the yield
     float resourceConsumption = yield * 0.05; // Assume 5% of yield is the resource consumption rate

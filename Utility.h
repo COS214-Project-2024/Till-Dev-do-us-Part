@@ -26,12 +26,11 @@ public:
     void notifyResourceDept(const std::string &message);
 
     // Getters and setters
-    std::string getName() const;
+    virtual std::string getName() const;
     int getWorkers() const;
-    std::string getStatus() const;
-    Resources * getResource() const;
-   
-
+    virtual void getStatus() const;
+    Resources *getResource() const;
+    
 };
 
 #endif // UTILITY_H
