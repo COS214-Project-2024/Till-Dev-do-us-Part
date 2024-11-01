@@ -7,11 +7,25 @@ Government::Government() {
 }
 
 Memento* Government::createMemento() {
-    return new Memento();
+     memento = new Memento();
+    std::vector<Policy*> policiesCopy;
+    for (Policy* policy : policies) {
+        policiesCopy.push_back(new Policy(*policy));
+    }
+    memento->setActivePolicies(policiesCopy);
+    return memento;
 }
 
 void Government::setMemento(Memento* memento) {
-    this->memento = memento;
+        for (Policy* policy : policies) {
+        delete policy;
+    }
+    policies.clear();
+
+    std::vector<Policy*> restoredPolicies = memento->getActivePolicies();
+    for (Policy* policy : restoredPolicies) {
+        policies.push_back(new Policy(*policy));
+    }
 }
 
 Government* Government::getInstance() {
@@ -37,7 +51,7 @@ void Government::revertPolicy(std::string name) {
    
     for (auto it = policies.begin(); it != policies.end(); ) {
         if ((*it)->getName() == name) {
-            delete *it;////yes?
+            //delete *it;////yes?
             it = policies.erase(it);  
         } else {
             ++it;  
@@ -58,6 +72,11 @@ void Government::removeDepartment(std::string name)
     } 
 
 }
+std::vector<Policy*> Government::getPolicies()
+{
+    return policies;
+}
+
 
 
 

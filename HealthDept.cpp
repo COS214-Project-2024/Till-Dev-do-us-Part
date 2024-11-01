@@ -4,6 +4,7 @@
 HealthDept:: HealthDept(float budget)
 {
     this->budget=budget;
+    
 }
 void HealthDept::addFacility(std:: string name,HealthcareFacility* facility)
 {
@@ -31,13 +32,13 @@ void HealthDept::admitPatient(Citizen* c)
 }
 void HealthDept:: totalDeaths()
 {
-    int totaldeaths;
+    int totaldeaths=0;
     for(auto& facilityPair:facilities)
     {
         HealthcareFacility* facility = facilityPair.second;
         totaldeaths+=facility->getDeathToll();
     }
-    std::cout<<"The Health Department has reported a total deathtoll of "<<totaldeaths<<"int 2024\n\n";
+    std::cout<<"The Health Department has reported a total deathtoll of "<<totaldeaths<<" in 2024\n\n";
 }
 HealthDept::~HealthDept() {
     for (auto& facilityPair : facilities) {

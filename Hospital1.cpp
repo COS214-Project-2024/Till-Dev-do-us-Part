@@ -7,6 +7,7 @@
 Hospital1::Hospital1() 
 {
     successor=nullptr;
+    deathtoll=0;
 }
 
 void Hospital1::admitPatient(Citizen* c) {///take in citizen

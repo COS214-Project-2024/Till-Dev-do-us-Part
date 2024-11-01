@@ -6,8 +6,8 @@
 
 HealthcareFacility:: HealthcareFacility() 
 {
-   
     successor=nullptr;
+    deathtoll=0;
 }
 
 void HealthcareFacility:: addSuccessor(HealthcareFacility* s)
@@ -20,14 +20,16 @@ void HealthcareFacility:: addSuccessor(HealthcareFacility* s)
 void HealthcareFacility::treatPatient(Citizen* c)
 {
     int outcome=generateRandomValue();
-    if(outcome==1 || outcome==2)
+    if(outcome==1 || outcome==2)///////fix
     {
         dischargePatient(c);
     }
     else
     {
-        delete c;/// o sure?????????
+        std::cout<<"Citizen died,RIP\n";
         deathtoll++;
+        c=nullptr;/// o sure?????????
+        
 
     }
     
