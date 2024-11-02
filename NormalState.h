@@ -3,12 +3,14 @@
 #define NORMAL_STATE_H
 
 #include "TransState.h"
+#include "CongestedState.h"
+#include "EmptyState.h"
 
 class NormalState : public TransState {
 public:
-    NormalState();
+    NormalState(TransportFacilities*f);
     void handleState() override;
-    void changeState(TransState newState);
+    void changeState();
 };
 
 #endif // NORMAL_STATE_H

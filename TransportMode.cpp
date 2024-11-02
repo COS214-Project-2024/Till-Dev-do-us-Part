@@ -2,24 +2,10 @@
 #include "CitizenObserver.h"
 #include <algorithm>
 
-// TransportFacilities* TransportMode:: GetFacility(){
-//     return this->facility;
-// }
-
-// TransportMode* TransportMode:: GetMode(){
-//     return this->mode;
-
-// }
 
 void TransportMode::changed(const std::string& state){
     this->state = state;
-
-    if(state=="safe"){
-        std::cout<<"Safe travel";
-        depart();
-    }
-    else{
-        mediator->notify(this);
+    mediator->notify(this);
 }
 
 void TransportMode::divertingRoute(){
@@ -33,34 +19,57 @@ void TransportMode::divertingRoute(){
     }
 }
 
+TransportationIterator* TransportMode::createQIterator()
+{
+    return new QueueIterator(this);
+}
+
+
+TransportationIterator* TransportMode::createSIterator()
+{
+    return new StackIterator(this);
+}
+
+
+void TransportMode::travel()
+{
+    // Define possible states
+        std::vector<std::string> states = {"accident", "bad weather", "traffic","safe"};
+
+    // Shuffle states
+    std::random_device rd;
+        std::mt19937 gen(rd());
+        std::shuffle(states.begin(), states.end(), gen);
+
+        // Pick the first state in the shuffled list
+       state = states.front();
+       changed(state);
+    
+}
+
 
 void TransportMode::SetFacilities(TransportFacilities* facility)
 {
     this->facility=facility;
     facility->add(this);
 }
-
-
-// Mediator
-void TransportMode::AttachMediator(ConcreteTransportationMediator* newMediator){
-    this->mediator= mediator;
-    this->mediator->registerMode(this);
-}
-
-void TransportMode::addObserver(CitizenObserver* observer) {
-    observers.push_back(observer);
-}
-
-void TransportMode::removeObserver(CitizenObserver* observer) {
-    observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
-}
-
-void TransportMode::notifyObservers(const std::string& message) {
-    for (CitizenObserver* observer : observers) {
-        observer->update(message);
-    }
-}
 std::list<TransportStation*> TransportMode:: getStops()
 {
     return stops;
 }
+
+ void TransportMode::SetMediator(ConcreteTransportationMediator* mediator)
+ {
+    this->mediator=mediator;
+ }
+
+ void TransportMode:: addStop(TransportStation* stop)
+ {
+    stops.push_back(stop);
+ }
+
+TransportFacilities* TransportMode::GetFacility()
+{
+    return this->facility;
+}
+

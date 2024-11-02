@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "C_Cpp.errorSquiggles": "enabled",
   "files.associations": {
+    "*.embeddedhtml": "html",
     "array": "cpp",
     "atomic": "cpp",
     "bit": "cpp",
@@ -104,6 +105,9 @@
     "streambuf": "cpp",
     "typeinfo": "cpp",
     "ctime": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "fstream": "cpp",
+    "iomanip": "cpp",
+    "sstream": "cpp"
   }
 }

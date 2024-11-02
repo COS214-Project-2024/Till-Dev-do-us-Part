@@ -11,14 +11,13 @@ class NormalState;
 class EmptyState;
 
 class CongestedState : public TransState {
-private:
-    TransportFacilities* stateFacility;
 public:
-    CongestedState();
+    CongestedState(TransportFacilities* f);
     void handleState();
     void changeState();
-    std:: string getStateName();
+
 
 };
 
 #endif // CONGESTED_STATE_H
+
