@@ -12,6 +12,7 @@ TrainMode::TrainMode() {
 
 void TrainMode::drive(){
     facility->add(this);
+    travel();
     QueueIterator it(this);
     int x=1;
     while (it.hasNext())
@@ -40,7 +41,7 @@ void TrainMode::SendMessage(const std::string& state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying trips and Notifying other vehicles.\n";
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();   
+            GetFacility()->getState()->changeState();  
         }
 
     }
@@ -57,7 +58,7 @@ void TrainMode::SendMessage(const std::string& state){
         std::cout << this->getName()<< ": Responding to air traffic. Delaying trips and Notifying other vehicles.\n";
 
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();  
+            GetFacility()->getState()->changeState();  
         }
     }
 

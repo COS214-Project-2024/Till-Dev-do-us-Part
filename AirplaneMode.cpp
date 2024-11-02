@@ -24,7 +24,7 @@ void AirplaneMode::SendMessage(const std::string& state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();
+            GetFacility()->getState()->changeState();
 
             
         }
@@ -43,7 +43,7 @@ void AirplaneMode::SendMessage(const std::string& state){
         std::cout << this->getName()<< ": Responding to air traffic. Delaying flights and Notifying other planes.\n";
 
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();
+            GetFacility()->getState()->changeState();
 
             
         }

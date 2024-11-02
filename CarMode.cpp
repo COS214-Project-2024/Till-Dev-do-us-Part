@@ -5,13 +5,13 @@
 #include "ModeFactory.h"
 
 void CarMode::drive(){
-    road->add(this);
+    facility->add(this);
     std::cout<<"Car starts driving"<<std::endl;
     travel();
 }
 
 void CarMode::stopDrive(){
-    road->remove(this);
+    facility->remove(this);
     std::cout<<"Car stops driving"<<std::endl;
 }
 
@@ -19,7 +19,7 @@ void CarMode::SendMessage(const std::string& state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();
+            GetFacility()->getState()->changeState();
 
             
         }
@@ -38,8 +38,7 @@ void CarMode::SendMessage(const std::string& state){
         std::cout << this->getName()<< ": Responding to air traffic. Delaying flights and Notifying other planes.\n";
 
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();
-
+            GetFacility()->getState()->changeState();
             
         }
     }

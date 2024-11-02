@@ -13,6 +13,7 @@ BusMode:: BusMode()
 void BusMode::drive(){
     facility->add(this);
     QueueIterator it(this);
+    travel();
     int x=1;
     while (it.hasNext())
     {
@@ -37,7 +38,7 @@ void BusMode::SendMessage(const std::string& state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying trips and Notifying other vehicles.\n";
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();   
+            GetFacility()->getState()->changeState();   
         }
 
     }
@@ -54,7 +55,7 @@ void BusMode::SendMessage(const std::string& state){
         std::cout << this->getName()<< ": Responding to air traffic. Delaying trips and Notifying other vehicles.\n";
 
         if(GetFacility()->getModeCount()>10){
-            GetFacility()->changeState();  
+            GetFacility()->getState()->changeState();  
         }
     }
 
