@@ -13,7 +13,6 @@ public:
     void handlePassengers() override;
     void manageFreight() override;
     void maintain() override;
-    void addTrain(TransportMode* train);
-    //void removeTrain(TransportMode* train);
+    
 
 };

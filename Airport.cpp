@@ -6,48 +6,41 @@
 #include <iostream>
 #include <algorithm>
 
-Airport::Airport(){
-    std::cout << "Building Airport." << std::endl;
+
+void Airport::decreaseTraffic(Airport* airport2){
+    // reset the the pointer for the plane to a new airport and erase the plane from the vector
+    int elementsToDelete = 6; 
+    for(int i=0; i< elementsToDelete && !planes.empty(); i++){
+        planes[i]->divertingRoute();
+        --i;
+    }
+    
+
+
+    // if(mediator->getAirportModes()>10){
+    //         int elementsToDelete = 5;
+    //         for(int i=0; i<elementsToDelete && !airportModes.empty(); i++){
+    //             // delete airportModes[i]; // Free memory
+    //     airportModes.erase(airportModes.begin() + i); // Remove element from vector
+    //     --i; //Adjust index after erase to account for shifting elements
+
+    //         } 
+    // }
 }
 
-Airport::Airport(TransState* state) : TransportFacilities(state) {}
+Airport::Airport(){
+    std::cout << "Building Airport." << std::endl;
+    currentState= new EmptyState();
+}
+
+// Airport::Airport(TransState* state) : TransportFacilities(state) {}
 
 Airport::~Airport() {
     delete currentState;
+    planes.clear();
 }
 
-void Airport::addPlane(TransportMode* plane) {
-    planes.push_back(plane);
-    changeState();  // Reevaluate state whenever a plane is added
-}
 
-void Airport::removePlane(TransportMode* plane) {
-    auto it = std::find(planes.begin(), planes.end(), plane);
-    if (it != planes.end()) {
-        planes.erase(it);
-        changeState();  // Reevaluate state whenever a plane is removed
-    }
-}
-
-void Airport::changeState() {
-    if (getPlaneCount() == 0) {
-        setState(new EmptyState());
-    } else if (getPlaneCount() > 3) {
-        setState(new CongestedState());
-    } else {
-        setState(new NormalState());
-    }
-    currentState->handleState(this);  // Call handleState based on the current state
-}
-
-void Airport::setState(TransState* newState) {
-    if (currentState) delete currentState;
-    currentState = newState;
-}
-
-int Airport::getPlaneCount() {
-    return planes.size();
-}
 
 void Airport::maintain() {
     std::cout << "Performing Airport maintenance" << std::endl;
@@ -59,7 +52,4 @@ void Airport::maintain() {
     std::cout << "Testing emergency systems" << std::endl;
 }
 
-void Airport::useTransport() {
-    std::cout << "Airport in use by airplanes." << std::endl;
-}
-
+    

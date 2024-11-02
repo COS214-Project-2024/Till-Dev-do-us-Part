@@ -6,7 +6,8 @@
 
 class NormalState : public TransState {
 public:
-    void handleState(TransportFacilities* facility) override;
+    NormalState();
+    void handleState() override;
     void changeState(TransState newState);
 };
 

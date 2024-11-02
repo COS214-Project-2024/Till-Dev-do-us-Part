@@ -23,13 +23,13 @@ private:
 
 public:
     TrainMode();
-    TrainMode(Railway* railway, const std::string& name, double speed, double capacity);
-    void operateStation() override;
-    void useTransport() override;
+    // TrainMode(Railway* railway, const std::string& name, double speed, double capacity);
+    // void operateStation() override;
+    // void useTransport() override;
      ~TrainMode(); // Destructor to handle removal from railway
 
     //Mediator 
-    TrainMode(TransportationMediator* mediator, TransportFacilities* facility);
+    // TrainMode(TransportationMediator* mediator, TransportFacilities* facility);
 
     std::string getName() const override;
     void alertAccident() override;
@@ -37,7 +37,7 @@ public:
     void set(const std::string& state) override;
     void changed(const std::string& state) override;
 
-    TransportFacilities* getFacility() const override;
+    // TransportFacilities* getFacility() const override;
     bool isRoadMode() const override;
     bool isRailwayMode() const override;
     bool isAirportMode() const override;

@@ -5,37 +5,36 @@
 #include "Airport.h"
 #include "TransState.h"
 #include "ModeFactory.h"
+#include "ConcreteTransportationMediator.h"
+#include <algorithm>
+
 
 class TransportFacilities;
 class TransportationMediator;
+class ConcreteTransportationMediator;
 
 class AirplaneMode: public TransportMode {
 private:
     Airport* airport;
     TransportFacilities* facility;
-    std::string schedule; //observer
+    std::string state;
+    TransportMode* mode;
+    // std::string schedule; //observer
 
 public:
     AirplaneMode();
-    void operateStation() override;
-    void useTransport() override;
     void depart();
     void arrive();
-    void setAirport(Airport* airport);
+    void SetFacilities(Airport* airport);
 
     //Mediator
-    AirplaneMode(TransportationMediator* mediator, TransportFacilities* facility);
-
+    // AirplaneMode(TransportationMediator* mediator, TransportFacilities* facility);
+    void SendMessage(const std::string& state);
+    std::string GetMessage();
     std::string getName() const override;
-    void alertAccident() override;
-    void manageTraffic(const std::string& state) override;
-    void set(const std::string& state) override;
     void changed(const std::string& state) override;
-
-    TransportFacilities* getFacility() const override;
-    bool isRoadMode() const override;
-    bool isRailwayMode() const override;
-    bool isAirportMode() const override;
+    void travel() override;
+    TransportFacilities* GetFacility();
 
     // Iterator???
 

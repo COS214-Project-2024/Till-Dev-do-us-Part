@@ -2,89 +2,104 @@
 #include <string>
 #include <iostream>
 
-
-
-// // AirplaneMode implementation
-// void AirplaneMode::useTransport() {
-//     // Check flight conditions
-//     if (state->getState() == "Congested") {
-//         std::cout << "Flight delayed due to congestion" << std::endl;
-//         return;
-//     }
-
-//     // Process passenger boarding
-//     for (auto& passenger : passengers) {
-//         std::cout << "Airplane boarding passenger" << std::endl;
-//         passenger->update("Now boarding flight");
-//     }
-
-//     // Update flight schedule and notify
-//     notifySchedule();
-//     mediator->notify(this, state);
-// }
-
-AirplaneMode::AirplaneMode(TransportationMediator* mediator, TransportFacilities* facility)
-    : TransportMode(mediator), facility(facility) {}
-
-
-void AirplaneMode::alertAccident() {
-    std::cout << "AirplaneMode: Accident reported at the airport. Notifying other planes.\n";
-    mediator->notify(this, "accident");
+TransportFacilities* AirplaneMode:: GetFacility(){
+     return this->airport;
 }
 
-void AirplaneMode::manageTraffic(const std::string& state) {
+void AirplaneMode::depart(){
+    airport->remove(this);
+    std::cout<<"Airplane is departing"<<std::endl;
+    // GetFacility()->changeState();
+}
+void AirplaneMode::arrive(){
+    airport->add(this);
+    
+    // GetFacility()->changeState();
+    travel();
+
+}
+
+void AirplaneMode::travel()
+{
+    // Define possible states
+        std::vector<std::string> states = {"accident", "bad weather", "traffic","safe"};
+
+    // Shuffle states
+    std::random_device rd;
+        std::mt19937 gen(rd());
+        std::shuffle(states.begin(), states.end(), gen);
+
+        // Pick the first state in the shuffled list
+       state = states.front();
+       changed(state);
+    
+}
+void AirplaneMode::SetFacilities(Airport* airport){
+    this->airport=airport;
+    
+}
+
+void AirplaneMode::SendMessage(const std::string& state){
     if (state == "accident") {
-        std::cout << "AirplaneMode: Responding to accident. Delaying flights.\n";
+        std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();
+
+            
+        }
+
     }
-    // Additional traffic management logic specific to trains
+
+    if(state=="safe"){
+        std::cout<<"Safe travel";
+    }
+
+    if (state == "bad weather") {
+        std::cout << this->getName()<< ": Responding to bad weather. Delaying flights and Notifying other planes.\n";
+    }
+
+    if (state == "traffic") {
+        std::cout << this->getName()<< ": Responding to air traffic. Delaying flights and Notifying other planes.\n";
+
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();
+
+            
+        }
+        // GetFacility()->changeState();
+    }
+
+}
+    
+std::string AirplaneMode::GetMessage(){
+return state;
 }
 
-void AirplaneMode::set(const std::string& state) {
-    manageTraffic(state);
-}
 
 void AirplaneMode::changed(const std::string& state) {
-    mediator->notify(this, state);
+    this->state = state;
+    mediator->notify(this);
+    
 }
+    
 
 std::string AirplaneMode:: getName() const {
      return "AirplaneMode"; }
 
-TransportFacilities* AirplaneMode:: getFacility() const { 
-    return facility; }
-
-bool AirplaneMode:: isRoadMode() const{
-    return false; }
-
-bool AirplaneMode::isRailwayMode() const { 
-    return false; }
-
-bool AirplaneMode:: isAirportMode() const { 
-    return true; }
 
 // Iterator???
 
 // CitizenObserver
-void AirplaneMode::setSchedule(const std::string& newSchedule) {
-    schedule = newSchedule;
-    notifyScheduleChange();
-}
+// void AirplaneMode::setSchedule(const std::string& newSchedule) {
+//     schedule = newSchedule;
+//     notifyScheduleChange();
+// }
 
-std::string AirplaneMode::getSchedule() const {
-    return schedule;
-}
+// std::string AirplaneMode::getSchedule() const {
+//     return schedule;
+// }
 
-void AirplaneMode::notifyScheduleChange() {
-    notifyObservers("Airplane schedule updated: " + schedule);
-}
+// void AirplaneMode::notifyScheduleChange() {
+//     notifyObservers("Airplane schedule updated: " + schedule);
+// }
 
-void AirplaneMode::depart(){
-    airport->removePlane(this);
-}
-void AirplaneMode::arrive(){
-    airport->addPlane(this);
-}
-void AirplaneMode::setAirport(Airport* airport){
-    this->airport=airport;
-    
-}

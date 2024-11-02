@@ -28,21 +28,48 @@
 // BusMode::BusMode(TransportationMediator* mediator, TransportFacilities* facility)
 //     : TransportMode(mediator), facility(facility) {}
 
-void BusMode::SetMediator(TransportationMediator* mediator)
-{
-    this->mediator= mediator;
+// void BusMode::SetMediator(TransportationMediator* mediator)
+// {
+//     this->mediator= mediator;
+// }
+
+TransportFacilities* BusMode:: GetFacility(){
+     return this->road;
 }
 
 void BusMode::SetRoad(Road* road){
     this->road= road;
 }
 
+TransportFacilities* BusMode::GetFacility(){
+    return this->road;
+}
+
 void BusMode::drive(){
-    road->addVehicle(this);
+    road->add(this);
+    QueueIterator it(this);
+    int x=1;
+    while (it.hasNext())
+    {
+        auto current=it.currItem();
+        std:: cout<<"Arriving at stop "<<x++<<std::endl;
+        it.next();
+    }
+    std::cout<<"Revisiting stops\n";
+    StackIterator it(this);
+    int x=1;
+    while (it.hasNext())
+    {
+        auto current=it.currItem();
+        std:: cout<<"Arriving at stop "<<x--<<std::endl;
+        it.next();
+    }
+     std::cout<<"Completed all routes";
+
 }
 
 void BusMode::stopDrive(){
-    road->removeVehicle(this);
+    road->remove(this);
 }
 
 void BusMode::alertAccident() {
@@ -61,15 +88,15 @@ void BusMode::set(const std::string& state) {
     manageTraffic(state);
 }
 
-void BusMode::changed(const std::string& state) {
-    mediator->notify(this, state);
+void BusMode::changed() {
+    mediator->notify(this);
 }
 
 std::string BusMode:: getName() const {
      return "BusMode"; }
 
-TransportFacilities* BusMode:: getFacility() const { 
-    return facility; }
+// TransportFacilities* BusMode:: getFacility() const { 
+//     return facility; }
 
 bool BusMode:: isRoadMode() const{
     return true; }
@@ -82,7 +109,8 @@ bool BusMode:: isAirportMode() const {
 
 // Iterator
 BusMode::BusMode() {
-    // Initialize bus stops if needed
+    
+
 }
 
 void BusMode::addBusStop(TransportStation* stop) {

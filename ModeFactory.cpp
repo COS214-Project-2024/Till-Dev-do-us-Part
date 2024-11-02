@@ -14,7 +14,3 @@
 //         modes.erase(it);
 //     }
 // }
-
-// std::vector<TransportMode*>& ModeFactory::getModes() {
-//     return modes;
-// }

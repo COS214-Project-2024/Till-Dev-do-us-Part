@@ -24,8 +24,7 @@
 // }
 
 TaxiMode::TaxiMode(){
-    // TransportMode* Cab= new TaxiMode;
-    // road->addVehicle(Cab);
+    
 
     
 }
@@ -46,7 +45,7 @@ void TaxiMode:: drive(){
 }
 
 void TaxiMode::stopDrive(){
-    road->removeVehicle(this);
+    road->remove(this);
 }
 // TaxiMode::TaxiMode(TransportationMediator* mediator, Road* road)
 //     : TransportMode(mediator), road(road) {}
@@ -65,10 +64,6 @@ void TaxiMode::manageTraffic(const std::string& state) {
 
 void TaxiMode::set(const std::string& state) {
     manageTraffic(state);
-}
-
-void TaxiMode::changed(const std::string& state) {
-    mediator->notify(this, state);
 }
 
 std::string TaxiMode:: getName() const {

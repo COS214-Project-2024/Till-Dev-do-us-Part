@@ -4,34 +4,45 @@
 #include "TransportationMediator.h"
 #include "TransportFacilities.h"
 #include "TransportationIterator.h" 
+#include "ConcreteTransportationMediator.h"
+#include "TransportDept.h"
 #pragma once
+#include <list>
 #include <vector>
 #include <string>
 #include <memory>
+
+#include <algorithm>
+#include <random>
 
 class TransportationMediator;
 class TransportFacilities;
 class TransportIterator;
 class CitizenObserver;
 class TransportStation;
+class ConcreteTransportationMediator;
 
 class TransportMode {
 protected:
-    std::string name;
-    double speed;
-    double capacity;
-    TransportationMediator* mediator;
-    TransportFacilities* facility;
+    // std::string name;
+    // double speed;
+    // double capacity;
+    ConcreteTransportationMediator* mediator;
+    TransportFacilities* facility; //??????
     TransState* state;
     TransportIterator* iterator;
+    std::list<TransportStation*> stops;
+
     // std::vector<CitizenObserver*> passengers;
     std::vector<TransportStation*> schedule;
     std::vector<CitizenObserver*> observers;  // List of observers (citizens)
+    TransportDept* transDept;
+
 
 
 public:
     TransportMode();
-    TransportMode(const std::string& name, double speed, double capacity); // Constructor
+    // TransportMode(const std::string& name, double speed, double capacity); // Constructor
 
     virtual ~TransportMode()=default;
 
@@ -42,23 +53,28 @@ public:
     void notifySchedule();
     void registerCitizen(CitizenObserver* observer);
     void removeCitizen(CitizenObserver* observer);
-    TransState getState();
+    //TransState* getState();
     void setState(TransState newState);
     void setIterator(TransportIterator* newIterator);
-    void setMediator(TransportationMediator* newMediator);
+    void AttachMediator(ConcreteTransportationMediator* newMediator);
     virtual void operateStation() = 0;
     virtual void useTransport() = 0;
-
-    void SetMediator(TransportationMediator* mediator);
+    virtual void SendMessage(const std::string& state);
+    virtual std::string GetMessage();
+    virtual TransportFacilities* GetFacility();
+    void divertingRoute();
+    virtual void SetFacilities(TransportFacilities* facility);
+    // virtual TransportMode* GetMode();
+    
+    
 
     //Mediator
-    virtual void changed(const std::string& state) = 0; // Notify mediator of changes
-    virtual bool isRoadMode() const = 0;
-    virtual bool isRailwayMode() const = 0;
-    virtual bool isAirportMode() const = 0;
-    virtual TransportFacilities* getFacility() const = 0; // Returns the associated facility
+    void changed(const std::string& state); // Notify mediator of changes
+    virtual void travel() =0;
+    virtual TransportFacilities* getFacility();
+    // virtual TransportFacilities* getFacility() const = 0; // Returns the associated facility
     // const std::string& getName() const { return name; }
-    TransportMode(TransportationMediator* mediator) : mediator(mediator) {}
+    // TransportMode(TransportationMediator* mediator) : mediator(mediator) {}
 
     virtual std::string getName() const = 0;
     virtual void alertAccident() = 0;
@@ -82,4 +98,7 @@ public:
     // Pure virtual functions for schedule management
     virtual void setSchedule(const std::string& schedule) = 0;
     virtual std::string getSchedule() const = 0;
+    std::list<TransportStation*> getStops();
+
+
 };

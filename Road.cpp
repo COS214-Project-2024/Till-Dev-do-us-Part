@@ -3,45 +3,22 @@
 #include "NormalState.h"
 #include "CongestedState.h"
 #include "TransState.h"
-
+#include "TransportMode.h" 
 #include <iostream>
 #include <algorithm>
 #include <string>
 
 Road:: Road(){
     std::cout << "Building Road." << std::endl;
+    currentState= new EmptyState;
     
 }
 
-Road::Road(TransState* state) : TransportFacilities(state) {}
+// Road::Road(TransState* state) : TransportFacilities(state) {}
 
 Road::~Road() {
     delete currentState;
-}
-
-void Road::addVehicle(TransportMode* vehicle) {
-    vehicles.push_back(vehicle);
-    changeState();  // Reevaluate state whenever a vehicle is added
-}
-
-void Road::removeVehicle(TransportMode* vehicle) {
-    auto it = std::find(vehicles.begin(), vehicles.end(), vehicle);
-    if (it != vehicles.end()) {
-        vehicles.erase(it);
-        changeState();  // Reevaluate state whenever a vehicle is removed
-    }
-}
-
-void Road::changeState() {
-    // Example logic for changing states based on vehicle count
-    if (getVehicleCount() == 0) {
-        setState(new EmptyState());
-    } else if (getVehicleCount() > 30) {
-        setState(new CongestedState());
-    } else {
-        setState(new NormalState());
-    }
-    currentState->handleState(this);  // Call handleState based on the current state
+    vehicles.clear();
 }
 
 void Road::setState(TransState* newState) {
@@ -49,12 +26,6 @@ void Road::setState(TransState* newState) {
     currentState = nullptr;
     currentState = newState;
 }
-
-int Road::getVehicleCount() {
-    return vehicles.size();
-}
-
-
 
 // TransportFacilities implementations
 void Road::maintain() {
@@ -66,6 +37,3 @@ void Road::maintain() {
     std::cout << "Maintaining road markings" << std::endl;
 }
 
-void Road::useTransport() {
-    std::cout << "Road in use by vehicles." << std::endl;
-}

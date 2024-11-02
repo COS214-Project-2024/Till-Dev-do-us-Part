@@ -9,15 +9,10 @@ private:
     std::vector<TransportMode*> trains;
 
 public:
-    Railway(TransState* state);
+    // Railway(TransState* state);
     Railway();
     ~Railway();
     void maintain() override;
-    void useTransport() override;
-    void addTrain(TransportMode* train);
-    void removeTrain(TransportMode* train);
-    void changeState();
     void setState(TransState* newState);
-    int getTrainCount();
 
 };

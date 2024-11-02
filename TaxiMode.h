@@ -42,14 +42,7 @@ public:
     void manageTraffic(const std::string& state) override;
     void set(const std::string& state) override;
     void changed(const std::string& state) override;
-
-    TransportFacilities* getFacility() const override;
-    bool isRoadMode() const override;
-    bool isRailwayMode() const override;
-    bool isAirportMode() const override;
-
-    // Road addVehicle(TransportMode* vehicle);
-
+    
     // Iterator??
     void addTaxiRank(TransportStation* rank);
 

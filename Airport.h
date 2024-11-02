@@ -3,6 +3,7 @@
 #include "TransportStation.h"
 #include <vector>
 #include "FacilitiesFactory.h"
+#include "ConcreteTransportationMediator.h" 
 
 class Airport : public TransportFacilities {
 private:
@@ -16,10 +17,9 @@ public:
     Airport(TransState* state);
     ~Airport();
     void maintain() override;
-    void useTransport() override;
-    void addPlane(TransportMode* plane);
-    void removePlane(TransportMode* plane);
     void changeState();
     void setState(TransState* newState);
-    int getPlaneCount();
+    void decreaseTraffic(Airport* airport2);
+    
+    
 };

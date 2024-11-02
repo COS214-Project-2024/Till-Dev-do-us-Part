@@ -3,7 +3,11 @@
 #include "TransportFacilities.h"
 #include <iostream>
 
-void EmptyState::handleState(TransportFacilities* facility) {
+EmptyState:: EmptyState(){
+    name= "EmptyState";
+}
+
+void EmptyState::handleState() {
     std::cout << "No traffic - operating under empty conditions." << std::endl;
     // Additional logic if necessary
 }

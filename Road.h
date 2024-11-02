@@ -3,7 +3,7 @@
 #include "TransportFacilities.h"
 #include "TransportMode.h"
 #include <vector>
-
+class TransportMode;
 class Road : public TransportFacilities {
 private:
     // int vehiclesCount;
@@ -14,11 +14,6 @@ public:
     Road();
     ~Road();
     void maintain() override;
-    void useTransport() override;
-    void addVehicle(TransportMode* vehicle);
-    void removeVehicle(TransportMode* vehicle);
-    void changeState();
     void setState(TransState* newState);
-    int getVehicleCount();
-
+ 
 };

@@ -4,25 +4,19 @@
 #include <string>
 #include <iostream>
 
-TrainMode::TrainMode(Railway* railway, const std::string& name, double speed, double capacity)
-    : TransportMode(name, speed, capacity), railway(railway) {
-    if (railway) {
-        railway->addTrain(this); // Add to railway on creation
-    }
-}
 
 TrainMode::~TrainMode() {
     if (railway) {
-        railway->removeTrain(this); // Remove from railway on destruction
+        railway->remove(this); // Remove from railway on destruction
     }
 }
 
-void TrainMode::useTransport() {
-    std::cout << "Train is using the railway." << std::endl;
-    if (railway) {
-        railway->useTransport();
-    }
-}
+// void TrainMode::useTransport() {
+//     std::cout << "Train is using the railway." << std::endl;
+//     if (railway) {
+//         railway->useTransport();
+//     }
+// }
 
 // // TrainMode implementation
 // void TrainMode::useTransport() {
@@ -71,8 +65,8 @@ void TrainMode::changed(const std::string& state) {
 std::string TrainMode:: getName() const {
      return "TrainMode"; }
 
-TransportFacilities* TrainMode:: getFacility() const { 
-    return facility; }
+// TransportFacilities* TrainMode:: getFacility() const { 
+//     return facility; }
 
 bool TrainMode:: isRoadMode() const{
     return false; }
@@ -108,9 +102,9 @@ void TrainMode::notifyScheduleChange() {
 
 void TrainMode:: drive()
 {
-    railway->addTrain(this);
+    railway->add(this);
 }
 void TrainMode:: stopdrive()
 {
-    railway->removeTrain(this);
+    railway->remove(this);
 }

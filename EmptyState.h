@@ -6,8 +6,9 @@
 
 class EmptyState : public TransState {
 public:
-    void handleState(TransportFacilities* facility) override;
+    void handleState() override;
     void changeState(TransState newState);
+    EmptyState();
 };
 
 #endif // EMPTY_STATE_H

@@ -6,6 +6,8 @@
 #include "ModeFactory.h"
 #include "BusIterator.h"
 #include "CitizenObserver.h"
+#include "QueueIterator.h"
+#include "StackIterator.h"
 #include <vector>
 #include <string>
 #include <list>
@@ -34,6 +36,8 @@ public:
     // BusMode(TransportationMediator* mediator, TransportFacilities* facility);
     void SetMediator(TransportationMediator* mediator);
     void SetRoad(Road* road);
+    TransportFacilities* GetFacility();
+
 
 
     std::string getName() const override;
@@ -42,7 +46,7 @@ public:
     void set(const std::string& state) override;
     void changed(const std::string& state) override;
 
-    TransportFacilities* getFacility() const override;
+    // TransportFacilities* getFacility() const override;
     bool isRoadMode() const override;
     bool isRailwayMode() const override;
     bool isAirportMode() const override;

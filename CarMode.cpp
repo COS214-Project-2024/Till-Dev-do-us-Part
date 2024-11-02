@@ -55,11 +55,11 @@ void CarMode::SetRoad(Road* road){
 }
 
 void CarMode::drive(){
-    road->addVehicle(this);
+    road->add(this);
 }
 
 void CarMode::stopDrive(){
-    road->removeVehicle(this);
+    road->remove(this);
 }
 
 // Mediator
@@ -100,6 +100,8 @@ bool CarMode::isRailwayMode() const {
 
 bool CarMode:: isAirportMode() const { 
     return false; }
+
+
 
  //Iterator???
 
