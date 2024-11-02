@@ -1,18 +1,21 @@
 #include "Utility.h"
 #include <iostream>
 
-Utility::Utility() : name("Unnamed Utility"), resDept(nullptr), resource(nullptr), revenue(0.0), workers(0) {}
-
-Utility::Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int workers)
-    : name(name), resDept(resDept), resource(resource), revenue(0.0), workers(workers) {}
+Utility::Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int numworkers)
+    : name(name), resDept(resDept), resource(resource)
+{
+    UtilityBus = new Wellness("Utility", numworkers);
+    std::cout << "Buying Property for Utilities" << std::endl;
+    UtilityBus->buyProperty("Plant");
+    std::cout << "Hiring Employess for Utilities" << std::endl;
+    for (int i = 0; i <= numworkers; i++)
+    {
+        UtilityBus->hireEmployee();
+    }
+    
+}
 
 Utility::~Utility() = default;
-
-void Utility::checkForBreakdowns()
-{
-    // Logic to check for breakdowns in utility service
-    std::cout << name << " is checking for breakdowns..." << std::endl;
-}
 
 void Utility::notifyResourceDept(const std::string &message)
 {
@@ -23,11 +26,6 @@ void Utility::notifyResourceDept(const std::string &message)
 std::string Utility::getName() const
 {
     return name;
-}
-
-int Utility::getWorkers() const
-{
-    return workers;
 }
 
 Resources *Utility::getResource() const

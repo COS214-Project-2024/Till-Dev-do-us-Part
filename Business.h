@@ -48,6 +48,10 @@ class Business
         void handleAccounts();  
         //destructor
         virtual ~Business(); 
+       
+int activelyWorking(); 
+
+
 
 }; 
 

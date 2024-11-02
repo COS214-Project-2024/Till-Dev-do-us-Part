@@ -14,7 +14,7 @@ protected:
     float currentProduction;
     ProductionState* proState;
 public:
-    ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource);
+    ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource,int numworkers);
     virtual ~ProductionUtility();
 
     // Production operations
@@ -33,7 +33,7 @@ public:
     std::string getProState() const;
     void setProState(ProductionState *state);
     void getStatus() const override;
-     void checkForBreakdowns() override;
+     void checkForBreakdowns();
 
 };
 
