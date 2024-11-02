@@ -10,6 +10,7 @@ protected:
 public:
     //BuildingFactory();
     virtual Building* build()=0;
+    virtual ~BuildingFactory() {}
 
 };
 

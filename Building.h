@@ -26,7 +26,7 @@ class Building
         int capacity; //
     public:
         Building(string type);
-        ~Building();
+        virtual ~Building();
         virtual void loadElectricity(float units);
         virtual void loadWater(float units);
         virtual bool useElectricity(float units);

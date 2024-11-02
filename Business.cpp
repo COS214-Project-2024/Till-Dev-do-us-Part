@@ -140,7 +140,7 @@ void Business::handleAccounts()
             income -= (pay + pay); 
 
             //pay employees
-            for (int i=0; i<employees.size(); i++)
+            for (int i=0; i<numEmployees[0]; i++)
             {
                 ((Adult*) employees[i])->salary(pay);
                 income -= pay; 

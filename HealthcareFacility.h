@@ -14,7 +14,7 @@ protected:
 public:
     HealthcareFacility() ;
 
-    ~HealthcareFacility() {}
+    virtual ~HealthcareFacility() {}
 
 
     virtual void admitPatient(Citizen* c)=0;
