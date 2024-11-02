@@ -10,7 +10,7 @@ private:
     Resources *energy;
 
 public:
-    PowerPlant(std::string name, ResourceDepartment *department, Resources *resource);
+    PowerPlant(std::string name, ResourceDepartment *department, Energy *resource);
     ~PowerPlant();
 
     void startProduction() override; // Starts power production

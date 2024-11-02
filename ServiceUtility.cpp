@@ -1,21 +1,9 @@
 #include "ServiceUtility.h"
 
-ServiceUtility::ServiceUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int workers, float capacity)
-    : Utility(name, resDept, resource, workers), serviceCapacity(capacity), currentServiceLevel(0), servState(nullptr) {}
+// ServiceUtility::ServiceUtility(std::string name, ResourceDepartment *resDept)
+//     : Utility(name, resDept, resource, workers), serviceCapacity(buildings.size()), currentServiceLevel(0), servState(nullptr) {}
 
 ServiceUtility::~ServiceUtility() = default;
-
-void ServiceUtility::startService()
-{
-    if (servState)
-    {
-        servState->handleService(this);
-    }
-    else
-    {
-        std::cout << "No service state set." << std::endl;
-    }
-}
 
 void ServiceUtility::processRequest()
 {
@@ -36,15 +24,39 @@ std::string ServiceUtility::getServState() const
 
 void ServiceUtility::setServState(ServiceState *state)
 {
-    servState = state;
+    if (!servState)
+    {
+        delete servState;
+    }
+    if (state)
+    {
+        cout << state->getStateName() << std::endl;
+        cout << "State exits setting state " << std::endl;
+    }
+    std::cout << "Settting state" << std::endl;
+
+    this->servState = state;
+    if (servState)
+    {
+        cout << "not setting state " << std::endl;
+    }
+
+    std::cout << "state set" << std::endl;
+}
+
+int ServiceUtility::getCapacity() const
+{
+    return serviceCapacity;
 }
 
 void ServiceUtility::getStatus() const
 {
-    std::cout << "---- Utility Status ----" << std::endl;
-    std::cout << "1. Utility Name   : " << name << std::endl;
-    std::cout << "2. Status         : " << servState->getStateName() << std::endl;
-    std::cout << "2. Revenue        : " << revenue << std::endl;
-    std::cout << "3. Workers        : " << workers << std::endl;
-    std::cout << "------------------------" << std::endl;
+    std::cout << "----------------Utility Status -------------------" << std::endl;
+    std::cout << "1. Utility Name                    : " << name << std::endl;
+    std::cout << "2. Status                          : " << servState->getStateName() << std::endl;
+    std::cout << "   - Total Capacity                : " << serviceCapacity << std::endl;
+    std::cout << "   - Service Level                 : " << currentServiceLevel << "/3" << std::endl;
+    std::cout << "3. Revenue                         : " << revenue << std::endl;
+    std::cout << "4. Workers                         : " << workers << std::endl;
+    std::cout << "--------------------------------------------------" << std::endl;
 }

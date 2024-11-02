@@ -9,17 +9,17 @@ ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDe
 
 ProductionUtility::~ProductionUtility() = default;
 
-void ProductionUtility::startProduction()
-{
-    if (proState)
-    {
-        proState->handleProduction(this);
-    }
-    else
-    {
-        std::cout << "No production state set." << std::endl;
-    }
-}
+// void ProductionUtility::startProduction()
+// {
+//     if (proState)
+//     {
+//         proState->handleProduction(this);
+//     }
+//     else
+//     {
+//         std::cout << "No production state set." << std::endl;
+//     }
+// }
 
 void ProductionUtility::processRequest()
 {

@@ -11,6 +11,20 @@
 #include "ResourceDepartment.h"
 #include "Energy.h"
 #include "Water.h"
+#include "Resources.h"
+    #include "Water.h"
+    #include "Energy.h"
+    #include "Materials.h"
+#include "ServiceUtility.h"
+#include "PowerPlant.h"
+#include "WaterSupply.h"
+#include "SewageSystem.h"
+#include "WasteManagement.h"
+#include "OperationalProductionState.h"
+#include "MaintenanceProductionState.h"
+#include "OutageProductionState.h"
+#include "ResourceDepartment.h"
+
 
 void simulationOne()
 {
@@ -18,49 +32,29 @@ void simulationOne()
     ResourceDepartment *resourceDept;
 
     // Create Energy and Water Resources
-    Resources *energyResource = new Energy();
+    Energy *energyResource = new Energy();
     Water *waterResource = new Water();
 
-    // Create PowerPlant and WaterSupply objects
+    std::cout << "\n--- Create Utilities ---\n";
     ProductionUtility *powerPlant = new PowerPlant("CityPower", resourceDept, energyResource);
     ProductionUtility *waterSupply = new WaterSupply("CityWater", resourceDept, waterResource);
-
-    // Create Production States
-    OperationalProductionState *operationalState = new OperationalProductionState();
-    MaintenanceProductionState *maintenanceState = new MaintenanceProductionState();
-    OutageProductionState *outageState = new OutageProductionState();
+    ServiceUtility *wasteManagement = new WasteManagement("CityWaste", resourceDept);
+    ServiceUtility *sewerSystem = new SewageSystem("CitySewage", resourceDept);
 
     // Start in Operational State for both utilities
-    std::cout << "\n--- Starting Production in Operational State ---\n";
-    powerPlant->setProState(operationalState);
-    waterSupply->setProState(operationalState);
-
-    powerPlant->getStatus();
-    // waterSupply->getStatus();
-
+    std::cout << "\n--- Start Production ---\n";
     powerPlant->startProduction();
-     powerPlant->getStatus();
-    
+    powerPlant->startProduction();
+
+    // waterSupply->startProduction();
     // waterSupply->startProduction();
 
-   
-    // waterSupply->getStatus();
+    std::cout << "\n--- Start Service ---\n";
+    wasteManagement->startService();
+    // wasteManagement->startService();
 
-    // // Transition to Maintenance State
-    // std::cout << "\n--- Switching to Maintenance State ---\n";
-    // powerPlant->setProState(maintenanceState);
-    // waterSupply->setProState(maintenanceState);
-
-    // powerPlant->startProduction();
-    // waterSupply->startProduction();
-
-    // // Transition to Outage State
-    // std::cout << "\n--- Switching to Outage State ---\n";
-    // powerPlant.setProductionState(&outageState);
-    // waterSupply.setProductionState(&outageState);
-
-    // powerPlant.startProduction();
-    // waterSupply.startProduction();
+    // sewerSystem->startService();
+    // sewerSystem->startService();
 }
 
 int main()

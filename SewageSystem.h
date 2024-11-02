@@ -5,10 +5,11 @@
 
 class SewageSystem : public ServiceUtility {
 public:
-    SewageSystem(std::string name, ResourceDepartment* department, Resources* resource, int workers,float cap);
+    SewageSystem(std::string name, ResourceDepartment* department);
     ~SewageSystem();
 
-    void startService() override;                 // Starts sewage management service
+    void startService() override;  
+    void iterateBuildings(bool limitedProcessing, int maxBuildings) override;               // Starts sewage management service
     
 };
 

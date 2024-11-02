@@ -13,7 +13,7 @@ protected:
     ResourceDepartment *resDept; // Pointer to the Resource Department
     Resources *resource;         // Pointer to the resources used by the utility
     float revenue;
-    int workers;
+    int workers;//Hire workers using Business
 
 public:
     // Constructors and destructor
