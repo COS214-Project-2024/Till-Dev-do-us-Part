@@ -8,11 +8,11 @@ class WaterSupply : public ProductionUtility {
     private: Resources * water;
 public:
 
-    WaterSupply(std::string name, ResourceDepartment* department, Resources* resource);
+   WaterSupply(std::string name, ResourceDepartment *department, Water *resource,int numworkers);
     ~WaterSupply();
 
     void startProduction() override;          // Starts power production
     
 };
 
-#endif // POWERPLANT_H
+#endif // WATERSUPPL_H

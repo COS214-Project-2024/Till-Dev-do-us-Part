@@ -6,6 +6,7 @@
 #include "ConstructionState.h"
 #include "CompleteState.h"
 #include "DilapidatedState.h"
+#include "ResourceDepartment.h"
 // #include "Citizen.h"
 #include <iostream>
 #include <algorithm>
@@ -24,6 +25,7 @@ class Building
         float value; //
         float area; //
         int capacity; //
+        ResourceDepartment * resDept;
     public:
         Building(string type);
         virtual ~Building();
@@ -42,6 +44,7 @@ class Building
         virtual bool removeOccupant(Citizen* c)=0;
         virtual Building* clone() =0;
         virtual bool isOccupied() =0;
+        virtual void consume();
 
 };
 #endif
