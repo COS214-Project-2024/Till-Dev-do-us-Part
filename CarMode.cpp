@@ -4,6 +4,11 @@
 #include <iostream>
 #include "ModeFactory.h"
 
+CarMode::CarMode(){
+    mediator=nullptr;
+    facility=nullptr;
+}
+
 void CarMode::drive(){
     facility->add(this);
     std::cout<<"Car starts driving"<<std::endl;
@@ -50,21 +55,3 @@ return state;
 
 std::string CarMode:: getName() const {
      return "CarMode"; }
-
-
-
- //Iterator??? No iterator!!!!!
-
-// //CitizenObserver
-// void CarMode::setSchedule(const std::string& newSchedule) {
-//     schedule = newSchedule;
-//     notifyScheduleChange();
-// }
-
-// std::string CarMode::getSchedule() const {
-//     return schedule;
-// }
-
-// void CarMode::notifyScheduleChange() {
-//     notifyObservers("Car schedule updated: " + schedule);
-// }

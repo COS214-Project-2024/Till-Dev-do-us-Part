@@ -40,9 +40,7 @@ public:
     void changed(const std::string& state);
     virtual ~TransportMode()=default;
     void TransportMode::travel();
-
-    virtual void operateStation() = 0;
-    virtual void useTransport() = 0;
+    
     virtual void SendMessage(const std::string& state)=0;
     virtual std::string GetMessage()=0;
     virtual TransportFacilities* GetFacility();

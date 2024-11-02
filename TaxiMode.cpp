@@ -7,7 +7,8 @@
 
 
 TaxiMode::TaxiMode(){
-
+    mediator=nullptr;
+    facility=nullptr;
 }
 
 // Mediator
@@ -16,6 +17,26 @@ void TaxiMode:: drive(){
     facility->add(this);
     std::cout<<"Taxi starts driving"<<std::endl;
     travel();
+
+    QueueIterator it(this);
+    int x=1;
+    while (it.hasNext())
+    {
+        auto current=it.currItem();
+        std:: cout<<"Arriving at stop "<<x++<<std::endl;
+        it.next();
+    }
+    std::cout<<"Revisiting stops\n";
+    StackIterator it(this);
+    int x=1;
+    while (it.hasNext())
+    {
+        auto current=it.currItem();
+        std:: cout<<"Arriving at stop "<<x--<<std::endl;
+        it.next();
+    }
+     std::cout<<"Completed all routes";
+
 }
 
 void TaxiMode::stopDrive(){
@@ -58,20 +79,4 @@ return state;
 
 std::string TaxiMode:: getName() const {
      return "TaxiMode"; }
-
-// Iterator??
-
-
-// CitizenObserver
-// void TaxiMode::setSchedule(const std::string& newSchedule) {
-//     schedule = newSchedule;
-//     notifyScheduleChange();
-// }
-
-// std::string TaxiMode::getSchedule() const {
-//     return schedule;
-// }
-
-// void TaxiMode::notifyScheduleChange() {
-//     notifyObservers("Taxi schedule updated: " + schedule);
-// }
+     
