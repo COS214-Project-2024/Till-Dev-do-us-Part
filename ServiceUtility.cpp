@@ -1,7 +1,8 @@
 #include "ServiceUtility.h"
 
-// ServiceUtility::ServiceUtility(std::string name, ResourceDepartment *resDept)
-//     : Utility(name, resDept, resource, workers), serviceCapacity(buildings.size()), currentServiceLevel(0), servState(nullptr) {}
+ServiceUtility::ServiceUtility(std::string name, ResourceDepartment *resDept)
+    : Utility(name, resDept, resource, workers), serviceCapacity(0), currentServiceLevel(0), servState(nullptr) {}
+//serviceCapacity(buildings.size())
 
 ServiceUtility::~ServiceUtility() = default;
 

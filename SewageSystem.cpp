@@ -19,7 +19,7 @@ void SewageSystem::startService()
     getStatus();
 }
 
-void SewageSystem::iterateBuildings(bool limitedProcessing, int maxBuildings)
-{
+// void SewageSystem::iterateBuildings(bool limitedProcessing, int maxBuildings)
+// {
 
-} // Starts sewage management service
+// } // Starts sewage management service

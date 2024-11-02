@@ -9,7 +9,7 @@ public:
     ~SewageSystem();
 
     void startService() override;  
-    void iterateBuildings(bool limitedProcessing, int maxBuildings) override;               // Starts sewage management service
+    // void iterateBuildings(bool limitedProcessing, int maxBuildings) override;               // Starts sewage management service
     
 };
 

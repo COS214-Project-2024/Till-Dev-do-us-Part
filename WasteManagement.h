@@ -17,7 +17,7 @@ public:
     ~WasteManagement();
 
     void startService() override;
-    void iterateBuildings(bool limitedProcessing, int maxBuildings) override; // Starts waste management service
+    // void iterateBuildings(bool limitedProcessing, int maxBuildings) override; // Starts waste management service
                                                                               // Adjusts waste management service level
 };
 

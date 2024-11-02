@@ -25,7 +25,7 @@ public:
     // Service operations
 
     virtual void startService() = 0;
-    virtual void iterateBuildings(bool limitedProcessing, int maxBuildings) = 0;
+    // virtual void iterateBuildings(bool limitedProcessing, int maxBuildings) = 0;
     void processRequest();
 
     // Getters and setters for service attributes
