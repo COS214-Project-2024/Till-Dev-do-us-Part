@@ -74,15 +74,15 @@ vector<TransportFacility*> TransportDept::getDeptFacilities(std::string type)
     return v;
 
 }
-void addSation(std::string type, TransportStation* station)
+void TransportDept::addSation(std::string type, TransportStation* station)
 {
     stations[type]= station;
 }
-void addMode(std::string type, TransportMode* mode)
+void TransportDept::addMode(std::string type, TransportMode* mode)
 {
     vehicles[type]= mode;
 }
-void addFacility(std::string type, TransportFacility* facility)
+void TransportDept::addFacility(std::string type, TransportFacility* facility)
 {
     facilities[type]=facility;
 }
