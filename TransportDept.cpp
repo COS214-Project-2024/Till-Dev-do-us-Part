@@ -5,25 +5,25 @@ TransportDept:: TransportDept(float budget)
     this->budget=budget;
 }
 
-void addSationFactory(std::string type, StationFactory* factory)
+void TransportDept::addSationFactory(std::string type, StationFactory* factory)
 {
     stationfactories[type]=factory;
 }
-void addModeFactory(std::string type, ModeFactory* factory)
+void TransportDept::addModeFactory(std::string type, ModeFactory* factory)
 {
     modefactories[type]=factory;
 }
-void addFacilitiesFactory(std::string type, FacilityFactory* factory)
+void TransportDept::addFacilitiesFactory(std::string type, FacilityFactory* factory)
 {
     facilitiesfactories[type]=factory;
 }
-void createMode(std::string type)
+void TransportDept::createMode(std::string type)
 {
     if(budget<=0)
     {
         std:: cout <<"Transport Mode not created. No budget in the department\n";
     }
-    vector<ModeFactory*>::iterator it = modefactories.find(type);
+    map<string,ModeFactory*>::iterator it = modefactories.find(type);
     if (it != modefactories.end()) {
         ModeFactory* factory = it->second;
         budget-=50;//spendmoney
@@ -31,13 +31,14 @@ void createMode(std::string type)
     }
     return nullptr
 }
-void createFacility(std::string type)
+void TransportDept::createFacility(std::string type)
 {
         if(budget<=0)
     {
         std:: cout <<"Transport Facility not created. No budget in the department\n";
     }
-    vector<FacilityFactory*>::iterator it = facilityfactories.find(type);
+    map<string,FacilityFactory*>::iterator it = facilityfactories.find(type);
+    
     if (it != modefactories.end()) {
         FacilityFactory* factory = it->second;
         budget-=50;//spendmoney
@@ -45,17 +46,43 @@ void createFacility(std::string type)
     }
     return nullptr
 }
-void createStation(std::string type)
+void TransportDept::createStation(std::string type)
 {
     if(budget<=0)
     {
         std:: cout <<"Transport Station not created. No budget in the department\n";
     }
-    vector<StationFactory*>::iterator it = modefactories.find(type);
+    map<string,FacilityFactory*>::iterator it = modefactories.find(type);
     if (it != modefactories.end()) {
         StationFactory* factory = it->second;
         budget-=50;//spendmoney
         return factory->createMode(); 
     }
     return nullptr
+}
+
+vector<TransportFacility*> TransportDept::getDeptFacilities(std::string type)
+{
+    std:: vector<TransportFacility*> v;
+    for(auto it: facilities)
+    {
+        if(it->first()==type)
+        {
+            v.push_back(it->second());
+        }
+    }
+    return v;
+
+}
+void addSation(std::string type, TransportStation* station)
+{
+    stations[type]= station;
+}
+void addMode(std::string type, TransportMode* mode)
+{
+    vehicles[type]= mode;
+}
+void addFacility(std::string type, TransportFacility* facility)
+{
+    facilities[type]=facility;
 }
