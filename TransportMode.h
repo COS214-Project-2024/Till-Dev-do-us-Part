@@ -30,7 +30,7 @@ protected:
     TransportFacilities* facility; //??????
     std::string state;
     std::list<TransportStation*> stops;
-    std::vector<TransportStation*> schedule;
+    // std::vector<TransportStation*> schedule;
     std::vector<CitizenObserver*> observers;  // List of observers (citizens)
     TransportDept* transDept;
 
@@ -44,7 +44,7 @@ public:
     virtual void SendMessage(const std::string& state)=0;
     virtual std::string GetMessage()=0;
     virtual TransportFacilities* GetFacility();
-    void divertingRoute();
+    void divertingRoute(std::string type);
     virtual void SetFacilities(TransportFacilities* facility);
 
     //Mediator

@@ -5,9 +5,7 @@
 
 
 TransportMode* BusModeFactory:: createMode(){
-        // return new BusMode();
         auto mode = new BusMode();
-        // modes.push_back(mode);
         return mode;    
     }
 

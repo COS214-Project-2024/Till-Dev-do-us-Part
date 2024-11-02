@@ -5,8 +5,6 @@
 #include <string>
 
 class TransportStation {
-// protected:
-//     TransportMode* momo;
 public:
     virtual ~TransportStation() = default;
     virtual void handlePassengers() = 0;

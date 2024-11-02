@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "TransportMode.h"
 // #include "TransportMode.h"
 #include "TransState.h"
 #include "Citizen.h"
@@ -12,6 +13,7 @@ class TransportMode;
 
 class TransportFacilities {
 protected:
+    std::string name; 
     TransState* currentState;
     TransportFacilities(TransState* state);
     std::vector<TransportMode*> moVec;
@@ -32,4 +34,5 @@ public:
     void notifyCitizens();
     void attach(Citizen* c);
     void detach(Citizen* c);
+    std:: string getFacilName();
 };

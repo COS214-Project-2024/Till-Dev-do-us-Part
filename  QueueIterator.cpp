@@ -1,5 +1,12 @@
 #include "QueueIterator.h"
 
+QueueIterator::~QueueIterator(){
+    while (!queue.empty()) {
+        delete queue.front();  // Delete the pointer at the front of the queue
+        queue.pop();           // Remove the front element from the queue
+    }
+}
+
 QueueIterator:: QueueIterator(TransportMode* mode)
 {
     for (auto stop : mode->getStops()) {

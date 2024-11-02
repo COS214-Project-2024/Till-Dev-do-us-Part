@@ -3,12 +3,9 @@
 #include "TransportStation.h"
 #include "TransportMode.h"
 #include <list>
+#include <algorithm>
 
 class TrainStation : public TransportStation {
-private:
-    // std::list<TransportMode*> trains;
-
-
 public:
     void handlePassengers() override;
     void manageFreight() override;

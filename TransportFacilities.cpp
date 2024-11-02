@@ -1,8 +1,22 @@
 #include "TransportFacilities.h"
 
-// Constructor definition, matching the declaration in the header
-TransportFacilities::TransportFacilities(TransState* state)
-    : currentState(state) {}
+TransportFacilities::TransportFacilities(){
+}
+
+std:: string TransportFacilities::getFacilName(){
+    return name;
+}
+
+TransportFacilities:: ~TransportFacilities(){
+    for (auto momo : moVec) {
+        delete momo;
+    }
+    moVec.clear();
+
+    citizens.clear();
+
+
+}
 
 void TransportFacilities::setState(TransState* newState) {
    if (currentState) delete currentState;
@@ -15,9 +29,10 @@ void TransportFacilities::decreaseTraffic()
 {
     int elementsToDelete = 6; 
     for(int i=0; i< elementsToDelete && i < moVec.size(); i++){
-        moVec.at(i)->divertingRoute();//come back 
+        moVec.at(i)->divertingRoute(moVec.at(i)->GetFacility()->getFacilName());//come back 
     }
 }
+
  int TransportFacilities::getModeCount()
  {
     return moVec.size();

@@ -10,7 +10,8 @@
 
 Airport::Airport(){
     std::cout << "Building Airport." << std::endl;
-    currentState= new EmptyState();
+    currentState= new EmptyState(this);
+    name= "Road";
 }
 
 Airport::~Airport() {

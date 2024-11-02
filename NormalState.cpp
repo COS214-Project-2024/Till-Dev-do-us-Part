@@ -10,7 +10,6 @@ NormalState:: NormalState(TransportFacilities* f){
 
 void NormalState::handleState() {
     std::cout << "Operating under normal conditions." << std::endl;
-    // Implement any additional logic if necessary
 }
 
 void NormalState::changeState() {

@@ -9,5 +9,5 @@ TransportMode* AirplaneModeFactory:: createMode(){
         auto mode = new AirplaneMode();
         // modes.push_back(mode);
         return mode;    
-    }
+}
 

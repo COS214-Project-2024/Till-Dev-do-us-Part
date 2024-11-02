@@ -14,7 +14,7 @@ private:
 
 
 public:
-    
+    ~QueueIterator();
     QueueIterator(TransportMode* mode);
     bool hasNext() const;
     TransportStation* next();

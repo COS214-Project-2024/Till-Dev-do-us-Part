@@ -15,13 +15,6 @@ class TransportationMediator;
 class ConcreteTransportationMediator;
 
 class CarMode : public TransportMode {
-private:
-    Road* road;
-    TransportFacilities* facility;
-    std::string schedule;
-    std::string state;
-    TransportMode* mode;
-
 public:
     CarMode();
     void drive();
@@ -31,12 +24,5 @@ public:
     void SendMessage(const std::string& state);
     std::string GetMessage();
     std::string getName() const override;
-    
-    //Iterator???
-
-    // //CitizenObserver
-    // void setSchedule(const std::string& newSchedule) override;
-    // std::string getSchedule() const override;
-    // void notifyScheduleChange();
     
 };

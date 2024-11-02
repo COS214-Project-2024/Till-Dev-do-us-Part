@@ -8,14 +8,9 @@
 #include <iostream>
 
 class TaxiRank : public TransportStation {
-
-private:
-    // std::list<TransportMode*> taxis;
-
 public:
     void handlePassengers() override;
     void manageFreight() override;
     void maintain() override;
-    // void addTaxi(TransportMode* taxi);
 };
 

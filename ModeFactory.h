@@ -5,12 +5,10 @@
 
 class ModeFactory {
 public:
-    // virtual ~ModeFactory();
-    virtual TransportMode* createMode(const std::string& type) = 0;  // Factory Method
-    // virtual void removeMode(TransportMode* mode);
+    virtual ~ModeFactory();
+    virtual TransportMode* createMode() = 0;  // Factory Method
+    
 protected:
     ModeFactory() = default;
     TransportMode* modes;
-
-    // std::vector<TransportMode*> modes;
 };

@@ -14,6 +14,7 @@ private:
 
 
 public:
+    ~StackIterator();
     StackIterator(TransportMode* mode);
     bool hasNext() const;
     TransportStation* next() ;

@@ -13,7 +13,6 @@ class TransportationMediator;
 class TransportStation;
 
 class TrainMode : public TransportMode {
-
 public:
     TrainMode();
     std::string getName() const override;

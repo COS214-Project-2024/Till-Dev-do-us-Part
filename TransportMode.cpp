@@ -2,6 +2,24 @@
 #include "CitizenObserver.h"
 #include <algorithm>
 
+TransportMode::~TransportMode(){
+    delete facility;  // Delete the single pointer
+    facility = nullptr;
+
+    delete transDept;  // Delete the single pointer
+    transDept = nullptr;
+
+    for (auto obi : observers) {
+        delete obi;
+    }
+    observers.clear();
+
+
+
+
+    
+
+}
 
 void TransportMode::changed(const std::string& state){
     this->state = state;
@@ -10,9 +28,9 @@ void TransportMode::changed(const std::string& state){
         mediator->notify(this);
 }
 
-void TransportMode::divertingRoute(){
+void TransportMode::divertingRoute(std::string type){
     
-    for(auto facility: transDept->getDeptFacilities()){
+    for(auto facility: transDept->getDeptFacilities(type)){
         if(facility->getState()->getStateName()!="Congested")
         {
             SetFacilities(facility);

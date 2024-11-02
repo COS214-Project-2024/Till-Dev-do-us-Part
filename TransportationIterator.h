@@ -9,7 +9,6 @@ class TransportStation;
 class TransportationIterator {
 public:
     virtual ~TransportationIterator() = default;
-    
     virtual bool hasNext() const = 0;
     virtual TransportStation* next() = 0;
     virtual TransportStation* first() = 0;

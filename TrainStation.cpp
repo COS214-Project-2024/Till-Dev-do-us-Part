@@ -19,13 +19,4 @@ void TrainStation::maintain() {
         std::cout << "Updating information displays" << std::endl;
 }
 
-// void TrainStation:: addTrain(TransportMode* train){
-//     if (train) { // Ensure the bus is not a null pointer
-//         trains.push_back(train);
-//         std::cout << "Train added to the Train Station." << std::endl;
-//     } else {
-//         std::cout << "Cannot add a null train to the Train Station." << std::endl;
-//     }
-
-// }
 

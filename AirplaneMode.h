@@ -23,6 +23,7 @@ public:
     void SendMessage(const std::string& state);
     std::string GetMessage();
     std::string getName() const override;
+    ~AirplaneMode();
 
     
 };

@@ -1,5 +1,12 @@
 #include "StackIterator.h"
 
+StackIterator::~StackIterator(){
+    while (!stack.empty()) {
+        delete stack.top();  // Delete the pointer at the front of the queue
+        stack.pop();           // Remove the top element from the queue
+    }
+}
+
 StackIterator:: StackIterator(TransportMode* mode)
 {
     for (auto stop : mode->getStops()) {

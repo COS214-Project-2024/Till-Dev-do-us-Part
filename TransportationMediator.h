@@ -9,8 +9,6 @@ class TransportMode; // Forward declaration
 class TransportationMediator {
 public:
     virtual void notify(TransportMode* mode) = 0;
-    // virtual void registerMode(TransportMode* mode) = 0;
-    // virtual void manageTraffic() = 0;
     virtual ~TransportationMediator() = default;
 };
 

@@ -57,3 +57,8 @@ return state;
 std::string AirplaneMode:: getName() const {
      return "AirplaneMode"; 
 }
+
+AirplaneMode::~AirplaneMode(){
+    
+
+}

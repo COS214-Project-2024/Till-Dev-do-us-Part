@@ -2,11 +2,12 @@
 #include "TrainStationFactory.h"
 #include "TrainStation.h"
 
+TransportStation::~TransportStation(){
+      
+}
+
 TransportStation* TrainStationFactory:: createStation() {
-        // return new TrainStation();
         auto station = new TrainStation();
-        // station = new TrainStation();
-        // stations.push_back(station);
         return station;
     }
     

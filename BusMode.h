@@ -4,7 +4,6 @@
 #include "TransportMode.h"
 #include "Road.h"
 #include "ModeFactory.h"
-#include "BusIterator.h"
 #include "CitizenObserver.h"
 #include "QueueIterator.h"
 #include "StackIterator.h"

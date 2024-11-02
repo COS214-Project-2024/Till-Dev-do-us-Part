@@ -8,7 +8,8 @@
 
 Railway:: Railway(){
     std::cout << "Building Railway." << std::endl;
-    currentState= new EmptyState;
+    currentState= new EmptyState(this);
+    name= "Road";
 }
 
 Railway::~Railway() {

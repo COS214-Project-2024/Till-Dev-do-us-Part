@@ -10,7 +10,9 @@
 
 Road:: Road(){
     std::cout << "Building Road." << std::endl;
-    currentState= new EmptyState;
+    currentState= new EmptyState(this);
+
+    name= "Road";
     
 }
 
@@ -19,5 +21,6 @@ Road::~Road() {
     delete currentState;
     moVec.clear();
 }
+
 
 

@@ -6,11 +6,7 @@
 #include "ConcreteTransportationMediator.h" 
 
 class Airport : public TransportFacilities {
-private:
-    std::vector<TransportMode*> planes;
-
 public:
-
     Airport();
     ~Airport();
     
