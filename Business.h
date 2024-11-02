@@ -8,13 +8,18 @@
 
 #include "Building.h"
 #include "Citizen.h"
+#include "Department.h"
 #include "FinanceDept.h"
+#include "DevelopmentDept.h"
 #include "Government.h"
+#include "SocialAffairsDept.h"
 #include "WiseBucks.h"
 
 #include <string>
 #include <vector>
 using namespace std; 
+
+// class Citizen;
 
 class Business
 {
@@ -30,8 +35,7 @@ class Business
 
     public: 
         virtual string getBusinessType() = 0; 
-
-        void buyProperty(); 
+        void buyProperty(string propertyType); 
         void sellProperty(); 
         void hireEmployee(); 
         void fireEmployee(); 

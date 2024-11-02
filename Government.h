@@ -11,19 +11,23 @@
 class Government {
 private:
     static Government* instance;
-    std::vector<Policy> policies;
+    std::vector<Policy*> policies;
     std::map<std::string, Department*> departments;
+    Memento* memento;
+    float budget;
 
     Government();  // Private constructor for singleton 
 
 public:
     static Government* getInstance();
-    Department* getDepartment(const std::string& name);
-    void enactPolicy(const Policy& policy);
-    void revertPolicy(const std::string& name);
+    Department* getDepartment(std::string name);
+    void enactPolicy(Policy* policy);
+    void revertPolicy(std::string name);
     void addDepartment(std::string name, Department* department);
     void removeDepartment(std:: string name);
-    // void notifyCitizens();
+    Memento* createMemento();
+    void setMemento( Memento* memento);
+    std::vector<Policy*> getPolicies();
 };
 
 #endif 

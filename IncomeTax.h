@@ -40,7 +40,7 @@ class IncomeTax : public TaxCalculator
             //calculate tax amount
             float tax = income * taxRate; 
             //send tax amount to crs
-            CRS::getTax(tax); 
+            ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->getCRS()->getTax(tax); 
             //return amount after tax
             return income - tax; 
         }

@@ -17,4 +17,3 @@ class Office : public Commercial
         virtual bool isOccupied();
 };
 #endif
-

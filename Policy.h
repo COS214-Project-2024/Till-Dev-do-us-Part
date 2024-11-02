@@ -10,12 +10,13 @@ private:
     std::string name;
     std::string code;
     Memento* memento;
+    std::string description;
 
 public:
-    Policy(std::string name, std::string code);
-    Memento* createMemento();
-    void setMemento(Memento* memento);
+    Policy(std::string name, std::string code,std:: string description);
+    std:: string getDescription();
     std:: string getName();
+    ~Policy();
 };
 
 #endif 

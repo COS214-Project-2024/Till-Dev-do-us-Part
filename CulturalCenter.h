@@ -13,5 +13,6 @@ class CulturalCenter : public Landmark
         virtual bool clean();
         virtual bool removeOccupant(Citizen *c);
         virtual Building *clone();
+        virtual bool isOccupied();
 };
 #endif

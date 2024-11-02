@@ -6,7 +6,15 @@
 class ShopFactory: public BuildingFactory{
 
 public:
-    ShopFactory();
-    Building* build();
+    ShopFactory()
+    {
+        building= new Shop();
+    }
+
+    Building* build()
+    {
+        return building-> clone();
+    }
+
 };
 #endif

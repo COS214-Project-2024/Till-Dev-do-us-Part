@@ -25,4 +25,3 @@ class Mall: public Commercial
         virtual bool isOccupied();
 };
 #endif
-

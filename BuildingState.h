@@ -16,5 +16,3 @@ class BuildingState
         virtual string getName();
 };
 #endif
-
-

@@ -1,3 +1,4 @@
+
 #include "ConstructionState.h"
 
 ConstructionState::ConstructionState():BuildingState("Construction"){

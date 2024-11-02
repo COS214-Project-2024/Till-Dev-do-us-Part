@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std; 
 
-//SEE LINES 88+
+//SEE LINES 88+   ??? who added this comment
 
 /*
     Building* property; 
@@ -19,22 +19,34 @@ using namespace std;
     WiseBucks* wiseBucksApp; 
 */
 
-void buyProperty()
+void Business::buyProperty(string propertyType)
 {
-
+    property = ((DevelopmentDept*)(Government::getInstance()->getDepartment("Development")))->build(propertyType);
+    // if (property != nullptr)
+    //     cout << "Bought property: " << propertyType << endl;  
+    // else cout << "Property is null" << endl; 
 }
 
-void sellProperty()
+void Business::sellProperty()
 {
-    
+    property = nullptr; 
 }
 
 void Business::hireEmployee()
 {
-    if (employees[0] != employees[1])
+    if (owner == nullptr)
     {
-        //hire employee by adding to vector 
-        employees[0]++; 
+        owner = ((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->employ(this);
+    }
+    else if (numEmployees[0] != numEmployees[1])
+    {
+        //hire employee by adding to vector (NOT FINALISED)
+        Citizen* newEmployee = ((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->employ(this); 
+        if (newEmployee != nullptr)
+        {
+            employees.push_back(newEmployee);
+            numEmployees[0]++; 
+        }
     }
     else cout << "Maximum employess reached for " << this->getBusinessName() << endl; 
 }
@@ -44,7 +56,8 @@ void Business::fireEmployee()
     if (employees[0] != 0)
     {
         //remove employee from vector and add to list of unemployed citizens
-        employees[0]--; 
+        // ((SocialAffairsDept*)(Government::getInstance()->getDepartment("SocialAffairs")))->addToUnemployed()
+        numEmployees[0]--; 
     }
     else cout << this->getBusinessName() << " has no employees" << endl; 
 }
@@ -115,7 +128,6 @@ void Business::handleAccounts()
     if (wiseBucksApp != nullptr)
     {
         //cannot pay if there is no work being done
-        // SHOULD WE CHECK IF ONLY THE OWNER WORKS I.E MAX EMPLOYEES IS 1 OR 0
         if (numEmployees[0] != 0 || property == nullptr)
         {
             //get income after tax paid
@@ -124,16 +136,17 @@ void Business::handleAccounts()
             //plus 2 accounts for double pay for owner
             int pay = income / (numEmployees[0] + 2); 
             // pay owner
+            ((Adult*) owner)->salary(pay+pay); 
             income -= (pay + pay); 
 
             //pay employees
-            for (int i=0; i<employees.size(); i++)
+            for (int i=0; i<numEmployees[0]; i++)
             {
+                ((Adult*) employees[i])->salary(pay);
                 income -= pay; 
             }
 
             //reset income amount 
-            // SHOULD THERE BE SOME CONDITION HERE?
             income += initialIncome; 
         }
         else 

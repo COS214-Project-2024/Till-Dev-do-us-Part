@@ -1,18 +1,23 @@
 #ifndef CITIZEN_H
 #define CITIZEN_H
-// #include "House.h"
-// #include "Townhouse.h"
-// #include "Estate.h"
-// #include "Residential.h"
-class Building;
-class Residential;
-class Citizen{
+#include <iostream>
+#include <string>
+#include "Feeling.h"
+
+class Business;
+
+class Citizen {
+
     protected:
-        Residential *building;
+        Feeling* mood;
+        int health;
 
     public:
-        virtual void addHome(Residential*b);
-        virtual void goToWork();
+        virtual Citizen* clone() = 0;
+        virtual void react() = 0;
+        virtual int getHealth();
+        virtual void setHealth(int);
+        virtual ~Citizen();
 };
 
 #endif

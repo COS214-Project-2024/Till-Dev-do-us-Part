@@ -104,4 +104,8 @@ void CulturalCenter::demolish()
 {
     cout << "Removing everyone from the CulturalCenter" << endl;
     occupants.clear();
+} 
+
+bool CulturalCenter::isOccupied(){
+    return occupants.size() > 0;
 }

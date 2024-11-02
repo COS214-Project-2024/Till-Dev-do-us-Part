@@ -1,3 +1,4 @@
+
 #ifndef COMPLETESTATE_H
 #define COMPLETESTATE_H
 #include "BuildingState.h"

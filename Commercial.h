@@ -15,4 +15,3 @@ class Commercial: public Building
         virtual bool isOccupied() = 0;
 };
 #endif
-

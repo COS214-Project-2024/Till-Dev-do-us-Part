@@ -1,6 +1,7 @@
 #ifndef TOWNHOUSE_H
 #define TOWNHOUSE_H
 #include "Residential.h"
+#include "Adult.h"
 
 class Townhouse : public Residential
 {

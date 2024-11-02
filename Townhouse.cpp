@@ -189,7 +189,7 @@ void Townhouse::goToWork()
 {
     for (vector<Citizen *>::iterator it = occupants.begin(); it < occupants.end(); it++)
     {
-        (*it)->goToWork();
+        ((Adult*)(*it))->goToWork();
     }
 }
 

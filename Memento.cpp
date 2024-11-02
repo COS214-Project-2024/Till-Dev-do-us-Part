@@ -1,17 +1,32 @@
-// #include "Memento.h"
+#include "Memento.h"
+#include "Policy.h"
 
-// float Memento::getBudget() const {
-//     return budget;
-// }
 
-// void Memento::setBudget(float budget) {
-//     this->budget = budget;
-// }
+std::vector<Policy*> Memento::getActivePolicies(){
+    std::vector<Policy*> policiesCopy;
+    for (Policy* policy : activePolicies) {
+        policiesCopy.push_back(new Policy(*policy)); 
+    }
+    return policiesCopy;
+}
 
-// std::vector<Policy*> Memento::getActivePolicies() const {
-//     return activePolicies;
-// }
+void Memento::setActivePolicies(std::vector<Policy*> policies) {
+        for (Policy* policy : activePolicies) {
+        delete policy;
+    }
+    activePolicies.clear();
 
-// void Memento::setActivePolicies(const std::vector<Policy*> policies) {
-//     activePolicies = policies;
-// }
+    
+    for (Policy* policy : policies) {
+        activePolicies.push_back(new Policy(*policy));
+    }
+}
+
+Memento:: ~Memento()
+{
+    // for(auto policy:activePolicies)
+    // {
+    //     delete policy;
+    // }//not sure about this
+    activePolicies.clear();
+}

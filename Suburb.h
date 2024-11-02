@@ -36,5 +36,3 @@ class Suburb : Residential
         virtual float getElectricity(); 
 };
 #endif
-
-

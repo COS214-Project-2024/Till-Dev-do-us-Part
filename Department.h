@@ -7,7 +7,7 @@ protected:
 
 public:
     // Department(float budget) : budget(budget) {}
-    virtual ~Department(){};
+    virtual ~Department(){}
 };
 
 #endif 

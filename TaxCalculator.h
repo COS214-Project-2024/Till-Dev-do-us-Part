@@ -18,6 +18,7 @@ class TaxCalculator
         virtual string getTaxType() = 0; 
         //strategy function (algorithm) and command function (execute)
         virtual float calculateTax(float income) = 0; 
+        virtual ~TaxCalculator() {}
 };
 
 #endif 

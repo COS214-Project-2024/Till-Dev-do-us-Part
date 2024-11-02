@@ -17,4 +17,3 @@ class Landmark:public Building
         virtual bool isOccupied();
 };
 #endif
-

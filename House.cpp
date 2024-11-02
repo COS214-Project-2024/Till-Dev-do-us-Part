@@ -1,5 +1,5 @@
 #include "House.h"
-#include "Citizen.h"
+#include "Adult.h"
 
 House::House():Residential("House")
 {
@@ -200,7 +200,7 @@ void House::goToWork()
 {
     for (vector<Citizen*>::iterator it = occupants.begin(); it < occupants.end(); it++)
     {
-        (*it)->goToWork();
+        ((Adult*)(*it))->goToWork();
     }
 }
 

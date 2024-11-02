@@ -5,7 +5,7 @@
 class Industrial : public Building
 {
     public:
-        Industrial(string type);
+        Industrial(string type) : Building(type) {}
         virtual bool addOccupant(Citizen *c) = 0;
         virtual bool removeOccupant(Citizen *c) = 0;
         virtual void demolish() = 0;

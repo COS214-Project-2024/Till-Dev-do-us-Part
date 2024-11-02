@@ -32,5 +32,3 @@ class IndustrialSite : public Industrial
         virtual float getElectricity();        
 };
 #endif
-
-

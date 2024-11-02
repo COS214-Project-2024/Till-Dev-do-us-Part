@@ -32,5 +32,3 @@ class CBD : public Commercial
         virtual float getElectricity();        
 };
 #endif
-
-
