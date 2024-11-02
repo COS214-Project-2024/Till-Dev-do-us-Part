@@ -2,6 +2,7 @@
 #pragma once
 #include "TransportMode.h"
 #include "Road.h"
+#include "TaxiRank.h"
 #include "TaxiRankIterator.h"
 #include <list>
 #include <vector>
@@ -17,40 +18,25 @@ class TaxiMode : public TransportMode {
 private:
     Road* road;
     TransportFacilities* facility;
-    std::list<TransportStation*> taxiRanks;//iterator
-    std::string schedule;//observer
-
+    std::string state;
+    TransportMode* mode;
 
 public:
     TaxiMode();
-    void operateStation() override;
-    void useTransport() override;
     void drive();
     void stopDrive();
 
-
     //Mediator
-    // TaxiMode(TransportationMediator* mediator, Road* road);
-    void SetMediator(TransportationMediator* mediator);
-    void SetRoad(Road* road);
-    // void SetRank(TaxiRank* rank);
-
-
-
     std::string getName() const override;
-    void alertAccident() override;
-    void manageTraffic(const std::string& state) override;
-    void set(const std::string& state) override;
-    void changed(const std::string& state) override;
+    void SendMessage(const std::string& state);
+    std::string GetMessage();
+
     
     // Iterator??
-    void addTaxiRank(TransportStation* rank);
-
-    TransportationIterator* createIterator() override;
-
+    
     // CitizenObserver
-    void setSchedule(const std::string& newSchedule) override;
-    std::string getSchedule() const override;
-    void notifyScheduleChange();
+    // void setSchedule(const std::string& newSchedule) override;
+    // std::string getSchedule() const override;
+    // void notifyScheduleChange();
     
 };

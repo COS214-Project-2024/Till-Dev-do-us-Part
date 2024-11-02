@@ -8,13 +8,11 @@ TransportFacilities* AirplaneMode:: GetFacility(){
 
 void AirplaneMode::depart(){
     airport->remove(this);
-    std::cout<<"Airplane is departing"<<std::endl;
-    // GetFacility()->changeState();
+    std::cout<<"Airplane is taking-off"<<std::endl;
 }
 void AirplaneMode::arrive(){
     airport->add(this);
-    
-    // GetFacility()->changeState();
+    std::cout<<"Airplane is landing"<<std::endl;
     travel();
 
 }
@@ -66,7 +64,6 @@ void AirplaneMode::SendMessage(const std::string& state){
 
             
         }
-        // GetFacility()->changeState();
     }
 
 }

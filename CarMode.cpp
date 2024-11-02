@@ -4,117 +4,68 @@
 #include <iostream>
 #include "ModeFactory.h"
 
-
-// // CarMode implementation
-// void CarMode:: useTransport() {
-//     // Check road conditions
-//     if (state->getState() == "Congested") {
-//         std::cout << "Heavy traffic on road" << std::endl;
-//         return;
-//     }
-
-//     // Process passenger transport
-//     for (auto& passenger : passengers) {
-//         std::cout << "Car transporting passenger" << std::endl;
-//         passenger->update("Car journey in progress");
-//     }
-
-//     // Update mediator
-//     mediator->notify(this, state);
-// }
-
-// void alertAccident() {
-//         std::cout << "Car accident reported!" << std::endl;
-//         setState(new CongestedState(this));
-//         mediator->notify(this, state);
-//     }
-
-//     void pickUpPassengers() override {
-//         if (passengers.size() < maxPassengers && isAvailable) {
-//             std::cout << "Car ready for pickup" << std::endl;
-//         } else {
-//             std::cout << "Car is full or unavailable" << std::endl;
-//         }
-//     }
-
-//     void dropOffPassengers() override {
-//         if (!passengers.empty()) {
-//             std::cout << "Dropping off car passengers" << std::endl;
-//             passengers.clear();
-//             isAvailable = true;
-//         }
-//     }
-
-void CarMode::SetMediator(TransportationMediator* mediator)
-{
-    this->mediator= mediator;
-}
-
-void CarMode::SetRoad(Road* road){
-    this->road= road;
-}
-
 void CarMode::drive(){
     road->add(this);
+    std::cout<<"Car starts driving"<<std::endl;
+    travel();
 }
 
 void CarMode::stopDrive(){
     road->remove(this);
+    std::cout<<"Car stops driving"<<std::endl;
 }
 
-// Mediator
-// CarMode::CarMode(TransportationMediator* mediator, TransportFacilities* facility)
-    // : TransportMode(mediator), facility(facility) {}
-
-void CarMode::alertAccident() {
-    std::cout << "CarMode: Accident reported. Notifying other road users.\n";
-    mediator->notify(this, "accident");
-}
-
-void CarMode::manageTraffic(const std::string& state) {
+void CarMode::SendMessage(const std::string& state){
     if (state == "accident") {
-        std::cout << "CarMode: Responding to accident. Slowing down traffic.\n";
+        std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();
+
+            
+        }
+
     }
-    // Additional traffic management logic
+
+    if(state=="safe"){
+        std::cout<<"Safe travel";
+    }
+
+    if (state == "bad weather") {
+        std::cout << this->getName()<< ": Responding to bad weather. Delaying flights and Notifying other planes.\n";
+    }
+
+    if (state == "traffic") {
+        std::cout << this->getName()<< ": Responding to air traffic. Delaying flights and Notifying other planes.\n";
+
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();
+
+            
+        }
+    }
 }
 
-void CarMode::set(const std::string& state) {
-    manageTraffic(state);
-}
-
-void CarMode::changed(const std::string& state) {
-    mediator->notify(this, state);
+std::string CarMode::GetMessage(){
+return state;
 }
 
 std::string CarMode:: getName() const {
      return "CarMode"; }
 
-TransportFacilities* CarMode:: getFacility() const { 
-    return facility; }
-
-bool CarMode:: isRoadMode() const{
-    return true; }
-
-bool CarMode::isRailwayMode() const { 
-    return false; }
-
-bool CarMode:: isAirportMode() const { 
-    return false; }
 
 
+ //Iterator??? No iterator!!!!!
 
- //Iterator???
+// //CitizenObserver
+// void CarMode::setSchedule(const std::string& newSchedule) {
+//     schedule = newSchedule;
+//     notifyScheduleChange();
+// }
 
-//CitizenObserver
-void CarMode::setSchedule(const std::string& newSchedule) {
-    schedule = newSchedule;
-    notifyScheduleChange();
-}
+// std::string CarMode::getSchedule() const {
+//     return schedule;
+// }
 
-std::string CarMode::getSchedule() const {
-    return schedule;
-}
-
-void CarMode::notifyScheduleChange() {
-    notifyObservers("Car schedule updated: " + schedule);
-}
+// void CarMode::notifyScheduleChange() {
+//     notifyObservers("Car schedule updated: " + schedule);
+// }

@@ -5,101 +5,73 @@
 #include <iostream>
 #include "ModeFactory.h"
 
-// void TaxiMode::useTransport() {
-//     // Check if state is valid for transport
-//     if (state->getState() == "Congested") {
-//         std::cout << "Bus service delayed due to congestion" << std::endl;
-//         return;
-//     }
-
-//     // Process passenger boarding
-//     for (auto& passenger : passengers) {
-//         std::cout << "Bus boarding passenger" << std::endl;
-//         passenger->update("Now boarding bus");
-//     }
-
-//     // Update schedule and notify mediator
-//     notifySchedule();
-//     mediator->notify(this, state);
-// }
 
 TaxiMode::TaxiMode(){
-    
 
-    
-}
-
-void TaxiMode::SetMediator(TransportationMediator* mediator)
-{
-    this->mediator= mediator;
-}
-
-void TaxiMode::SetRoad(Road* road){
-    this->road= road;
 }
 
 // Mediator
 
 void TaxiMode:: drive(){
-    road->addVehicle(this);
+    road->add(this);
+    std::cout<<"Taxi starts driving"<<std::endl;
 }
 
 void TaxiMode::stopDrive(){
     road->remove(this);
-}
-// TaxiMode::TaxiMode(TransportationMediator* mediator, Road* road)
-//     : TransportMode(mediator), road(road) {}
-
-void TaxiMode::alertAccident() {
-    std::cout << "TaxiMode: Accident reported. Notifying other road users.\n";
-    mediator->notify(this, "accident");
+    std::cout<<"Taxi stops driving"<<std::endl;
 }
 
-void TaxiMode::manageTraffic(const std::string& state) {
+void TaxiMode::SendMessage(const std::string& state){
     if (state == "accident") {
-        std::cout << "TaxiMode: Responding to accident. Slowing down traffic.\n";
+        std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();
+
+            
+        }
+
     }
-    // Additional traffic management logic
+
+    if(state=="safe"){
+        std::cout<<"Safe travel";
+    }
+
+    if (state == "bad weather") {
+        std::cout << this->getName()<< ": Responding to bad weather. Delaying flights and Notifying other planes.\n";
+    }
+
+    if (state == "traffic") {
+        std::cout << this->getName()<< ": Responding to air traffic. Delaying flights and Notifying other planes.\n";
+
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();
+
+            
+        }
+    }
 }
 
-void TaxiMode::set(const std::string& state) {
-    manageTraffic(state);
+std::string TaxiMode::GetMessage(){
+return state;
 }
 
 std::string TaxiMode:: getName() const {
      return "TaxiMode"; }
 
-TransportFacilities* TaxiMode:: getFacility() const { 
-    return facility; }
-
-bool TaxiMode:: isRoadMode() const{
-    return true; }
-
-bool TaxiMode::isRailwayMode() const { 
-    return false; }
-
-bool TaxiMode:: isAirportMode() const { 
-    return false; }
-
 // Iterator??
-void TaxiMode::addTaxiRank(TransportStation* rank) {
-    taxiRanks.push_back(rank);
-}
 
-TransportationIterator* TaxiMode::createIterator() {
-    return new TaxiRankIterator(taxiRanks);
-}
 
 // CitizenObserver
-void TaxiMode::setSchedule(const std::string& newSchedule) {
-    schedule = newSchedule;
-    notifyScheduleChange();
-}
+// void TaxiMode::setSchedule(const std::string& newSchedule) {
+//     schedule = newSchedule;
+//     notifyScheduleChange();
+// }
 
-std::string TaxiMode::getSchedule() const {
-    return schedule;
-}
+// std::string TaxiMode::getSchedule() const {
+//     return schedule;
+// }
 
-void TaxiMode::notifyScheduleChange() {
-    notifyObservers("Taxi schedule updated: " + schedule);
-}
+// void TaxiMode::notifyScheduleChange() {
+//     notifyObservers("Taxi schedule updated: " + schedule);
+// }

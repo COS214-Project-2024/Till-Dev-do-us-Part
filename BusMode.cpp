@@ -25,13 +25,8 @@
 
 
 // Mediator
-// BusMode::BusMode(TransportationMediator* mediator, TransportFacilities* facility)
-//     : TransportMode(mediator), facility(facility) {}
 
-// void BusMode::SetMediator(TransportationMediator* mediator)
-// {
-//     this->mediator= mediator;
-// }
+
 
 TransportFacilities* BusMode:: GetFacility(){
      return this->road;

@@ -3,49 +3,40 @@
 #include "TransportMode.h"
 #include "Road.h"
 #include "ModeFactory.h"
+#include "TransportFacilities.h"
+#include "TransState.h"
+#include "ModeFactory.h"
+#include "ConcreteTransportationMediator.h"
+#include <algorithm>
 
 
 class TransportFacilities;
 class TransportationMediator;
+class ConcreteTransportationMediator;
 
 class CarMode : public TransportMode {
 private:
     Road* road;
     TransportFacilities* facility;
     std::string schedule;
-
+    std::string state;
+    TransportMode* mode;
 
 public:
     CarMode();
-    void operateStation() override;
-    void useTransport() override;
     void drive();
     void stopDrive();
     
-
-
     //Mediator
-    // CarMode(TransportationMediator* mediator, TransportFacilities* facility);
-    void SetMediator(TransportationMediator* mediator);
-    void SetRoad(Road* road);
-    
-
+    void SendMessage(const std::string& state);
+    std::string GetMessage();
     std::string getName() const override;
-    void alertAccident() override;
-    void manageTraffic(const std::string& state) override;
-    void set(const std::string& state) override;
-    void changed(const std::string& state) override;
-
-    TransportFacilities* getFacility() const override;
-    bool isRoadMode() const override;
-    bool isRailwayMode() const override;
-    bool isAirportMode() const override;
-
+    
     //Iterator???
 
-    //CitizenObserver
-    void setSchedule(const std::string& newSchedule) override;
-    std::string getSchedule() const override;
-    void notifyScheduleChange();
+    // //CitizenObserver
+    // void setSchedule(const std::string& newSchedule) override;
+    // std::string getSchedule() const override;
+    // void notifyScheduleChange();
     
 };

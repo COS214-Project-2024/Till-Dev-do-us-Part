@@ -91,13 +91,13 @@ public:
 
     // CitizenObserver
      // Methods to manage observers
-    void addObserver(CitizenObserver* observer);
-    void removeObserver(CitizenObserver* observer);
-    void notifyObservers(const std::string& message);
+    // void addObserver(CitizenObserver* observer);
+    // void removeObserver(CitizenObserver* observer);
+    // void notifyObservers(const std::string& message);
 
-    // Pure virtual functions for schedule management
-    virtual void setSchedule(const std::string& schedule) = 0;
-    virtual std::string getSchedule() const = 0;
+    // // Pure virtual functions for schedule management
+    // virtual void setSchedule(const std::string& schedule) = 0;
+    // virtual std::string getSchedule() const = 0;
     std::list<TransportStation*> getStops();
 
 

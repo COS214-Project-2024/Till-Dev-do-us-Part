@@ -33,8 +33,7 @@ public:
     void stopDrive();
 
     //Mediator
-    // BusMode(TransportationMediator* mediator, TransportFacilities* facility);
-    void SetMediator(TransportationMediator* mediator);
+
     void SetRoad(Road* road);
     TransportFacilities* GetFacility();
 
