@@ -5,15 +5,19 @@
 #include <vector>
 #include "Resources.h"
 #include "Utility.h"
+#include "Department.h"
 
 
 class Utility;
 
-class ResourceDepartment
+class ResourceDepartment: public Department
 {
 private:
     std::vector<Resources *> resources; // List of managed resources
     std::vector<Utility *> utilities;  // List of registered utilities
+      int totalEnergyDemand;
+      int totalWaterDemand;
+
 
 public:
     // Constructor and Destructor
@@ -35,6 +39,10 @@ public:
 
     // Check total resource levels
     void checkResourceLevels();
+
+    ResourceDepartment(float budget);
+
+    void processResourceRequest(float amount);
 };
 
 #endif // RESOURCEDEPARTMENT_H

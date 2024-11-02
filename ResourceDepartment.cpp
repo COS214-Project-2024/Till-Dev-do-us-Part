@@ -87,3 +87,20 @@ void ResourceDepartment::checkResourceLevels()
     {
         }
 }
+
+ResourceDepartment:: ResourceDepartment(float budget)
+{
+    this->budget=budget;
+}
+// void ResourceDepartment:: addUtility()
+// {
+//     utilities.push_back(utility);
+// }
+void ResourceDepartment:: processResourceRequest(float amount)
+{
+    // budget-=amount
+    // if(budget<0)
+    // {
+    //     budget=0;
+    // }
+}

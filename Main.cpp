@@ -1,12 +1,15 @@
 #include "main.h"
 
+//SIMULATION DISPLAY
+#include "display.h"
+
 //DECLARING GLOBAL VARIABLES
 Government* Gov;
 HealthcareFacility *clinic,*GH, *ICH;
 Resources *WaterResource, *EnergyResource;
 Population* AdultFactory, *MinorFactory;
-ProductionUtility* PowerPlant, *WaterSupply;
-ServiceUtility *WasteManagement, *SewerSystem;
+ProductionUtility* powerPlant, *waterSupply;
+ServiceUtility *wasteManagement, *SewerSystem;
 Department* DevDept, *FinDept, *SoAffDept, *TransDept, *ResourceDept, *healthDept;
 TaxCalculator* taxes [6]; 
 WiseBucks* apps [6]; 
@@ -52,6 +55,10 @@ std::map<int, std::string> monthsOfTheYear = {
 
 int main()
 {
+     #ifdef _WIN32
+        // Enable ANSI escape sequences for Windows
+        system("color");
+    #endif
     DemoMain(); 
     return 0; 
 }
@@ -63,6 +70,7 @@ void DemoMain()
     cout << "  WELCOME TO THE GREATEST CITY IN 214" << endl; 
     cout << "~ created by TDP - Till Dev do us Part ~" << endl; 
 
+    // displayIntro();
     cout << "===========================================================================================================================================================================" << endl;
     
     cout << "Creating Goverment and its Departments:" << endl; 
@@ -228,29 +236,31 @@ void governmentObjects(){
     //Change how addDept is used
 
     Gov = Government::getInstance(); 
-     ResourceDept = new Department(100000);
-    // Gov->addDepartment("Resources", ResourcesDept(100000)); 
-    // FinDept = new FinanceDept(100000); 
-    Gov->addDepartment("Finance", new FinanceDept(100000)); 
+     ResourceDept = new ResourceDepartment(100000);
+     Gov->addDepartment("Resources", ResourceDept); 
+    FinDept = new FinanceDept(100000); 
+    Gov->addDepartment("Finance", FinDept); 
     DevDept = new DevelopmentDept(100000); 
-    Gov->addDepartment("Development", new DevelopmentDept(100000));  
-    // TransDept = new TransDept(100000);
+    Gov->addDepartment("Development", DevDept);  
+     //TransDept = new TransportDept(100000);
     // Gov->addDepartment("Transport", TransDept(100000));
-    // healthDept = new healthDept(50000);
-    Gov->addDepartment("Health", new HealthDept(50000));  
-    // SoAffDept = new SocialAffairsDept(100000);
-    Gov->addDepartment("SocialAffairs", new SocialAffairsDept(100000));
+    healthDept = new HealthDept(50000);
+    Gov->addDepartment("Health", healthDept);  
+    SoAffDept = new SocialAffairsDept(100000);
+    Gov->addDepartment("SocialAffairs", SoAffDept);
 }
 
 void utilResourceObjects(){
 
     EnergyResource = new Energy();
     WaterResource = new Water();
+    
 
-    // PowerPlant = new PowerPlant("CityPower", resourceDept, EnergyResource);
-    // WaterSupply = new WaterSupply("CityWater", resourceDept, WaterResource);
-    // WasteManagement = new WasteManagement("CityWaste", resourceDept);
-    // SewerSystem = new SewageSystem("CitySewage", resourceDept);
+    
+       powerPlant = new PowerPlant("CityPower", static_cast<ResourceDepartment*>(ResourceDept), static_cast<Energy*>(EnergyResource));
+    waterSupply = new WaterSupply("CityWater", static_cast<ResourceDepartment*>(ResourceDept), WaterResource);
+    wasteManagement = new WasteManagement("CityWaste", static_cast<ResourceDepartment*>(ResourceDept));
+    SewerSystem = new SewageSystem("CitySewage", static_cast<ResourceDepartment*>(ResourceDept));
 
 }
 
