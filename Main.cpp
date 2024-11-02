@@ -300,6 +300,24 @@ void utilResourceObjects(){
     wasteManagement = new WasteManagement("CityWaste", static_cast<ResourceDepartment*>(ResourceDept));
     SewerSystem = new SewageSystem("CitySewage", static_cast<ResourceDepartment*>(ResourceDept));
 
+
+    //retha's main
+
+
+    // Start in Operational State for both utilities
+    std::cout << "\n--- Start Production ---\n";
+    powerPlant->startProduction();
+    powerPlant->startProduction();
+
+    waterSupply->startProduction();
+    waterSupply->startProduction();
+
+    std::cout << "\n--- Start Service ---\n";
+    wasteManagement->startService();
+    wasteManagement->startService();
+
+    SewerSystem->startService();
+    SewerSystem->startService();
 }
 
 void buildingObjects(){
