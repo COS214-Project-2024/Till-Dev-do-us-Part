@@ -320,6 +320,8 @@ void DemoMain()
     //instantiate building objects 
 
 //CREATING THE CITY 
+    /*TO CREATE CITIZENS: use the functions growPopulation in SAD
+      TO CREATE IMMIGRANTS: use the reproduce function in AdultPop/ MinorPop*/
     Citizen** first100 = AdultFactory->reproduce(100); 
     for (int i=0; i<100; i++)
     {
