@@ -145,7 +145,7 @@ void DemoMain()
             }
         }
 
-        // ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->getCRS()->settleTax(); //Settle Monthly
+         ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->getCRS()->settleTax(); //Settle Monthly
     }
 
     cout << "===========================================================================================================================================================================" << endl;
@@ -228,7 +228,7 @@ void governmentObjects(){
     //Change how addDept is used
 
     Gov = Government::getInstance(); 
-    // ResourceDept = new ResourcesDept(100000);
+     ResourceDept = new Department(100000);
     // Gov->addDepartment("Resources", ResourcesDept(100000)); 
     // FinDept = new FinanceDept(100000); 
     Gov->addDepartment("Finance", new FinanceDept(100000)); 
