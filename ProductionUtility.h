@@ -7,6 +7,7 @@
 #include <thread>       // For sleep_for
 #include <chrono>  
 #include "MaintenanceProductionState.h"
+#include "OutageProductionState.h"
 class ProductionUtility : public Utility
 {
 protected:
@@ -14,7 +15,7 @@ protected:
     float currentProduction;
     ProductionState* proState;
 public:
-    ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource,int numworkers);
+    ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource,int maxWorkers);
     virtual ~ProductionUtility();
 
     // Production operations

@@ -2,13 +2,12 @@
 #include <cstdlib> // For rand() and srand()
 #include <ctime>   // For time()
 
-ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource,int numworkers)
-    : Utility(name, resDept, resource,numworkers), currentProduction(0), proState(nullptr)
+ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int MaxWorkers)
+    : Utility(name, resDept, resource, MaxWorkers), currentProduction(0), proState(nullptr)
 {
 }
 
 ProductionUtility::~ProductionUtility() = default;
-
 
 void ProductionUtility::processRequest()
 {
@@ -41,7 +40,7 @@ void ProductionUtility::getStatus() const
     std::cout << "   - Total Capacity                : " << productionCapacity << std::endl;
     std::cout << "   - Current Production            : " << currentProduction << std::endl;
     std::cout << "3. Revenue                         : " << 1000000 << std::endl;
-    std::cout << "4. Active Workers                  : " << workers << std::endl;
+    std::cout << "4. Active Workers                  : " << ActiveWorkers << std::endl;
     std::cout << "--------------------------------------------------" << std::endl;
 }
 
