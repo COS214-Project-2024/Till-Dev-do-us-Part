@@ -1,18 +1,20 @@
 #include "Utility.h"
 #include <iostream>
 
-Utility::Utility() : name("Unnamed Utility"), resDept(nullptr), resource(nullptr), revenue(0.0), workers(0) {}
-
-Utility::Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int workers)
-    : name(name), resDept(resDept), resource(resource), revenue(0.0), workers(workers) {}
+Utility::Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int maxWorkers)
+    : name(name), resDept(resDept), resource(resource), MaxWorkers(maxWorkers)
+{
+    UtilityBus = new Wellness("Utility", MaxWorkers);
+    std::cout << "Buying Property for Utilities" << std::endl;
+    UtilityBus->buyProperty("Plant");
+    std::cout << "Hiring Employess for Utilities" << std::endl;
+    for (int i = 0; i <= MaxWorkers; i++)
+    {
+        UtilityBus->hireEmployee();
+    }
+}
 
 Utility::~Utility() = default;
-
-void Utility::checkForBreakdowns()
-{
-    // Logic to check for breakdowns in utility service
-    std::cout << name << " is checking for breakdowns..." << std::endl;
-}
 
 void Utility::notifyResourceDept(const std::string &message)
 {
@@ -25,11 +27,6 @@ std::string Utility::getName() const
     return name;
 }
 
-int Utility::getWorkers() const
-{
-    return workers;
-}
-
 Resources *Utility::getResource() const
 {
     return resource;
@@ -38,4 +35,13 @@ Resources *Utility::getResource() const
 void Utility::getStatus() const
 {
     std::cout << "---- Utility Status ----" << std::endl;
+}
+
+int Utility::getActiveWorkers() const
+{
+    return ActiveWorkers;
+}
+int Utility::getMaxWorkers() const
+{
+    return MaxWorkers;
 }

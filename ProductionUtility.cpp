@@ -1,25 +1,13 @@
 #include "ProductionUtility.h"
-#include <cstdlib>   // For rand() and srand()
-#include <ctime>     // For time()
+#include <cstdlib> // For rand() and srand()
+#include <ctime>   // For time()
 
-ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource)
-    : Utility(name, resDept, resource, workers), currentProduction(0), proState(nullptr)
+ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int MaxWorkers)
+    : Utility(name, resDept, resource, MaxWorkers), currentProduction(0), proState(nullptr)
 {
 }
 
 ProductionUtility::~ProductionUtility() = default;
-
-// void ProductionUtility::startProduction()
-// {
-//     if (proState)
-//     {
-//         proState->handleProduction(this);
-//     }
-//     else
-//     {
-//         std::cout << "No production state set." << std::endl;
-//     }
-// }
 
 void ProductionUtility::processRequest()
 {
@@ -51,8 +39,8 @@ void ProductionUtility::getStatus() const
     std::cout << "2. Status                          : " << proState->getStateName() << std::endl;
     std::cout << "   - Total Capacity                : " << productionCapacity << std::endl;
     std::cout << "   - Current Production            : " << currentProduction << std::endl;
-    std::cout << "3. Revenue                         : " << revenue << std::endl;
-    std::cout << "4. Workers                         : " << workers << std::endl;
+    std::cout << "3. Revenue                         : " << 1000000 << std::endl;
+    std::cout << "4. Active Workers                  : " << ActiveWorkers << std::endl;
     std::cout << "--------------------------------------------------" << std::endl;
 }
 
@@ -73,7 +61,7 @@ void ProductionUtility::checkForBreakdowns()
         std::cout << name << " has broken down and is entering Maintenance State." << std::endl;
 
         // Change state to Maintenance (assuming setState and MaintenanceState exist)
-        setProState(new MaintenanceProductionState()); 
+        setProState(new MaintenanceProductionState());
     }
     else
     {
