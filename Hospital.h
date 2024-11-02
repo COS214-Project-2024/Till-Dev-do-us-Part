@@ -1,9 +1,8 @@
 #ifndef HOSPITAL_H
 #define HOSPITAL_H
 #include "Public.h"
-#include "Clinic.h"
-// #include "Citizens.h"
-class Citizen;
+#include "Citizen.h"
+// class Citizen;
 
 class Hospital :public Public
 {
@@ -13,11 +12,11 @@ class Hospital :public Public
     public:
         Hospital();
         ~Hospital();
-        //Karabo removed purity. What inherits from hospital?
-        virtual bool addOccupant(Citizen *c) ;
+        virtual bool addOccupant(Citizen *c);
         virtual void demolish();
         virtual bool clean();
-        virtual Building* clone();
-        // void heal(); //dk what to do with this but must be used to remove patients from the hospital
+        virtual bool removeOccupant(Citizen *c);
+        virtual Building *clone();
+        virtual bool isOccupied();
 };
 #endif

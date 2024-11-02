@@ -2,7 +2,6 @@
 
 DilapidatedState::DilapidatedState() : BuildingState("Dilapidated")
 {
-    
 }
 
 bool DilapidatedState::canUseElectricity()
@@ -15,8 +14,7 @@ bool DilapidatedState::canUseWater()
     return false;
 }
 
-BuildingState *DilapidatedState::change()
+BuildingState *DilapidatedState::clone()
 {
-    return nullptr; 
-    // return new DilapidatedState();
+    return new DilapidatedState();
 }

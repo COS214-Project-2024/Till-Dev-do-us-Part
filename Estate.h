@@ -1,11 +1,14 @@
 #ifndef ESTATE_H
 #define ESTATE_H
 #include "Residential.h"
+#include "Building.h"
+
 
 class Estate : public Residential
 {
     private:
         vector<Residential *> buildings;
+        int noBuildings;
 
     public:
         Estate();
@@ -15,9 +18,16 @@ class Estate : public Residential
         virtual bool useToilet();
         virtual bool useStove();
         virtual bool clean();
-        virtual Building* clone();
         bool addOccupant(Citizen *c);
-        bool addHouse(Residential *); // if capacity is reached, return false
-    
-};
+        bool addHouse(Residential *);
+        virtual void goToWork();
+        virtual int getNoBuildings();
+        virtual bool removeOccupant(Citizen *c);
+        bool removeBuilding(Residential *building);
+        virtual Building *clone();
+        virtual bool isOccupied();
+        virtual float getCleanliness();
+        virtual float getWater();
+        virtual float getElectricity();
+    };
 #endif

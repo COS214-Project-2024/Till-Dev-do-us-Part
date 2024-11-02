@@ -13,8 +13,7 @@ bool CompleteState::canUseWater()
     return true;
 }
 
-BuildingState *CompleteState::change()
+BuildingState* CompleteState::clone()
 {
-    return nullptr; 
-    // return new CompleteState();
+    return new CompleteState();
 }

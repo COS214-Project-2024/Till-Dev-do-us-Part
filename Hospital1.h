@@ -13,12 +13,6 @@ class Hospital1: public HealthcareFacility {
         ~Hospital1(){};
         void admitPatient(Citizen* c);
 
-public:
-    Hospital1() ;
-    //~Hospital1();
-
-    void admitPatient(Citizen* c);
-
 };
 
 #endif

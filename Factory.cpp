@@ -2,13 +2,16 @@
 
 Factory::Factory() : Industrial("Factory")
 {
-    // cout << "Factory created" << endl;
+    cout << "Factory created" << endl;
 }
 
-Building* Factory::clone() {
-   
-}//Added by Karabo
-
+Factory::~Factory()
+{
+    delete this->state;
+    state = nullptr;
+    demolish();
+    cout << "Factory demolished!" << endl;
+}
 
 bool Factory::addOccupant(Citizen *c)
 {
@@ -48,7 +51,37 @@ bool Factory::clean(){
     return false;
 }
 
-Factory::~Factory(){
-    demolish();
-    cout << "Factory demolished!" << endl;
+Building *Factory::clone()
+{
+    Factory *newFactory = new Factory();
+    newFactory->cleanliness = this->cleanliness;
+    newFactory->electricityUnits = this->electricityUnits;
+    newFactory->waterUnits = this->waterUnits;
+    newFactory->value = this->value;
+    newFactory->area = this->area;
+    newFactory->capacity = this->capacity;
+
+    return newFactory;
+}
+
+bool Factory::removeOccupant(Citizen *c)
+{
+    vector<Citizen *>::iterator first = occupants.begin();
+    vector<Citizen *>::iterator last = occupants.end();
+
+    vector<Citizen *>::iterator it = find(first, last, c);
+    if (it != last)
+    {
+        occupants.erase(it);
+        cout << "Occupant removed from the Factory" << endl;
+        return true;
+    }
+
+    cout << "Occupant not in the Factory" << endl;
+    return false;
+}
+
+bool Factory::isOccupied()
+{
+    return occupants.size() >0;
 }

@@ -23,16 +23,16 @@ class DevelopmentDept : public Department
     private:
         int land;
         map<std::string, float> priceList;
+        map<std::string, float> buildingAreaList;
         map<std::string, BuildingFactory *> factories;
-        vector<Building*> unOccupiedBuildings;
+        vector<Building *> unOccupiedBuildings;
 
     public : 
         DevelopmentDept(float budget);
-        bool allocateLand(int Landsize);
+        ~DevelopmentDept();
         float getPrice(std::string buildingType);
         void addFactory(const std::string buildingType, BuildingFactory *factory);
         Building *build(std::string buildingType);
-        ~DevelopmentDept();
 };
 
 #endif

@@ -5,15 +5,16 @@
 class Shop : public Commercial
 {
     private:
-        vector<Citizen *> occupants;
-        // Citizen* occupant;
-    
+        Citizen * occupant;
+
     public:
         Shop();
         ~Shop();
         virtual void demolish();
         virtual bool clean();
         virtual bool addOccupant(Citizen *c);
+        virtual bool removeOccupant(Citizen *c);
         virtual Building* clone();
+        virtual bool isOccupied();
 };
 #endif

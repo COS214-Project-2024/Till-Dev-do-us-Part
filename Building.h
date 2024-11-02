@@ -1,37 +1,47 @@
+// #include "Citizen.h"
 #ifndef BUILDING_H
 #define BUILDING_H
 
+#include "BuildingState.h"
+#include "ConstructionState.h"
+#include "CompleteState.h"
+#include "DilapidatedState.h"
+// #include "Citizen.h"
 #include <iostream>
+#include <algorithm>
 #include <vector>
 using namespace std;
-#include "BuildingState.h"
-class Citizen; //for now since Citizen is not defined
-#include "Citizen.h"
 
+class Citizen;
 class Building
 {
     protected:
         BuildingState* state;
         string type;
-        float area;
-        float value;
-        int floor; //dk how im going to use it now, 'cause im planning on adding a floor decorator
+        float cleanliness;
         float electricityUnits;
         float waterUnits;
-        int capacity;
+        float value; //
+        float area; //
+        int capacity; //
     public:
         Building(string type);
-        virtual ~Building();
-        virtual void loadElectricity(int units); //needs utilities
-        virtual void loadWater(int units); //needs utilities
-        virtual bool useElectricity(int units);
-        virtual bool useWater(int units);
-        virtual float getPrice();
+        ~Building();
+        virtual void loadElectricity(float units);
+        virtual void loadWater(float units);
+        virtual bool useElectricity(float units);
+        virtual bool useWater(float units);
+        virtual float getValue();
         virtual string getType();
+        virtual float getWater();
+        virtual float getElectricity();
+        virtual float getCleanliness();
         virtual void demolish()=0;
         virtual bool clean()=0;
         virtual bool addOccupant(Citizen* c)=0;
+        virtual bool removeOccupant(Citizen* c)=0;
         virtual Building* clone() =0;
-        // virtual bool useToilet(); // why boolean, because when there isnt enough water/electricity it must affect the citizen
+        virtual bool isOccupied() =0;
+
 };
 #endif
