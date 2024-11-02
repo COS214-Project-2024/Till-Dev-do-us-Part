@@ -14,26 +14,10 @@ Road:: Road(){
     
 }
 
-// Road::Road(TransState* state) : TransportFacilities(state) {}
 
 Road::~Road() {
     delete currentState;
-    vehicles.clear();
+    moVec.clear();
 }
 
-void Road::setState(TransState* newState) {
-    if (currentState) delete currentState;
-    currentState = nullptr;
-    currentState = newState;
-}
-
-// TransportFacilities implementations
-void Road::maintain() {
-    std::cout << "Performing road maintenance" << std::endl;
-
-    // Perform maintenance tasks
-    std::cout << "Checking road surface" << std::endl;
-    std::cout << "Repairing potholes" << std::endl;
-    std::cout << "Maintaining road markings" << std::endl;
-}
 

@@ -8,11 +8,10 @@
 class TransportFacilities; // Forward declaration
 
 class TransState {
-private:
-    TransportFacilities* stateFacility;
-
 protected: 
     std:: string name;
+    TransportFacilities* stateFacility;
+
 public:
     virtual ~TransState() = default;
     virtual void handleState() = 0;

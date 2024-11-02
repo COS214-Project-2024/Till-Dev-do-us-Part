@@ -2,39 +2,22 @@
 #include <string>
 #include <iostream>
 
-TransportFacilities* AirplaneMode:: GetFacility(){
-     return this->airport;
+
+AirplaneMode:: AirplaneMode()
+{
+    mediator=nullptr;
+    facility=nullptr;
 }
 
 void AirplaneMode::depart(){
-    airport->remove(this);
-    std::cout<<"Airplane is taking-off"<<std::endl;
+    facility->remove(this);
+    std::cout<<"Airplane is departing"<<std::endl;
+
 }
 void AirplaneMode::arrive(){
-    airport->add(this);
-    std::cout<<"Airplane is landing"<<std::endl;
+    facility->add(this);
     travel();
 
-}
-
-void AirplaneMode::travel()
-{
-    // Define possible states
-        std::vector<std::string> states = {"accident", "bad weather", "traffic","safe"};
-
-    // Shuffle states
-    std::random_device rd;
-        std::mt19937 gen(rd());
-        std::shuffle(states.begin(), states.end(), gen);
-
-        // Pick the first state in the shuffled list
-       state = states.front();
-       changed(state);
-    
-}
-void AirplaneMode::SetFacilities(Airport* airport){
-    this->airport=airport;
-    
 }
 
 void AirplaneMode::SendMessage(const std::string& state){
@@ -66,37 +49,11 @@ void AirplaneMode::SendMessage(const std::string& state){
         }
     }
 
-}
-    
+}   
 std::string AirplaneMode::GetMessage(){
 return state;
 }
 
-
-void AirplaneMode::changed(const std::string& state) {
-    this->state = state;
-    mediator->notify(this);
-    
-}
-    
-
 std::string AirplaneMode:: getName() const {
-     return "AirplaneMode"; }
-
-
-// Iterator???
-
-// CitizenObserver
-// void AirplaneMode::setSchedule(const std::string& newSchedule) {
-//     schedule = newSchedule;
-//     notifyScheduleChange();
-// }
-
-// std::string AirplaneMode::getSchedule() const {
-//     return schedule;
-// }
-
-// void AirplaneMode::notifyScheduleChange() {
-//     notifyObservers("Airplane schedule updated: " + schedule);
-// }
-
+     return "AirplaneMode"; 
+}

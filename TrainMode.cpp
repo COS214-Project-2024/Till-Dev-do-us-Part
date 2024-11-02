@@ -5,106 +5,66 @@
 #include <iostream>
 
 
-TrainMode::~TrainMode() {
-    if (railway) {
-        railway->remove(this); // Remove from railway on destruction
+TrainMode::TrainMode() {
+    mediator=nullptr;
+    facility=nullptr;
+}
+
+void TrainMode::drive(){
+    facility->add(this);
+    QueueIterator it(this);
+    int x=1;
+    while (it.hasNext())
+    {
+        auto current=it.currItem();
+        std:: cout<<"Arriving at stop "<<x++<<std::endl;
+        it.next();
     }
-}
-
-// void TrainMode::useTransport() {
-//     std::cout << "Train is using the railway." << std::endl;
-//     if (railway) {
-//         railway->useTransport();
-//     }
-// }
-
-// // TrainMode implementation
-// void TrainMode::useTransport() {
-//     // Verify railway status
-//     if (state->getState() == "Congested") {
-//         std::cout << "Train service delayed" << std::endl;
-//         return;
-//     }
-
-//     // Handle passenger boarding
-//     for (auto& passenger : passengers) {
-//         std::cout << "Train boarding passenger" << std::endl;
-//         passenger->update("Now boarding train");
-//     }
-
-//     // Update schedule and notify
-//     notifySchedule();
-//     mediator->notify(this, state);
-// }
-
-//Mediator
-// TrainMode::TrainMode(TransportationMediator* mediator, TransportFacilities* facility)
-//     : TransportMode(mediator), facility(facility) {}
-
-
-void TrainMode::alertAccident() {
-    std::cout << "TrainMode: Accident reported on the railway. Notifying other train users.\n";
-    mediator->notify(this, "accident");
-}
-
-void TrainMode::manageTraffic(const std::string& state) {
-    if (state == "accident") {
-        std::cout << "TrainMode: Responding to accident. Slowing down trains.\n";
+    std::cout<<"Revisiting stops\n";
+    StackIterator it(this);
+    int x=1;
+    while (it.hasNext())
+    {
+        auto current=it.currItem();
+        std:: cout<<"Arriving at stop "<<x--<<std::endl;
+        it.next();
     }
-    // Additional traffic management logic specific to trains
-}
+     std::cout<<"Completed all routes";
 
-void TrainMode::set(const std::string& state) {
-    manageTraffic(state);
-}
-
-void TrainMode::changed(const std::string& state) {
-    mediator->notify(this, state);
 }
 
 std::string TrainMode:: getName() const {
      return "TrainMode"; }
 
-// TransportFacilities* TrainMode:: getFacility() const { 
-//     return facility; }
+void TrainMode::SendMessage(const std::string& state){
+    if (state == "accident") {
+        std::cout << this->getName()<< ": Responding to accident. Delaying trips and Notifying other vehicles.\n";
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();   
+        }
 
-bool TrainMode:: isRoadMode() const{
-    return false; }
+    }
 
-bool TrainMode::isRailwayMode() const { 
-    return true; }
+    if(state=="safe"){
+        std::cout<<"Safe travel";
+    }
 
-bool TrainMode:: isAirportMode() const { 
-    return false; }
+    if (state == "bad weather") {
+        std::cout << this->getName()<< ": Responding to bad weather. Delaying trips and Notifying other vehicles.\n";
+    }
 
-// Iterator ????
-void TrainMode::addTrainStation(TransportStation* station) {
-    trainStations.push_back(station);
+    if (state == "traffic") {
+        std::cout << this->getName()<< ": Responding to air traffic. Delaying trips and Notifying other vehicles.\n";
+
+        if(GetFacility()->getModeCount()>10){
+            GetFacility()->changeState();  
+        }
+    }
+
+} 
+void TrainMode::stopdrive(){
+    facility->remove(this);
 }
-
-TransportationIterator* TrainMode::createIterator() {
-    return new TrainStationIterator(trainStations);
-}
-
-// CitizenObserver
-void TrainMode::setSchedule(const std::string& newSchedule) {
-    schedule = newSchedule;
-    notifyScheduleChange();
-}
-
-std::string TrainMode::getSchedule() const {
-    return schedule;
-}
-
-void TrainMode::notifyScheduleChange() {
-    notifyObservers("Train schedule updated: " + schedule);
-}
-
-void TrainMode:: drive()
-{
-    railway->add(this);
-}
-void TrainMode:: stopdrive()
-{
-    railway->remove(this);
+std::string TrainMode::GetMessage(){
+return state;
 }

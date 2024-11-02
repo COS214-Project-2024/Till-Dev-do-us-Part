@@ -11,6 +11,17 @@ void TransportFacilities::setState(TransState* newState) {
     notifyCitizens();
 
 }
+void TransportFacilities::decreaseTraffic()
+{
+    int elementsToDelete = 6; 
+    for(int i=0; i< elementsToDelete && i < moVec.size(); i++){
+        moVec.at(i)->divertingRoute();//come back 
+    }
+}
+ int TransportFacilities::getModeCount()
+ {
+    return moVec.size();
+ }
 
 TransState* TransportFacilities:: getState()
 {

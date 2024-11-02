@@ -18,48 +18,14 @@ class TransportFacilities;
 class TransportationMediator;
 
 class BusMode : public TransportMode {
-private:
-    Road* road;
-    TransportFacilities* facility; //mediator
-    std::list<TransportStation*> busStops; //iterator
-    std::string schedule; //observer
-
-
 public:
     BusMode();
-    void operateStation() override;
-    void useTransport() override;
     void drive();
-    void stopDrive();
-
-    //Mediator
-
-    void SetRoad(Road* road);
-    TransportFacilities* GetFacility();
-
-
-
+    void stopdrive();
     std::string getName() const override;
-    void alertAccident() override;
-    void manageTraffic(const std::string& state) override;
-    void set(const std::string& state) override;
-    void changed(const std::string& state) override;
+    void SendMessage(const std::string& state);
+    std::string GetMessage();
 
-    // TransportFacilities* getFacility() const override;
-    bool isRoadMode() const override;
-    bool isRailwayMode() const override;
-    bool isAirportMode() const override;
 
-    //Iterator
-    // Method to add bus stops
-    void addBusStop(TransportStation* stop);
-
-    // Overridden method to create a BusIterator
-    TransportationIterator* createIterator() override;
-
-    // CitizenObserver
-    void setSchedule(const std::string& newSchedule) override;
-    std::string getSchedule() const override;
-    void notifyScheduleChange();
 
 };

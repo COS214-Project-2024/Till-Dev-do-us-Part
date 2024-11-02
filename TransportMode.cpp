@@ -2,14 +2,6 @@
 #include "CitizenObserver.h"
 #include <algorithm>
 
-// TransportFacilities* TransportMode:: GetFacility(){
-//     return this->facility;
-// }
-
-// TransportMode* TransportMode:: GetMode(){
-//     return this->mode;
-
-// }
 
 void TransportMode::changed(const std::string& state){
     this->state = state;
@@ -29,6 +21,34 @@ void TransportMode::divertingRoute(){
     }
 }
 
+TransportationIterator* TransportMode::createQIterator()
+{
+    return new QueueIterator(this);
+}
+
+
+TransportationIterator* TransportMode::createSIterator()
+{
+    return new StackIterator(this);
+}
+
+
+void TransportMode::travel()
+{
+    // Define possible states
+        std::vector<std::string> states = {"accident", "bad weather", "traffic","safe"};
+
+    // Shuffle states
+    std::random_device rd;
+        std::mt19937 gen(rd());
+        std::shuffle(states.begin(), states.end(), gen);
+
+        // Pick the first state in the shuffled list
+       state = states.front();
+       changed(state);
+    
+}
+
 
 void TransportMode::SetFacilities(TransportFacilities* facility)
 {
@@ -40,3 +60,19 @@ std::list<TransportStation*> TransportMode:: getStops()
 {
     return stops;
 }
+
+ void TransportMode::SetMediator(ConcreteTransportationMediator* mediator)
+ {
+    this->mediator=mediator;
+ }
+
+ void TransportMode:: addStop(TransportStation* stop)
+ {
+    stops.push_back(stop);
+ }
+
+TransportFacilities* TransportMode::GetFacility()
+{
+    return this->facility;
+}
+
