@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-class Resource;
+class Resources;
 
 /**
  * @class ResourceState
