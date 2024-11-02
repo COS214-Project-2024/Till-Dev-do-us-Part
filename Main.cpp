@@ -114,6 +114,7 @@ void DemoMain()
         }
     }
 
+  performDailyActivities();
     cout << "===========================================================================================================================================================================" << endl;
     
     cout << "Creating businesses to get the economy going..." << endl; 
@@ -229,6 +230,43 @@ void DemoMain()
 void performDailyActivities() {
     std::cout << "Citizen is going through daily routines.\n";
     //For all adults call goToWork() via the department . pass in a variable to change the consumption
+    Adult* adult = new Adult();
+     Business* company = new Retail();  // Example business
+    // Building* apartment = new Building("456 Home Ave", 1000.0f);  // Example building
+    
+    std::cout << "\n=== Testing Adult Daily Activities ===\n" << std::endl;
+    
+    // Test 1: Initial unemployment status
+    std::cout << "Test 1 - Initial Employment Status:" << std::endl;
+    std::cout << "Employment Status: " << (adult->employmentStatus() ? "Employed" : "Unemployed") << std::endl;
+    
+    // Test 2: Setting job and checking employment status
+    std::cout << "\nTest 2 - Setting Job:" << std::endl;
+    adult->setJob(company);
+    std::cout << "Employment Status after setting job: " << 
+        (adult->employmentStatus() ? "Employed" : "Unemployed") << std::endl;
+    
+    // Test 3: Testing salary function
+    std::cout << "\nTest 3 - Testing Salary:" << std::endl;
+    float testSalary = 5000.0f;
+    adult->salary(testSalary);
+    
+    // Test 4: Testing goToWork function
+    std::cout << "\nTest 4 - Going to Work:" << std::endl;
+    adult->goToWork();
+    
+    // Test 5: Testing react function
+    std::cout << "\nTest 5 - Testing Reaction:" << std::endl;
+    adult->react();
+    
+    // Test 6: Testing hasChild function
+    std::cout << "\nTest 6 - Testing Has Child:" << std::endl;
+    std::cout << "Has Child: " << (adult->hasChild() ? "Yes" : "No") << std::endl;
+    
+    // Test 7: Testing clone function
+    std::cout << "\nTest 7 - Testing Clone:" << std::endl;
+    Citizen* clonedAdult = adult->clone();
+    std::cout << "Successfully cloned adult" << std::endl;
 }
 
 void governmentObjects(){

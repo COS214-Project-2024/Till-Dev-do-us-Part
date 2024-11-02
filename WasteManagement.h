@@ -19,6 +19,8 @@ public:
     void startService() override;
     // void iterateBuildings(bool limitedProcessing, int maxBuildings) override; // Starts waste management service
                                                                               // Adjusts waste management service level
+
+    DevelopmentDept* createDevelopmentDept() override;
 };
 
 #endif // WASTEMANAGEMENT_H

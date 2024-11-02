@@ -19,6 +19,10 @@ void SewageSystem::startService()
     getStatus();
 }
 
+ DevelopmentDept* SewageSystem:: createDevelopmentDept()
+ {
+
+ }
 // void SewageSystem::iterateBuildings(bool limitedProcessing, int maxBuildings)
 // {
 

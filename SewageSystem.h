@@ -10,7 +10,7 @@ public:
 
     void startService() override;  
     // void iterateBuildings(bool limitedProcessing, int maxBuildings) override;               // Starts sewage management service
-    
+     DevelopmentDept* createDevelopmentDept() override;
 };
 
 #endif // SEWAGESYSTEM_H

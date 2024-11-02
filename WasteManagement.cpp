@@ -28,6 +28,11 @@ void WasteManagement::startService()
     getStatus();
 }
 
+ DevelopmentDept* WasteManagement::createDevelopmentDept() 
+ {
+   // return new ;
+ }
+
 // void WasteManagement::iterateBuildings(bool limitedProcessing, int maxBuildings)
 // {
 //     std::cout << "Iterating Buildings" << std::endl;

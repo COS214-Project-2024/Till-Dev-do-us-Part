@@ -4,7 +4,7 @@
 //
 #include "Utility.h"
 #include "ServiceState.h"
-// #include "Building.h"
+#include "DevelopmentDept.h"
 // #include "BuildingIterator.h"
 #include "OperationalServiceState.h"
 
@@ -43,6 +43,7 @@ public:
 
     int  getCapacity() const;
     
+    virtual DevelopmentDept* createDevelopmentDept()=0;
 
     
 };
