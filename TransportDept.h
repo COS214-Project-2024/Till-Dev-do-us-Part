@@ -40,9 +40,9 @@ public:
 
 };
 
-// ModeFactory* carfactory= new Carfactory();
-// departmentT->addModeFactory("Car", carfactory);
-// TransportMode * car= departmentT->createMode("Car");
+// // ModeFactory* carfactory= new Carfactory();
+// // departmentT->addModeFactory("Car", carfactory);
+// // TransportMode * car= departmentT->createMode("Car");
 
 
-#endif 
+// #endif 

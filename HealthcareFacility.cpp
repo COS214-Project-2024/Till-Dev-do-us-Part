@@ -52,12 +52,12 @@ int HealthcareFacility:: getDeathToll()
 {
     return deathtoll;
 }
-HealthcareFacility:: ~HealthcareFacility()
-{
-    // if(successor!=nullptr)
-    // {
-    //     delete successor;
-    //     successor=nullptr;
-    // }
-}
+// HealthcareFacility:: ~HealthcareFacility()
+// {
+//     // if(successor!=nullptr)
+//     // {
+//     //     delete successor;
+//     //     successor=nullptr;
+//     // }
+// }
 

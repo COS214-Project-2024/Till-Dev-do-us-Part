@@ -4,13 +4,13 @@
 #include <random>
 
 
-Clinic:: Clinic() 
+Clinic::Clinic() 
 {
     successor=nullptr;
     deathtoll=0;
 }
 
-void Clinic:: admitPatient(Citizen* c) {///take in citizen
+void Clinic::admitPatient(Citizen* c) {///take in citizen
     if(c->getHealth()<=0)
     {
         c=nullptr;///dead!!

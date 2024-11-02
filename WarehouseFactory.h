@@ -3,7 +3,7 @@
 #include "BuildingFactory.h"
 #include "Warehouse.h"
 
-class WareHouseFactory: public BuildingFactory{
+class WarehouseFactory: public BuildingFactory{
 
     public:
         WarehouseFactory();

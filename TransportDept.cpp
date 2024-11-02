@@ -1,9 +1,9 @@
-#include "TransportDept.h"
+// #include "TransportDept.h"
 
-TransportDept:: TransportDept(float budget)
-{
-    this->budget=budget;
-}
+// TransportDept:: TransportDept(float budget)
+// {
+//     this->budget=budget;
+// }
 
 void TransportDept::addSationFactory(std::string type, StationFactory* factory)
 {

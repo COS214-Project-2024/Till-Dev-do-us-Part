@@ -1,7 +1,8 @@
-#ifndef Hospital2_H
-#define Hospital2_H
+#ifndef HOSPITAL2_H
+#define HOSPITAL2_H
 #include <string>
 #include "Citizen.h"
+#include "Clinic.h"
 #include "HealthcareFacility.h"
 
 
