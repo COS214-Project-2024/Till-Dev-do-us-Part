@@ -1,37 +1,17 @@
-# Compiler and Flags
-CXX = g++
-CXXFLAGS = -g -Wall -fprofile-arcs -ftest-coverage
-LDFLAGS = -fprofile-arcs -ftest-coverage
 
-# Project Files
-TARGET = TestingMain
-SOURCES = $(wildcard *.cpp)
-HEADERS = $(wildcard *.h)
-OBJECTS = $(SOURCES:.cpp=.o)
 
-# Default Target
-all: $(TARGET)
+# Target to link object files and create the executable
+main: *.o
+	g++ -o main *.o 
 
-# Link Object Files to Create Executable
-$(TARGET): $(OBJECTS)
-	$(CXX) $(LDFLAGS) -o $@ $(OBJECTS)
+# Target to compile .cpp files into object files
+*.o: *.cpp 
+	g++ -c *.cpp 
 
-# Compile Source Files into Object Files
-%.o: %.cpp %.h
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# Target to run the executable
+run: main 
+	./main 
 
-# Run with Valgrind
-run: $(TARGET)
-	valgrind --track-origins=yes --leak-check=full ./$(TARGET)
-
-# Clean Up Build Files
-clean:
-	rm -f $(OBJECTS) $(TARGET) *.gcda *.gcno *.gcov
-
-# Run Code Coverage Analysis
-coverage: $(TARGET)
-	./$(TARGET)
-	gcov -b $(SOURCES)
-
-# PHONY Targets
-.PHONY: all clean run coverage
+# Target to clean up build files
+clean: 
+	rm *.o main

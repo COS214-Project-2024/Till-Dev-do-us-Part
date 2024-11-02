@@ -4,16 +4,16 @@
 #include "ProductionUtility.h"
 #include "Energy.h"
 
-class PowerPlant : public ProductionUtility {
-    private:
-     Resources * energy;
-public:
+class PowerPlant : public ProductionUtility
+{
+private:
+    Resources *energy;
 
-    PowerPlant(std::string name, ResourceDepartment* department, Resources* resource);
+public:
+    PowerPlant(std::string name, ResourceDepartment *department, Resources *resource);
     ~PowerPlant();
 
-    void startProduction() override;          // Starts power production
-    
+    void startProduction() override; // Starts power production
 };
 
 #endif // POWERPLANT_H

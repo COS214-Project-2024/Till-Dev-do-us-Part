@@ -30,12 +30,12 @@ int Utility::getWorkers() const
     return workers;
 }
 
-std::string Utility::getStatus() const
-{
-    return "Utility: " + name + ", Revenue: " + std::to_string(revenue) + ", Workers: " + std::to_string(workers);
-}
-
 Resources *Utility::getResource() const
 {
     return resource;
+}
+
+void Utility::getStatus() const
+{
+    std::cout << "---- Utility Status ----" << std::endl;
 }
