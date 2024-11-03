@@ -1,49 +1,56 @@
 #include "Suburb.h"
 
-Suburb::Suburb():Residential("Suburb"){
+Suburb::Suburb() : Residential("Suburb")
+{
     area = 10000;
     capacity = 50;
     noBuildings = 0;
     value = 12000;
 }
 
-void Suburb::loadElectricity(float units){
+void Suburb::loadElectricity(float units)
+{
 
     for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        (*it)->loadElectricity(units);
+        (*it)->requestElectricity(units);
         electricityUnits += units;
     }
 }
 
-void Suburb::loadWater(float units){
+void Suburb::loadWater(float units)
+{
     for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        (*it)->loadWater(units);
+        (*it)->requestWater(units);
         waterUnits += units;
     }
 }
 
-float Suburb::getPrice(){
+float Suburb::getPrice()
+{
     return value;
 }
 
-string Suburb::getType(){
+string Suburb::getType()
+{
     return type;
 }
 
-void Suburb::demolish(){
+void Suburb::demolish()
+{
     cout << "Demolishing all the buildings in the suburb\n";
-    for (vector<Residential*>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        delete(*it);
+        delete (*it);
         (*it) = nullptr;
     }
 
     cout << "Demolished  all the buildings in the suburb\n";
 }
 
-bool Suburb::clean(){
+bool Suburb::clean()
+{
     if (state->canUseElectricity() && state->canUseWater())
     {
         cleanliness = 0;
@@ -74,7 +81,8 @@ bool Suburb::clean(){
     return false;
 }
 
-bool Suburb::addOccupant(Citizen* c){
+bool Suburb::addOccupant(Citizen *c)
+{
     if (c != nullptr)
     {
         for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
@@ -85,38 +93,44 @@ bool Suburb::addOccupant(Citizen* c){
             }
         }
     }
-    
+
     return false;
 }
 
-Suburb::~Suburb(){
+Suburb::~Suburb()
+{
     demolish();
     cout << "Destroyed the suburb\n";
 }
 
 bool Suburb::addBuilding(Residential *building)
 {
-    if(building!= nullptr){
-        if(building->getType() == "Estate"){
+    if (building != nullptr)
+    {
+        if (building->getType() == "Estate")
+        {
             int estateBuildings = ((Estate *)building)->getNoBuildings();
-            if (estateBuildings+noBuildings <= capacity)
+            if (estateBuildings + noBuildings <= capacity)
             {
                 buildings.push_back(building);
-                noBuildings+=estateBuildings;
+                noBuildings += estateBuildings;
                 value += building->getValue();
                 waterUnits += building->getWater();
                 electricityUnits += building->getElectricity();
-                cleanliness = (cleanliness+building->getCleanliness())/noBuildings;
+                cleanliness = (cleanliness + building->getCleanliness()) / noBuildings;
                 cout << "Estate added to the Suburb" << endl;
                 return true;
             }
-            else{
+            else
+            {
                 cout << "Estate could not be added to the Suburb" << endl;
                 return false;
             }
         }
-        else{
-            if(noBuildings + 1 <= capacity){
+        else
+        {
+            if (noBuildings + 1 <= capacity)
+            {
                 buildings.push_back(building);
                 noBuildings++;
                 value += building->getValue();
@@ -126,7 +140,8 @@ bool Suburb::addBuilding(Residential *building)
                 cout << "Building added to the Suburb" << endl;
                 return true;
             }
-            else{
+            else
+            {
                 cout << "Building could not be added to the Suburb" << endl;
                 return false;
             }
@@ -164,9 +179,10 @@ bool Suburb::removeBuilding(Residential *building)
 
 bool Suburb::removeOccupant(Citizen *c)
 {
-    for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+    for (vector<Residential *>::iterator it = buildings.begin(); it < buildings.end(); it++)
     {
-        if((*it)->removeOccupant(c)){
+        if ((*it)->removeOccupant(c))
+        {
             cout << "Citizen removed\n";
             return true;
         }
@@ -174,12 +190,12 @@ bool Suburb::removeOccupant(Citizen *c)
 
     cout << "Citizen was not found in any of the buildings in the suburb\n";
     return false;
-    
 }
 
 bool Suburb::useElectricity(float units)
 {
-    if(this->state->canUseElectricity()){
+    if (this->state->canUseElectricity())
+    {
         electricityUnits = 0;
         bool usedAll = true;
         for (vector<Residential *>::iterator it = buildings.begin(); it != buildings.end(); it++)
@@ -213,7 +229,7 @@ bool Suburb::useWater(float units)
             {
                 usedAll = false;
             }
-            waterUnits+= (*it)->getWater();
+            waterUnits += (*it)->getWater();
         }
 
         if (!usedAll)
@@ -228,15 +244,18 @@ bool Suburb::useWater(float units)
     return false;
 }
 
-bool Suburb::useShower(){
-    if(state->canUseElectricity() && state->canUseWater()){
+bool Suburb::useShower()
+{
+    if (state->canUseElectricity() && state->canUseWater())
+    {
         cleanliness = 0;
         waterUnits = 0;
         electricityUnits = 0;
         bool usedAll = true;
-        for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+        for (vector<Residential *>::iterator it = buildings.begin(); it < buildings.end(); it++)
         {
-            if(!(*it)->useShower()){
+            if (!(*it)->useShower())
+            {
                 usedAll = false;
             }
             cleanliness += (*it)->getCleanliness();
@@ -246,10 +265,12 @@ bool Suburb::useShower(){
 
         cleanliness /= buildings.size();
 
-        if(usedAll){
+        if (usedAll)
+        {
             cout << "Used all Showers in the Suburb\n";
         }
-        else{
+        else
+        {
             cout << "Could not used all Showers in the Suburb\n";
         }
 
@@ -260,15 +281,18 @@ bool Suburb::useShower(){
     return false;
 }
 
-bool Suburb::useToilet(){
-    if(state->canUseWater() && state->canUseElectricity()){
+bool Suburb::useToilet()
+{
+    if (state->canUseWater() && state->canUseElectricity())
+    {
         cleanliness = 0;
         waterUnits = 0;
         electricityUnits = 0;
         bool usedAll = true;
-        for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+        for (vector<Residential *>::iterator it = buildings.begin(); it < buildings.end(); it++)
         {
-            if(!(*it)->useToilet()){
+            if (!(*it)->useToilet())
+            {
                 usedAll = false;
             }
             cleanliness += (*it)->getCleanliness();
@@ -278,10 +302,12 @@ bool Suburb::useToilet(){
 
         cleanliness /= buildings.size();
 
-        if(usedAll){
+        if (usedAll)
+        {
             cout << "Used all Toilets in the Suburb\n";
         }
-        else{
+        else
+        {
             cout << "Could not used all Toilets in the Suburb\n";
         }
         return usedAll;
@@ -291,15 +317,18 @@ bool Suburb::useToilet(){
     return false;
 }
 
-bool Suburb::useStove(){
-    if(this->state->canUseElectricity()){
+bool Suburb::useStove()
+{
+    if (this->state->canUseElectricity())
+    {
         cleanliness = 0;
         waterUnits = 0;
         electricityUnits = 0;
         bool usedAll = true;
-        for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+        for (vector<Residential *>::iterator it = buildings.begin(); it < buildings.end(); it++)
         {
-            if(!(*it)->useStove()){
+            if (!(*it)->useStove())
+            {
                 usedAll = false;
             }
             cleanliness += (*it)->getCleanliness();
@@ -308,10 +337,12 @@ bool Suburb::useStove(){
         }
         cleanliness /= buildings.size();
 
-        if(usedAll){
+        if (usedAll)
+        {
             cout << "Used all Stoves in the Suburb\n";
         }
-        else{
+        else
+        {
             cout << "Could not used all Stoves in the Suburb\n";
         }
         return usedAll;
@@ -321,11 +352,12 @@ bool Suburb::useStove(){
     return false;
 }
 
-void Suburb::goToWork(){
+void Suburb::goToWork()
+{
     cleanliness = 0;
     waterUnits = 0;
     electricityUnits = 0;
-    for (vector<Residential*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+    for (vector<Residential *>::iterator it = buildings.begin(); it < buildings.end(); it++)
     {
         (*it)->goToWork();
         cleanliness += (*it)->getCleanliness();
@@ -333,8 +365,8 @@ void Suburb::goToWork(){
         electricityUnits += (*it)->getElectricity();
     }
 
-    cleanliness/= buildings.size();
-    cout << "Took all citizens in the Suburb to work\n";    
+    cleanliness /= buildings.size();
+    cout << "Took all citizens in the Suburb to work\n";
 }
 
 bool Suburb::isOccupied()

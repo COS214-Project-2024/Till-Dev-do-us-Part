@@ -9,8 +9,6 @@ Estate::Estate():Residential("Estate"){
 
 Estate::~Estate()
 {
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Estate demolished" << endl;
 }
@@ -221,7 +219,6 @@ bool Estate::removeBuilding(Residential* building){
         waterUnits -= building->getWater();
         electricityUnits -= building->getElectricity();
         cleanliness = (cleanliness - building->getCleanliness()) / noBuildings;
-        delete building;
         building = nullptr;
         noBuildings--;
         cout << "Building removed from the Estate" << endl;

@@ -1,31 +1,34 @@
 #include "IndustrialSite.h"
 
-IndustrialSite::IndustrialSite():Industrial("IndustrialSite"){
+IndustrialSite::IndustrialSite() : Industrial("IndustrialSite")
+{
     area = 10000;
     capacity = 50;
     noBuildings = 0;
     value = 12000;
 }
 
-void IndustrialSite::loadElectricity(float units){
-    
-    for (vector<Industrial*>::iterator it = buildings.begin(); it != buildings.end(); it++)
-    {
-        (*it)->loadElectricity(units);
-        electricityUnits+= units;
-    }
-    
-}
+void IndustrialSite::loadElectricity(float units)
+{
 
-void IndustrialSite::loadWater(float units){
     for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        (*it)->loadWater(units);
+        (*it)->requestElectricity(units);
+        electricityUnits += units;
+    }
+}
+
+void IndustrialSite::loadWater(float units)
+{
+    for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    {
+        (*it)->requestWater(units);
         waterUnits += units;
     }
 }
 
-bool IndustrialSite::useElectricity(float units){
+bool IndustrialSite::useElectricity(float units)
+{
     if (this->state->canUseElectricity())
     {
         electricityUnits = 0;
@@ -36,7 +39,7 @@ bool IndustrialSite::useElectricity(float units){
             {
                 usedAll = false;
             }
-            electricityUnits+=(*it)->getElectricity();
+            electricityUnits += (*it)->getElectricity();
         }
 
         if (!usedAll)
@@ -50,7 +53,8 @@ bool IndustrialSite::useElectricity(float units){
     return false;
 }
 
-bool IndustrialSite::useWater(float units){
+bool IndustrialSite::useWater(float units)
+{
     if (this->state->canUseWater())
     {
         this->waterUnits = 0;
@@ -76,30 +80,34 @@ bool IndustrialSite::useWater(float units){
     return false;
 }
 
-float IndustrialSite::getPrice(){
+float IndustrialSite::getPrice()
+{
     return value;
 }
 
-string IndustrialSite::getType(){
+string IndustrialSite::getType()
+{
     return type;
 }
 
-void IndustrialSite::demolish(){
+void IndustrialSite::demolish()
+{
     cout << "Demolishing all the buildings in the IndustrialSite\n";
-    for (vector<Industrial*>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        value-= (*it)->getValue();
-        waterUnits-= (*it)->getWater();
-        electricityUnits-= (*it)->getElectricity();
-        delete(*it);
+        value -= (*it)->getValue();
+        waterUnits -= (*it)->getWater();
+        electricityUnits -= (*it)->getElectricity();
+        delete (*it);
         (*it) = nullptr;
-        noBuildings --;
+        noBuildings--;
     }
 
     cout << "Demolished  all the buildings in the IndustrialSite\n";
 }
 
-bool IndustrialSite::clean(){
+bool IndustrialSite::clean()
+{
     if (state->canUseElectricity() && state->canUseWater())
     {
         cleanliness = 0;
@@ -130,7 +138,8 @@ bool IndustrialSite::clean(){
     return false;
 }
 
-bool IndustrialSite::addOccupant(Citizen* c){
+bool IndustrialSite::addOccupant(Citizen *c)
+{
     if (c != nullptr)
     {
         for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
@@ -141,21 +150,24 @@ bool IndustrialSite::addOccupant(Citizen* c){
             }
         }
     }
-    
+
     return false;
 }
 
-IndustrialSite::~IndustrialSite(){
+IndustrialSite::~IndustrialSite()
+{
     demolish();
     cout << "Destroyed the IndustrialSite\n";
 }
 
 bool IndustrialSite::addBuilding(Industrial *building)
 {
-    if(building!= nullptr){
-        if(building->getType() == "Plant"){
-            int plantBuildings = ((Plant*)building)->getNoBuildings();
-            if (plantBuildings+noBuildings <= capacity)
+    if (building != nullptr)
+    {
+        if (building->getType() == "Plant")
+        {
+            int plantBuildings = ((Plant *)building)->getNoBuildings();
+            if (plantBuildings + noBuildings <= capacity)
             {
                 buildings.push_back(building);
                 noBuildings += plantBuildings;
@@ -165,13 +177,16 @@ bool IndustrialSite::addBuilding(Industrial *building)
                 cout << "Plant added to the Industrial Site" << endl;
                 return true;
             }
-            else{
+            else
+            {
                 cout << "Plant could not be added to the Industrial Site" << endl;
                 return false;
             }
         }
-        else{
-            if(noBuildings + 1 <= capacity){
+        else
+        {
+            if (noBuildings + 1 <= capacity)
+            {
                 buildings.push_back(building);
                 noBuildings++;
                 value += building->getValue();
@@ -181,7 +196,8 @@ bool IndustrialSite::addBuilding(Industrial *building)
                 cout << "Building added to the Industrial Site" << endl;
                 return true;
             }
-            else{
+            else
+            {
                 cout << "Building could not be added to the Industrial Site" << endl;
                 return false;
             }
@@ -219,9 +235,10 @@ bool IndustrialSite::removeBuilding(Industrial *building)
 
 bool IndustrialSite::removeOccupant(Citizen *c)
 {
-    for (vector<Industrial*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+    for (vector<Industrial *>::iterator it = buildings.begin(); it < buildings.end(); it++)
     {
-        if((*it)->removeOccupant(c)){
+        if ((*it)->removeOccupant(c))
+        {
             cout << "Citizen removed\n";
             return true;
         }
@@ -229,13 +246,12 @@ bool IndustrialSite::removeOccupant(Citizen *c)
 
     cout << "Citizen was not found in any of the buildings in the IndustrialSite\n";
     return false;
-    
 }
 
 Building *IndustrialSite::clone()
 {
     IndustrialSite *newBuilding = new IndustrialSite();
-    
+
     newBuilding->area = this->area;
     newBuilding->capacity = this->capacity;
     for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)

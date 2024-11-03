@@ -49,7 +49,6 @@ bool Mall::removeBuilding(Commercial *building)
         waterUnits -= building->getWater();
         electricityUnits -= building->getElectricity();
         cleanliness = (cleanliness - building->getCleanliness()) / noBuildings;
-        delete building;
         building = nullptr;
         noBuildings--;
         cout << "Building removed from the Mall" << endl;
@@ -62,7 +61,7 @@ bool Mall::removeBuilding(Commercial *building)
 
 void Mall::demolish()
 {
-    cout << "Clearing and demolishing all the buildings in the Mall:" << endl;
+    cout << "====Demolishing buildings in the Mall====" << endl;
     for (int i = 0; i < stores.size(); ++i)
     {
         delete stores.at(i);

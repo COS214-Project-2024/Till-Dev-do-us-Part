@@ -3,7 +3,7 @@
 #include "Residential.h"
 #include "Building.h"
 #include "Estate.h"
-class Suburb : Residential
+class Suburb : public Residential
 {
     private:
         vector<Residential*> buildings;

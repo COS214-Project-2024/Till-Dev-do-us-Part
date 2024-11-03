@@ -16,5 +16,6 @@ public:
         return building-> clone();
     }
 
+
 };
 #endif

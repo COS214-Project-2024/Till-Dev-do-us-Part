@@ -8,8 +8,6 @@ Shop::Shop():Commercial("Shop"){
 }
 
 Shop::~Shop(){
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Shop demolished!" << endl;
 }
@@ -31,7 +29,10 @@ bool Shop::clean()
                 cleanliness = 0;
                 delete this->state;
                 this->state = new DilapidatedState();
-                cout << "Shop is now in Dilapidated state\n";
+                cout << "Shop is now in Dilapidated state:\n";
+                cout << "Cleanliness: " << cleanliness << "\n";
+                cout << "Electricity: " << electricityUnits << "\n";
+                cout << "Water: " << waterUnits << "\n";
             }
             else
             {
@@ -44,7 +45,15 @@ bool Shop::clean()
         cout << "Required electricity to clean: 300" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+
+        if (requestElectricity(300) && requestWater(350))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Shop is in " << this->state->getName() << " and cannot be cleaned" << endl;

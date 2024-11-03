@@ -10,8 +10,6 @@ House::House():Residential("House")
 
 House::~House()
 {
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "House demolished!" << endl;
 }
@@ -43,8 +41,15 @@ bool House::useShower(){
         cout << "Required water to shower: 80" << endl;
         cout << "Required electricity to shower: 40" << endl;
         cout << "Current water: " << waterUnits << endl;
-        cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        cout << "Current electricity: " << electricityUnits << endl << endl;
+
+        if (requestElectricity(40) && requestWater(80)){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
     }
 
     cout << "House is in " << this->state->getName() << " and cannot use shower" << endl;
@@ -76,7 +81,13 @@ bool House::useToilet(){
         cout << "Required electricity for toilet: 5" << endl;
         cout << "Required water for toilet: 16" << endl;
         cout << "Current water: " << waterUnits << endl;
-        return false;
+
+        if (requestElectricity(5) && requestWater(16)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     cout << "House is in " << this->state->getName() << " and cannot use Toilet" << endl;
@@ -107,7 +118,15 @@ bool House::useStove(){
         cout << "Not enough electricity to use stove:" << endl;
         cout << "Required electricity for stove: 40" << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+
+        if (requestElectricity(40))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "House is in " << this->state->getName() << " and use stove" << endl;
@@ -141,7 +160,14 @@ bool House::clean(){
         cout << "Required electricity to clean: 40" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        if (requestElectricity(40) && requestWater(200))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "House is in " << this->state->getName() << " and cannot be cleaned" << endl;
