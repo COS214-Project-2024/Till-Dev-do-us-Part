@@ -2,7 +2,6 @@
 #define PRODUCTIONSTATE_H
 
 #include <string>
-#include "UtilityState.h"
 
 class ProductionUtility;
 

@@ -1,11 +1,21 @@
 #include "MaintenanceProductionState.h"
 #include <iostream>
+#include <cstdlib> // For rand() and srand()
+#include <ctime>   // For time()
 
+/**
+ * @brief Handles production operations while in the maintenance state.
+ * 
+ * Calculates production yield based on available resources and active workers, 
+ * handles resource consumption, and checks for state transitions.
+ * 
+ * @param utility Pointer to the ProductionUtility that is in maintenance.
+ */
 void MaintenanceProductionState::handleProduction(ProductionUtility *utility)
 {
     // Calculate maximum possible production based on resources and workers
     float resourceFactor = utility->getResource()->getCurrentAmount() / utility->getResource()->getInitialAmount();
-    float workerEfficiency = 50;                                                                    // Assume 50% efficiency for simplification, or set as needed
+    float workerEfficiency = 50; // Assume 50% efficiency for simplification
     float workerFactor = static_cast<float>(utility->getActiveWorkers()) / utility->getMaxWorkers(); // Ratio of active workers to total
     float capacity = utility->getProductionCapacity();
     float yield = capacity * resourceFactor * workerFactor * (workerEfficiency / 100.0f); // Adjusted yield calculation
@@ -15,7 +25,6 @@ void MaintenanceProductionState::handleProduction(ProductionUtility *utility)
     {
         yield = capacity;
     }
-
 
     // Set current production to the maintenance-level yield
     utility->setCurrentProduction(yield);

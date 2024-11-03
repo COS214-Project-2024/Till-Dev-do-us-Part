@@ -1,102 +1,151 @@
 #include "ResourceDepartment.h"
 
-// Destructor to clean up Resourcess
+/**
+ * @brief Destructor to clean up Resources.
+ */
 ResourceDepartment::~ResourceDepartment()
 {
-    for (Resources *Resources : resources)
+    for (Resources *resource : resources)
     {
-        delete Resources;
+        delete resource; // Clean up each Resource
     }
     for (Utility *utility : utilities)
     {
-        delete utility;
+        delete utility; // Clean up each Utility
     }
 }
 
-// Add a Resources to the department
+/**
+ * @brief Add a Resource to the department.
+ * 
+ * @param resource Pointer to the Resource to be added.
+ */
 void ResourceDepartment::addResource(Resources *resource)
 {
     resources.push_back(resource);
-    std::cout << "ResourcesDepartment: Added Resources " << std::endl;
+    std::cout << "ResourceDepartment: Added resource " << std::endl;
 }
 
-// Check if a specific Resources has sufficient amount available
+/**
+ * @brief Check if a specific Resource has sufficient amount available.
+ * 
+ * @param resource Pointer to the Resource to check.
+ * @param amount The amount to check for sufficiency.
+ * @return true if sufficient resources are available, false otherwise.
+ */
 bool ResourceDepartment::hasSufficientResource(Resources *resource, float amount)
 {
+    // Uncomment and complete logic to check resource sufficiency
     // for (Resources* res : resources) {
-    //     if (res == resources && res->getAvailableAmount() >= amount) {
+    //     if (res == resource && res->getAvailableAmount() >= amount) {
     //         return true;
     //     }
     // }
-    return false;
+    return false; // Placeholder return statement
 }
 
-// Consume a specified amount of a Resources
+/**
+ * @brief Consume a specified amount of a Resource.
+ * 
+ * @param resource Pointer to the Resource to consume from.
+ * @param amount The amount to consume.
+ */
 void ResourceDepartment::consumeResource(Resources *resource, float amount)
 {
     for (Resources *res : resources)
     {
+        // Uncomment and complete logic to consume resource
         // if (res == resource) {
         //     res->consume(amount);
-        //     std::cout << "ResourcesDepartment: Consumed " << amount << " units of " << res->getName() << std::endl;
+        //     std::cout << "ResourceDepartment: Consumed " << amount << " units of " << res->getName() << std::endl;
         //     return;
         // }
     }
-    std::cout << "ResourcesDepartment: Resources not found!" << std::endl;
+    std::cout << "ResourceDepartment: Resource not found!" << std::endl;
 }
 
-// Release or add back a specified amount of a Resources
+/**
+ * @brief Release or add back a specified amount of a Resource.
+ * 
+ * @param resource Pointer to the Resource to release.
+ * @param amount The amount to release.
+ */
 void ResourceDepartment::releaseResource(Resources *resource, float amount)
 {
     for (Resources *res : resources)
     {
-        // if (res == resources) {
+        // Uncomment and complete logic to release resource
+        // if (res == resource) {
         //     res->release(amount);
-        //     std::cout << "ResourcesDepartment: Released " << amount << " units of " << res->getName() << std::endl;
+        //     std::cout << "ResourceDepartment: Released " << amount << " units of " << res->getName() << std::endl;
         //     return;
         // }
     }
-    std::cout << "ResourcesDepartment: Resources not found!" << std::endl;
+    std::cout << "ResourceDepartment: Resource not found!" << std::endl;
 }
 
-// Add a utility to the department for management and tracking
+/**
+ * @brief Add a utility to the department for management and tracking.
+ * 
+ * @param utility Pointer to the Utility to be added.
+ */
 void ResourceDepartment::addUtility(Utility *utility)
 {
     utilities.push_back(utility);
-    std::cout << "ResourcesDepartment: Added utility " << std::endl;
+    std::cout << "ResourceDepartment: Added utility " << std::endl;
 }
 
-// Notify utilities in case of outages or issues with Resourcess
+/**
+ * @brief Notify utilities in case of outages or issues with Resources.
+ * 
+ * @param message The message to send to utilities about the outage.
+ */
 void ResourceDepartment::notifyUtilityOutage(const std::string &message)
 {
     for (Utility *utility : utilities)
     {
+        // Uncomment and complete logic to notify utility of the outage
         // utility->notifyResourcesDivision(message);
     }
 }
 
-// Update utilities based on Resources availability or scheduled checks
+/**
+ * @brief Update utilities based on Resource availability or scheduled checks.
+ */
 void ResourceDepartment::updateUtilities()
 {
+    // Placeholder for utility update logic
 }
 
-// Check total levels of Resourcess and notify in case of shortages
+/**
+ * @brief Check total levels of Resources and notify in case of shortages.
+ */
 void ResourceDepartment::checkResourceLevels()
 {
     for (Resources *res : resources)
     {
+        // Placeholder for resource level check logic
     }
 }
 
+/**
+ * @brief Constructor with budget.
+ * 
+ * @param budget The initial budget for the ResourceDepartment.
+ */
 ResourceDepartment::ResourceDepartment(float budget)
 {
     this->budget = budget;
 }
-// void ResourceDepartment:: addUtility()
-// {
-//     utilities.push_back(utility);
-// }
-bool ResourceDepartment::processResourceRequest(string utiName, float amount)
+
+/**
+ * @brief Process a resource request from a utility.
+ * 
+ * @param utiName The name of the utility making the request.
+ * @param amount The amount of resource requested.
+ * @return true if the request was successfully processed, false otherwise.
+ */
+bool ResourceDepartment::processResourceRequest(std::string utiName, float amount)
 {
-    return true;
+    return true; // Placeholder return statement
 }
