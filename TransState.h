@@ -16,7 +16,7 @@ protected:
 public:
     virtual ~TransState();
     virtual void handleState() = 0;
-    void changeState();
+    virtual void changeState()=0;
     virtual std:: string getStateName(){return name;}
 
 };
