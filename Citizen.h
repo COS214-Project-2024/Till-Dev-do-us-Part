@@ -10,7 +10,8 @@
 #include <iostream>
 #include <string>
 #include "Feeling.h"
-#include "Business.h"
+
+class Business;
 
 /**
  * @class Citizen

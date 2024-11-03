@@ -77,6 +77,8 @@ public:
 
     int getSatisfactionLevel();
 
+    void sendAdultsToWork();
+
     /**
      * @brief Increases the population by creating new adult and child citizens.
      * 

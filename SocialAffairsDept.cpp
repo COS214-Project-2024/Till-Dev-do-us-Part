@@ -96,6 +96,15 @@ int SocialAffairsDept::getNumUnemployed(){
     return unemployed.size();
 }
 
+void SocialAffairsDept::sendAdultsToWork(){
+
+    cout << "Citizens going to work." << endl;
+    for (auto adult : adults) {
+        if(((Adult*)adult)->employmentStatus())
+            ((Adult*)adult)->goToWork();
+    }
+}
+
 
 /**
  * @brief Increases the population by creating new adult and child citizens.
