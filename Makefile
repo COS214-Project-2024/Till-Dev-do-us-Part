@@ -12,6 +12,8 @@ OBJECTS = $(SOURCES:.cpp=.o)
 run: main
 	./main
 
+	make clean
+
 # Link all object files into the main executable
 main: $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o main $(OBJECTS)
@@ -29,6 +31,8 @@ clean:
 	rm -f *.o main main_debug
 
 # Valgrind target for memory checks
-valgrind: debug
+
+v: debug
 	valgrind --tool=memcheck --leak-check=yes --track-origins=yes --log-file=valg.txt ./main_debug
 	make clean
+

@@ -41,6 +41,7 @@ bool Building::requestWater(float units)
     return false;
 }
 
+
 bool Building::useElectricity(float units) //units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage 
 {
     if (this->electricityUnits - units < 0 || !this->state->canUseElectricity())

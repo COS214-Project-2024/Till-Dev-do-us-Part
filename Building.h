@@ -6,6 +6,7 @@
 #include "ConstructionState.h"
 #include "CompleteState.h"
 #include "DilapidatedState.h"
+#include "ResourceDepartment.h"
 // #include "Citizen.h"
 #include <iostream>
 #include <algorithm>
@@ -15,6 +16,7 @@ using namespace std;
 class Citizen;
 class Building
 {
+
 protected:
     BuildingState *state;
     ResourceDepartment *resourceDept;
@@ -43,5 +45,6 @@ public:
     virtual bool removeOccupant(Citizen *c) = 0;
     virtual Building *clone() = 0;
     virtual bool isOccupied() = 0;
+
 };
 #endif
