@@ -3,10 +3,11 @@
 
 #include "TransportationIterator.h"
 #include "TransportStation.h"
+#include "TransportMode.h"
 #include <list>
 #include <queue>
 
-class TransportStation;
+// class TransportStation;
 
 class QueueIterator : public TransportationIterator {
 private:

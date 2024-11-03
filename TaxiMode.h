@@ -3,16 +3,13 @@
 #include "TransportMode.h"
 #include "Road.h"
 #include "TaxiRank.h"
-#include "TaxiRankIterator.h"
 #include <list>
 #include <vector>
 #include <memory>
 #include <string>
 #include <iostream>
 
-class TransportFacilities;
-class TransportationMediator;
-class TransportStation;
+// class TransportStation;
 
 class TaxiMode : public TransportMode{
 public:

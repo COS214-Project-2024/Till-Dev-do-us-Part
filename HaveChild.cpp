@@ -1,18 +1,18 @@
-#include "HaveChild.h"
+// #include "HaveChild.h"
 
-HaveChild::HaveChild(Citizen* adult){
-    person =  adult;
-}
+// HaveChild::HaveChild(Citizen* adult){
+//     person =  adult;
+// }
 
-void HaveChild::haveChild(Citizen* baby){
-    this->child = baby;
-}
+// void HaveChild::haveChild(Citizen* baby){
+//     this->child = baby;
+// }
 
-HaveChild::~HaveChild(){
-    delete person;
-    person = nullptr;
-}
+// HaveChild::~HaveChild(){
+//     delete person;
+//     person = nullptr;
+// }
 
-bool HaveChild::hasChild(){
-    return true;
-}
+// bool HaveChild::hasChild(){
+//     return true;
+// }

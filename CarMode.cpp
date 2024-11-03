@@ -23,7 +23,7 @@ void CarMode::stopDrive(){
 void CarMode::SendMessage(const std::string& state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
-        if(GetFacility()->getModeCount()>10){
+        if(GetFacility()->getModeCount()>30){
             GetFacility()->getState()->changeState();
 
             
@@ -42,7 +42,7 @@ void CarMode::SendMessage(const std::string& state){
     if (state == "traffic") {
         std::cout << this->getName()<< ": Responding to air traffic. Delaying flights and Notifying other planes.\n";
 
-        if(GetFacility()->getModeCount()>10){
+        if(GetFacility()->getModeCount()>30){
             GetFacility()->getState()->changeState();
             
         }

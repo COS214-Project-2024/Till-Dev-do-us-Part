@@ -1,4 +1,6 @@
 // Abstract Creators
+#ifndef MODEFACTORY_H
+#define MODEFACTORY_H
 #pragma once
 #include "TransportMode.h"
 #include <algorithm>
@@ -12,3 +14,4 @@ protected:
     ModeFactory() = default;
     TransportMode* modes;
 };
+#endif

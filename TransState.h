@@ -4,6 +4,7 @@
 
 #include <string>
 #include <iostream>
+#include "TransportFacilities.h"
 
 class TransportFacilities; // Forward declaration
 
@@ -13,7 +14,7 @@ protected:
     TransportFacilities* stateFacility;
 
 public:
-    virtual ~TransState() = default;
+    virtual ~TransState();
     virtual void handleState() = 0;
     void changeState();
     virtual std:: string getStateName(){return name;}

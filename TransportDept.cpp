@@ -1,4 +1,6 @@
 #include "TransportDept.h"
+#include "TransportFacilities.h"
+#include "TransportMode.h"
 
 void TransportDept::addSationFactory(std::string type, StationFactory* factory)
 {

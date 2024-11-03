@@ -7,8 +7,6 @@
 #include "EmptyState.h"
 #include "NormalState.h"
 
-class NormalState;
-class EmptyState;
 
 class CongestedState : public TransState {
 public:

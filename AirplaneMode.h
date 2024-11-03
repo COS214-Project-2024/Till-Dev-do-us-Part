@@ -9,9 +9,7 @@
 #include <algorithm>
 
 
-class TransportFacilities;
-class TransportationMediator;
-class ConcreteTransportationMediator;
+
 
 class AirplaneMode: public TransportMode {
 

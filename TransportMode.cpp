@@ -1,4 +1,5 @@
 #include "TransportMode.h"
+#include "TransportFacilities.h"
 #include "CitizenObserver.h"
 #include <algorithm>
 

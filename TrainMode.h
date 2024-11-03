@@ -2,15 +2,12 @@
 #pragma once
 #include "TransportMode.h"
 #include "Railway.h"
-#include "TrainStationIterator.h"
 #include <list>
 #include <memory>
 #include <string>
 #include <iostream>
 
-class TransportFacilities;
-class TransportationMediator;
-class TransportStation;
+// class TransportStation;
 
 class TrainMode : public TransportMode {
 public:

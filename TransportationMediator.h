@@ -4,7 +4,9 @@
 #include <string>
 #include <vector>
 
-class TransportMode; // Forward declaration
+#include "TransportMode.h" 
+
+class TransportMode;// Forward declaration
 
 class TransportationMediator {
 public:

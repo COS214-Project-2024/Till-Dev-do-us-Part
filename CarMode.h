@@ -10,10 +10,6 @@
 #include <algorithm>
 
 
-class TransportFacilities;
-class TransportationMediator;
-class ConcreteTransportationMediator;
-
 class CarMode : public TransportMode {
 public:
     CarMode();

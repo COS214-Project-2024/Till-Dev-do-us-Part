@@ -8,11 +8,14 @@
 #include "TransportMode.h"
 #include "TransportStation.h"
 #include "TransportFacilities.h"
+#pragma once
 #include <vector>
 #include <map>
 
-
+class TransportMode;
 class TransportFacilities;
+class FacilitiesFactory;
+class ModeFactory;
 
 class TransportDept : public Department {
 private:

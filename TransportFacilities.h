@@ -1,5 +1,7 @@
 // Abstract Products
 // TransportFacilities.h
+#ifndef TRANSPORTFACILITIES_H
+#define TRANSPORTFACILITIES_H
 #pragma once
 #include <string>
 #include <vector>
@@ -10,6 +12,7 @@
 #include "Citizen.h"
 
 class TransportMode;
+class TransState;
 
 class TransportFacilities {
 protected:
@@ -36,3 +39,5 @@ public:
     void detach(Citizen* c);
     std:: string getFacilName();
 };
+
+#endif

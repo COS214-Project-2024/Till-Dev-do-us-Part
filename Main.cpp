@@ -1,46 +1,59 @@
 #include <iostream>
-#include <memory>
+#include <vector>
+#include <string>
+
+// Include necessary headers for transport modes and facilities
 #include "TransportMode.h"
 #include "BusMode.h"
 #include "TrainMode.h"
 #include "TaxiMode.h"
 #include "CarMode.h"
 #include "AirplaneMode.h"
+
+// Include observer and mediator headers
 #include "CitizenObserver.h"
-#include "Adult.h"
-#include "Minor.h"
-#include "TransState.h"
+#include "ConcreteTransportationMediator.h"
+
+// Include state pattern headers
 #include "NormalState.h"
 #include "CongestedState.h"
 #include "EmptyState.h"
-#include "TransportationMediator.h"
-#include "ConcreteTransportationMediator.h"
-#include "BusIterator.h"
-#include "TrainStationIterator.h"
-#include "TaxiRankIterator.h"
+
+// Include iterator headers
+#include "QueueIterator.h"
+#include "StackIterator.h"
+
+// Include facility headers
 #include "Road.h"
 #include "Railway.h"
 #include "Airport.h"
 
 int main() {
-    // Testing Factory Method by Creating Different Transport Modes and Facilities
-    std::cout << "Factory Method Pattern - Creating Transport Modes and Facilities\n";
+    // Factory Pattern - Create instances of each transport mode and facility
+    std::cout << "=== Factory Pattern ===" << std::endl;
     BusMode busMode;
     TrainMode trainMode;
     TaxiMode taxiMode;
     CarMode carMode;
     AirplaneMode airplaneMode;
-    
-    Road road;
-    Railway railway;
-    Airport airport;
 
-    // // Testing State Pattern - Setting and Changing State of Facilities
-    // std::cout << "\nState Pattern - Changing Facility States\n";
+    // std::cout << "Testing displayMode function:" << std::endl;
+    // busMode.displayMode();
+    // trainMode.displayMode();
+    // taxiMode.displayMode();
+    // carMode.displayMode();
+    // airplaneMode.displayMode();
+
+    // Road road;
+    // Railway railway;
+    // Airport airport;
+
+    // std::cout << "\n=== State Pattern ===" << std::endl;
     // NormalState normalState;
     // CongestedState congestedState;
     // EmptyState emptyState;
 
+    // std::cout << "Testing state transitions for Road:" << std::endl;
     // road.setState(&normalState);
     // road.handleState();
     // road.setState(&congestedState);
@@ -48,84 +61,52 @@ int main() {
     // road.setState(&emptyState);
     // road.handleState();
 
+    // std::cout << "\nTesting state transitions for Railway:" << std::endl;
     // railway.setState(&normalState);
     // railway.handleState();
+    // railway.setState(&emptyState);
+    // railway.handleState();
+
+    // std::cout << "\nTesting state transitions for Airport:" << std::endl;
+    // airport.setState(&normalState);
+    // airport.handleState();
     // airport.setState(&congestedState);
     // airport.handleState();
 
-    // // Testing Observer Pattern - Citizens Subscribe to Transport Schedules
-    // std::cout << "\nObserver Pattern - Citizens Subscribing to Schedules\n";
-    // Adult adult1("John Doe");
-    // Minor minor1("Jane Smith");
-
-    // busMode.addObserver(&adult1);
-    // busMode.addObserver(&minor1);
-    // trainMode.addObserver(&minor1);  // Minor subscribing to train schedule
-
-    // busMode.setSchedule("Buses depart every 15 minutes.");
-    // trainMode.setSchedule("Trains depart every 30 minutes.");
-
-    // busMode.setSchedule("Bus delay: traffic congestion.");
-    // trainMode.setSchedule("Train delay: maintenance on tracks.");
-
-    // // Testing Mediator Pattern - Communication between Modes on Road, Railway, and Airport
-    // std::cout << "\nMediator Pattern - Inter-Mode Communication\n";
+    // std::cout << "\n=== Observer Pattern ===" << std::endl;
     // ConcreteTransportationMediator mediator;
-    // busMode.setMediator(&mediator);
-    // taxiMode.setMediator(&mediator);
-    // trainMode.setMediator(&mediator);
-    // airplaneMode.setMediator(&mediator);
+    // CitizenObserver observer1("Alice");
+    // CitizenObserver observer2("Bob");
 
-    // mediator.registerMode(&busMode);
-    // mediator.registerMode(&taxiMode);
-    // mediator.registerMode(&trainMode);
-    // mediator.registerMode(&airplaneMode);
+    // std::cout << "Adding observers and sending notifications:" << std::endl;
+    // mediator.addObserver(&observer1);
+    // mediator.addObserver(&observer2);
+    // mediator.notifyObservers("Traffic update: Road is congested");
 
-    // busMode.alertAccident();
-    // trainMode.alertAccident();
-    // airplaneMode.alertAccident();
+    // std::cout << "\n=== Iterator Pattern ===" << std::endl;
+    // std::vector<TransportMode*> transportModes = { &busMode, &trainMode, &taxiMode, &carMode, &airplaneMode };
 
-    // // Testing Iterator Pattern - Iterating through Transport Stations
-    // std::cout << "\nIterator Pattern - Route Navigation\n";
-    // BusIterator busIterator(busMode.getBusStops());
-    // TrainStationIterator trainIterator(trainMode.getTrainStations());
-    // TaxiRankIterator taxiIterator(taxiMode.getTaxiRanks());
-    // AirportIterator airportIterator(airplaneMode.getAirports());
-
-    // std::cout << "Bus Route:\n";
-    // while (busIterator.hasNext()) {
-    //     TransportStation* station = busIterator.next();
-    //     station->handlePassengers();
+    // std::cout << "Testing QueueIterator:" << std::endl;
+    // QueueIterator queueIterator(transportModes);
+    // while(queueIterator.hasNext()) {
+    //     TransportMode* mode = queueIterator.next();
+    //     mode->displayMode();
     // }
 
-    // std::cout << "\nTrain Route:\n";
-    // while (trainIterator.hasNext()) {
-    //     TransportStation* station = trainIterator.next();
-    //     station->handlePassengers();
+    // std::cout << "\nTesting StackIterator:" << std::endl;
+    // StackIterator stackIterator(transportModes);
+    // while(stackIterator.hasNext()) {
+    //     TransportMode* mode = stackIterator.next();
+    //     mode->displayMode();
     // }
 
-    // std::cout << "\nTaxi Route:\n";
-    // while (taxiIterator.hasNext()) {
-    //     TransportStation* station = taxiIterator.next();
-    //     station->handlePassengers();
-    // }
+    // std::cout << "\n=== Mediator Pattern ===" << std::endl;
+    // mediator.addTransportMode(&busMode);
+    // mediator.addTransportMode(&trainMode);
 
-    // std::cout << "\nAirport Itinerary:\n";
-    // while (airportIterator.hasNext()) {
-    //     TransportStation* station = airportIterator.next();
-    //     station->handlePassengers();
-    // }
+    // std::cout << "Testing coordination between BusMode and TrainMode:" << std::endl;
+    // mediator.coordinateTransport("BusMode", "TrainMode");
 
-    // // Testing Specific Functions for Each Transport Mode
-    // std::cout << "\nTesting Transport Mode Specific Functions\n";
-    // std::cout << "Bus Mode Schedule: " << busMode.getSchedule() << "\n";
-    // std::cout << "Train Mode Schedule: " << trainMode.getSchedule() << "\n";
-    // std::cout << "Taxi Mode Schedule: " << taxiMode.getSchedule() << "\n";
-    // std::cout << "Car Mode Schedule: " << carMode.getSchedule() << "\n";
-    // std::cout << "Airplane Mode Schedule: " << airplaneMode.getSchedule() << "\n";
-
-    // // Cleanup and Verification of Proper Destruction
-    // std::cout << "\nCleaning up and finalizing the test...\n";
-
+    // std::cout << "\nAll functionality has been tested." << std::endl;
     return 0;
 }

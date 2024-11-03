@@ -1,6 +1,5 @@
 #include "TaxiMode.h"
 #include "TransportFacilities.h"
-#include "TaxiRankIterator.h"
 #include <string>
 #include <iostream>
 #include "ModeFactory.h"
@@ -13,30 +12,32 @@ TaxiMode::TaxiMode(){
 
 // Mediator
 
-void TaxiMode:: drive(){
+void TaxiMode::drive() {
     facility->add(this);
-    std::cout<<"Taxi starts driving"<<std::endl;
+    std::cout << "Taxi starts driving" << std::endl;
     travel();
 
-    QueueIterator it(this);
-    int x=1;
-    while (it.hasNext())
-    {
-        auto current=it.currItem();
-        std:: cout<<"Arriving at stop "<<x++<<std::endl;
-        it.next();
+    // Use QueueIterator to traverse stops in forward order
+    QueueIterator queueIt(this);
+    int x = 1;
+    while (queueIt.hasNext()) {
+        auto current = queueIt.currItem();
+        std::cout << "Arriving at stop " << x++ << std::endl;
+        queueIt.next();
     }
-    std::cout<<"Revisiting stops\n";
-    StackIterator it(this);
-    int x=1;
-    while (it.hasNext())
-    {
-        auto current=it.currItem();
-        std:: cout<<"Arriving at stop "<<x--<<std::endl;
-        it.next();
-    }
-     std::cout<<"Completed all routes";
 
+    std::cout << "Revisiting stops\n";
+
+    // Use StackIterator to traverse stops in reverse order
+    StackIterator stackIt(this);
+    x = 1; // Reset x for reverse traversal
+    while (stackIt.hasNext()) {
+        auto current = stackIt.currItem();
+        std::cout << "Arriving at stop " << x-- << std::endl;
+        stackIt.next();
+    }
+
+    std::cout << "Completed all routes" << std::endl;
 }
 
 void TaxiMode::stopDrive(){

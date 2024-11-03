@@ -10,29 +10,34 @@ TrainMode::TrainMode() {
     facility=nullptr;
 }
 
-void TrainMode::drive(){
+void TrainMode::drive() {
     facility->add(this);
     travel();
-    QueueIterator it(this);
-    int x=1;
-    while (it.hasNext())
-    {
-        auto current=it.currItem();
-        std:: cout<<"Arriving at stop "<<x++<<std::endl;
-        it.next();
-    }
-    std::cout<<"Revisiting stops\n";
-    StackIterator it(this);
-    int x=1;
-    while (it.hasNext())
-    {
-        auto current=it.currItem();
-        std:: cout<<"Arriving at stop "<<x--<<std::endl;
-        it.next();
-    }
-     std::cout<<"Completed all routes";
 
+    // Use QueueIterator for forward traversal
+    QueueIterator queueIt(this);
+    int x = 1;
+    while (queueIt.hasNext()) {
+        auto current = queueIt.currItem();
+        std::cout << "Arriving at stop " << x++ << std::endl;
+        queueIt.next();
+    }
+
+    std::cout << "Revisiting stops\n";
+
+    // Use StackIterator for reverse traversal
+    StackIterator stackIt(this);
+    x = 1; // Reset x for reverse traversal
+    while (stackIt.hasNext()) {
+        auto current = stackIt.currItem();
+        std::cout << "Arriving at stop " << x-- << std::endl;
+        stackIt.next();
+    }
+
+    std::cout << "Completed all routes" << std::endl;
 }
+
+
 
 std::string TrainMode:: getName() const {
      return "TrainMode"; }

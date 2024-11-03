@@ -1,7 +1,12 @@
 // / Abstract Creators
+#ifndef FACILITIESFACTORY_H
+#define FACILITIESFACTORY_H
 #pragma once
 #include "TransportFacilities.h"
 #include <algorithm>
+
+class TransportFacilities;
+
 class FacilitiesFactory {
 public:
     ~FacilitiesFactory();
@@ -12,3 +17,4 @@ protected:
     TransportFacilities* facilities;
     
 };
+#endif

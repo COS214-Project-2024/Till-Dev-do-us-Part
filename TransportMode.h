@@ -1,13 +1,19 @@
 // Abstract Products
 // TransportMode.h
+#ifndef TRANSPORTMODE_H
+#define TRANSPORTMODE_H
+
 #include "TransState.h"
 #include "TransportationMediator.h"
 #include "TransportFacilities.h"
 #include "TransportationIterator.h" 
+#include "TransportStation.h"
 #include "ConcreteTransportationMediator.h"
 #include "TransportDept.h"
 #include "QueueIterator.h"
 #include "StackIterator.h"
+#include "CitizenObserver.h"
+#include "TransportDept.h"
 #pragma once
 #include <list>
 #include <vector>
@@ -16,13 +22,9 @@
 
 #include <algorithm>
 #include <random>
-
-class TransportationMediator;
 class TransportFacilities;
-class TransportIterator;
-class CitizenObserver;
-class TransportStation;
 class ConcreteTransportationMediator;
+class TransportDept;
 
 class TransportMode {
 protected:
@@ -38,8 +40,8 @@ public:
     //TransportMode();
     // TransportMode(const std::string& name, double speed, double capacity); // Constructor
     void changed(const std::string& state);
-    virtual ~TransportMode()=default;
-    void TransportMode::travel();
+    virtual ~TransportMode();
+    void travel();
     
     virtual void SendMessage(const std::string& state)=0;
     virtual std::string GetMessage()=0;
@@ -59,3 +61,5 @@ public:
 
 
 };
+
+#endif

@@ -9,29 +9,33 @@ BusMode:: BusMode()
 }
 
 
-void BusMode::drive(){
+void BusMode::drive() {
     facility->add(this);
-    QueueIterator it(this);
+    QueueIterator queueIt(this);
     travel();
-    int x=1;
-    while (it.hasNext())
-    {
-        auto current=it.currItem();
-        std:: cout<<"Arriving at stop "<<x++<<std::endl;
-        it.next();
-    }
-    std::cout<<"Revisiting stops\n";
-    StackIterator it(this);
-    int x=1;
-    while (it.hasNext())
-    {
-        auto current=it.currItem();
-        std:: cout<<"Arriving at stop "<<x--<<std::endl;
-        it.next();
-    }
-     std::cout<<"Completed all routes";
+    int x = 1;
 
+    // Iterate through stops using QueueIterator
+    while (queueIt.hasNext()) {
+        auto current = queueIt.currItem();
+        std::cout << "Arriving at stop " << x++ << std::endl;
+        queueIt.next();
+    }
+
+    std::cout << "Revisiting stops\n";
+    StackIterator stackIt(this); // Use a different variable name for the StackIterator
+    x = 1;
+
+    // Iterate through stops in reverse order using StackIterator
+    while (stackIt.hasNext()) {
+        auto current = stackIt.currItem();
+        std::cout << "Arriving at stop " << x-- << std::endl;
+        stackIt.next();
+    }
+
+    std::cout << "Completed all routes" << std::endl;
 }
+
 
 void BusMode::SendMessage(const std::string& state){
     if (state == "accident") {

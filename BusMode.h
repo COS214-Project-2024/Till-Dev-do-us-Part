@@ -12,10 +12,6 @@
 #include <list>
 #include <memory>
 
-
-class TransportFacilities;
-class TransportationMediator;
-
 class BusMode : public TransportMode {
 public:
     BusMode();

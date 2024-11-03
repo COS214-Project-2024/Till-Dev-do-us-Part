@@ -7,7 +7,8 @@
 #include <vector>
 #include <string>
 
-class TransportMode;
+class TransportStation;
+
 
 class ConcreteTransportationMediator : public TransportationMediator {
 
