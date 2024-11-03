@@ -19,7 +19,7 @@ class Building
 
 protected:
     BuildingState *state;
-    ResourceDepartment *resourceDept;
+    // ResourceDepartment *resourceDept;
     string type;
     float cleanliness;
     float electricityUnits;
