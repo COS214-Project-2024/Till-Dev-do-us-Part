@@ -1,3 +1,13 @@
+/**
+ * @file CRS.h
+ * @brief Class representing the Central Revenue Service (CRS).
+ * 
+ * The CRS handles tax collection from businesses and distributes the collected
+ * tax to various departments within the government.
+ * 
+ * @author Driya Govender
+ */
+
 #ifndef CRS_H
 #define CRS_H
 
