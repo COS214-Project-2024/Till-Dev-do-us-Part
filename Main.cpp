@@ -1,4 +1,4 @@
-#include "main.h"
+#include "Main.h"
 
 // SIMULATION DISPLAY
 #include "display.h"

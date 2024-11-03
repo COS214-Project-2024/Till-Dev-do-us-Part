@@ -28,7 +28,7 @@ bool ResourceDepartment::hasSufficientResource(Resources *resource, float amount
     //         return true;
     //     }
     // }
-     return false;
+    return false;
 }
 
 // Consume a specified amount of a Resources
@@ -85,22 +85,18 @@ void ResourceDepartment::checkResourceLevels()
 {
     for (Resources *res : resources)
     {
-        }
+    }
 }
 
-ResourceDepartment:: ResourceDepartment(float budget)
+ResourceDepartment::ResourceDepartment(float budget)
 {
-    this->budget=budget;
+    this->budget = budget;
 }
 // void ResourceDepartment:: addUtility()
 // {
 //     utilities.push_back(utility);
 // }
-void ResourceDepartment:: processResourceRequest(float amount)
+bool ResourceDepartment::processResourceRequest(string utiName, float amount)
 {
-    // budget-=amount
-    // if(budget<0)
-    // {
-    //     budget=0;
-    // }
+    return true;
 }

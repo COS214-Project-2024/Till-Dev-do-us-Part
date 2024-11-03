@@ -1,5 +1,5 @@
-#include"Building.h"
-
+#include "Building.h"
+#include "ResourceDepartment.h"
 Building::Building(string type)
 {
     state = new ConstructionState();
@@ -18,7 +18,8 @@ Building::~Building()
 bool Building::requestElectricity(float units)
 {
     cout << "Requesting electricity from Resource Department:";
-    if (resourceDept->processRequest("electricity", units))
+
+    if (resourceDept->processResourceRequest("electricity", units))
     {
         electricityUnits += units;
         cout << "Resource department supplied electricity" << endl;
@@ -26,12 +27,12 @@ bool Building::requestElectricity(float units)
     }
     cout << "Resource department could not supply electricity" << endl;
     return false;
-} 
+}
 
 bool Building::requestWater(float units)
 {
     cout << "Requesting water from Resource Department:";
-    if (resourceDept->processRequest("water", units))
+    if (resourceDept->processResourceRequest("water", units))
     {
         waterUnits += units;
         cout << "Resource department supplied water" << endl;
@@ -41,19 +42,18 @@ bool Building::requestWater(float units)
     return false;
 }
 
-
-bool Building::useElectricity(float units) //units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage 
+bool Building::useElectricity(float units) // units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage
 {
     if (this->electricityUnits - units < 0 || !this->state->canUseElectricity())
         return false;
-    
-    electricityUnits-=units;
+
+    electricityUnits -= units;
     return true;
 }
 
 bool Building::useWater(float units) // units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage
 {
-    if(this->waterUnits - units < 0 ||! this->state->canUseWater())
+    if (this->waterUnits - units < 0 || !this->state->canUseWater())
         return false;
 
     waterUnits -= units;

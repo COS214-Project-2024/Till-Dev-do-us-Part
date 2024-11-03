@@ -39,7 +39,7 @@ class DevelopmentDept : public Department
         float getPrice(std::string buildingType);
         Building *build(std::string buildingType);
         void addUnoccupiedBuilding(Building* b);
-        void DevelopmentDept::removeUnoccupiedBuilding(Building *b);
+        void removeUnoccupiedBuilding(Building *b);
 
     };
 

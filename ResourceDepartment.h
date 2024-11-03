@@ -42,7 +42,7 @@ public:
 
     ResourceDepartment(float budget);
 
-    void processResourceRequest(float amount);
+    bool processResourceRequest(string utiName,float amount);
 };
 
 #endif // RESOURCEDEPARTMENT_H

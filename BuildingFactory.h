@@ -1,6 +1,6 @@
 #ifndef BUILDINGFACTORY_H
 #define BUILDINGFACTORY_H
-#include "Building.h"
+class Building;  // Forward declaration
 
 class BuildingFactory{
 

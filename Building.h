@@ -6,20 +6,21 @@
 #include "ConstructionState.h"
 #include "CompleteState.h"
 #include "DilapidatedState.h"
-#include "ResourceDepartment.h"
+// #include "ResourceDepartment.h"
 // #include "Citizen.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
 using namespace std;
 
+class ResourceDepartment;
 class Citizen;
 class Building
 {
 
 protected:
     BuildingState *state;
-    // ResourceDepartment *resourceDept;
+    ResourceDepartment *resourceDept;
     string type;
     float cleanliness;
     float electricityUnits;

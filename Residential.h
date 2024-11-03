@@ -1,6 +1,7 @@
 #ifndef RESIDENTIAL_H
 #define RESIDENTIAL_H
 #include "Building.h"
+
 class Citizen;
 class Residential : public Building
 {
