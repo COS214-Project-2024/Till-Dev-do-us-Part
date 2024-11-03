@@ -336,7 +336,81 @@ TEST_SUITE("Economy Tests")
 }        
 
 //KARABO SEROTHOANE
+TEST_SUITE("CITIZEN TESTS") {
 
+    Government* Gov;
+    Department* SA;
+    Population* adultFactory;
+    Population* minorFactory;
+    Citizen* adult;
+    Citizen* child;
+
+    TEST_CASE("Setup Government and Social Affairs Department") {
+
+        std::srand(std::time(0));
+        Gov = Government::getInstance();
+        SA = new SocialAffairsDept(50000);
+        Gov->addDepartment("SocialAffairs", SA);
+        
+        adultFactory = new AdultPop();
+        adult = adultFactory->getPerson();
+        minorFactory = new MinorPop();
+        child = minorFactory->getPerson();
+
+        CHECK(adult != nullptr);
+        CHECK(child != nullptr);
+
+        SUBCASE("Check adult and child reaction"){
+            CHECK_NOTHROW(adult->react());
+            CHECK_NOTHROW(child->react());
+        }
+
+        SUBCASE("CHECK ADULT AND CHILD ADDED TO SAD"){
+            ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addCitizen(adult);
+            ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addChild(child);
+            CHECK(((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->getNumCitizens() == 2);
+        }
+
+        SUBCASE("CHECK THAT EMPLOYMENT WORKS"){
+
+            ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(adult);
+            Business* shop = new Food();
+            Citizen* person1 = ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->employ(shop);
+
+            CHECK(person1 != nullptr);
+            CHECK(((Adult*) person1)->employmentStatus());
+            CHECK(((Adult*) adult)->employmentStatus());
+
+            delete shop;
+        }
+
+        SUBCASE("CHECK GROW POPULATION"){
+            ((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->growPopulation(10);
+            CHECK(((SocialAffairsDept*)(Gov->getDepartment("SocialAffairs")))->getNumCitizens() == 14);
+        }
+
+        SUBCASE("CHECK THAT HAS CHILD WORKS"){
+            CHECK(!(((HaveChild*) adult)->hasChild()));
+        }
+
+        SUBCASE("CHECK THAT HAVECHILD DECORATOR WORKS"){
+            CHECK(!(((HaveChild*) adult)->hasChild()));
+            HaveChild* parent = new HaveChild(adult);
+            ((Minor*) child)->setParent((Adult*)adult);
+            CHECK((((HaveChild*) parent)->hasChild()));
+        }
+
+    }
+
+
+    TEST_CASE("Tear Down") {
+        delete adultFactory;
+        delete minorFactory;
+        Gov->removeDepartment("SocialAffairs");
+        delete SA;
+    }
+
+}
 
 //KATLEGO MOSITI
 
