@@ -4,6 +4,7 @@
 PowerPlant::PowerPlant(std::string name, ResourceDepartment *department, Energy *resource, int numworkers)
     : ProductionUtility(name, department, resource, numworkers)
 {
+    std::cout << "Simulation " << std::endl;
     productionCapacity = 5000;
     currentProduction = 0;
     setProState(new OperationalProductionState);

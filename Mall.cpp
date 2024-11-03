@@ -3,7 +3,7 @@
 Mall::Mall():Commercial("Mall")
 {
     area = 40000;
-    value = 1200000;
+    value = 350000;
     capacity = 15;
 }
 

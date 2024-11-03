@@ -5,6 +5,7 @@
 ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int MaxWorkers)
     : Utility(name, resDept, resource, MaxWorkers), currentProduction(0), proState(nullptr)
 {
+    std::cout << "Simulation One" << std::endl;
 }
 
 ProductionUtility::~ProductionUtility() = default;

@@ -2,7 +2,9 @@
 
 Park::Park():Landmark("Park")
 {
-
+    area = 600;
+    capacity = 25;
+    value=30000;
 }
 
 Park::~Park()

@@ -2,6 +2,9 @@
 
 Monument::Monument() : Landmark("Monument")
 {
+    area = 300;
+    capacity = 10;
+    value=20000;
 }
 
 Monument::~Monument()

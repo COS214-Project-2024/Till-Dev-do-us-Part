@@ -2,13 +2,15 @@
 
 Warehouse::Warehouse() : Industrial("Warehouse")
 {
+    area = 1000;
+    capacity = 15;
+    value=30000;
     cout << "Warehouse created!"  << endl;
 }
 
 Warehouse::~Warehouse()
 {
-    delete this->state;
-    state = nullptr;
+
     demolish();
     cout << "Warehouse demolished!" << endl;
 }

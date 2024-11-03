@@ -4,6 +4,7 @@
 Utility::Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int maxWorkers)
     : name(name), resDept(resDept), resource(resource), MaxWorkers(maxWorkers)
 {
+    std::cout<<"segfault"<<std::endl;
     UtilityBus = new Wellness("Utility", MaxWorkers);
     std::cout << "Buying Property for Utilities" << std::endl;
     UtilityBus->buyProperty("Plant");

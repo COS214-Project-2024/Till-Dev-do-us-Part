@@ -1,6 +1,10 @@
 #include "Plant.h"
 
 Plant::Plant():Industrial("Plant"){
+    area = 4000;
+    capacity = 15;
+    value=100000;
+    noBuildings = 0;
     cout << "Plant created" << endl;
 }
 

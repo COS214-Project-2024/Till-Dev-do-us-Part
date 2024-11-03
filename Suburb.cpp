@@ -2,7 +2,7 @@
 
 Suburb::Suburb() : Residential("Suburb")
 {
-    area = 10000;
+    area = 50000;
     capacity = 50;
     noBuildings = 0;
     value = 12000;

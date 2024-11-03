@@ -2,6 +2,9 @@
 
 Factory::Factory() : Industrial("Factory")
 {
+    area = 1300;
+    capacity = 15;
+    value=50000;
     cout << "Factory created" << endl;
 }
 

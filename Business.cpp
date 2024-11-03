@@ -34,6 +34,7 @@ void Business::buyProperty(string propertyType)
 
 void Business::sellProperty()
 {
+    delete property;
     property = nullptr;
 }
 

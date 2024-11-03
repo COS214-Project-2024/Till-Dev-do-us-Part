@@ -2,7 +2,7 @@
 
 Shop::Shop():Commercial("Shop"){
     area = 200;
-    value = 300000;
+    value = 180000;
     capacity = 1;
     occupant= nullptr;
 }

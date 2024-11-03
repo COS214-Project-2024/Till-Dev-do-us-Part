@@ -28,6 +28,7 @@ class Wellness : public Business
 
         Wellness(string shopName, int maxEmployess)
         {
+            std::cout<<"segfault wellnes"<<std::endl;
             wiseBucksApp = nullptr; 
             numEmployees[0] = 0; 
             numEmployees[1] = maxEmployess; 
@@ -37,6 +38,7 @@ class Wellness : public Business
 
             //add to dept vector of businesses
             ((FinanceDept*)(Government::getInstance()->getDepartment("Finance")))->newBusiness(this); 
+             std::cout<<"segfault wellnes end"<<std::endl;
         }
 
         virtual string getBusinessType()

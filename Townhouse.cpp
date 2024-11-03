@@ -2,7 +2,7 @@
 #include "Citizen.h"
 
 Townhouse::Townhouse():Residential("Townhouse"){
-    value = 80000;
+    value = 7000;
     area = 200;
     capacity = 3;
 }

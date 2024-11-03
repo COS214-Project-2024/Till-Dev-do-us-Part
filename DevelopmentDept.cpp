@@ -5,50 +5,56 @@ DevelopmentDept::DevelopmentDept(float budget)
     this->budget = budget;
     land = 10000000;
 
-    buildingAreaList["House"] = 500;
-    buildingAreaList["Townhouse"] = 180;
-    buildingAreaList["Estate"] = 500;
+    buildingAreaList["House"] = 400;
+    buildingAreaList["Townhouse"] = 200;
+    buildingAreaList["Estate"] = 1500;
     buildingAreaList["Office"] = 180;
-    buildingAreaList["Shop"] = 200;
-    buildingAreaList["Mall"] = 1000;
-    buildingAreaList["Warehouse"] = 500;
-    buildingAreaList["Factory"] = 1200;
-    buildingAreaList["Plant"] = 1200;
-    buildingAreaList["Park"] = 1200;
-    buildingAreaList["Monument"] = 1200;
-    buildingAreaList["Cultural Center"] = 1200;
-    buildingAreaList["Hospital"] = 1200;
-    buildingAreaList["CBD"] = 1200;
-    buildingAreaList["Suburb"] = 12000;
-    buildingAreaList["Industrial"] = 1200;
+    buildingAreaList["Shop"] = 600;
+    buildingAreaList["Mall"] = 12000;
+    buildingAreaList["Warehouse"] = 1000;
+    buildingAreaList["Factory"] = 1300;
+    buildingAreaList["Plant"] = 4000;
+    buildingAreaList["Park"] = 600;
+    buildingAreaList["Monument"] = 300;
+    buildingAreaList["Cultural Center"] = 500;
+    buildingAreaList["Hospital"] = 3000;
+    buildingAreaList["CBD"] = 50000;
+    buildingAreaList["Suburb"] = 50000;
+    buildingAreaList["Industrial"] = 60000;
 
-    priceList["House"] = 1000;
-    priceList["Townhouse"] = 180;
-    priceList["Estate"] = 500;
-    priceList["Office"] = 180;
-    priceList["Shop"] = 200;
-    priceList["Mall"] = 1000;
-    priceList["Warehouse"] = 500;
-    priceList["Factory"] = 1200;
-    priceList["Plant"] = 1200;
-    priceList["Park"] = 1200;
-    priceList["Monument"] = 1200;
-    priceList["Cultural Center"] = 1200;
-    priceList["Hospital"] = 1200;
-    priceList["CBD"] = 1200;
+    priceList["House"] = 10000;
+    priceList["Townhouse"] = 7000;
+    priceList["Estate"] = 200000;
+    priceList["Office"] = 12000;
+    priceList["Shop"] = 180000;
+    priceList["Mall"] = 350000;
+    priceList["Warehouse"] = 30000;
+    priceList["Factory"] = 50000;
+    priceList["Plant"] = 100000;
+    priceList["Park"] = 30000;
+    priceList["Monument"] = 20000;
+    priceList["Cultural Center"] = 30000;
+    priceList["Hospital"] = 100000;
+    priceList["CBD"] = 12000;
     priceList["Suburb"] = 12000;
-    priceList["Industrial"] = 1200;
+    priceList["Industrial"] = 12000;
 
 
 
+    factories["House"]= new HouseFactory();
+    factories["Townhouse"] = new TownhouseFactory();
+    factories["Estate"] = new EstateFactory();
     factories["Shop"] = new ShopFactory();
     factories["Office"] = new OfficeFactory();
     factories["Mall"]= new MallFactory();
-    // factories["House"]= new HouseFactory();
-    // factories["Townhouse"] = new TownhouseFactory();
-    // factories["Estate"] = new EstateFactory();
-    // factories["Factory"]= new FactoryFactory();
-    // factories["Warehouse"]= new WarehouseFactory();
+    factories["Factory"]= new FactoryFactory();
+    factories["Warehouse"]= new WarehouseFactory();
+    factories["Monument"]= new MonumentFactory();
+    factories["Cultural Center"]= new CulturalFactory();
+    factories["Hospital"]= new HospitalFactory();
+    factories["CBD"]= new CBDFactory();
+    factories["Suburb"]= new SuburbFactory();
+    factories["Industrial"]= new IndustrialFactory();
 }
 
 DevelopmentDept::~DevelopmentDept()
@@ -60,7 +66,7 @@ DevelopmentDept::~DevelopmentDept()
     {
         delete (it)->second;
         (it)->second = nullptr;
-        cout << "second: " << (it)->second;
+        // cout << "second: " << (it)->second;
         factories.erase(it->first);
     }
     
@@ -69,6 +75,24 @@ DevelopmentDept::~DevelopmentDept()
         delete (*it);
         (*it) = nullptr;
         unOccupiedBuildings.erase(it);
+    }
+
+    for(vector<Residential*>::iterator it=suburbs.begin(); it != suburbs.end();it++){
+        delete (*it);
+        (*it) = nullptr;
+        suburbs.erase(it);
+    }
+    
+    for(vector<Commercial*>::iterator it=cbds.begin(); it != cbds.end();it++){
+        delete (*it);
+        (*it) = nullptr;
+        cbds.erase(it);
+    }
+    
+    for(vector<Industrial*>::iterator it=industrialSites.begin(); it != industrialSites.end();it++){
+        delete (*it);
+        (*it) = nullptr;
+        industrialSites.erase(it);
     }
 }
 
@@ -86,7 +110,52 @@ Building* DevelopmentDept::build(std::string buildingType)
         if((*it)->getType() == buildingType){
             Building* building = (*it);
             unOccupiedBuildings.erase(it);
-            return building; //citizen will have to add themselves to the building
+
+            if (buildingType == "House" || buildingType == "Townhouse" || buildingType == "Estate"){
+                for (vector<Residential*>::iterator it = suburbs.begin(); it != suburbs.end(); it++)
+                {
+                    if(((Suburb*)(*it))->addBuilding((Residential*)building)){
+                        return building;
+                    }
+                }
+
+                Suburb *newSub = new Suburb();
+                newSub->addBuilding((Residential *)building);
+                suburbs.push_back(newSub);
+                return building;
+            }
+            else{
+                if (buildingType == "Factory" || buildingType == "Warehouse" || buildingType == "Plant")
+                {
+                    for (vector<Industrial *>::iterator it = industrialSites.begin(); it != industrialSites.end(); it++)
+                    {
+                        if (((IndustrialSite *)(*it))->addBuilding((Industrial *)building))
+                        {
+                            return building;
+                        }
+                    }
+
+                    IndustrialSite *newIndust = new IndustrialSite();
+                    newIndust->addBuilding((Industrial *)building);
+                    industrialSites.push_back(newIndust);
+                    return building;
+                }
+                else{
+
+                    for (vector<Commercial *>::iterator it = cbds.begin(); it != cbds.end(); it++)
+                    {
+                        if (((CBD *)(*it))->addBuilding((Building *)building))
+                        {
+                            return building;
+                        }
+                    }
+
+                    CBD *newCBD = new CBD();
+                    newCBD->addBuilding((Building *)building);
+                    cbds.push_back(newCBD);
+                    return building;
+                }
+            }
         }
     }
 

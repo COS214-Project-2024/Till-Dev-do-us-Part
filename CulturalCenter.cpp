@@ -2,6 +2,9 @@
 
 CulturalCenter::CulturalCenter() : Landmark("CulturalCenter")
 {
+    area = 500;
+    capacity = 15;
+    value=30000;
 }
 
 CulturalCenter::~CulturalCenter()
