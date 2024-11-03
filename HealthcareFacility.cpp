@@ -27,7 +27,7 @@ void HealthcareFacility::treatPatient(Citizen* c)
     else
     {
         std::cout<<"Citizen died,RIP\n";
-        deathtoll++;
+        ++deathtoll;
         c=nullptr;/// o sure?????????
         
 

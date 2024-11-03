@@ -20,6 +20,8 @@ private:
 
 public:
     static Government* getInstance();
+    static void deleteInstance();
+    ~Government();
     Department* getDepartment(std::string name);
     void enactPolicy(Policy* policy);
     void revertPolicy(std::string name);

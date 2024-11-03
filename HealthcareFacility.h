@@ -14,7 +14,7 @@ protected:
 public:
     HealthcareFacility() ;
 
-    ~HealthcareFacility();
+    ~HealthcareFacility(){successor=nullptr;}
 
 
     virtual void admitPatient(Citizen* c)=0;

@@ -9,7 +9,6 @@ class Policy {
 private:
     std::string name;
     std::string code;
-    Memento* memento;
     std::string description;
 
 public:

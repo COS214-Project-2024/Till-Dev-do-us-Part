@@ -1,4 +1,5 @@
 #include "Policy.h"
+#include <iostream>
 
 Policy::Policy( std::string name, std::string code,std::string description)
     : name(name), code(code), description(description) {}
@@ -16,10 +17,7 @@ std::string Policy:: getDescription()
 
 Policy:: ~Policy()
 {
-    if(memento!=nullptr)
-    {
-        delete memento;
-        memento=nullptr;
-    }
+    
+
 }
 

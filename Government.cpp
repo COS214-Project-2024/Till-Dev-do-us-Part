@@ -4,6 +4,36 @@
 Government* Government::instance = nullptr;
 
 Government::Government() {
+    memento=nullptr;
+}
+void Government::deleteInstance()
+{
+    
+    if(instance!=nullptr)
+    {
+        delete instance;
+        instance=nullptr;
+    }
+}
+
+Government::~Government() {
+    
+    if(memento)
+    {
+        delete memento;/////////
+        memento=nullptr;
+    }
+    for (Policy* policy : policies) {
+        delete policy;  // Free each policy
+    }
+    policies.clear();
+
+    for (auto department : departments) {
+        delete department.second;  // Free each department
+    }
+    departments.clear();
+
+
 }
 
 Memento* Government::createMemento() {
@@ -13,19 +43,28 @@ Memento* Government::createMemento() {
         policiesCopy.push_back(new Policy(*policy));
     }
     memento->setActivePolicies(policiesCopy);
+
+
+    for (Policy* policy : policiesCopy) {
+        delete policy;  // Free each policy
+    }
+    policiesCopy.clear();
     return memento;
 }
 
 void Government::setMemento(Memento* memento) {
+    if(memento=nullptr)
+    {
+        return;
+    }
         for (Policy* policy : policies) {
-        delete policy;
+        //delete policy;
     }
     policies.clear();
 
+    // Get copy of policies from memento
     std::vector<Policy*> restoredPolicies = memento->getActivePolicies();
-    for (Policy* policy : restoredPolicies) {
-        policies.push_back(new Policy(*policy));
-    }
+    policies = restoredPolicies;  // Assign the new policies
 }
 
 Government* Government::getInstance() {
@@ -49,6 +88,10 @@ void Government::enactPolicy(Policy* policy) {
 
 void Government::revertPolicy(std::string name) {
    
+    if(policies.empty())
+    {
+        return;
+    }
     for (auto it = policies.begin(); it != policies.end(); ) {
         if ((*it)->getName() == name) {
             //delete *it;////yes?

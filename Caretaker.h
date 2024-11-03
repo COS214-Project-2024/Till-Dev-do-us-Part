@@ -8,6 +8,7 @@ private:
     Memento* memento;
 
 public:
+    Caretaker();
     void saveMemento(Memento* memento);
     Memento* getMemento();
     ~Caretaker();

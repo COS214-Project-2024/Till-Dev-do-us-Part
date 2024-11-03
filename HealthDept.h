@@ -11,6 +11,7 @@ private:
 public:
     HealthDept(float budget);
     void addFacility(std:: string name,HealthcareFacility* facility);
+    std::map<std::string,HealthcareFacility*> getFacilities(){return facilities;}
     void admitPatient(Citizen* c);
     void totalDeaths();
     ~HealthDept();

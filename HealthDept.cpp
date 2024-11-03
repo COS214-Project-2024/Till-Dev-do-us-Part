@@ -42,7 +42,7 @@ void HealthDept:: totalDeaths()
 }
 HealthDept::~HealthDept() {
     for (auto& facilityPair : facilities) {
-        delete facilityPair.second; 
+       // delete facilityPair.second; 
     }
     facilities.clear(); // Clear the map
 }

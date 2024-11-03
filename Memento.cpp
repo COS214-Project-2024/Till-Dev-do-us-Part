@@ -1,7 +1,11 @@
 #include "Memento.h"
 #include "Policy.h"
+#include <iostream>
 
-
+Memento:: Memento()
+{
+    
+}
 std::vector<Policy*> Memento::getActivePolicies(){
     std::vector<Policy*> policiesCopy;
     for (Policy* policy : activePolicies) {
@@ -12,11 +16,13 @@ std::vector<Policy*> Memento::getActivePolicies(){
 
 void Memento::setActivePolicies(std::vector<Policy*> policies) {
         for (Policy* policy : activePolicies) {
-        delete policy;
+        // if(policy!=nullptr)
+        // {
+            delete policy;
+        // }
     }
     activePolicies.clear();
 
-    
     for (Policy* policy : policies) {
         activePolicies.push_back(new Policy(*policy));
     }
@@ -24,9 +30,15 @@ void Memento::setActivePolicies(std::vector<Policy*> policies) {
 
 Memento:: ~Memento()
 {
-    // for(auto policy:activePolicies)
-    // {
-    //     delete policy;
-    // }//not sure about this
+    if(activePolicies.empty())
+    {
+        return;
+    }
+    for(auto policy:activePolicies)
+    {
+
+        delete policy;
+
+    }//not sure about this
     activePolicies.clear();
 }

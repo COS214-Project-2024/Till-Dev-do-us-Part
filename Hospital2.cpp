@@ -11,7 +11,12 @@ Hospital2::Hospital2()
 }
 
 void Hospital2::admitPatient(Citizen* c) {///take in citizen
-    if (c->getHealth()<15) {
+    if(c->getHealth()>=15)
+    {
+        return;
+    }
+
+    if (c->getHealth()<15&& c->getHealth()>0) {
         std::cout << "Patient admitted\n";
         treatPatient(c);
     } else {
@@ -20,10 +25,10 @@ void Hospital2::admitPatient(Citizen* c) {///take in citizen
         {
             successor->admitPatient(c);
         }
-        // else
-        // {
-        //     delete c;///die again?shame
-        // }
+        else
+        {
+            c=nullptr;///die again?shame
+        }
     }
 }
 
