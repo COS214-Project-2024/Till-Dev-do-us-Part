@@ -3,7 +3,7 @@
 
 House::House():Residential("House")
 {
-    value = 10000;
+    value = 1000;
     area = 500;
     capacity = 5;
 }

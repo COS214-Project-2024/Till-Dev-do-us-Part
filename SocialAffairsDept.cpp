@@ -83,6 +83,12 @@ void SocialAffairsDept::growPopulation(int n) {
     cout << "Increased current population by 10 adults and " << num << " kids" << endl;
 }
 
+void SocialAffairsDept::sendAdultsToWork(){
+    for(auto adult: adults){
+        ((Adult*)adult)->goToWork();
+    }
+}
+
 SocialAffairsDept::~SocialAffairsDept() {
    
     while (!unemployed.empty()) {

@@ -40,13 +40,6 @@ void autumn(); // More businesses opening
 void winter(); // use up more utilities, more consumption
 void spring(); // More babies, September babies
 
-// SEASON METHODS
-// Create a loop that runs 3 times in each season
-void summer(); // Use more money
-void autumn(); // More businesses opening
-void winter(); // use up more utilities, more consumption
-void spring(); // More babies, September babies
-
 void globalCleanUp();
 
 std::map<int, std::string> monthsOfTheYear = {
@@ -78,8 +71,8 @@ void DemoMain()
 {
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "  WELCOME TO THE GREATEST CITY IN 214" << endl;
-    cout << "~ created by TDP - Till Dev do us Part ~" << endl;
+    // cout << "  WELCOME TO THE GREATEST CITY IN 214" << endl;
+    // cout << "~ created by TDP - Till Dev do us Part ~" << endl;
 
     // displayIntro();
     cout << "===========================================================================================================================================================================" << endl;
@@ -114,18 +107,19 @@ void DemoMain()
 
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "Appearearance of the first 100 citizens" << endl;
+    cout << "Appearance of the first 100 citizens" << endl;
     citizenObjects();
     Citizen **first100 = AdultFactory->reproduce(100);
     {
         for (int i = 0; i < 100; i++)
         {
-            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(first100[i]); // deleted by SAD
+            ((Adult*) first100[i])->setHouse(((DevelopmentDept*)(Gov->getDepartment("Development")))->build("House")); 
+            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(first100[i]); 
             ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(first100[i]);
         }
+
     }
 
-    performDailyActivities();
     cout << "===========================================================================================================================================================================" << endl;
 
     cout << "Creating businesses to get the economy going..." << endl;
@@ -165,7 +159,6 @@ void DemoMain()
             }
         }
 
-        // ((FinanceDept *)(Government::getInstance()->getDepartment("Finance")))->getCRS()->settleTax(); // Settle Monthly
     }
 
     cout << "===========================================================================================================================================================================" << endl;
@@ -253,58 +246,23 @@ void DemoMain()
 
 void performDailyActivities()
 {
-    // std::cout << "Citizen is going through daily routines.\n";
-    // // For all adults call goToWork() via the department . pass in a variable to change the consumption
-    // Adult *adult = new Adult();
-    // Business *company = new Retail(); // Example business
-    // // Building* apartment = new Building("456 Home Ave", 1000.0f);  // Example building
+    ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->sendAdultsToWork();
+    ((FinanceDept *)(Government::getInstance()->getDepartment("Finance")))->getCRS()->settleTax(); 
+}
 
-    // std::cout << "\n=== Testing Adult Daily Activities ===\n"
-    //           << std::endl;
+void unleashDisease(){
 
-    // // Test 1: Initial unemployment status
-    // std::cout << "Test 1 - Initial Employment Status:" << std::endl;
-    // std::cout << "Employment Status: " << (adult->employmentStatus() ? "Employed" : "Unemployed") << std::endl;
-
-    // // Test 2: Setting job and checking employment status
-    // std::cout << "\nTest 2 - Setting Job:" << std::endl;
-    // adult->setJob(company);
-    // std::cout << "Employment Status after setting job: " << (adult->employmentStatus() ? "Employed" : "Unemployed") << std::endl;
-
-    // // Test 3: Testing salary function
-    // std::cout << "\nTest 3 - Testing Salary:" << std::endl;
-    // float testSalary = 5000.0f;
-    // adult->salary(testSalary);
-
-    // // Test 4: Testing goToWork function
-    // std::cout << "\nTest 4 - Going to Work:" << std::endl;
-    // adult->goToWork();
-
-    // // Test 5: Testing react function
-    // std::cout << "\nTest 5 - Testing Reaction:" << std::endl;
-    // adult->react();
-
-    // // Test 6: Testing hasChild function
-    // std::cout << "\nTest 6 - Testing Has Child:" << std::endl;
-    // std::cout << "Has Child: " << (adult->hasChild() ? "Yes" : "No") << std::endl;
-
-    // // Test 7: Testing clone function
-    // std::cout << "\nTest 7 - Testing Clone:" << std::endl;
-    // Citizen *clonedAdult = adult->clone();
-    // std::cout << "Successfully cloned adult" << std::endl;
 }
 
 void governmentObjects()
 {
-
-    // Change how addDept is used
 
     Gov = Government::getInstance();
     ResourceDept = new ResourceDepartment(100000);
     Gov->addDepartment("Resources", ResourceDept);
     FinDept = new FinanceDept(100000);
     Gov->addDepartment("Finance", FinDept);
-    DevDept = new DevelopmentDept(100000);
+    DevDept = new DevelopmentDept(1000000);
     Gov->addDepartment("Development", DevDept);
     // TransDept = new TransportDept(100000);
     // Gov->addDepartment("Transport", TransDept(100000));
@@ -391,21 +349,31 @@ void citizenObjects()
 void summer()
 {
     cout << "Summer has arrived";
+
+    for(int i=0; i<10; i++){
+        performDailyActivities();
+    }
 }
 
 void autumn()
 {
     cout << "Autumn has arrived! " << endl;
+    performDailyActivities();
 }
 
 void winter()
 {
     cout << "Winter has arrived! " << endl;
+    performDailyActivities();
+    // unleashDisease();
 }
 
 void spring()
 {
     cout << "Spring has arrived! " << endl;
+    performDailyActivities();
+    ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->growPopulation(100);
+
 }
 
 void globalCleanUp()

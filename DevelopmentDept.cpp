@@ -22,7 +22,7 @@ DevelopmentDept::DevelopmentDept(float budget)
     buildingAreaList["Suburb"] = 50000;
     buildingAreaList["Industrial"] = 60000;
 
-    priceList["House"] = 10000;
+    priceList["House"] = 1000;
     priceList["Townhouse"] = 7000;
     priceList["Estate"] = 200000;
     priceList["Office"] = 12000;
