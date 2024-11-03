@@ -3,7 +3,16 @@
 #include "House.h"
 
 Adult::Adult(){
-    mood = new Neutral();
+
+    int num = rand();
+
+    if(num%2==0)
+        mood = new Neutral();
+    else if(num%3==0)
+        mood = new Content();
+    else
+        mood = new Distraught();
+
     ///check dept money
     balance = 1000;
     health = 100;
