@@ -2,18 +2,24 @@
 #define Hospital1_H
 #include <string>
 #include "Citizen.h"
-#include "Clinic.h"
 #include "HealthcareFacility.h"
 
-
-class Hospital1: public HealthcareFacility {
-
+/**
+ * @class Hospital1
+ * @brief Represents a mid-level healthcare facility for treating moderately ill patients.
+ */
+class Hospital1 : public HealthcareFacility {
 public:
-    Hospital1() ;
-    //~Hospital1();
+    /**
+     * @brief Default constructor initializes Hospital1.
+     */
+    Hospital1();
 
-    void admitPatient(Citizen* c);
-
+    /**
+     * @brief Admits a patient if their health is within the treatment range for this facility.
+     * @param c Pointer to the Citizen being admitted.
+     */
+    void admitPatient(Citizen*& c);
 };
 
 #endif

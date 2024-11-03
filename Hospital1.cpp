@@ -10,7 +10,7 @@ Hospital1::Hospital1()
     deathtoll=0;
 }
 
-void Hospital1::admitPatient(Citizen* c) {///take in citizen
+void Hospital1::admitPatient(Citizen*& c) {///take in citizen
 
     if(c->getHealth()>=30)
     {

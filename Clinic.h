@@ -4,17 +4,22 @@
 #include "Citizen.h"
 #include "HealthcareFacility.h"
 
-
-class Clinic: public HealthcareFacility {
-
-
+/**
+ * @class Clinic
+ * @brief A healthcare facility that provides admission and treatment for patients.
+ */
+class Clinic : public HealthcareFacility {
 public:
-    Clinic() ;
+    /**
+     * @brief Default constructor initializes Clinic.
+     */
+    Clinic();
 
-    //~Clinic(){};
-
-    void admitPatient(Citizen* c);
-
+    /**
+     * @brief Admits a patient if their health is within the treatment range.
+     * @param c Pointer to the Citizen being admitted.
+     */
+    void admitPatient(Citizen*& c);
 };
 
 #endif

@@ -10,7 +10,7 @@ Hospital2::Hospital2()
     deathtoll=0;
 }
 
-void Hospital2::admitPatient(Citizen* c) {///take in citizen
+void Hospital2::admitPatient(Citizen*& c) {///take in citizen
     if(c->getHealth()>=15)
     {
         return;
