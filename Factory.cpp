@@ -7,8 +7,6 @@ Factory::Factory() : Industrial("Factory")
 
 Factory::~Factory()
 {
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Factory demolished!" << endl;
 }
@@ -44,7 +42,14 @@ bool Factory::clean(){
         cout << "Required electricity to clean: 700" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        if (requestElectricity(700) && requestWater(1200))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Factory is in " << this->state->getName() << " and cannot be cleaned" << endl;

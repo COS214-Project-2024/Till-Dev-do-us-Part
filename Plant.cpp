@@ -6,8 +6,6 @@ Plant::Plant():Industrial("Plant"){
 
 Plant::~Plant()
 {
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Plant demolished" << endl;
 }
@@ -59,7 +57,6 @@ bool Plant::removeBuilding(Industrial *building)
         waterUnits -= building->getWater();
         electricityUnits -= building->getElectricity();
         cleanliness = (cleanliness - building->getCleanliness()) / noBuildings;
-        delete building;
         building = nullptr;
         noBuildings--;
         cout << "Building removed from the Estate" << endl;

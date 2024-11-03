@@ -8,8 +8,6 @@ Townhouse::Townhouse():Residential("Townhouse"){
 }
 
 Townhouse ::~Townhouse(){
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Townhouse demolished!" << endl;
 }
@@ -47,7 +45,14 @@ bool Townhouse::useShower()
         cout << "Required electricity to shower: 50" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        if (requestElectricity(50) && requestWater(100))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Townhouse is in " << this->state->getName() << " and cannot use shower" << endl;
@@ -65,6 +70,10 @@ bool Townhouse::useToilet()
                 cleanliness = 0;
                 delete this->state;
                 this->state = new DilapidatedState();
+                cout << "Townhouse is now in Dilapidated state:\n";
+                cout << "Cleanliness: " << cleanliness << "\n";
+                cout << "Electricity: " << electricityUnits << "\n";
+                cout << "Water: " << waterUnits << "\n";
             }
             else{
                 cleanliness -= 10;
@@ -76,7 +85,14 @@ bool Townhouse::useToilet()
         cout << "Required electricity for toilet: 3" << endl;
         cout << "Required water for toilet: 13" << endl;
         cout << "Current water: " << waterUnits << endl;
-        return false;
+        if (requestElectricity(3) && requestWater(13))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Townhouse is in " << this->state->getName() << " and cannot use Toilet" << endl;
@@ -94,6 +110,10 @@ bool Townhouse::useStove()
                 cleanliness = 0;
                 delete this->state;
                 this->state = new DilapidatedState();
+                cout << "Townhouse is now in Dilapidated state:\n";
+                cout << "Cleanliness: " << cleanliness << "\n";
+                cout << "Electricity: " << electricityUnits << "\n";
+                cout << "Water: " << waterUnits << "\n";
             }
             else{
                 cleanliness -= 15;
@@ -104,7 +124,14 @@ bool Townhouse::useStove()
         cout << "Not enough electricity to use stove:" << endl;
         cout << "Required electricity for stove: 58" << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        if (requestElectricity(58))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Townhouse is in " << this->state->getName() << " and use stove" << endl;
@@ -126,6 +153,10 @@ bool Townhouse::clean()
                 if(cleanliness <=0 && cleanliness+30 >=0 && waterUnits > 0 && electricityUnits >0){
                     delete state;
                     state = new CompleteState();
+                    cout << "Townhouse is now in Operational state:\n";
+                    cout << "Cleanliness: " << cleanliness << "\n";
+                    cout << "Electricity: " << electricityUnits << "\n";
+                    cout << "Water: " << waterUnits << "\n";
                 }
                 cleanliness += 30;
             }
@@ -137,7 +168,14 @@ bool Townhouse::clean()
         cout << "Required electricity to clean: 70" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        if (requestElectricity(50) && requestWater(100))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Townhouse is in " << this->state->getName() << " and cannot be cleaned" << endl;
@@ -200,11 +238,11 @@ bool Townhouse::isOccupied()
 
 void Townhouse::display()
 {
-    std::cout << "-----------------House-------------------" << std::endl;
+    std::cout << "-----------------Townhouse-------------------" << std::endl;
     std::cout << "   - Cleanliness                   : " << cleanliness << std::endl;
     std::cout << "   - Electricity Units             : " << electricityUnits << std::endl;
     std::cout << "   - Water Units                   : " << waterUnits << std::endl;
-    std::cout << "   - Value Units                   : " << value << std::endl;
+    std::cout << "   - Value                         : " << value << std::endl;
     std::cout << "   - Area                          : " << area << std::endl;
     std::cout << "   - Number of Occupants           : " << occupants.size() << std::endl;
     std::cout << "-----------------------------------------" << std::endl;

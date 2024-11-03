@@ -170,7 +170,9 @@ void Business::handleAccounts()
 
 Business::~Business()
 {
-    if (property != nullptr)
-        property = nullptr;
-    // FinanceDept::removeBusiness(this);
-}
+
+    if(property != nullptr)
+        property = nullptr; 
+    // FinanceDept::removeBusiness(this); 
+} 
+

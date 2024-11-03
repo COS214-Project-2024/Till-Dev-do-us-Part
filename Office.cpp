@@ -8,8 +8,6 @@ Office::Office():Commercial("Office"){
 }
 
 Office::~Office(){
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Office demolished!" << endl;
 }
@@ -37,6 +35,9 @@ bool Office::clean()
                     delete state;
                     state = new CompleteState();
                     cout << "Office is now in Operational state" << endl;
+                    cout << "Cleanliness: " << cleanliness << "\n";
+                    cout << "Electricity: " << electricityUnits << "\n";
+                    cout << "Water: " << waterUnits << "\n";
                 }
                 cleanliness += 30;
             }
@@ -47,7 +48,14 @@ bool Office::clean()
         cout << "Required electricity to clean: 40" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        if (requestElectricity(40) && requestWater(150))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Office is in " << this->state->getName() << " and cannot be cleaned" << endl;

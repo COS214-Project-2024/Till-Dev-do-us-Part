@@ -1,6 +1,5 @@
 #ifndef CITIZEN_H
 #define CITIZEN_H
-
 #include <iostream>
 #include <string>
 #include "Feeling.h"
@@ -19,7 +18,6 @@ class Citizen {
         virtual int getHealth();
         virtual void setHealth(int);
         virtual ~Citizen();
-
 };
 
 #endif

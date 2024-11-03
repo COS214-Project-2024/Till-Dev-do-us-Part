@@ -7,8 +7,6 @@ Park::Park():Landmark("Park")
 
 Park::~Park()
 {
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Park demolished!" << endl;
 }

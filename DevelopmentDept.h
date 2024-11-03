@@ -1,5 +1,3 @@
-////hold factory
-
 #ifndef DevelopmentDept_H
 #define DevelopmentDept_H
 #include <map>
@@ -15,6 +13,11 @@
 #include "FactoryFactory.h"
 #include "WarehouseFactory.h"
 #include "Department.h"
+#include "Suburb.h"
+#include "Plant.h"
+#include "Industrial.h"
+#include "IndustrialSite.h"
+#include "CBD.h"
 
 
 class DevelopmentDept : public Department
@@ -26,13 +29,18 @@ class DevelopmentDept : public Department
         map<std::string, float> buildingAreaList;
         map<std::string, BuildingFactory *> factories;
         vector<Building *> unOccupiedBuildings;
+        vector<Residential*> suburbs;
+        vector<Commercial*> cbds;
+        vector<Industrial *> industrialSites;
 
     public : 
         DevelopmentDept(float budget);
         ~DevelopmentDept();
         float getPrice(std::string buildingType);
-        void addFactory(const std::string buildingType, BuildingFactory *factory);
         Building *build(std::string buildingType);
-};
+        void addUnoccupiedBuilding(Building* b);
+        void DevelopmentDept::removeUnoccupiedBuilding(Building *b);
+
+    };
 
 #endif

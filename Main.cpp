@@ -1,34 +1,46 @@
 #include "main.h"
 
-//SIMULATION DISPLAY
+
+// SIMULATION DISPLAY
 #include "display.h"
 
-//DECLARING GLOBAL VARIABLES
-Government* Gov;
-HealthcareFacility *clinic,*GH, *ICH;
+// DECLARING GLOBAL VARIABLES
+Government *Gov;
+HealthcareFacility *clinic, *GH, *ICH;
 Resources *WaterResource, *EnergyResource;
-Population* AdultFactory, *MinorFactory;
-ProductionUtility* powerPlant, *waterSupply;
+Population *AdultFactory, *MinorFactory;
+ProductionUtility *powerPlant, *waterSupply;
 ServiceUtility *wasteManagement, *SewerSystem;
-Department* DevDept, *FinDept, *SoAffDept, *TransDept, *ResourceDept, *healthDept;
-TaxCalculator* taxes [6]; 
-WiseBucks* apps [6]; 
+Department *DevDept, *FinDept, *SoAffDept, *TransDept, *ResourceDept, *healthDept;
+TaxCalculator *taxes[6];
+WiseBucks *apps[6];
 
-//Add funtion in goverment to get overall status of the city. MyCityStatus();
-void DemoMain(); 
+// Add funtion in goverment to get overall status of the city. MyCityStatus();
+void DemoMain();
+
 void governmentObjects();
 void utilResourceObjects();
 void buildingObjects();
 void financeObjects();
 void transportObjects();
-void healthcareObjects(); 
+
+void healthcareObjects();
 void citizenObjects();
 
-//SIMULATION
+// SIMULATION
+
 void performDailyActivities();
 void inflation();
 void unleashDisease();
 void strike();
+
+
+// SEASON METHODS
+// Create a loop that runs 3 times in each season
+void summer(); // Use more money
+void autumn(); // More businesses opening
+void winter(); // use up more utilities, more consumption
+void spring(); // More babies, September babies
 
 //SEASON METHODS
 //Create a loop that runs 3 times in each season
@@ -36,6 +48,7 @@ void summer(); //Use more money
 void autumn(); //More businesses opening
 void winter(); //use up more utilities, more consumption
 void spring(); //More babies, September babies
+
 void globalCleanUp();
 
 std::map<int, std::string> monthsOfTheYear = {
@@ -50,6 +63,7 @@ std::map<int, std::string> monthsOfTheYear = {
     {9, "September"},
     {10, "October"},
     {11, "November"},
+
     {12, "December"}
 };
 
@@ -61,11 +75,13 @@ int main()
     #endif
     DemoMain(); 
     return 0; 
+
 }
 
 void DemoMain()
 {
     cout << "===========================================================================================================================================================================" << endl;
+
     
     cout << "  WELCOME TO THE GREATEST CITY IN 214" << endl; 
     cout << "~ created by TDP - Till Dev do us Part ~" << endl; 
@@ -214,6 +230,7 @@ void DemoMain()
 
     cout << "===========================================================================================================================================================================" << endl;
 
+
 //DELETES
 
       for (int i=0; i<8; i++)
@@ -225,7 +242,10 @@ void DemoMain()
     delete [] first100; 
     first100 = nullptr; 
 
-}
+
+        ((FinanceDept *)(Government::getInstance()->getDepartment("Finance")))->getCRS()->settleTax(); // Settle Monthly
+    }
+
 
 void performDailyActivities() {
     std::cout << "Citizen is going through daily routines.\n";
@@ -381,22 +401,49 @@ void globalCleanUp(){
     for (int i=0; i<6; i++)
     {
         delete apps[i];
-        apps[i] = nullptr; 
+        apps[i] = nullptr;
     }
 
-    for (int i=0; i<6; i++)
+    for (int i = 0; i < 6; i++)
     {
         delete taxes[i];
-        taxes[i] = nullptr; 
+        taxes[i] = nullptr;
     }
 
    
     delete MinorFactory;
     MinorFactory = nullptr;
 
-    delete AdultFactory; 
+    delete AdultFactory;
     AdultFactory = nullptr;
      
+    delete ICH;
+    ICH = nullptr;
+
+    delete GH;
+    GH = nullptr;
+
+    delete clinic;
+    clinic = nullptr;
+
+    delete WaterResource;
+    WaterResource = nullptr;
+
+    delete EnergyResource;
+    EnergyResource = nullptr;
+
+    Gov->removeDepartment("SocialAffairs");
+    delete SoAffDept;
+    SoAffDept = nullptr;
+
+    Gov->removeDepartment("Health");
+    delete healthDept;
+    healthDept = nullptr;
+
+    Gov->removeDepartment("Transport");
+    delete TransDept;
+    TransDept = nullptr;
+
     delete ICH;
     ICH = nullptr;
 
@@ -429,13 +476,14 @@ void globalCleanUp(){
     DevDept = nullptr;
 
     Gov->removeDepartment("Finance");
-    delete FinDept; 
-    FinDept = nullptr; 
+    delete FinDept;
+    FinDept = nullptr;
 
     Gov->removeDepartment("Resources");
     delete ResourceDept;
     ResourceDept = nullptr;
 
-    delete Gov; 
+    delete Gov;
     Gov = nullptr;
+
 }

@@ -1,6 +1,7 @@
 #include "CBD.h"
 
-CBD::CBD():Commercial("CBD"){
+CBD::CBD() : Commercial("CBD")
+{
     area = 10000;
     capacity = 50;
     noBuildings = 0;
@@ -15,25 +16,27 @@ CBD::~CBD()
     cout << "Destroyed the CBD\n";
 }
 
-void CBD::loadElectricity(float units){
-    
-    for (vector<Building*>::iterator it = buildings.begin(); it != buildings.end(); it++)
-    {
-        (*it)->loadElectricity(units);
-        electricityUnits += units;
-    }
-    
-}
+void CBD::loadElectricity(float units)
+{
 
-void CBD::loadWater(float units){
     for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        (*it)->loadWater(units);
+        (*it)->requestElectricity(units);
+        electricityUnits += units;
+    }
+}
+
+void CBD::loadWater(float units)
+{
+    for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    {
+        (*it)->requestWater(units);
         waterUnits += units;
     }
 }
 
-bool CBD::useElectricity(float units){
+bool CBD::useElectricity(float units)
+{
     if (this->state->canUseElectricity())
     {
         electricityUnits = 0;
@@ -57,7 +60,8 @@ bool CBD::useElectricity(float units){
     return false;
 }
 
-bool CBD::useWater(float units){
+bool CBD::useWater(float units)
+{
     if (this->state->canUseWater())
     {
         this->waterUnits = 0;
@@ -83,17 +87,20 @@ bool CBD::useWater(float units){
     return false;
 }
 
-float CBD::getPrice(){
+float CBD::getPrice()
+{
     return value;
 }
 
-string CBD::getType(){
+string CBD::getType()
+{
     return type;
 }
 
-void CBD::demolish(){
+void CBD::demolish()
+{
     cout << "Demolishing all the buildings in the CBD\n";
-    for (vector<Building*>::iterator it = buildings.begin(); it != buildings.end(); it++)
+    for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         value -= (*it)->getValue();
         waterUnits -= (*it)->getWater();
@@ -106,7 +113,8 @@ void CBD::demolish(){
     cout << "Demolished  all the buildings in the CBD\n";
 }
 
-bool CBD::clean(){
+bool CBD::clean()
+{
     if (state->canUseElectricity() && state->canUseWater())
     {
         cleanliness = 0;
@@ -137,7 +145,8 @@ bool CBD::clean(){
     return false;
 }
 
-bool CBD::addOccupant(Citizen* c){
+bool CBD::addOccupant(Citizen *c)
+{
     if (c != nullptr)
     {
         for (vector<Building *>::iterator it = buildings.begin(); it != buildings.end(); it++)
@@ -148,7 +157,7 @@ bool CBD::addOccupant(Citizen* c){
             }
         }
     }
-    
+
     return false;
 }
 
@@ -159,10 +168,12 @@ int CBD::getNoBuildings()
 
 bool CBD::addBuilding(Building *building)
 {
-    if(building!= nullptr){
-        if(building->getType() == "Mall"){
-            int mallBuildings = ((Mall*)building)->getNoBuildings();
-            if (mallBuildings+noBuildings <= capacity)
+    if (building != nullptr)
+    {
+        if (building->getType() == "Mall")
+        {
+            int mallBuildings = ((Mall *)building)->getNoBuildings();
+            if (mallBuildings + noBuildings <= capacity)
             {
                 buildings.push_back(building);
                 noBuildings += mallBuildings;
@@ -172,13 +183,16 @@ bool CBD::addBuilding(Building *building)
                 cout << "Mall added to the CBD" << endl;
                 return true;
             }
-            else{
+            else
+            {
                 cout << "Mall could not be added to the CBD" << endl;
                 return false;
             }
         }
-        else{
-            if(noBuildings + 1 <= capacity){
+        else
+        {
+            if (noBuildings + 1 <= capacity)
+            {
                 buildings.push_back(building);
                 noBuildings++;
                 value += building->getValue();
@@ -188,7 +202,8 @@ bool CBD::addBuilding(Building *building)
                 cout << "Building added to the CBD" << endl;
                 return true;
             }
-            else{
+            else
+            {
                 cout << "Building could not be added to the CBD" << endl;
                 return false;
             }
@@ -226,9 +241,10 @@ bool CBD::removeBuilding(Building *building)
 
 bool CBD::removeOccupant(Citizen *c)
 {
-    for (vector<Building*>::iterator it = buildings.begin(); it < buildings.end(); it++)
+    for (vector<Building *>::iterator it = buildings.begin(); it < buildings.end(); it++)
     {
-        if((*it)->removeOccupant(c)){
+        if ((*it)->removeOccupant(c))
+        {
             cout << "Citizen removed\n";
             return true;
         }
@@ -236,7 +252,6 @@ bool CBD::removeOccupant(Citizen *c)
 
     cout << "Citizen was not found in any of the buildings in the CBD\n";
     return false;
-    
 }
 
 Building *CBD::clone()

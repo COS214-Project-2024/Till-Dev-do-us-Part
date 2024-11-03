@@ -11,6 +11,7 @@ OBJECTS = $(SOURCES:.cpp=.o)
 # Main target to build the executable
 run: main
 	./main
+
 	make clean
 
 # Link all object files into the main executable
@@ -30,6 +31,8 @@ clean:
 	rm -f *.o main main_debug
 
 # Valgrind target for memory checks
+
 v: debug
 	valgrind --tool=memcheck --leak-check=yes --track-origins=yes --log-file=valg.txt ./main_debug
 	make clean
+

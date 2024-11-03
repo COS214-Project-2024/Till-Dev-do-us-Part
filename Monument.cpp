@@ -6,8 +6,6 @@ Monument::Monument() : Landmark("Monument")
 
 Monument::~Monument()
 {
-    delete this->state;
-    state = nullptr;
     demolish();
     cout << "Monument demolished!" << endl;
 }

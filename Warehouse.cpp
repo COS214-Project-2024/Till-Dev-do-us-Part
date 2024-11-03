@@ -46,7 +46,14 @@ bool Warehouse::clean(){
         cout << "Required electricity to clean: 300" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        return false;
+        if (requestElectricity(300) && requestWater(500))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     cout << "Warehouse is in " << this->state->getName() << " and cannot be cleaned" << endl;
