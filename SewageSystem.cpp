@@ -2,7 +2,11 @@
 #include <iostream>
 
 SewageSystem::SewageSystem(std::string name, ResourceDepartment *department)
-    : ServiceUtility(name, department) {}
+    : ServiceUtility(name, department)
+{
+    std::cout << "Constructor of SewerSystem called" << std::endl;
+    setServState(new OperationalServiceState);
+}
 
 SewageSystem::~SewageSystem() {}
 
@@ -19,10 +23,9 @@ void SewageSystem::startService()
     getStatus();
 }
 
- DevelopmentDept* SewageSystem:: createDevelopmentDept()
- {
-
- }
+DevelopmentDept *SewageSystem::createDevelopmentDept()
+{
+}
 // void SewageSystem::iterateBuildings(bool limitedProcessing, int maxBuildings)
 // {
 
