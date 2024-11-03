@@ -10,8 +10,8 @@
  */
 FinanceDept::FinanceDept(float budget)
 {
-    this->budget = budget/2; 
-    crs = new CRS(budget/2); 
+    this->budget = 0; 
+    crs = new CRS(budget); 
 }
 
 /**

@@ -21,6 +21,7 @@
     #include "Hospital2.h"
 #include "Resources.h"
     #include "Energy.h"
+    #include "Materials.h"
     #include "Water.h"
 #include "TaxCalculator.h"
     #include "CorporateTax.h"
