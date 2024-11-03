@@ -21,8 +21,11 @@ void Clinic::admitPatient(Citizen*& c)
     //     c = nullptr; // Patient is dead
     //     return;
     // }
-    
-    if (c->getHealth() < 50 && c->getHealth() >= 30)
+    if(c->getHealth()>=50)
+    {
+        return;
+    }
+    else if (c->getHealth() < 50 && c->getHealth() >= 30)
     {
         std::cout << "Patient admitted\n";
         treatPatient(c);
