@@ -21,6 +21,7 @@ class Adult: public Citizen{
         virtual bool hasChild();
         virtual void salary(float);
         virtual void setJob(Business*);
+        virtual void setHouse(Building*);
         virtual ~Adult(){};
 
 };

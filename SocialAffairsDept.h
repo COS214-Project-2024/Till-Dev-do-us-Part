@@ -29,6 +29,7 @@ class SocialAffairsDept: public Department{
         void addToUnemployed(Citizen*);
         int getNumCitizens();
         void growPopulation(int);
+        void sendAdultsToWork();
         virtual ~SocialAffairsDept();
 
 };

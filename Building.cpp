@@ -23,6 +23,10 @@ bool Building::requestElectricity(float units)
     {
         electricityUnits += units;
         cout << "Resource department supplied electricity" << endl;
+        if(waterUnits>0){
+            delete this->state;
+            this->state = new CompleteState();
+        }
         return true;
     }
     cout << "Resource department could not supply electricity" << endl;
@@ -36,6 +40,10 @@ bool Building::requestWater(float units)
     {
         waterUnits += units;
         cout << "Resource department supplied water" << endl;
+        if(electricityUnits>0){
+            delete this->state;
+            this->state = new CompleteState();
+        }
         return true;
     }
     cout << "Resource department could not supply water" << endl;
