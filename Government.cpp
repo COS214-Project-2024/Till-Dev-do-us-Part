@@ -9,6 +9,7 @@ Government* Government:: instance=nullptr;
 
 Government::Government() {
     memento=nullptr;
+
 }
 
 Government* Government::getInstance()
@@ -106,6 +107,7 @@ void Government::addDepartment(std::string name, Department* department)
  */
 void Government::enactPolicy(Policy* policy) {
     policies.push_back(policy);
+    ((SocialAffairsDept *)(getDepartment("SocialAffairs")))->reactPolicy();
 }
 
 /**
@@ -127,6 +129,7 @@ void Government::revertPolicy(std::string name) {
             ++it;  
         }
     }
+    
 }
 
 /**

@@ -132,6 +132,14 @@ public:
     void sendAdultsToWork();
 
     /**
+     * @brief Reacts to a policy change within the department.
+     * 
+     * Triggers each adult citizen’s response to recent policy changes by calling
+     * their individual react() method, allowing adjustments based on the policy.
+     */
+    void reactPolicy();
+
+    /**
      * @brief Increases the population by creating new adult and child citizens.
      * 
      * Adds a specified number of adult citizens and pairs adults with children when possible.
