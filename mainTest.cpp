@@ -10,6 +10,7 @@
 // #include "Caretaker.h"
 // #include "Government.h"
 // #include "Department.h"
+// #include "Adult.h"
 
 // // Testing Policy class
 // TEST_CASE("Policy Class Tests") {
@@ -65,7 +66,9 @@
 //     CHECK(government != nullptr);
 
 //     Department* dept = new HealthDept(50000);
+//     Department* social = new SocialAffairsDept(50000);
 //     government->addDepartment("Health", dept);
+//     government->addDepartment("SocialAffairs",social);
 //     CHECK(government->getDepartment("Health") == dept);
 //     government->removeDepartment("Health");
 //     CHECK(government->getDepartment("Health") == nullptr);
@@ -88,7 +91,7 @@
 //     //CHECK_NOTHROW(government->setMemento(nullptr));
 
 // //     delete memento;
-//     delete dept;
+//     //delete dept;
 //     delete policy1;
 // }
 
@@ -101,7 +104,7 @@
 //     CHECK(healthDept.getFacilities().size() == 1);
 
 //     HealthDept lowBudgetDept(500000);
-//     CHECK_NOTHROW(lowBudgetDept.addFacility("LowBudgetClinic", new Clinic()));
+//     CHECK_NOTHROW(lowBudgetDept.addFacility("Clinic", new Clinic()));
 //     CHECK(lowBudgetDept.getFacilities().size() == 1);
 
 //     healthDept.totalDeaths();
@@ -113,7 +116,7 @@
 // TEST_CASE("HealthcareFacility Class Tests") {
 //     Clinic clinic;
 
-//     Citizen* healthyCitizen = new Citizen("Healthy", 100);
+//     Citizen* healthyCitizen = new Adult();
 //     clinic.dischargePatient(healthyCitizen);
 //     CHECK(healthyCitizen->getHealth() == 100);
 
@@ -127,50 +130,35 @@
 // // Testing Clinic class with admitPatient logic
 // TEST_CASE("Clinic Class Tests") {
 //     Clinic clinic;
-//     Citizen* patient = new Citizen("Patient", 40);
+//     // Citizen* patient = new Adult();
+//     // patient->setHealth(40);
 
-//     clinic.admitPatient(patient);
-//     CHECK((patient->getHealth() == 100 ||patient==nullptr));
+//     // clinic.admitPatient(patient);
+//     // CHECK((patient->getHealth() == 100 ||patient==nullptr));
 
-//     Citizen* healthyCitizen = new Citizen("Healthy Citizen", 90);
+//     Citizen* healthyCitizen = new Adult();
+//     healthyCitizen->setHealth(90);
 //     clinic.admitPatient(healthyCitizen);
 //     CHECK(healthyCitizen->getHealth() == 90);
 
-//     delete patient;
+//     //delete patient;
 //     delete healthyCitizen;
 // }
 
 // // Testing Hospital1 class
 // TEST_CASE("Hospital1 Class Tests") {
 //     Hospital1 hospital;
-//     Citizen* patient = new Citizen("Hospital Patient", 25);
+//     Citizen* patient = new Adult();
+//     patient->setHealth(25);
 
 //     hospital.admitPatient(patient);
 //     CHECK((patient==nullptr|| patient->getHealth() == 100 ));
 
-//     Citizen* highHealthPatient = new Citizen("High Health", 40);
-//     hospital.admitPatient(highHealthPatient);
-//     CHECK(highHealthPatient->getHealth() == 40);
 
 //     delete patient;
-//     delete highHealthPatient;
+
 // }
 
-// // Testing Hospital2 class
-// TEST_CASE("Hospital2 Class Tests") {
-//     Hospital2 hospital;
-//     Citizen* criticalPatient = new Citizen("Critical Patient", 10);
-
-//     hospital.admitPatient(criticalPatient);
-//     CHECK((criticalPatient==nullptr||criticalPatient->getHealth() == 100));
-
-//     Citizen* lessCriticalPatient = new Citizen("Less Critical", 20);
-//     hospital.admitPatient(lessCriticalPatient);
-//     CHECK(lessCriticalPatient->getHealth() == 20);
-
-//     delete criticalPatient;
-//     delete lessCriticalPatient;
-// }
 
 // // Testing HealthcareFacility Chain of Responsibility
 // TEST_CASE("HealthcareFacility Chain of Responsibility Tests") {
@@ -181,15 +169,18 @@
 //     clinic->addSuccessor(hospital1);
 //     hospital1->addSuccessor(hospital2);
 
-//     Citizen* moderatePatient = new Citizen("Moderate Patient", 25);
+//     Citizen* moderatePatient = new Adult();
+//     moderatePatient->setHealth(25);
 //     clinic->admitPatient(moderatePatient);
 //     CHECK((moderatePatient==nullptr|| moderatePatient->getHealth() == 100));
 
-//     Citizen* criticalPatient = new Citizen("Critical Patient", 5);
+//     Citizen* criticalPatient = new Adult();
+//     criticalPatient->setHealth(5);
 //     clinic->admitPatient(criticalPatient);
 //     CHECK((criticalPatient==nullptr||criticalPatient->getHealth() == 100 ));
 
-//     Citizen* healthyCitizen = new Citizen("Healthy Citizen", 90);
+//     Citizen* healthyCitizen = new Adult();
+//     healthyCitizen->setHealth(90);
 //     clinic->admitPatient(healthyCitizen);
 //     CHECK(healthyCitizen->getHealth() == 90);
 
