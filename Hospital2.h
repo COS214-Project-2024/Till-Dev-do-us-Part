@@ -2,16 +2,24 @@
 #define HOSPITAL2_H
 #include <string>
 #include "Citizen.h"
-#include "Clinic.h"
 #include "HealthcareFacility.h"
 
-
-class Hospital2: public HealthcareFacility {
-
-
+/**
+ * @class Hospital2
+ * @brief Represents an advanced healthcare facility for critically ill patients.
+ */
+class Hospital2 : public HealthcareFacility {
 public:
-    Hospital2() ;
-    //~Hospital2();
-    void admitPatient(Citizen* c); 
+    /**
+     * @brief Default constructor initializes Hospital2.
+     */
+    Hospital2();
+
+    /**
+     * @brief Admits a patient if their health is within the treatment range for critical cases.
+     * @param c Pointer to the Citizen being admitted.
+     */
+    void admitPatient(Citizen*& c);
 };
+
 #endif

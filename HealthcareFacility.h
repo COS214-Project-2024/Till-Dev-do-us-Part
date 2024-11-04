@@ -3,28 +3,61 @@
 #include <string>
 #include "Citizen.h"
 
-
+/**
+ * @class HealthcareFacility
+ * @brief Abstract class for healthcare facilities providing patient admission and treatment.
+ */
 class HealthcareFacility {
 protected:
-
-    //citizens
-    HealthcareFacility* successor;
-    int deathtoll;
+    HealthcareFacility* successor; /**< Pointer to the next facility in the chain of responsibility. */
+    int deathtoll; /**< Tracks the number of deaths in the facility. */
 
 public:
-    HealthcareFacility() ;
+    /**
+     * @brief Default constructor initializes successor and deathtoll.
+     */
+    HealthcareFacility();
 
-    virtual ~HealthcareFacility() {}
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~HealthcareFacility() { successor = nullptr; }
 
+    /**
+     * @brief Pure virtual method to admit a patient.
+     * @param c Pointer to the Citizen being admitted.
+     */
+    virtual void admitPatient(Citizen*& c) = 0;
 
-    virtual void admitPatient(Citizen* c)=0;
-    
-    void dischargePatient(Citizen* c) ;
-    void treatPatient(Citizen* c);
+    /**
+     * @brief Discharges a patient after treatment.
+     * @param c Pointer to the Citizen being discharged.
+     */
+    void dischargePatient(Citizen* c);
+
+    /**
+     * @brief Treats a patient and determines the outcome.
+     * @param c Pointer to the Citizen being treated.
+     */
+    void treatPatient(Citizen*& c);
+
+    /**
+     * @brief Sets the successor facility in the chain of responsibility.
+     * @param s Pointer to the successor HealthcareFacility.
+     */
     void addSuccessor(HealthcareFacility* s);
-    int generateRandomValue();
-    int getDeathToll();
 
-    //virtual std::string getType() = 0; 
+    /**
+     * @brief Generates a random outcome value for treatment.
+     * @return Integer representing the treatment outcome.
+     */
+    int generateRandomValue();
+
+    /**
+     * @brief Gets the death toll of the facility.
+     * @return Integer death toll count.
+     */
+    int getDeathToll();
 };
+
 #endif

@@ -24,9 +24,9 @@
 //     }
 
 //     // Initialize healthcare facilities
-//     Clinic* clinic1 = new Clinic();
-//     Hospital1* hospital1 = new Hospital1();
-//     Hospital2* hospital2 = new Hospital2();
+//     HealthcareFacility* clinic1 = new Clinic();
+//     HealthcareFacility* hospital1 = new Hospital1();
+//     HealthcareFacility* hospital2 = new Hospital2();
 //     healthDept->addFacility("Clinic", clinic1);
 //     healthDept->addFacility("General Hospital", hospital1);
 //     healthDept->addFacility("Intensive Care Hospital", hospital1);
@@ -95,12 +95,18 @@
 //     healthDept->totalDeaths();
 
 //     // Cleanup
+//     delete crime;
+//     //delete healthcarePolicy;
 //     delete patient1;
 //     delete patient2;
 //     delete patient3;
 //     delete healthcarePolicy;
 //     delete clinic1;
 //     delete hospital1;
+//     delete hospital2;
+//     Government::deleteInstance();
+   
+
 
 //     std::cout << "\n--- End of Tests ---\n";
 //     return 0;
