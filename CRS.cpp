@@ -50,7 +50,7 @@ void CRS::getTax(float tax)  //adds tax money to taxFund
 void CRS::distributeTax()
 {
     //RESOURCES = 15%
-    // (Government::getInstance()->getDepartment("Resources"))->receiveTax(taxFund*0.15); 
+    (Government::getInstance()->getDepartment("Resources"))->receiveTax(taxFund*0.15); 
 
     //TRANSPORT = 10%
     // (Government::getInstance()->getDepartment("Transport"))->receiveTax(taxFund*0.1); 
@@ -62,13 +62,13 @@ void CRS::distributeTax()
     (Government::getInstance()->getDepartment("SocialAffairs"))->receiveTax(taxFund*0.2); 
     
     //HEALTH = 10%
-    // (Government::getInstance()->getDepartment("Health"))->receiveTax(taxFund*0.1); 
+    (Government::getInstance()->getDepartment("Health"))->receiveTax(taxFund*0.1); 
 
-    // taxFund -= taxFund*0.15;
+    taxFund -= taxFund*0.15;
     // taxFund -= taxFund*0.1;
     taxFund -= taxFund*0.3;
     taxFund -= taxFund*0.2; 
-    // taxFund -= taxFund*0.1;
+    taxFund -= taxFund*0.1;
 
     //FINANCE 
     (Government::getInstance()->getDepartment("Finance"))->receiveTax(taxFund);

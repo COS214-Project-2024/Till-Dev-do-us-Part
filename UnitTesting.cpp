@@ -244,16 +244,16 @@ TEST_SUITE("Economy Tests")
     TEST_CASE("Testing CRS")
     {
         Government* Gov = Government::getInstance(); 
-        // Department* ResourceDept = new ResourceDepartment(100000); 
-        // Gov->addDepartment("Resources", ResourceDept); 
+        Department* ResourceDept = new ResourceDepartment(100000); 
+        Gov->addDepartment("Resources", ResourceDept); 
         Department* FinDept = new FinanceDept(100000); 
         Gov->addDepartment("Finance", FinDept);
         Department* DevDept = new DevelopmentDept(1000000); 
         Gov->addDepartment("Development", DevDept); 
         // Department* TransDept = new TransportDept(100000); 
         // Gov->addDepartment("Transport", TransDept); 
-        // Department* healthDept = new HealthDept(100000); 
-        // Gov->addDepartment("Health", healthDept); 
+        Department* healthDept = new HealthDept(100000); 
+        Gov->addDepartment("Health", healthDept); 
         Department* SoAffDept = new SocialAffairsDept(100000); 
         Gov->addDepartment("SocialAffairs", SoAffDept); 
 
@@ -314,12 +314,12 @@ TEST_SUITE("Economy Tests")
         {     
             ((FinanceDept*) Government::getInstance()->getDepartment("Finance"))->getCRS()->distributeTax(); 
 
-            // CHECK((Government::getInstance()->getDepartment("Resources"))->getBudget() == 115000);
+            CHECK((Government::getInstance()->getDepartment("Resources"))->getBudget() == 115000);
             // CHECK((Government::getInstance()->getDepartment("Transport"))->getBudget() == 110000);
             CHECK((Government::getInstance()->getDepartment("Development"))->getBudget() == 1030000);
             CHECK((Government::getInstance()->getDepartment("SocialAffairs"))->getBudget() == 120000);
-            // CHECK((Government::getInstance()->getDepartment("Health"))->getBudget() == 110000);
-            CHECK((Government::getInstance()->getDepartment("Finance"))->getBudget() == 56000);
+            CHECK((Government::getInstance()->getDepartment("Health"))->getBudget() == 110000);
+            CHECK((Government::getInstance()->getDepartment("Finance"))->getBudget() == 42840);
         } 
 
         SUBCASE("Verifying Settle Tax")    
