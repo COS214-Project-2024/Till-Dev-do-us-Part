@@ -46,6 +46,7 @@ public:
     virtual bool removeOccupant(Citizen *c) = 0;
     virtual Building *clone() = 0;
     virtual bool isOccupied() = 0;
+    virtual void addResourceDept(ResourceDepartment*r);
 
 };
 #endif

@@ -1,7 +1,10 @@
 #include "DevelopmentDept.h"
 
-DevelopmentDept::DevelopmentDept(float budget)
+DevelopmentDept::DevelopmentDept(float budget, ResourceDepartment *r)
 {
+    if(r != nullptr){
+        resourceDept = r;
+    }
     this->budget = budget;
     land = 10000000;
 
@@ -115,6 +118,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                 for (vector<Residential*>::iterator it = suburbs.begin(); it != suburbs.end(); it++)
                 {
                     if(((Suburb*)(*it))->addBuilding((Residential*)building)){
+                        building->addResourceDept(resourceDept);
                         return building;
                     }
                 }
@@ -122,6 +126,8 @@ Building* DevelopmentDept::build(std::string buildingType)
                 Suburb *newSub = new Suburb();
                 newSub->addBuilding((Residential *)building);
                 suburbs.push_back(newSub);
+                building->addResourceDept(resourceDept);
+
                 return building;
             }
             else{
@@ -131,6 +137,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     {
                         if (((IndustrialSite *)(*it))->addBuilding((Industrial *)building))
                         {
+                            building->addResourceDept(resourceDept);
                             return building;
                         }
                     }
@@ -138,6 +145,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     IndustrialSite *newIndust = new IndustrialSite();
                     newIndust->addBuilding((Industrial *)building);
                     industrialSites.push_back(newIndust);
+                    building->addResourceDept(resourceDept);
                     return building;
                 }
                 else{
@@ -146,6 +154,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     {
                         if (((CBD *)(*it))->addBuilding((Building *)building))
                         {
+                            building->addResourceDept(resourceDept);
                             return building;
                         }
                     }
@@ -153,6 +162,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     CBD *newCBD = new CBD();
                     newCBD->addBuilding((Building *)building);
                     cbds.push_back(newCBD);
+                    building->addResourceDept(resourceDept);
                     return building;
                 }
             }
@@ -172,6 +182,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                 for (vector<Residential*>::iterator it = suburbs.begin(); it != suburbs.end(); it++)
                 {
                     if(((Suburb*)(*it))->addBuilding((Residential*)newBuilding)){
+                        newBuilding->addResourceDept(resourceDept);
                         return newBuilding;
                     }
                 }
@@ -179,6 +190,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                 Suburb *newSub = new Suburb();
                 newSub->addBuilding((Residential *)newBuilding);
                 suburbs.push_back(newSub);
+                newBuilding->addResourceDept(resourceDept);
                 return newBuilding;
             }
             else{
@@ -188,6 +200,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     {
                         if (((IndustrialSite *)(*it))->addBuilding((Industrial *)newBuilding))
                         {
+                            newBuilding->addResourceDept(resourceDept);
                             return newBuilding;
                         }
                     }
@@ -195,6 +208,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     IndustrialSite *newIndust = new IndustrialSite();
                     newIndust->addBuilding((Industrial *)newBuilding);
                     industrialSites.push_back(newIndust);
+                    newBuilding->addResourceDept(resourceDept);
                     return newBuilding;
                 }
                 else{
@@ -203,6 +217,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     {
                         if (((CBD *)(*it))->addBuilding((Building *)newBuilding))
                         {
+                            newBuilding->addResourceDept(resourceDept);
                             return newBuilding;
                         }
                     }
@@ -210,6 +225,7 @@ Building* DevelopmentDept::build(std::string buildingType)
                     CBD *newCBD = new CBD();
                     newCBD->addBuilding((Building *)newBuilding);
                     cbds.push_back(newCBD);
+                    newBuilding->addResourceDept(resourceDept);
                     return newBuilding;
                 }
             }

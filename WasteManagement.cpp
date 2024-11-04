@@ -1,75 +1,71 @@
-#include "WasteManagement.h"
+/**
+ * @file WasteManagement.cpp
+ * @brief Implements the WasteManagement class methods for managing waste services.
+ */
 
+#include "WasteManagement.h"
 #include <iostream>
 
+/**
+ * @brief Constructs a WasteManagement utility with specified parameters.
+ * @param name Name of the waste management utility
+ * @param department Pointer to the Resource Department
+ */
 WasteManagement::WasteManagement(std::string name, ResourceDepartment *department)
     : ServiceUtility(name, department)
-
 {
-
-    std::cout << "Constructor of WasteManagement called" << std::endl;
-    setServState(new OperationalServiceState);
+    setServState(new OperationalServiceState); // Set the initial service state to operational
 }
 
+/**
+ * @brief Default destructor for WasteManagement.
+ */
 WasteManagement::~WasteManagement()
 {
-    delete servState;
+    delete servState; // Clean up the service state
 }
 
+/**
+ * @brief Starts the waste management service.
+ */
 void WasteManagement::startService()
 {
     std::cout << "\n--- Starting Service Cycle ---" << std::endl;
 
-    servState->handleService(this);
+    if (servState)
+    {
+        servState->handleService(this); // Delegate service handling to the current state
+    }
+    else
+    {
+        std::cout << getName() << " has no service state set.\n"; // Handle case where service state is not set
+    }
 
-    // State-specific behavior
-    std::cout << "--- End of Service ---\n"
-              << std::endl;
-    getStatus();
+    std::cout << "--- End of Service ---\n" << std::endl;
+    getStatus(); // Display current status
 }
 
- DevelopmentDept* WasteManagement::createDevelopmentDept() 
- {
-   // return new ;
- }
+/**
+ * @brief Creates a new Development Department (not implemented).
+ * @return Pointer to the DevelopmentDept
+ */
+DevelopmentDept* WasteManagement::createDevelopmentDept() 
+{
+    // Implementation to be done in the future
+    return nullptr; // Placeholder return
+}
 
+// Uncomment and implement in the future if building iteration is required
 // void WasteManagement::iterateBuildings(bool limitedProcessing, int maxBuildings)
 // {
 //     std::cout << "Iterating Buildings" << std::endl;
 //     iterator.reset();
 //     int processedCount = 0;
-
-//     iterator.hasNext();
-
+//     while (iterator.hasNext() && (limitedProcessing ? processedCount < maxBuildings : true))
+//     {
 //         Building *building = iterator.next();
-
-//     // If in limited processing mode, only process up to maxBuildings
-//     if (limitedProcessing && processedCount >= maxBuildings)
-//     {
-//         std::cout << "Reached limit of " << maxBuildings << " buildings during maintenance." << std::endl;
-        
+//         // Simulate partial waste collection or checks
+//         processedCount++;
 //     }
-
-//     // Simulate partial waste collection or checks
-//     if (limitedProcessing)
-//     {
-//         // Perform limited maintenance without printing for each iteration
-//     }
-//     else
-//     {
-//         // Collect waste without printing for each iteration
-//         // Insert full waste collection logic here for Operational state
-//     }
-
-//     processedCount++;
-
-//     // Output only after finishing the loop
-//     if (limitedProcessing)
-//     {
-//         std::cout << "Completed limited maintenance on " << processedCount << " buildings." << std::endl;
-//     }
-//     else
-//     {
-//         std::cout << "Completed waste collection on " << processedCount << " buildings." << std::endl;
-//     }
+//     std::cout << "Completed waste collection on " << processedCount << " buildings." << std::endl;
 // }
