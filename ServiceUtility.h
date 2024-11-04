@@ -30,7 +30,7 @@ public:
      * @param name Name of the service utility
      * @param resDept Pointer to the Resource Department
      */
-    ServiceUtility(std::string name, ResourceDepartment *resDept);
+    ServiceUtility(std::string name, ResourceDepartment *resDept,WiseBucks* app);
 
     /**
      * @brief Default destructor for ServiceUtility.

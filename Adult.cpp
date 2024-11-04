@@ -53,17 +53,17 @@ void Adult::setHouse(Building* h){
 }
 
 void Adult::goToWork(){
-    // if(!((House*)house)->useShower()){
-    //     house->requestWater(1000);
-    //     house->requestElectricity(1000);
-    // }
-    // if(!((House*)house)->useToilet()){
-    //     house->requestWater(1000);
-    //     house->requestElectricity(1000);
-    // }
-    // if(!((House*)house)->useStove()){
-    //     house->requestElectricity(1000);
-    // }
+    if(!((House*)house)->useShower()){
+        house->requestWater(1000);
+        house->requestElectricity(1000);
+    }
+    if(!((House*)house)->useToilet()){
+        house->requestWater(1000);
+        house->requestElectricity(1000);
+    }
+    if(!((House*)house)->useStove()){
+        house->requestElectricity(1000);
+    }
     
     //Need to use transport here
 

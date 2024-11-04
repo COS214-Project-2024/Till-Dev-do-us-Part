@@ -26,7 +26,7 @@ public:
      * @param name Name of the waste management utility
      * @param department Pointer to the Resource Department
      */
-    WasteManagement(std::string name, ResourceDepartment *department);
+    WasteManagement(std::string name, ResourceDepartment *department,WiseBucks* app);
 
     /**
      * @brief Default destructor for WasteManagement.

@@ -26,7 +26,7 @@ public:
      * @param resource Pointer to the Energy resource
      * @param numworkers Number of workers for the power plant
      */
-    PowerPlant(std::string name, ResourceDepartment *department, Energy *resource, int numworkers);
+    PowerPlant(std::string name, ResourceDepartment *department, Energy *resource, int numworkers,WiseBucks* app);
 
     /**
      * @brief Default destructor for PowerPlant.

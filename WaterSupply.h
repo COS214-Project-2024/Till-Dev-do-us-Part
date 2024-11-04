@@ -26,7 +26,7 @@ public:
      * @param resource Pointer to the Water resource
      * @param numworkers Number of workers for the water supply
      */
-    WaterSupply(std::string name, ResourceDepartment *department, Water *resource, int numworkers);
+    WaterSupply(std::string name, ResourceDepartment *department, Water *resource, int numworkers,WiseBucks* app);
 
     /**
      * @brief Default destructor for WaterSupply.

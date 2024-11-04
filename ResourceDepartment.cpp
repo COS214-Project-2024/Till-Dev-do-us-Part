@@ -94,6 +94,7 @@ void ResourceDepartment::addUtility(Utility *utility)
 {
     utilities.push_back(utility);
     std::cout << "ResourceDepartment: Added utility." << std::endl;
+    std::cout << "Budget: " << budget - 2000 << std::endl;
 }
 
 /**

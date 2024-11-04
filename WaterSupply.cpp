@@ -13,8 +13,8 @@
  * @param resource Pointer to the Water resource
  * @param numworkers Number of workers for the water supply
  */
-WaterSupply::WaterSupply(std::string name, ResourceDepartment *department, Water *resource, int numworkers)
-    : ProductionUtility(name, department, resource, numworkers)
+WaterSupply::WaterSupply(std::string name, ResourceDepartment *department, Water *resource, int numworkers,WiseBucks* app)
+    : ProductionUtility(name, department, resource, numworkers,app)
 {
     productionCapacity = 5000;
     currentProduction = 0;
