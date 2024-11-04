@@ -14,6 +14,7 @@ Department *DevDept, *FinDept, *SoAffDept, *TransDept, *ResourceDept, *healthDep
 TaxCalculator *taxes[6];
 WiseBucks *apps[6];
 Business *first8Businesses[8];
+Citizen **first100;
 
 // Add funtion in goverment to get overall status of the city. MyCityStatus();
 void DemoMain();
@@ -88,7 +89,7 @@ void DemoMain()
     governmentObjects();
 
     citizenObjects();
-    Citizen **first100 = AdultFactory->reproduce(150);
+    first100 = AdultFactory->reproduce(150);
     {
         for (int i = 0; i < 150; i++)
         {
@@ -157,7 +158,12 @@ void performDailyActivities()
 
 void unleashDisease()
 {
-
+    cout << "THERE HAS BEEN AN OUTBREAK OF COS VIRUS" << endl;
+    for (int i = 0; i < 150; i++)
+    {
+       clinic->admitPatient(first100[i]);
+    }
+    
 }
 
 void governmentObjects()
@@ -233,9 +239,14 @@ void healthcareObjects()
     GH = new Hospital1();
     ICH = new Hospital2();
 
-    ((HealthDept *)(Gov->getDepartment("Health")))->addFacility("Clinic", clinic);
-    ((HealthDept *)(Gov->getDepartment("Health")))->addFacility("General Hospital", GH);
-    ((HealthDept *)(Gov->getDepartment("Health")))->addFacility("Intensive Care Hospital", ICH);
+    clinic->addSuccessor(GH);
+    clinic->addSuccessor(ICH);
+
+
+    for (int i = 0; i < 150; i++)
+    {
+        clinic->admitPatient(first100[i]);
+    }
 }
 
 void citizenObjects()
