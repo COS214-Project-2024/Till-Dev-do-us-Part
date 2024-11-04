@@ -1,38 +1,23 @@
-# Compiler and flags
-CXX = g++
-CXXFLAGS = -std=c++11 -Wall
-
-# Find all .cpp files in the current directory
-SOURCES = $(wildcard *.cpp)
-
-# Convert source files to object files
-OBJECTS = $(SOURCES:.cpp=.o)
-
-# Main target to build the executable
 run: main
-	./main
+		./main
+		make c
 
-	make clean
+main: *.o
+		g++ -std=c++11 -o main *.o
 
-# Link all object files into the main executable
-main: $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -o main $(OBJECTS)
+*.o: *.cpp
+		g++ -std=c++11 -c -w *.cpp
 
-# Compile each .cpp file into an .o file
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+debugcpp: debugo
+		g++ -std=c++11 -ggdb3 -o main *.o
 
-# Debug build with debug symbols
-debug: $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -ggdb3 -o main_debug $(OBJECTS)
+debugo: *.cpp
+		g++ -std=c++11 -ggdb3 -c -w *.cpp
 
-# Clean command to remove executables and object files
-clean:
-	rm -f *.o main main_debug
+c:
+		rm *.o main
 
-# Valgrind target for memory checks
-
-v: debug
-	valgrind --tool=memcheck --leak-check=yes --track-origins=yes --log-file=valg.txt ./main_debug
-	make clean
-
+v: 
+		make debugcpp
+		valgrind --tool=memcheck --leak-check=yes --track-origins=yes --log-file=valg.txt ./main
+		make c

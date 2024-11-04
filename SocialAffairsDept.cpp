@@ -32,10 +32,10 @@ SocialAffairsDept::SocialAffairsDept(float b) {
  * @return Citizen* Pointer to the employed Citizen, or nullptr if no citizens are available.
  */
 Citizen* SocialAffairsDept::employ(Business* job) {
-    cout << "Entering employ" << endl;
+    // cout << "Entering employ" << endl;
 
     if (!unemployed.empty()) {
-        cout << "Employing citizen..." << endl;
+        // cout << "Employing citizen..." << endl;
         Adult* employee = (Adult*)(unemployed.front());
         employee->setJob(job);
         unemployed.pop();
@@ -55,7 +55,7 @@ Citizen* SocialAffairsDept::employ(Business* job) {
  */
 void SocialAffairsDept::addCitizen(Citizen* citizen) {
     adults.push_back(citizen);
-    cout << "Added new adult to adults vector " << endl;
+    // cout << "Added new adult to adults vector " << endl;
 }
 
 /**
@@ -67,7 +67,7 @@ void SocialAffairsDept::addCitizen(Citizen* citizen) {
  */
 void SocialAffairsDept::addChild(Citizen* citizen) {
     children.push_back(citizen);
-    cout << "Added new child to children vector " << endl;
+    // cout << "Added new child to children vector " << endl;
 }
 
 /**
@@ -79,7 +79,7 @@ void SocialAffairsDept::addToUnemployed(Citizen* person) {
     if (person == nullptr)
         cout << "PERSON IS NULL" << endl;
     unemployed.push(person);
-    cout << "Added new adult to unemployed queue " << endl;
+    // cout << "Added new adult to unemployed queue " << endl;
 }
 
 /**

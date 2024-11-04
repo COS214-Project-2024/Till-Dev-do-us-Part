@@ -75,10 +75,25 @@ void DemoMain()
     // cout << "~ created by TDP - Till Dev do us Part ~" << endl;
 
     // displayIntro();
+
     cout << "===========================================================================================================================================================================" << endl;
 
     cout << "Creating Goverment and its Departments:" << endl;
     governmentObjects();
+
+    cout << "===========================================================================================================================================================================" << endl;
+    
+    cout << "Appearance of the first 150 citizens" << endl;
+    citizenObjects();
+    Citizen **first100 = AdultFactory->reproduce(150);
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            ((Adult *)first100[i])->setHouse(((DevelopmentDept *)(Gov->getDepartment("Development")))->build("House"));
+            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(first100[i]);
+            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(first100[i]);
+        }
+    }
 
     cout << "===========================================================================================================================================================================" << endl;
 
@@ -104,20 +119,6 @@ void DemoMain()
 
     cout << "Setting up healthcare facilities" << endl;
     healthcareObjects();
-
-    cout << "===========================================================================================================================================================================" << endl;
-
-    cout << "Appearance of the first 100 citizens" << endl;
-    citizenObjects();
-    Citizen **first100 = AdultFactory->reproduce(100);
-    {
-        for (int i = 0; i < 100; i++)
-        {
-            ((Adult *)first100[i])->setHouse(((DevelopmentDept *)(Gov->getDepartment("Development")))->build("House"));
-            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(first100[i]);
-            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(first100[i]);
-        }
-    }
 
     cout << "===========================================================================================================================================================================" << endl;
 
