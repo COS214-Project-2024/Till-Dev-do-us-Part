@@ -1,7 +1,8 @@
 #include "TransportFacilities.h"
 #include "TransportMode.h"
 
-TransportFacilities::TransportFacilities(){
+TransportFacilities::TransportFacilities() :moVec{}{  
+
 }
 
 std:: string TransportFacilities::getFacilName(){
@@ -16,21 +17,41 @@ TransportFacilities:: ~TransportFacilities(){
 
     citizens.clear();
 
+    delete currentState;
+    currentState = nullptr;
+
 
 }
 
 void TransportFacilities::setState(TransState* newState) {
-   if (currentState) delete currentState;
-    currentState = nullptr;
-    currentState = newState;
-    notifyCitizens();
+   
+    if(newState != nullptr){
+        
+        if (currentState->getStateName() != newState->getStateName()){
+          
+            std::cout << "Now in:"<<currentState->getStateName() <<"\n";
+            delete currentState;
+          
+            currentState = newState;
+           
+            notifyCitizens();
+           
+            return;
+        } 
+        
+        return;
 
+    }
 }
 void TransportFacilities::decreaseTraffic()
 {
     int elementsToDelete = 6; 
+    
+
     for(int i=0; i< elementsToDelete && i < moVec.size(); i++){
-        moVec.at(i)->divertingRoute(moVec.at(i)->GetFacility()->getFacilName());//come back 
+       
+        moVec.at(i)->stopdrive();//come back 
+        
     }
 }
 
@@ -44,11 +65,45 @@ TransState* TransportFacilities:: getState()
     return this->currentState;
 }
 
-void TransportFacilities::add(TransportMode* momo){
-    moVec.push_back(momo);
-    currentState->changeState();
 
- }
+
+void TransportFacilities::add(TransportMode* momo) {
+    
+    if (!momo) {
+        std::cout << "momo is nullptr" << std::endl;
+        return;
+    }
+
+    if (dynamic_cast<TransportMode*>(momo) == nullptr) {
+        std::cout << "momo is not a valid TransportMode instance" << std::endl;
+        return;
+    }
+    
+    try {
+        
+        moVec.push_back(momo);
+         
+       
+    } catch (const std::exception& e) {
+        std::cerr << "Error while adding to moVec: " << e.what() << std::endl;
+    }
+
+    
+    
+   
+    std::cout << currentState->getStateName()<< std::endl;
+    if (currentState != nullptr)  {
+        
+        currentState->changeState();
+    } else {
+        std::cout << "currentState is nullptr" << std::endl;
+    }
+
+
+}
+
+
+
 void TransportFacilities::remove(TransportMode* momo){
       auto it = std::find(moVec.begin(), moVec.end(), momo);
     if (it != moVec.end()) {

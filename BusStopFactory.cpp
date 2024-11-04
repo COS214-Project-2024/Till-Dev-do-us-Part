@@ -4,7 +4,7 @@
 #include "BusStop.h"
 
 TransportStation* BusStopFactory:: createStation() {
-        auto station = new BusStop();
-        return station;
+        // auto station = new BusStop();
+        return new BusStop();
     }
 

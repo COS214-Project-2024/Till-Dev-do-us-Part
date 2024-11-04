@@ -5,6 +5,7 @@
 
 class BusModeFactory : public ModeFactory {
 public:
-    TransportMode* createMode();
+    BusModeFactory();
+    TransportMode* createMode() override;
 
 };

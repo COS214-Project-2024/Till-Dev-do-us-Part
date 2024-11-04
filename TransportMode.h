@@ -19,6 +19,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
 
 #include <algorithm>
 #include <random>
@@ -39,15 +40,19 @@ protected:
 public:
     //TransportMode();
     // TransportMode(const std::string& name, double speed, double capacity); // Constructor
-    void changed(const std::string& state);
+    void changed(std::string state);
     virtual ~TransportMode();
     void travel();
     
-    virtual void SendMessage(const std::string& state)=0;
+    virtual void SendMessage(std::string state)=0;
     virtual std::string GetMessage()=0;
     virtual TransportFacilities* GetFacility();
     void divertingRoute(std::string type);
     virtual void SetFacilities(TransportFacilities* facility);
+    virtual void SetTransDept(TransportDept* transDept)=0;
+    virtual void drive()=0;
+    virtual void stopdrive()=0;
+
 
     //Mediator
     virtual std::string getName() const = 0;

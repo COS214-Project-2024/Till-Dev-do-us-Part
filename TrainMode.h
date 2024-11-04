@@ -15,6 +15,7 @@ public:
     std::string getName() const override;
     void drive();
     void stopdrive();
-    void SendMessage(const std::string& state);
+        void SetTransDept(TransportDept* transDept);
+    void SendMessage(std::string state);
     std::string GetMessage();
 };

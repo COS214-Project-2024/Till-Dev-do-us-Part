@@ -9,18 +9,24 @@ AirplaneMode:: AirplaneMode()
     facility=nullptr;
 }
 
-void AirplaneMode::depart(){
+void AirplaneMode::stopdrive(){
     facility->remove(this);
     std::cout<<"Airplane is departing"<<std::endl;
 
 }
-void AirplaneMode::arrive(){
+void AirplaneMode::drive(){
     facility->add(this);
     travel();
 
 }
+void AirplaneMode::SetTransDept(TransportDept* transDept){
+    this->transDept=transDept;
+    transDept->addMode("Airplane",this);
 
-void AirplaneMode::SendMessage(const std::string& state){
+}
+
+void AirplaneMode::SendMessage(std::string state){
+
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
         if(GetFacility()->getModeCount()>10){

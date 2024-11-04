@@ -18,7 +18,6 @@ class TransportFacilities {
 protected:
     std::string name; 
     TransState* currentState;
-    TransportFacilities(TransState* state);
     std::vector<TransportMode*> moVec;
     std::vector<Citizen*> citizens;
 
@@ -26,18 +25,19 @@ protected:
 public:
     virtual ~TransportFacilities();  
     TransportFacilities(); 
-    void setState(TransState* state);
-    int getModeCount();
+    // TransportFacilities(TransState* state);
+    virtual void setState(TransState* state);
+    virtual int getModeCount();
     virtual void decreaseTraffic();
-    TransState* getState();
-    void add(TransportMode*momo);
-    void remove(TransportMode* momo);
-    int GetModeCount();
-    std::vector<TransportMode*> GetModes();
-    void notifyCitizens();
-    void attach(Citizen* c);
-    void detach(Citizen* c);
-    std:: string getFacilName();
+    virtual TransState* getState();
+    virtual void add(TransportMode*momo);
+    virtual void remove(TransportMode* momo);
+    virtual int GetModeCount();
+    virtual std::vector<TransportMode*> GetModes();
+    virtual void notifyCitizens();
+    virtual void attach(Citizen* c);
+    virtual void detach(Citizen* c);
+    virtual std:: string getFacilName();
 };
 
 #endif

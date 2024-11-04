@@ -15,10 +15,11 @@ void CongestedState::handleState() {
 }
 
 void CongestedState::changeState() {
+    
     if (stateFacility->getModeCount() == 0) {
         stateFacility->setState(new EmptyState(stateFacility));
     } 
-    else if (stateFacility->getModeCount() > 30) {
+    else if (stateFacility->getModeCount() > 10) {
         stateFacility->setState(new CongestedState(stateFacility));
         
 

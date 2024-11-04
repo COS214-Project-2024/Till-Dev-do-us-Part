@@ -2,6 +2,16 @@
 #include "TransportFacilities.h"
 #include "TransportMode.h"
 
+TransportDept:: TransportDept(float budget)
+{
+    this->budget=budget;
+    facilities={};
+    // facilities.clear();
+}
+
+
+
+
 void TransportDept::addSationFactory(std::string type, StationFactory* factory)
 {
     stationfactories[type]=factory;
@@ -59,17 +69,21 @@ TransportStation* TransportDept::createStation(std::string type)
 }
 
 std:: vector<TransportFacilities*> TransportDept::getDeptFacilities(std::string type)
-{
-    std:: vector<TransportFacilities*> v;
-    for(auto &it: facilities)
-    {
-        if(it.first==type)
-        {
-            v.push_back(it.second);
-        }
+{   
+ 
+    if(type=="Road"){
+        
+        
+        return roadroad;
     }
-    return v;
-
+    
+    if(type=="Railway"){
+        return wayway;
+    }
+    if(type=="Airport"){
+        return portport;
+    }
+    
 }
 void TransportDept:: addSation(std::string type, TransportStation* station)
 {
@@ -79,7 +93,17 @@ void TransportDept:: addMode(std::string type, TransportMode* mode)
 {
     vehicles[type]= mode;
 }
-void TransportDept:: addFacility(std::string type, TransportFacilities* facility)
+void TransportDept:: addFacility(TransportFacilities* facility)
 {
-    facilities[type]=facility;
+    if(facility->getFacilName()=="Road"){
+        roadroad.push_back(facility);
+    }
+    if(facility->getFacilName()=="Railway"){
+        wayway.push_back(facility);
+    }
+    if(facility->getFacilName()=="Airport"){
+        portport.push_back(facility);
+    }
+    
+    // facilities[type].push_back(facility);
 }

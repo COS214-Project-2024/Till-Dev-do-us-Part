@@ -14,10 +14,10 @@ class CarMode : public TransportMode {
 public:
     CarMode();
     void drive();
-    void stopDrive();
-    
+    void stopdrive();
+        void SetTransDept(TransportDept* transDept);
     //Mediator
-    void SendMessage(const std::string& state);
+    void SendMessage(std::string state);
     std::string GetMessage();
     std::string getName() const override;
     

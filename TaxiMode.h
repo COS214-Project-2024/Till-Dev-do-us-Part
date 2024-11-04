@@ -15,10 +15,10 @@ class TaxiMode : public TransportMode{
 public:
     TaxiMode();
     void drive();
-    void stopDrive();
-
+    void stopdrive();
+    void SetTransDept(TransportDept* transDept);
     //Mediator
     std::string getName() const override;
-    void SendMessage(const std::string& state);
+    void SendMessage(std::string state);
     std::string GetMessage();
 };

@@ -15,15 +15,21 @@ void CarMode::drive(){
     travel();
 }
 
-void CarMode::stopDrive(){
+void CarMode::stopdrive(){
     facility->remove(this);
     std::cout<<"Car stops driving"<<std::endl;
 }
 
-void CarMode::SendMessage(const std::string& state){
+void CarMode::SetTransDept(TransportDept* transDept){
+    this->transDept=transDept;
+    transDept->addMode("Car",this);
+
+}
+
+void CarMode::SendMessage(std::string state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
-        if(GetFacility()->getModeCount()>30){
+        if(GetFacility()->getModeCount()>10){
             GetFacility()->getState()->changeState();
 
             
@@ -32,7 +38,7 @@ void CarMode::SendMessage(const std::string& state){
     }
 
     if(state=="safe"){
-        std::cout<<"Safe travel";
+        std::cout<<"Safe travels";
     }
 
     if (state == "bad weather") {
@@ -42,7 +48,7 @@ void CarMode::SendMessage(const std::string& state){
     if (state == "traffic") {
         std::cout << this->getName()<< ": Responding to air traffic. Delaying flights and Notifying other planes.\n";
 
-        if(GetFacility()->getModeCount()>30){
+        if(GetFacility()->getModeCount()>10){
             GetFacility()->getState()->changeState();
             
         }

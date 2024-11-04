@@ -15,10 +15,10 @@ class AirplaneMode: public TransportMode {
 
 public:
     AirplaneMode();
-    void depart();
-    void arrive();
-
-    void SendMessage(const std::string& state);
+    void stopdrive();
+    void drive();
+    void SetTransDept(TransportDept* transDept);
+    void SendMessage(std::string state);
     std::string GetMessage();
     std::string getName() const override;
     ~AirplaneMode();

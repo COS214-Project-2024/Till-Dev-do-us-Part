@@ -40,12 +40,18 @@ void TaxiMode::drive() {
     std::cout << "Completed all routes" << std::endl;
 }
 
-void TaxiMode::stopDrive(){
+void TaxiMode::stopdrive(){
     facility->remove(this);
     std::cout<<"Taxi stops driving"<<std::endl;
 }
 
-void TaxiMode::SendMessage(const std::string& state){
+void TaxiMode::SetTransDept(TransportDept* transDept){
+    this->transDept=transDept;
+    transDept->addMode("Taxi",this);
+
+}
+
+void TaxiMode::SendMessage(std::string state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying flights and Notifying other planes.\n";
         if(GetFacility()->getModeCount()>10){

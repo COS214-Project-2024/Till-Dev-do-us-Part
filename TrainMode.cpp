@@ -37,12 +37,16 @@ void TrainMode::drive() {
     std::cout << "Completed all routes" << std::endl;
 }
 
+void TrainMode::SetTransDept(TransportDept* transDept){
+    this->transDept=transDept;
+    transDept->addMode("Train",this);
 
+}
 
 std::string TrainMode:: getName() const {
      return "TrainMode"; }
 
-void TrainMode::SendMessage(const std::string& state){
+void TrainMode::SendMessage(std::string state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying trips and Notifying other vehicles.\n";
         if(GetFacility()->getModeCount()>10){

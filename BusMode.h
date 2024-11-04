@@ -17,8 +17,9 @@ public:
     BusMode();
     void drive();
     void stopdrive();
+        void SetTransDept(TransportDept* transDept);
     std::string getName() const override;
-    void SendMessage(const std::string& state);
+    void SendMessage(std::string state);
     std::string GetMessage();
 
 

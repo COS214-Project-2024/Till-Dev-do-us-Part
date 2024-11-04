@@ -2,7 +2,9 @@
 #include "TransportMode.h"
 #include <iostream>
 
+  ConcreteTransportationMediator::ConcreteTransportationMediator(){
 
+ }
 
 void ConcreteTransportationMediator::notify(TransportMode* mode) {
     std::cout << mode->getName() << " reported a "<<  mode->GetMessage()<< ". Notifying colleagues...\n";

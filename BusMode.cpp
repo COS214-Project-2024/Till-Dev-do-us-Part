@@ -4,27 +4,32 @@
 
 BusMode:: BusMode()
 {
+    
     mediator=nullptr;
+    transDept= nullptr;
     facility=nullptr;
+    state="";
+    transDept=nullptr;
 }
 
 
 void BusMode::drive() {
+    
     facility->add(this);
-    QueueIterator queueIt(this);
+    TransportationIterator* queueIt= createQIterator();
     travel();
     int x = 1;
 
     // Iterate through stops using QueueIterator
-    while (queueIt.hasNext()) {
-        auto current = queueIt.currItem();
+    while (queueIt->hasNext()) {
+        auto current = queueIt->currItem();
         std::cout << "Arriving at stop " << x++ << std::endl;
-        queueIt.next();
+        queueIt->next();
     }
 
     std::cout << "Revisiting stops\n";
     StackIterator stackIt(this); // Use a different variable name for the StackIterator
-    x = 1;
+    x = getStops().size();
 
     // Iterate through stops in reverse order using StackIterator
     while (stackIt.hasNext()) {
@@ -36,10 +41,17 @@ void BusMode::drive() {
     std::cout << "Completed all routes" << std::endl;
 }
 
+void BusMode::SetTransDept(TransportDept* transDept){
+    this->transDept=transDept;
+    transDept->addMode("Bus",this);
 
-void BusMode::SendMessage(const std::string& state){
+}
+
+
+void BusMode::SendMessage(std::string state){
     if (state == "accident") {
         std::cout << this->getName()<< ": Responding to accident. Delaying trips and Notifying other vehicles.\n";
+        std::cout <<"Diverting Traffic\n";
         if(GetFacility()->getModeCount()>10){
             GetFacility()->getState()->changeState();   
         }
@@ -56,6 +68,7 @@ void BusMode::SendMessage(const std::string& state){
 
     if (state == "traffic") {
         std::cout << this->getName()<< ": Responding to air traffic. Delaying trips and Notifying other vehicles.\n";
+        std::cout <<"Diverting Traffic\n";
 
         if(GetFacility()->getModeCount()>10){
             GetFacility()->getState()->changeState();  
@@ -72,5 +85,6 @@ void BusMode::stopdrive(){
 }
 
 std::string BusMode:: getName() const {
-     return "BusMode"; }
+     return "BusMode\n"; 
+     }
 

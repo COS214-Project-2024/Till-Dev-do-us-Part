@@ -13,8 +13,8 @@ public:
     virtual TransportFacilities* createFacilities() = 0;  // Factory Method
 
 protected:
-    FacilitiesFactory() = default;
-    TransportFacilities* facilities;
+    // FacilitiesFactory();
+    // TransportFacilities* facilities;
     
 };
 #endif
