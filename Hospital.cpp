@@ -1,17 +1,11 @@
 #include "Hospital.h"
 
 Hospital::Hospital():Public("Hospital"){
-    area = 3000;
-    capacity = 20;
-    value=100000;
     cout << "Hospital created" << endl;
 }
 
 Hospital::~Hospital(){
-    delete this->state;
-    state = nullptr;
     demolish();
-    cout << "Hospital demolished" << endl;
 }
 
 bool Hospital::addOccupant(Citizen *c){
@@ -53,38 +47,4 @@ bool Hospital::clean(){
 
     cout << "Hospital is in " << this->state->getName() << " and cannot be cleaned" << endl;
     return false;
-}
-
-bool Hospital::removeOccupant(Citizen *c)
-{
-    vector<Citizen *>::iterator first = patients.begin();
-    vector<Citizen *>::iterator last = patients.end();
-
-    vector<Citizen *>::iterator it = find(first, last, c);
-    if (it != last)
-    {
-        patients.erase(it);
-        cout << "Patient removed from the Hospital" << endl;
-        return true;
-    }
-
-    cout << "Patient not in the Hospital" << endl;
-    return false;
-}
-
-Building *Hospital::clone()
-{
-    Hospital *newHospital = new Hospital();
-    newHospital->cleanliness = this->cleanliness;
-    newHospital->electricityUnits = this->electricityUnits;
-    newHospital->waterUnits = this->waterUnits;
-    newHospital->value = this->value;
-    newHospital->area = this->area;
-    newHospital->capacity = this->capacity;
-
-    return newHospital;
-}
-
-bool Hospital::isOccupied(){
-    return patients.size() > 0;
 }

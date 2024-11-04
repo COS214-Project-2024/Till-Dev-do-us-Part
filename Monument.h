@@ -7,11 +7,8 @@ class Monument : public Landmark
 {
     public:
         Monument();
-        ~Monument();
-        virtual bool addOccupant(Citizen *c);
-        virtual void demolish();
+        // virtual void demolish();
         virtual bool clean();
-        virtual bool removeOccupant(Citizen *c);
-        virtual Building *clone();
+        // virtual bool addOccupant(Citizen *c);
 };
 #endif

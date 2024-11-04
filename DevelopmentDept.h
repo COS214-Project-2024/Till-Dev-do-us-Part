@@ -1,53 +1,39 @@
+////hold factory
+
 #ifndef DevelopmentDept_H
 #define DevelopmentDept_H
 #include <map>
 #include <vector>
 #include "Building.h"
 #include "BuildingFactory.h"
-#include "HouseFactory.h"
-#include "TownhouseFactory.h"
-#include "EstateFactory.h"
+// #include "HouseFactory.h"
+// #include "TownhouseFactory.h"
+// #include "EstateFactory.h"
 #include "ShopFactory.h"
 #include "OfficeFactory.h"
 #include "MallFactory.h"
-#include "FactoryFactory.h"
-#include "WarehouseFactory.h"
-#include "CulturalFactory.h"
-#include "MonumentFactory.h"
-#include "HospitalFactory.h"
-#include "CBDFactory.h"
-#include "SuburbFactory.h"
-#include "IndustrialFactory.h"
-#include "Department.h"
-#include "Suburb.h"
-#include "Plant.h"
-#include "Industrial.h"
-#include "IndustrialSite.h"
-#include "CBD.h"
+// #include "FactoryFactory.h"
+// #include "WarehouseFactory.h"
+// #include "Department.h"
 
 
 class DevelopmentDept : public Department
 {
 
     private:
-        ResourceDepartment* resourceDept;
         int land;
         map<std::string, float> priceList;
         map<std::string, float> buildingAreaList;
         map<std::string, BuildingFactory *> factories;
         vector<Building *> unOccupiedBuildings;
-        vector<Residential*> suburbs;
-        vector<Commercial*> cbds;
-        vector<Industrial *> industrialSites;
 
     public : 
-        DevelopmentDept(float budget, ResourceDepartment*);
-        ~DevelopmentDept();
+        DevelopmentDept(float budget);
+        bool allocateLand(int Landsize);
         float getPrice(std::string buildingType);
+        void addFactory(const std::string buildingType, BuildingFactory *factory);
         Building *build(std::string buildingType);
-        void addUnoccupiedBuilding(Building* b);
-        void removeUnoccupiedBuilding(Building *b);
-
-    };
+};
 
 #endif
+

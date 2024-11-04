@@ -5,21 +5,17 @@
 class House : public Residential
 {
     private:
+        /* data */
         vector<Citizen *> occupants;
 
     public:
         House();
         ~House();
-        virtual void demolish(); 
-        virtual bool useShower();
-        virtual bool useToilet();
-        virtual bool useStove();
+        virtual void demolish(); //inherited from Building, hence this class is abstract
+        virtual bool useShower(); //
+        virtual bool useToilet(); // why boolean, because when there isnt enough water/electricity it must affect the citizen
+        virtual bool useStove();  // why boolean, because when there isnt enough water/electricity it must affect the citizen
         virtual bool clean();
         virtual bool addOccupant(Citizen *c);
-        Building* clone();
-        bool removeOccupant(Citizen *c);
-        virtual void goToWork();
-        virtual bool isOccupied();
-        virtual void display();
 };
 #endif

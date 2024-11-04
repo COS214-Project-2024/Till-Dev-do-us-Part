@@ -9,11 +9,10 @@ class Landmark:public Building
 
     public:
         Landmark(string type);
-        virtual bool addOccupant(Citizen *c) = 0;
-        virtual void demolish() = 0;
+        virtual void demolish();
         virtual bool clean() = 0;
-        virtual bool removeOccupant(Citizen *c) = 0;
-        virtual Building *clone() = 0;
-        virtual bool isOccupied();
+        virtual bool addOccupant(Citizen *c);
+        
 };
 #endif
+

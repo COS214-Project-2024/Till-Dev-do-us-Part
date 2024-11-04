@@ -1,74 +1,46 @@
-#include "Building.h"
-#include "ResourceDepartment.h"
+#include"Building.h"
+
 Building::Building(string type)
 {
-    state = new ConstructionState();
     this->type = type;
-    this->cleanliness = 100;
-    electricityUnits = 0;
-    waterUnits = 0;
 }
 
 Building::~Building()
 {
-    delete this->state;
-    state = nullptr;
+
 }
 
-bool Building::requestElectricity(float units)
+void Building::loadElectricity(int units)
 {
-    cout << "Requesting electricity from Resource Department:";
+    if(units > 0)
+        electricityUnits += units;  
+} 
 
-    if (resourceDept->processResourceRequest("electricity", units))
-    {
-        electricityUnits += units;
-        cout << "Resource department supplied electricity" << endl;
-        if(waterUnits>0){
-            delete this->state;
-            this->state = new CompleteState();
-        }
-        return true;
-    }
-    cout << "Resource department could not supply electricity" << endl;
-    return false;
-}
-
-bool Building::requestWater(float units)
+void Building::loadWater(int units)
 {
-    cout << "Requesting water from Resource Department:";
-    if (resourceDept->processResourceRequest("water", units))
-    {
-        waterUnits += units;
-        cout << "Resource department supplied water" << endl;
-        if(electricityUnits>0){
-            delete this->state;
-            this->state = new CompleteState();
-        }
-        return true;
-    }
-    cout << "Resource department could not supply water" << endl;
-    return false;
+    if(units > 0)
+        waterUnits +=units;
 }
 
-bool Building::useElectricity(float units) // units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage
+bool Building::useElectricity(int units) //units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage 
 {
     if (this->electricityUnits - units < 0 || !this->state->canUseElectricity())
         return false;
-
-    electricityUnits -= units;
+    
+    electricityUnits-=units;
     return true;
 }
 
-bool Building::useWater(float units) // units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage
+bool Building::useWater(int units) // units will always be > 0 'cause this is used by clean, useShower, useStove which have a predefined usage
 {
-    if (this->waterUnits - units < 0 || !this->state->canUseWater())
+    if(this->waterUnits - units < 0 ||! this->state->canUseWater())
         return false;
 
     waterUnits -= units;
     return true;
 }
 
-float Building::getValue()
+float Building::getPrice()
 {
     return this->value;
 }
@@ -78,21 +50,6 @@ string Building::getType()
     return this->type;
 }
 
-float Building::getWater()
-{
-    return waterUnits;
-}
 
-float Building::getElectricity()
-{
-    return electricityUnits;
-}
-
-float Building::getCleanliness()
-{
-    return cleanliness;
-}
-
-void Building::addResourceDept(ResourceDepartment* r) {
-    this->resourceDept = r; // Assign the resource department to this building
-}
+//a citizen calls the utilities.getWater(units,building) which calls building.loadWater(units). Same applies with elec
+//when a citizen goes to work, the citizen calls useShower() which calls useWater(100) and useElectricity(50)

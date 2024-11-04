@@ -1,6 +1,6 @@
 #ifndef BUILDINGFACTORY_H
 #define BUILDINGFACTORY_H
-class Building;  // Forward declaration
+#include "Building.h"
 
 class BuildingFactory{
 
@@ -10,10 +10,6 @@ protected:
 public:
     //BuildingFactory();
     virtual Building* build()=0;
-    virtual ~BuildingFactory() {
-        delete building;
-        building = nullptr;
-    }
 
 };
 

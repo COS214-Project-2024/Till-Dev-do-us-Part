@@ -4,3 +4,8 @@ Commercial::Commercial(string type):Building(type)
 {
 
 }
+
+Commercial::~Commercial(){
+
+}
+

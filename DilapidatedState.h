@@ -7,8 +7,9 @@ class DilapidatedState : public BuildingState
     private:
     public:
         DilapidatedState();
+        virtual ~DilapidatedState();
         virtual bool canUseElectricity();
         virtual bool canUseWater();
-        virtual BuildingState* clone();
+        virtual BuildingState *change();
 };
 #endif

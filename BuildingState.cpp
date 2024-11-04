@@ -7,7 +7,3 @@ BuildingState::BuildingState(string name){
 string BuildingState::getName(){
     return this->name;
 }
-
-BuildingState::~BuildingState(){
-    
-}

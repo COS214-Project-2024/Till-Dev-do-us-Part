@@ -7,6 +7,8 @@ MallFactory:: MallFactory()
 
 Building* MallFactory:: build()
 {
-    return building-> clone();
+    if (building!=nullptr){
+        return building-> clone();
 
+    }
 }
