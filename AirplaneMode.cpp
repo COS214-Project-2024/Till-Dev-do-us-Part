@@ -1,3 +1,14 @@
+//**
+ * @file AirplaneMode.cpp
+ * @author Paballo Diyase -u23528142
+ * @brief 
+ * @version 0.1
+ * @date 2024-11-04
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #include "AirplaneMode.h"
 #include <string>
 #include <iostream>

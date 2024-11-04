@@ -6,7 +6,6 @@ TransportDept:: TransportDept(float budget)
 {
     this->budget=budget;
     facilities={};
-    // facilities.clear();
 }
 
 
@@ -104,6 +103,4 @@ void TransportDept:: addFacility(TransportFacilities* facility)
     if(facility->getFacilName()=="Airport"){
         portport.push_back(facility);
     }
-    
-    // facilities[type].push_back(facility);
 }
