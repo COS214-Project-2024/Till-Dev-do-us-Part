@@ -90,7 +90,7 @@ void DemoMain()
     citizenObjects();
     Citizen **first100 = AdultFactory->reproduce(150);
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 150; i++)
         {
             ((Adult *)first100[i])->setHouse(((DevelopmentDept *)(Gov->getDepartment("Development")))->build("House"));
             ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(first100[i]);
