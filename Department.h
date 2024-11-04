@@ -1,14 +1,26 @@
 #ifndef DEPARTMENT_H
 #define DEPARTMENT_H
 
-class Department{
+class Department {
+protected:
+    float budget;
 
-    protected:
-        float budget;
+public:
+    // Department(float budget) : budget(budget) {}
 
-    public:
-        virtual ~Department(){} 
+    void receiveTax(float amount)
+    {
+        if (amount > 0)
+            budget += amount; 
+            
+    }
 
+    float getBudget()
+    {
+        return budget; 
+    }
+    
+    virtual ~Department(){}
 };
 
-#endif
+#endif 
