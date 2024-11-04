@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/boity/OneDrive - University of Pretoria/Second Year/Second Semester/COS 214/Practicals/214 Project/Till-Dev-do-us-Part",
+      "program": "c:/Users/boity/OneDrive - University of Pretoria/Second Year/Second Semester/COS 214/Practicals/214 Project/Till-Dev-do-us-Part/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/RiRi/Desktop/UP/COS 214/PRACTICALS/214 Project/Till-Dev-do-us-Part",
+      "program": "c:/Users/RiRi/Desktop/UP/COS 214/PRACTICALS/214 Project/Till-Dev-do-us-Part/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
