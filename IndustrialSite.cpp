@@ -1,16 +1,23 @@
 #include "IndustrialSite.h"
 
+/**
+ * @brief Constructs a new IndustrialSite object with default values.
+ */
 IndustrialSite::IndustrialSite() : Industrial("IndustrialSite")
 {
-    area = 50000;
-    capacity = 50;
-    noBuildings = 0;
-    value = 12000;
+    area = 50000;    ///< Set the area of the industrial site.
+    capacity = 50;   ///< Set the maximum capacity of buildings in the industrial site.
+    noBuildings = 0; ///< Initialize the number of buildings to zero.
+    value = 12000;   ///< Set the initial value of the industrial site.
 }
 
+/**
+ * @brief Loads a specified amount of electricity to all buildings in the industrial site.
+ *
+ * @param units The amount of electricity to load.
+ */
 void IndustrialSite::loadElectricity(float units)
 {
-
     for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
     {
         (*it)->requestElectricity(units);
@@ -18,6 +25,11 @@ void IndustrialSite::loadElectricity(float units)
     }
 }
 
+/**
+ * @brief Loads a specified amount of water to all buildings in the industrial site.
+ *
+ * @param units The amount of water to load.
+ */
 void IndustrialSite::loadWater(float units)
 {
     for (vector<Industrial *>::iterator it = buildings.begin(); it != buildings.end(); it++)
@@ -27,6 +39,12 @@ void IndustrialSite::loadWater(float units)
     }
 }
 
+/**
+ * @brief Uses a specified amount of electricity across all buildings.
+ *
+ * @param units The amount of electricity to use.
+ * @return true if all buildings successfully used the electricity, false otherwise.
+ */
 bool IndustrialSite::useElectricity(float units)
 {
     if (this->state->canUseElectricity())
@@ -53,6 +71,12 @@ bool IndustrialSite::useElectricity(float units)
     return false;
 }
 
+/**
+ * @brief Uses a specified amount of water across all buildings.
+ *
+ * @param units The amount of water to use.
+ * @return true if all buildings successfully used the water, false otherwise.
+ */
 bool IndustrialSite::useWater(float units)
 {
     if (this->state->canUseWater())
@@ -80,16 +104,29 @@ bool IndustrialSite::useWater(float units)
     return false;
 }
 
+/**
+ * @brief Gets the price of the industrial site.
+ *
+ * @return The value of the industrial site.
+ */
 float IndustrialSite::getPrice()
 {
     return value;
 }
 
+/**
+ * @brief Gets the type of the industrial site.
+ *
+ * @return The type as a string.
+ */
 string IndustrialSite::getType()
 {
     return type;
 }
 
+/**
+ * @brief Demolishes all buildings in the industrial site and frees associated resources.
+ */
 void IndustrialSite::demolish()
 {
     cout << "Demolishing all the buildings in the IndustrialSite\n";
@@ -103,9 +140,14 @@ void IndustrialSite::demolish()
         noBuildings--;
     }
 
-    cout << "Demolished  all the buildings in the IndustrialSite\n";
+    cout << "Demolished all the buildings in the IndustrialSite\n";
 }
 
+/**
+ * @brief Cleans all buildings in the industrial site using water and electricity if available.
+ *
+ * @return true if all buildings were successfully cleaned, false otherwise.
+ */
 bool IndustrialSite::clean()
 {
     if (state->canUseElectricity() && state->canUseWater())
@@ -138,6 +180,12 @@ bool IndustrialSite::clean()
     return false;
 }
 
+/**
+ * @brief Adds a citizen to one of the buildings in the industrial site.
+ *
+ * @param c The citizen to add.
+ * @return true if the citizen was successfully added, false otherwise.
+ */
 bool IndustrialSite::addOccupant(Citizen *c)
 {
     if (c != nullptr)
@@ -154,12 +202,21 @@ bool IndustrialSite::addOccupant(Citizen *c)
     return false;
 }
 
+/**
+ * @brief Destroys the IndustrialSite, cleans up resources and demolishes all buildings.
+ */
 IndustrialSite::~IndustrialSite()
 {
     demolish();
     cout << "Destroyed the IndustrialSite\n";
 }
 
+/**
+ * @brief Adds a building to the industrial site.
+ *
+ * @param building The building to add.
+ * @return true if the building was successfully added, false otherwise.
+ */
 bool IndustrialSite::addBuilding(Industrial *building)
 {
     if (building != nullptr)
@@ -208,6 +265,12 @@ bool IndustrialSite::addBuilding(Industrial *building)
     return false;
 }
 
+/**
+ * @brief Removes a building from the industrial site.
+ *
+ * @param building The building to remove.
+ * @return true if the building was successfully removed, false otherwise.
+ */
 bool IndustrialSite::removeBuilding(Industrial *building)
 {
     vector<Industrial *>::iterator first = buildings.begin();
@@ -216,7 +279,6 @@ bool IndustrialSite::removeBuilding(Industrial *building)
     vector<Industrial *>::iterator it = find(first, last, building);
     if (it != last)
     {
-
         buildings.erase(it);
         value -= building->getValue();
         waterUnits -= building->getWater();
@@ -233,6 +295,12 @@ bool IndustrialSite::removeBuilding(Industrial *building)
     return false;
 }
 
+/**
+ * @brief Removes a citizen from one of the buildings in the industrial site.
+ *
+ * @param c The citizen to remove.
+ * @return true if the citizen was successfully removed, false otherwise.
+ */
 bool IndustrialSite::removeOccupant(Citizen *c)
 {
     for (vector<Industrial *>::iterator it = buildings.begin(); it < buildings.end(); it++)
@@ -248,6 +316,11 @@ bool IndustrialSite::removeOccupant(Citizen *c)
     return false;
 }
 
+/**
+ * @brief Clones the IndustrialSite, creating a new instance with the same properties.
+ *
+ * @return A pointer to the cloned IndustrialSite.
+ */
 Building *IndustrialSite::clone()
 {
     IndustrialSite *newBuilding = new IndustrialSite();
@@ -265,6 +338,11 @@ Building *IndustrialSite::clone()
     return newBuilding;
 }
 
+/**
+ * @brief Gets the cleanliness level of the industrial site.
+ *
+ * @return The average cleanliness of the buildings.
+ */
 float IndustrialSite::getCleanliness()
 {
     int accumCleanliness = 0;
@@ -276,6 +354,11 @@ float IndustrialSite::getCleanliness()
     return cleanliness;
 }
 
+/**
+ * @brief Gets the total amount of water used by all buildings.
+ *
+ * @return The total water units.
+ */
 float IndustrialSite::getWater()
 {
     int accumWater = 0;
@@ -287,6 +370,11 @@ float IndustrialSite::getWater()
     return accumWater;
 }
 
+/**
+ * @brief Gets the total amount of electricity used by all buildings.
+ *
+ * @return The total electricity units.
+ */
 float IndustrialSite::getElectricity()
 {
     int accumElec = 0;
@@ -298,11 +386,21 @@ float IndustrialSite::getElectricity()
     return accumElec;
 }
 
+/**
+ * @brief Gets the number of buildings in the industrial site.
+ *
+ * @return The number of buildings.
+ */
 int IndustrialSite::getNoBuildings()
 {
     return noBuildings;
 }
 
+/**
+ * @brief Checks if the industrial site is occupied by any buildings.
+ *
+ * @return true if no buildings are occupied, false otherwise.
+ */
 bool IndustrialSite::isOccupied()
 {
     for (vector<Industrial *>::iterator it = buildings.begin(); it < buildings.end(); it++)

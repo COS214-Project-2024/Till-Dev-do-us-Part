@@ -3,10 +3,11 @@
 #include "BuildingFactory.h"
 #include "Townhouse.h"
 
-class TownhouseFactory: public BuildingFactory{
+class TownhouseFactory : public BuildingFactory
+{
 
-    public:
-        TownhouseFactory();
-        Building* build();
+public:
+    TownhouseFactory();
+    Building *build();
 };
 #endif

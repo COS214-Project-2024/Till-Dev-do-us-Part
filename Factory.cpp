@@ -1,43 +1,65 @@
 #include "Factory.h"
 
+/**
+ * @brief Constructs a Factory object with predefined area, capacity, and value.
+ */
 Factory::Factory() : Industrial("Factory")
 {
-    area = 1300;
-    capacity = 15;
-    value=50000;
+    area = 1300;   /**< Area of the factory in square units. */
+    capacity = 15; /**< Maximum number of occupants allowed in the factory. */
+    value = 50000; /**< Monetary value of the factory. */
     cout << "Factory created" << endl;
 }
 
+/**
+ * @brief Destroys the Factory object and frees resources.
+ */
 Factory::~Factory()
 {
     demolish();
     cout << "Factory demolished!" << endl;
 }
 
+/**
+ * @brief Adds an occupant (Citizen) to the factory.
+ *
+ * @param c Pointer to the Citizen to be added.
+ * @return true if the occupant was successfully added, false if the factory is at capacity or the citizen is null.
+ */
 bool Factory::addOccupant(Citizen *c)
 {
     if (c != nullptr && occupants.size() < capacity)
     {
         occupants.push_back(c);
-        cout << "Occupant added";
+        cout << "Occupant added" << endl;
         return true;
     }
 
-    cout << "Could not add occupant. Building at capacity";
+    cout << "Could not add occupant. Building at capacity" << endl;
     return false;
 }
 
-void Factory::demolish(){
+/**
+ * @brief Demolishes the factory and removes all occupants.
+ */
+void Factory::demolish()
+{
     cout << "Removing everyone from the Factory" << endl;
-    occupants.clear();
+    occupants.clear(); // Clear the occupants list
 }
 
-bool Factory::clean(){
+/**
+ * @brief Cleans the factory using specified amounts of water and electricity.
+ *
+ * @return true if the factory was successfully cleaned, false otherwise.
+ */
+bool Factory::clean()
+{
     if (this->state->canUseWater() && this->state->canUseElectricity())
     {
         if (useWater(1200) && useElectricity(700))
         {
-            cout << "Factory cleaned.";
+            cout << "Factory cleaned." << endl;
             return true;
         }
         cout << "Not enough water or electricity to clean the Factory:" << endl;
@@ -59,6 +81,11 @@ bool Factory::clean(){
     return false;
 }
 
+/**
+ * @brief Creates a clone of the factory.
+ *
+ * @return A pointer to a new Building object that is a clone of the current factory.
+ */
 Building *Factory::clone()
 {
     Factory *newFactory = new Factory();
@@ -72,6 +99,12 @@ Building *Factory::clone()
     return newFactory;
 }
 
+/**
+ * @brief Removes an occupant (Citizen) from the factory.
+ *
+ * @param c Pointer to the Citizen to be removed.
+ * @return true if the occupant was successfully removed, false if the occupant was not found.
+ */
 bool Factory::removeOccupant(Citizen *c)
 {
     vector<Citizen *>::iterator first = occupants.begin();
@@ -89,7 +122,12 @@ bool Factory::removeOccupant(Citizen *c)
     return false;
 }
 
+/**
+ * @brief Checks if the factory is occupied.
+ *
+ * @return true if there are occupants in the factory, false otherwise.
+ */
 bool Factory::isOccupied()
 {
-    return occupants.size() >0;
+    return occupants.size() > 0;
 }
