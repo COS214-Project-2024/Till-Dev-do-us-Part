@@ -1,14 +1,18 @@
 /**
  * @file SocialAffairsDept.cpp
  * @brief Implements the SocialAffairsDept class for managing citizens in a social affairs department.
- * @author Karabo
+ * 
+ * This file defines the methods for managing adult and child citizens, assigning jobs, tracking employment and housing status,
+ * and managing population growth.
+ * 
+ * Author: Karabo
  */
 
 #include <iostream>
 #include <queue>
 #include <vector>
 #include <algorithm>
-#include "Citizen.h"      
+#include "Citizen.h"
 #include "HaveChild.h"
 #include "SocialAffairsDept.h"
 
@@ -16,6 +20,8 @@ using namespace std;
 
 /**
  * @brief Constructor for the SocialAffairsDept class.
+ * 
+ * Initializes the department's budget with the provided value.
  * 
  * @param b Initial budget for the department.
  */
@@ -26,16 +32,14 @@ SocialAffairsDept::SocialAffairsDept(float b) {
 /**
  * @brief Employs a citizen from the unemployed queue.
  * 
- * This method checks if there are any unemployed citizens and assigns a job to the first one in the queue.
+ * If there are unemployed citizens, this method assigns a job to the first citizen in the queue.
  * 
  * @param job The Business instance representing the job to be assigned.
  * @return Citizen* Pointer to the employed Citizen, or nullptr if no citizens are available.
  */
 Citizen* SocialAffairsDept::employ(Business* job) {
-    // cout << "Entering employ" << endl;
-
     if (!unemployed.empty()) {
-        // cout << "Employing citizen..." << endl;
+        // Assign job to the first unemployed adult in the queue.
         Adult* employee = (Adult*)(unemployed.front());
         employee->setJob(job);
         unemployed.pop();
@@ -49,29 +53,29 @@ Citizen* SocialAffairsDept::employ(Business* job) {
 /**
  * @brief Adds a citizen to the adults vector.
  * 
- * This method stores an adult citizen in the department's records.
+ * This method stores an adult citizen in the department's records for future reference.
  * 
  * @param citizen Pointer to the Citizen instance to be added.
  */
 void SocialAffairsDept::addCitizen(Citizen* citizen) {
     adults.push_back(citizen);
-    // cout << "Added new adult to adults vector " << endl;
 }
 
 /**
  * @brief Adds a citizen to the children vector.
  * 
- * This method stores a child citizen in the department's records.
+ * This method stores a child citizen in the department's records for future reference.
  * 
  * @param citizen Pointer to the Citizen instance to be added.
  */
 void SocialAffairsDept::addChild(Citizen* citizen) {
     children.push_back(citizen);
-    // cout << "Added new child to children vector " << endl;
 }
 
 /**
  * @brief Adds a citizen to the unemployed queue.
+ * 
+ * This queue maintains a record of citizens who are currently unemployed and seeking jobs.
  * 
  * @param person Pointer to the Citizen instance to be added.
  */
@@ -79,53 +83,68 @@ void SocialAffairsDept::addToUnemployed(Citizen* person) {
     if (person == nullptr)
         cout << "PERSON IS NULL" << endl;
     unemployed.push(person);
-    // cout << "Added new adult to unemployed queue " << endl;
 }
 
 /**
- * @brief Gets the total number of citizens (adults + children).
+ * @brief Gets the total number of citizens (adults only).
  * 
- * @return int Total number of citizens in the department.
+ * @return int Total number of adult citizens in the department.
  */
 int SocialAffairsDept::getNumCitizens() {
-    return (adults.size());
+    return adults.size();
 }
 
+/**
+ * @brief Gets the total number of children in the department.
+ * 
+ * @return int Number of child citizens in the department.
+ */
 int SocialAffairsDept::getNumChildren() {
-    return (children.size());
+    return children.size();
 }
 
-
-int SocialAffairsDept::getNumUnemployed(){
+/**
+ * @brief Gets the number of unemployed citizens.
+ * 
+ * @return int Number of citizens in the unemployed queue.
+ */
+int SocialAffairsDept::getNumUnemployed() {
     return unemployed.size();
 }
 
-int SocialAffairsDept::getHomeless(){
-
-    int num=0;
+/**
+ * @brief Gets the count of homeless adults.
+ * 
+ * @return int Number of adults without assigned housing.
+ */
+int SocialAffairsDept::getHomeless() {
+    int num = 0;
 
     for (auto adult : adults) {
-        if(!((Adult*)adult)->hasHouse())
+        if (!((Adult*)adult)->hasHouse())
             num++;
     }
 
     return num;
 }
 
-void SocialAffairsDept::sendAdultsToWork(){
-
+/**
+ * @brief Sends employed adults to work.
+ * 
+ * This method iterates through the adults vector and invokes the goToWork method for each employed citizen.
+ */
+void SocialAffairsDept::sendAdultsToWork() {
     cout << "Citizens going to work." << endl;
     for (auto adult : adults) {
-        if(((Adult*)adult)->employmentStatus())
+        if (((Adult*)adult)->employmentStatus())
             ((Adult*)adult)->goToWork();
     }
 }
 
-
 /**
  * @brief Increases the population by creating new adult and child citizens.
  * 
- * This method generates new adults and pairs them with parents to create children.
+ * This method creates new adult citizens and assigns parents to children. It pairs adults with the potential to have children.
  * 
  * @param n The number of adults to be added to the population.
  */
@@ -141,12 +160,12 @@ void SocialAffairsDept::growPopulation(int n) {
     delete factory;
 
     factory = new MinorPop();
-
     int num = 0;
     auto it = adults.begin();
 
+    // Iterate through the adults and pair some with children
     for (int i = 0; it != adults.end(); ++it, i += 2) {
-        if ((i % 3) != 0)
+        if ((i % 3) != 0)  // Conditional pairing for varied family sizes
             continue;
 
         num++;
@@ -161,46 +180,49 @@ void SocialAffairsDept::growPopulation(int n) {
     cout << "Increased current population by 10 adults and " << num << " kids" << endl;
 }
 
-int SocialAffairsDept::getSatisfactionLevel(){
-
-    int N,C,D;
+/**
+ * @brief Calculates the satisfaction level of the citizens.
+ * 
+ * Satisfaction is derived from the feelings of the citizens and expressed as a percentage.
+ * 
+ * @return int Satisfaction level in percentage.
+ */
+int SocialAffairsDept::getSatisfactionLevel() {
+    int N = 0, C = 0, D = 0;
 
     for (auto adult : adults) {
-        if(((Citizen*)adult)->getFeeling() == "Content")
-            C++;
-        if(((Citizen*)adult)->getFeeling() == "Distraught")
-            D++;
-        if(((Citizen*)adult)->getFeeling() == "Distraught"){
-            N++;
-        }
+        string feeling = ((Citizen*)adult)->getFeeling();
+        if (feeling == "Content") C++;
+        if (feeling == "Distraught") D++;
+        if (feeling == "Neutral") N++;
     }
 
-    return ((C/(C+N+D))*100);
+    return ((C * 100) / (C + N + D));
 }
 
 /**
  * @brief Destructor for the SocialAffairsDept class.
  * 
- * Cleans up resources by deleting all citizens and clearing the department's records.
+ * Cleans up resources by deleting all citizens and clearing the department's records, ensuring no memory leaks.
  */
 SocialAffairsDept::~SocialAffairsDept() {
     while (!unemployed.empty()) {
         Citizen* employee = unemployed.front();
-        employee = nullptr;  
-        unemployed.pop();  
+        employee = nullptr;
+        unemployed.pop();
     }
 
     for (auto adult : adults) {
         delete adult;
-        adult = nullptr;  
+        adult = nullptr;
     }
 
     for (auto child : children) {
         delete child;
-        child = nullptr;  
+        child = nullptr;
     }
 
     adults.clear();
-    children.clear();  
+    children.clear();
     factory = nullptr;
 }
