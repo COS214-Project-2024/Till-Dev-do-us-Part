@@ -4,7 +4,7 @@ Hospital::Hospital():Public("Hospital"){
     area = 3000;
     capacity = 20;
     value=100000;
-    cout << "Hospital created" << endl;
+    // cout << "Hospital created" << endl;
 }
 
 Hospital::~Hospital(){

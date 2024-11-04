@@ -1,32 +1,23 @@
-main:
-	g++ -g -std=c++0x *.cpp -o main
+run: main
+		./main
+		make c
 
-run:
-	./main
+main: *.o
+		g++ -std=c++11 -o main *.o
 
-clean:
-	rm main
+*.o: *.cpp
+		g++ -std=c++11 -c -w *.cpp
 
-all:
-	make -s && make run -s
+debugcpp: debugo
+		g++ -std=c++11 -ggdb3 -o main *.o
 
-# CXX := g++
-# CXXFLAGS := -g -std=c++11 -Wall -pedantic
-# INCLUDE_PATH := include
-# SOURCES := $(wildcard src/*.cpp)
-# OBJECTS := $(SOURCES:.cpp=.o)
-# MAIN := Testingmain.cpp
+debugo: *.cpp
+		g++ -std=c++11 -ggdb3 -c -w *.cpp
 
-# .PHONY: all run clean
+c:
+		rm *.o main
 
-# all: $(OBJECTS)
-# 	$(CXX) $^ -o main
-
-# %.o: %.cpp
-# 	$(CXX) $(CXXFLAGS) -I$(INCLUDE_PATH) -c $< -o $@
-
-# run:
-# 	./main
-
-# clean:
-# 	rm -f *.o main
+v: 
+		make debugcpp
+		valgrind --tool=memcheck --leak-check=yes --track-origins=yes --log-file=valg.txt ./main
+		make c

@@ -137,12 +137,12 @@ bool Suburb::addBuilding(Residential *building)
                 waterUnits += building->getWater();
                 electricityUnits += building->getElectricity();
                 cleanliness = (cleanliness + building->getCleanliness()) / noBuildings;
-                cout << "Building added to the Suburb" << endl;
+                // cout << "Building added to the Suburb" << endl;
                 return true;
             }
             else
             {
-                cout << "Building could not be added to the Suburb" << endl;
+                // cout << "Building could not be added to the Suburb" << endl;
                 return false;
             }
         }

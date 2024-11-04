@@ -81,11 +81,11 @@ void DemoMain()
 
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "Appearance of the first 150 citizens" << endl;
+    cout << "Appearance of the first 150 citizens..." << endl;
 
     cout << "===========================================================================================================================================================================" << endl;
     
-    cout << "Creating Goverment and its Departments:" << endl;
+    cout << "Creating Goverment and its Departments..." << endl;
     governmentObjects();
 
     citizenObjects();
@@ -101,17 +101,17 @@ void DemoMain()
 
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "Gathering resources and creating Utility plants..." << endl;
-    utilResourceObjects();
+    cout << "Gathering resources and creating utility plants..." << endl;
+    // utilResourceObjects();
 
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "Setting up tax collection via the WiseBucksApp" << endl;
+    cout << "Setting up tax collection via the WiseBucksApp..." << endl;
     financeObjects();
 
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "Building parks, monuments and cultural centers" << endl;
+    cout << "Building parks, monuments and cultural centers..." << endl;
     buildingObjects();
 
     cout << "===========================================================================================================================================================================" << endl;
@@ -121,7 +121,7 @@ void DemoMain()
 
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "Setting up healthcare facilities" << endl;
+    cout << "Setting up healthcare facilities..." << endl;
     healthcareObjects();
 
     cout << "===========================================================================================================================================================================" << endl;
@@ -296,7 +296,6 @@ void simulation()
 
         for (int month = 1; month <= 12; ++month)
         {
-
             std::cout << endl;
 
             // Determine the season based on the month
@@ -304,12 +303,13 @@ void simulation()
             {
                 if (currentSeason != "Spring")
                 {
-
                     cout << "===========================================================================================================================================================================" << endl;
-                    autumn();
-                    cout << endl;
+                    cout << "Autumn has arrived! " << endl << endl;
                     currentSeason = "Spring";
                 }
+                cout << monthsOfTheYear[month] << "\n" << endl;
+                autumn();
+                cout << endl;
             }
             else if (month >= 6 && month <= 8)
             {
@@ -317,10 +317,12 @@ void simulation()
                 {
 
                     cout << "===========================================================================================================================================================================" << endl;
-                    winter();
-                    std::cout << endl;
+                    cout << "Winter has arrived! " << endl << endl;
                     currentSeason = "Summer";
                 }
+                cout << monthsOfTheYear[month] << "\n" << endl;
+                winter();
+                std::cout << endl;
             }
             else if (month >= 9 && month <= 11)
             {
@@ -328,10 +330,12 @@ void simulation()
                 {
 
                     cout << "===========================================================================================================================================================================" << endl;
-                    spring();
-                    std::cout << endl;
+                    cout << "Spring has arrived! " << endl << endl;
                     currentSeason = "Autumn";
                 }
+                cout << monthsOfTheYear[month] << "\n" << endl;
+                spring();
+                std::cout << endl;
             }
             else
             {
@@ -342,15 +346,16 @@ void simulation()
                     cout << "Summer has arrived!" << endl;
                     if (monthsOfTheYear[month] == "December")
                     {
-                        cout << "...Again!";
+                        cout << "...Again!" << endl;
                     }
                     cout << endl;
-                    summer();
                     currentSeason = "Winter";
                 }
+                cout << monthsOfTheYear[month] << "\n" << endl;
+                summer();
+                cout << endl; 
             }
 
-            cout << monthsOfTheYear[month] << "\n";
             cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
             this_thread::sleep_for(chrono::milliseconds(5000));
         }
@@ -360,28 +365,21 @@ void simulation()
 void summer()
 {
     performDailyActivities();
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     performDailyActivities();
-    // }
 }
 
 void autumn()
 {
-    cout << "Autumn has arrived! " << endl << endl;
     performDailyActivities();
 }
 
 void winter()
 {
-    cout << "Winter has arrived! " << endl;
     performDailyActivities();
     // unleashDisease();
 }
 
 void spring()
 {
-    cout << "Spring has arrived! " << endl;
     performDailyActivities();
     ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->growPopulation(100);
 }

@@ -158,7 +158,8 @@ bool ResourceDepartment::processResourceRequest(string utiName, float amount)
                 }
                 else
                 {
-                    prodUtility->startProduction(); // Restart production if insufficient
+                    prodUtility->incrementRequestCounter(); 
+                    // prodUtility->startProduction(); // Restart production if insufficient
                     std::cout << utiName << " production restarted due to insufficient resources." << std::endl;
                 }
             }
