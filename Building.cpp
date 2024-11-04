@@ -92,3 +92,7 @@ float Building::getCleanliness()
 {
     return cleanliness;
 }
+
+void Building::addResourceDept(ResourceDepartment* r) {
+    this->resourceDept = r; // Assign the resource department to this building
+}
