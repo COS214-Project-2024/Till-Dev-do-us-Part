@@ -2,17 +2,7 @@
 
 Warehouse::Warehouse() : Industrial("Warehouse")
 {
-    area = 1000;
-    capacity = 15;
-    value=30000;
     cout << "Warehouse created!"  << endl;
-}
-
-Warehouse::~Warehouse()
-{
-
-    demolish();
-    cout << "Warehouse demolished!" << endl;
 }
 
 bool Warehouse::addOccupant(Citizen *c)
@@ -48,51 +38,14 @@ bool Warehouse::clean(){
         cout << "Required electricity to clean: 300" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        if (requestElectricity(300) && requestWater(500))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     cout << "Warehouse is in " << this->state->getName() << " and cannot be cleaned" << endl;
     return false;
 }
 
-Building *Warehouse::clone()
-{
-    Warehouse *newWarehouse = new Warehouse();
-    newWarehouse->cleanliness = this->cleanliness;
-    newWarehouse->electricityUnits = this->electricityUnits;
-    newWarehouse->waterUnits = this->waterUnits;
-    newWarehouse->value = this->value;
-    newWarehouse->area = this->area;
-    newWarehouse->capacity = this->capacity;
-
-    return newWarehouse;
-}
-
-bool Warehouse::removeOccupant(Citizen *c)
-{
-    vector<Citizen *>::iterator first = occupants.begin();
-    vector<Citizen *>::iterator last = occupants.end();
-
-    vector<Citizen *>::iterator it = find(first, last, c);
-    if (it != last)
-    {
-        occupants.erase(it);
-        cout << "Occupant removed from the Warehouse" << endl;
-        return true;
-    }
-
-    cout << "Occupant not in the Warehouse" << endl;
-    return false;
-}
-
-bool Warehouse::isOccupied()
-{
-    return occupants.size() > 0;
+Warehouse::~Warehouse(){
+    demolish();
+    cout << "Warehouse demolished!" << endl;
 }

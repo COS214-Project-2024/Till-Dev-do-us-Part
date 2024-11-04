@@ -1,4 +1,3 @@
-
 #ifndef PARK_H
 #define PARK_H
 #include "Landmark.h"
@@ -8,11 +7,8 @@ class Park : public Landmark
 {
     public:
         Park();
-        ~Park();
-        virtual bool addOccupant(Citizen *c);
-        virtual void demolish();
-        virtual bool clean();
-        virtual bool removeOccupant(Citizen *c);
-        virtual Building *clone();
+        // virtual void demolish();
+        virtual bool clean() = 0; // inherited from Building, hence this class is abstract
+        // virtual bool addOccupant(Citizen *c) = 0;
 };
 #endif

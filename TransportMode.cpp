@@ -11,7 +11,7 @@ TransportMode::~TransportMode(){
     transDept = nullptr;
 
     for (auto obi : observers) {
-     
+        //delete obi;
     }
     observers.clear();
 }

@@ -2,19 +2,16 @@
 
 Shop::Shop():Commercial("Shop"){
     area = 200;
-    value = 180000;
-    capacity = 1;
-    occupant= nullptr;
+    value = 300000;
+    floor = 1;
 }
 
 Shop::~Shop(){
-    demolish();
-    cout << "Shop demolished!" << endl;
+    occupants.clear();
 }
 
 void Shop::demolish(){
-    cout << "Removing occupant from the Office" << endl;
-    occupant = nullptr;
+    //want it to call the destructor
 }
 
 bool Shop::clean()
@@ -24,20 +21,6 @@ bool Shop::clean()
         if (useWater(350) && useElectricity(300))
         {
             cout << "Shop cleaned.";
-            if (cleanliness - 10 <= 0)
-            {
-                cleanliness = 0;
-                delete this->state;
-                this->state = new DilapidatedState();
-                cout << "Shop is now in Dilapidated state:\n";
-                cout << "Cleanliness: " << cleanliness << "\n";
-                cout << "Electricity: " << electricityUnits << "\n";
-                cout << "Water: " << waterUnits << "\n";
-            }
-            else
-            {
-                cleanliness -= 10;
-            }
             return true;
         }
         cout << "Not enough water or electricity to clean the Shop:" << endl;
@@ -45,15 +28,7 @@ bool Shop::clean()
         cout << "Required electricity to clean: 300" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-
-        if (requestElectricity(300) && requestWater(350))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     cout << "Shop is in " << this->state->getName() << " and cannot be cleaned" << endl;
@@ -61,61 +36,21 @@ bool Shop::clean()
 }
 
 bool Shop::addOccupant(Citizen *c){
-    if (c != nullptr)
+    if (c != nullptr && occupants.size() < capacity)
     {
-        if(occupant == nullptr){
-            occupant = c;
-            cout << "Occupant added to the Shop!"<< endl;
-            return true;
-        }
-        else{
-            cout << "The Shop already has an occupant." << endl;
-            return false;
-        }
+        occupants.push_back(c);
+        return true;
     }
 
-    cout << "Cannot add a non-existent citizen to Shop" << endl;
-    return false;
-}
-
-bool Shop::removeOccupant(Citizen *c){
-    if(c!=nullptr){
-        if(occupant == nullptr){
-            cout << "Shop has no occupant" << endl;
-            return true;
-        }
-        else{
-            if(occupant == c){
-                occupant = nullptr;
-                cout << "Occupant removed!" << endl;
-                return true;
-            }
-            else{
-                cout << "Occupant not found." << endl;
-                return false;
-            }
-        }
-    }
-
-    cout << "Cannot remove a non-existent citizen from Shop" << endl;
     return false;
 }
 
 Building *Shop::clone()
 {
     Shop *newBuilding = new Shop();
-    newBuilding->state = this->state->clone();
-    newBuilding->cleanliness = this->cleanliness;
     newBuilding->electricityUnits = this->electricityUnits;
     newBuilding->waterUnits = this->waterUnits;
-    newBuilding->value = this->value;
-    newBuilding->area = this->area;    
     newBuilding->capacity = this->capacity;
 
     return newBuilding;
-}
-
-bool Shop::isOccupied()
-{
-    return occupant != nullptr;
 }

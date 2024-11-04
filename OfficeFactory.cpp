@@ -7,5 +7,8 @@ OfficeFactory:: OfficeFactory()
 
 Building* OfficeFactory:: build()
 {
-    return building-> clone();
+    if (building!=nullptr){
+        return building-> clone();
+
+    }
 }

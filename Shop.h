@@ -5,7 +5,7 @@
 class Shop : public Commercial
 {
     private:
-        Citizen * occupant;
+        Citizen * occupants;
 
     public:
         Shop();
@@ -13,8 +13,6 @@ class Shop : public Commercial
         virtual void demolish();
         virtual bool clean();
         virtual bool addOccupant(Citizen *c);
-        virtual bool removeOccupant(Citizen *c);
         virtual Building* clone();
-        virtual bool isOccupied();
 };
 #endif

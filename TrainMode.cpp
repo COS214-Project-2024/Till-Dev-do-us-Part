@@ -16,7 +16,7 @@ void TrainMode::drive() {
 
     // Use QueueIterator for forward traversal
     QueueIterator queueIt(this);
-    int x = 1;
+    int x = getStops().size();
     while (queueIt.hasNext()) {
         auto current = queueIt.currItem();
         std::cout << "Arriving at stop " << x++ << std::endl;
