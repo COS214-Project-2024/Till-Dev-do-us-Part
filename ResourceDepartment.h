@@ -1,28 +1,35 @@
+/**
+ * @file ResourceDepartment.h
+ * @brief Defines the ResourceDepartment class responsible for managing resources and utilities in the simulation.
+ */
+
 #ifndef RESOURCEDEPARTMENT_H
 #define RESOURCEDEPARTMENT_H
 
 #include <iostream>
 #include <vector>
 #include "Resources.h"
-#include "Utility.h"
+#include "ProductionUtility.h"
 #include "Department.h"
 
+class Utility;  // Forward declaration
 
-class Utility;
-
-class ResourceDepartment: public Department
+/**
+ * @class ResourceDepartment
+ * @brief Manages resources and utilities within the city simulation.
+ */
+class ResourceDepartment : public Department
 {
 private:
     std::vector<Resources *> resources; // List of managed resources
-    std::vector<Utility *> utilities;  // List of registered utilities
-      int totalEnergyDemand;
-      int totalWaterDemand;
-
+    std::vector<Utility *> utilities;   // List of registered utilities
+    float budget;                       // Budget for the department
 
 public:
-    // Constructor and Destructor
-    ResourceDepartment() = default;
-    ~ResourceDepartment();
+    // Constructors and Destructor
+    ResourceDepartment() = default; // Default constructor
+    ResourceDepartment(float budget); // Constructor with budget
+    ~ResourceDepartment(); // Destructor
 
     // Resource Management
     void addResource(Resources *resource);
@@ -40,9 +47,8 @@ public:
     // Check total resource levels
     void checkResourceLevels();
 
-    ResourceDepartment(float budget);
-
-    bool processResourceRequest(string utiName,float amount);
+    // Process resource requests from utilities
+    bool processResourceRequest(std::string utiName, float amount);
 };
 
 #endif // RESOURCEDEPARTMENT_H
