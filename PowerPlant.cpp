@@ -13,8 +13,8 @@
  * @param resource Pointer to the Energy resource
  * @param numworkers Number of workers for the power plant
  */
-PowerPlant::PowerPlant(std::string name, ResourceDepartment *department, Energy *resource, int numworkers)
-    : ProductionUtility(name, department, resource, numworkers)
+PowerPlant::PowerPlant(std::string name, ResourceDepartment *department, Energy *resource, int numworkers,WiseBucks* app)
+    : ProductionUtility(name, department, resource, numworkers,app)
 {
     productionCapacity = 5000;
     currentProduction = 0;

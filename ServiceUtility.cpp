@@ -10,8 +10,8 @@
  * @param name Name of the service utility
  * @param resDept Pointer to the Resource Department
  */
-ServiceUtility::ServiceUtility(std::string name, ResourceDepartment *resDept)
-    : Utility(name, resDept, resource, MaxWorkers), serviceCapacity(0), currentServiceLevel(0), servState(nullptr) {}
+ServiceUtility::ServiceUtility(std::string name, ResourceDepartment *resDept,WiseBucks* app)
+    : Utility(name, resDept, resource, MaxWorkers,app), serviceCapacity(0), currentServiceLevel(0), servState(nullptr) {}
 
 /**
  * @brief Default destructor for ServiceUtility.

@@ -14,8 +14,8 @@
  * @param resource Pointer to the resources used by the utility
  * @param MaxWorkers Maximum number of workers allowed
  */
-ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int MaxWorkers)
-    : Utility(name, resDept, resource, MaxWorkers), currentProduction(0), proState(nullptr)
+ProductionUtility::ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int MaxWorkers, WiseBucks *app)
+    : Utility(name, resDept, resource, MaxWorkers, app), currentProduction(0), proState(nullptr)
 {
 }
 
@@ -107,7 +107,7 @@ void ProductionUtility::checkForBreakdowns()
 
     // Randomly decide if a breakdown occurs (e.g., 10% chance)
     int chance = rand() % 100; // Generates a number between 0 and 99
-    if (chance < 10) // 10% chance of breakdown
+    if (chance < 10)           // 10% chance of breakdown
     {
         std::cout << name << " has broken down and is entering Maintenance State." << std::endl;
 
@@ -134,11 +134,18 @@ std::string ProductionUtility::getType() const
  */
 void ProductionUtility::incrementRequestCounter()
 {
+
     requestCounter++;
-    if (requestCounter >= 50)
+    if (requestCounter % 5 == 0)
     {
-        requestCounter = 0; // Reset counter
-        std::cout << "\n=== Utility Status Report ===" << std::endl;
+
+        std::cout << "\nReport " << requestCounter << std::endl;
         getStatus();
     }
+}
+
+void ProductionUtility::resetRequestCounter()
+{
+
+    requestCounter = 0;
 }

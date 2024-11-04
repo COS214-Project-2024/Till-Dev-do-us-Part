@@ -11,8 +11,8 @@
  * @param name Name of the sewage system
  * @param department Pointer to the Resource Department
  */
-SewageSystem::SewageSystem(std::string name, ResourceDepartment *department)
-    : ServiceUtility(name, department)
+SewageSystem::SewageSystem(std::string name, ResourceDepartment *department,WiseBucks* app)
+    : ServiceUtility(name, department,app)
 {
     std::cout << "Constructor of SewageSystem called" << std::endl;
     setServState(new OperationalServiceState); // Set the initial service state to operational

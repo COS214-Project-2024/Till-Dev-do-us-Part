@@ -35,7 +35,7 @@ public:
      * @param resource Pointer to the resources used by the utility
      * @param maxWorkers Maximum number of workers allowed
      */
-    ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int maxWorkers);
+    ProductionUtility(std::string name, ResourceDepartment *resDept, Resources *resource, int maxWorkers,WiseBucks* app);
 
     /**
      * @brief Default destructor for ProductionUtility.
@@ -120,6 +120,7 @@ public:
      * @brief Increments the request counter.
      */
     void incrementRequestCounter();
+    void resetRequestCounter();
 };
 
 #endif // PRODUCTIONUTILITY_H

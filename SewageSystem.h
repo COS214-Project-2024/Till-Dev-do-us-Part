@@ -19,7 +19,7 @@ public:
      * @param name Name of the sewage system
      * @param department Pointer to the Resource Department
      */
-    SewageSystem(std::string name, ResourceDepartment* department);
+    SewageSystem(std::string name, ResourceDepartment* department,WiseBucks* app);
 
     /**
      * @brief Default destructor for SewageSystem.
