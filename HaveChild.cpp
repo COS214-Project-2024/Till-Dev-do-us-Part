@@ -25,6 +25,27 @@ void HaveChild::haveChild(Citizen* baby) {
     this->child = baby; // Assigns the child to this instance.
 }
 
+
+/**
+ * @brief Checks if the adult Citizen has a child.
+ * 
+ * @return bool Always returns true, indicating that this class represents a Citizen capable of having children.
+ */
+bool HaveChild::hasChild() {
+    return true; // Indicates that this Citizen has a child.
+}
+
+
+/**
+ * @brief Perform added adult responsibility
+ * 
+ */
+
+void HaveChild::takeCare(){
+    if(child)
+        ((Minor*)child)->goToSchool();
+}
+
 /**
  * @brief Destructor for the HaveChild class.
  * 
@@ -35,11 +56,3 @@ HaveChild::~HaveChild() {
     person = nullptr; // Sets the pointer to nullptr for safety.
 }
 
-/**
- * @brief Checks if the adult Citizen has a child.
- * 
- * @return bool Always returns true, indicating that this class represents a Citizen capable of having children.
- */
-bool HaveChild::hasChild() {
-    return true; // Indicates that this Citizen has a child.
-}

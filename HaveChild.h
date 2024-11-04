@@ -44,6 +44,13 @@ public:
      */
     virtual bool hasChild();
 
+
+    /**
+     * @brief Perform added adult responsibility
+     * 
+     */
+    void takeCare();
+
     /**
      * @brief Destructor for the HaveChild class.
      * 
