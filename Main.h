@@ -12,7 +12,7 @@
     #include "DevelopmentDept.h"
     #include "FinanceDept.h"
     #include "HealthDept.h"
-    #include "ResourcesDept.h"
+   
     #include "SocialAffairsDept.h"
 #include "Government.h"
 #include "HealthcareFacility.h"
