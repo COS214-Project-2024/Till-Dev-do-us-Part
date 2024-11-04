@@ -523,6 +523,7 @@ TEST_SUITE("Resource Management System Tests") {
             CHECK(water->getState() == "Surplus State");
         }
         
+        
         delete water;
     }
 }
