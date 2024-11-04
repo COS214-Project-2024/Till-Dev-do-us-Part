@@ -35,7 +35,7 @@ bool Estate::addHouse(Residential *building)
                 return true;
             }
             else{
-                cout << "Building could not be added to the Estate" << endl;
+                // cout << "Building could not be added to the Estate" << endl;
                 return false;
             }
         }

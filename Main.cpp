@@ -15,6 +15,7 @@ TaxCalculator *taxes[6];
 WiseBucks *apps[6];
 Business *first8Businesses[8];
 Citizen **first100;
+Citizen **morePeople;
 
 // Add funtion in goverment to get overall status of the city. MyCityStatus();
 void DemoMain();
@@ -77,7 +78,7 @@ void DemoMain()
     // cout << "  WELCOME TO THE GREATEST CITY IN 214" << endl;
     // cout << "~ created by TDP - Till Dev do us Part ~" << endl;
 
-    // displayIntro();
+    displayIntro();
 
     cout << "===========================================================================================================================================================================" << endl;
 
@@ -89,15 +90,35 @@ void DemoMain()
     governmentObjects();
 
     citizenObjects();
-    first100 = AdultFactory->reproduce(150);
+    first100 = AdultFactory->reproduce(50);
+
+    for (int i = 0; i < 50; i++)
     {
-        for (int i = 0; i < 150; i++)
+        ((Adult *)first100[i])->setHouse(((DevelopmentDept *)(Gov->getDepartment("Development")))->build("House"));
+        ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(first100[i]);
+        ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(first100[i]);
+    }
+
+    morePeople = AdultFactory->reproduce(200);
+
+    for (int j = 0; j < 50; j++){
+
+        Building* h = ((Adult*)first100[j])->getHouse();
+        int num = 0;
+
+        for (int i = 0; i < 200; i++)
         {
-            ((Adult *)first100[i])->setHouse(((DevelopmentDept *)(Gov->getDepartment("Development")))->build("House"));
-            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(first100[i]);
-            ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(first100[i]);
+            if(num<5 && !((Adult*)morePeople[i])->hasHouse()){
+                ((Adult*)morePeople[i])->setHouse(h);
+                h->addOccupant(morePeople[i]);
+                num++;
+            }
+            else
+                continue;
         }
     }
+
+    simulation(); 
 
     cout << "===========================================================================================================================================================================" << endl;
 
@@ -132,7 +153,6 @@ void DemoMain()
     cout << "===========================================================================================================================================================================" << endl;
     
     // Season and day simulation
-    simulation(); 
 
     cout << "===========================================================================================================================================================================" << endl;
 
@@ -200,10 +220,10 @@ void utilResourceObjects()
     SewerSystem = new SewageSystem("CitySewage", static_cast<ResourceDepartment *>(ResourceDept), apps[4]);
     cout << endl; 
 
-    ((ResourceDepartment *)ResourceDept)->addUtility(powerPlant);
-    ((ResourceDepartment *)ResourceDept)->addUtility(waterSupply);
-    ((ResourceDepartment *)ResourceDept)->addUtility(wasteManagement);
-    ((ResourceDepartment *)ResourceDept)->addUtility(SewerSystem);
+    // ((ResourceDepartment *)ResourceDept)->addUtility(powerPlant);
+    // ((ResourceDepartment *)ResourceDept)->addUtility(waterSupply);
+    // ((ResourceDepartment *)ResourceDept)->addUtility(wasteManagement);
+    // ((ResourceDepartment *)ResourceDept)->addUtility(SewerSystem);
 }
 
 void buildingObjects()
@@ -364,6 +384,8 @@ void simulation()
 
 void summer()
 {
+    cout << "Summer has arrived! " << endl << endl;
+
     performDailyActivities();
 }
 

@@ -204,7 +204,7 @@ bool CBD::addBuilding(Building *building)
             }
             else
             {
-                cout << "Building could not be added to the CBD" << endl;
+                // cout << "Building could not be added to the CBD" << endl;
                 return false;
             }
         }

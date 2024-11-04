@@ -198,7 +198,7 @@ bool IndustrialSite::addBuilding(Industrial *building)
             }
             else
             {
-                cout << "Building could not be added to the Industrial Site" << endl;
+                // cout << "Building could not be added to the Industrial Site" << endl;
                 return false;
             }
         }
