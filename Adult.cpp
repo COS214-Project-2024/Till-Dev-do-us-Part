@@ -151,20 +151,20 @@ Building* Adult::getHouse() {
  * @note The method is currently a stub and requires implementation for transport to work.
  */
 void Adult::goToWork() {
-    // if (house) {
-    //     if (!((House*)house)->useShower()) {
-    //         house->requestWater(1000);
-    //         house->requestElectricity(1000);
-    //     }
-    //     if (!((House*)house)->useToilet()) {
-    //         house->requestWater(1000);
-    //         house->requestElectricity(1000);
-    //     }
-    //     if (!((House*)house)->useStove()) {
-    //         house->requestElectricity(1000);
-    //     }
-    // } else {
-    //     std::cout << "Person cannot prepare to go to work." << std::endl;
-    // }
+    if (house) {
+        if (!((House*)house)->useShower()) {
+            house->requestWater(1000);
+            house->requestElectricity(1000);
+        }
+        if (!((House*)house)->useToilet()) {
+            house->requestWater(1000);
+            house->requestElectricity(1000);
+        }
+        if (!((House*)house)->useStove()) {
+            house->requestElectricity(1000);
+        }
+    } else {
+        std::cout << "Person cannot prepare to go to work." << std::endl;
+    }
     // Transport to work will be implemented here in future versions
 }
