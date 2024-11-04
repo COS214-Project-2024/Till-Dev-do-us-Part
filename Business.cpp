@@ -224,7 +224,7 @@ void Business::handleAccounts()
     } 
     else 
     {
-        cout << "WiseBucks App has not been linked for " << name << endl; 
+        // cout << "WiseBucks App has not been linked for " << name << endl; 
     }
 }
 
