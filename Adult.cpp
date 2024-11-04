@@ -168,3 +168,20 @@ void Adult::goToWork() {
     }
     // Transport to work will be implemented here in future versions
 }
+
+/**
+ * @brief Deducts a specified amount from the current balance or budget.
+ * 
+ * This function reduces the adults's available funds by the provided amount.
+ * 
+ * @param amount The amount to be deducted.
+ */
+void Adult::spendMoney(float amount)
+{
+    if (amount > balance)
+    {
+        cout << "Citizen does not have enough money to spend" << endl;
+        return; 
+    }
+    balance -= amount; 
+}

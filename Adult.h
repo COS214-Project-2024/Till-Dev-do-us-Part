@@ -118,6 +118,15 @@ public:
     virtual void setHouse(Building* h);
 
     /**
+     * @brief Deducts a specified amount from the current balance or budget.
+     * 
+     * This function reduces the adult's available funds by the provided amount.
+     * 
+     * @param amount The amount to be deducted.
+     */
+    virtual void spendMoney(float amount); 
+
+    /**
      * @brief Destructor for the Adult class.
      * 
      * Frees any dynamically allocated resources (if any) upon deletion of an Adult instance.
