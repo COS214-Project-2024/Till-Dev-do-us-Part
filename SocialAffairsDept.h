@@ -73,7 +73,11 @@ public:
      */
     int getNumCitizens();
 
+    int getNumChildren();
+
     int getNumUnemployed();
+
+    int getHomeless();
 
     int getSatisfactionLevel();
 

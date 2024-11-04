@@ -129,6 +129,7 @@ void DemoMain()
     createBusinesses(); 
 
     cout << "===========================================================================================================================================================================" << endl;
+    
     // Season and day simulation
     simulation(); 
 
@@ -184,13 +185,13 @@ void utilResourceObjects()
     EnergyResource = new Energy();
     WaterResource = new Water();
 
-    powerPlant = new PowerPlant("CityPower", static_cast<ResourceDepartment *>(ResourceDept), static_cast<Energy *>(EnergyResource), 20);
+    powerPlant = new PowerPlant("CityPower", static_cast<ResourceDepartment *>(ResourceDept), static_cast<Energy *>(EnergyResource), 20, apps[4]);
     cout << endl; 
-    waterSupply = new WaterSupply("CityWater", static_cast<ResourceDepartment *>(ResourceDept), static_cast<Water *>(WaterResource), 20);
+    waterSupply = new WaterSupply("CityWater", static_cast<ResourceDepartment *>(ResourceDept), static_cast<Water *>(WaterResource), 20, apps[4]);
     cout << endl; 
-    wasteManagement = new WasteManagement("CityWaste", static_cast<ResourceDepartment *>(ResourceDept));
+    wasteManagement = new WasteManagement("CityWaste", static_cast<ResourceDepartment *>(ResourceDept), apps[4]);
     cout << endl; 
-    SewerSystem = new SewageSystem("CitySewage", static_cast<ResourceDepartment *>(ResourceDept));
+    SewerSystem = new SewageSystem("CitySewage", static_cast<ResourceDepartment *>(ResourceDept), apps[4]);
     cout << endl; 
 
     ((ResourceDepartment *)ResourceDept)->addUtility(powerPlant);
@@ -347,10 +348,11 @@ void simulation()
 
 void summer()
 {
-    for (int i = 0; i < 10; i++)
-    {
-        performDailyActivities();
-    }
+    performDailyActivities();
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     performDailyActivities();
+    // }
 }
 
 void autumn()

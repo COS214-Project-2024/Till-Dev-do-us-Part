@@ -18,6 +18,7 @@ Adult::Adult(){
     health = 100;
     netWorth = 0;
     job = nullptr;
+    house = nullptr;
 }
 
 void Adult::react() {
@@ -52,18 +53,37 @@ void Adult::setHouse(Building* h){
     house->addOccupant(this);
 }
 
+bool Adult::hasHouse(){
+    return(house!=nullptr);
+}
+
+Building* Adult::getHouse(){
+    if(house)
+        return house;
+    else
+        cout << "No house allocated" << endl;
+}
+
 void Adult::goToWork(){
-    if(!((House*)house)->useShower()){
+
+    if(house){
+
+        if(!((House*)house)->useShower()){
         house->requestWater(1000);
         house->requestElectricity(1000);
+        }
+        if(!((House*)house)->useToilet()){
+            house->requestWater(1000);
+            house->requestElectricity(1000);
+        }
+        if(!((House*)house)->useStove()){
+            house->requestElectricity(1000);
+        }
     }
-    if(!((House*)house)->useToilet()){
-        house->requestWater(1000);
-        house->requestElectricity(1000);
+    else{
+        cout<<"Person cannot prepare to go to work." << endl;
     }
-    if(!((House*)house)->useStove()){
-        house->requestElectricity(1000);
-    }
+    
     
     //Need to use transport here
 

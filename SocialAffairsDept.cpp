@@ -88,12 +88,28 @@ void SocialAffairsDept::addToUnemployed(Citizen* person) {
  * @return int Total number of citizens in the department.
  */
 int SocialAffairsDept::getNumCitizens() {
-    return (adults.size() + children.size());
+    return (adults.size());
+}
+
+int SocialAffairsDept::getNumChildren() {
+    return (children.size());
 }
 
 
 int SocialAffairsDept::getNumUnemployed(){
     return unemployed.size();
+}
+
+int SocialAffairsDept::getHomeless(){
+
+    int num=0;
+
+    for (auto adult : adults) {
+        if(!((Adult*)adult)->hasHouse())
+            num++;
+    }
+
+    return num;
 }
 
 void SocialAffairsDept::sendAdultsToWork(){
