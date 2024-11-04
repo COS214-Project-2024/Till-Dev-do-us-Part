@@ -27,7 +27,7 @@ void TrainMode::drive() {
 
     // Use StackIterator for reverse traversal
     StackIterator stackIt(this);
-    x = 1; // Reset x for reverse traversal
+    x = getStops().size();// Reset x for reverse traversal
     while (stackIt.hasNext()) {
         auto current = stackIt.currItem();
         std::cout << "Arriving at stop " << x-- << std::endl;
