@@ -73,6 +73,19 @@ void SocialAffairsDept::addChild(Citizen* citizen) {
 }
 
 /**
+ * @brief Reacts to a policy change within the department.
+ * 
+ * This method iterates over the list of adult citizens, calling the react() method
+ * for each. The react() method triggers each adult's individual response to recent 
+ * policy changes, which could affect their behavior or state, such as employment 
+ * status or satisfaction levels.
+ */
+void SocialAffairsDept::reactPolicy() {
+    for (auto adult : adults) 
+        adult->react();
+}
+
+/**
  * @brief Adds a citizen to the unemployed queue.
  * 
  * This queue maintains a record of citizens who are currently unemployed and seeking jobs.

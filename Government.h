@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Department.h"
+#include "SocialAffairsDept.h"
 #include "Policy.h"
 #include "Memento.h"
 

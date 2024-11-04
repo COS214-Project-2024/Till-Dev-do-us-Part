@@ -53,5 +53,5 @@ void Minor::react() {
  * Currently unimplemented; future functionality will define how the Minor interacts with school.
  */
 void Minor::goToSchool() {
-    // Need to decide on implementation.
+    std::cout << "Minor at school" << endl;
 }
