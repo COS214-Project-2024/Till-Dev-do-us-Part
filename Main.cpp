@@ -13,6 +13,7 @@ ServiceUtility *wasteManagement, *SewerSystem;
 Department *DevDept, *FinDept, *SoAffDept, *TransDept, *ResourceDept, *healthDept;
 TaxCalculator *taxes[6];
 WiseBucks *apps[6];
+Business *first8Businesses[8];
 
 // Add funtion in goverment to get overall status of the city. MyCityStatus();
 void DemoMain();
@@ -22,7 +23,7 @@ void utilResourceObjects();
 void buildingObjects();
 void financeObjects();
 void transportObjects();
-
+void createBusinesses(); 
 void healthcareObjects();
 void citizenObjects();
 
@@ -32,6 +33,7 @@ void performDailyActivities();
 void inflation();
 void unleashDisease();
 void strike();
+void simulation(); 
 
 // SEASON METHODS
 // Create a loop that runs 3 times in each season
@@ -78,12 +80,13 @@ void DemoMain()
 
     cout << "===========================================================================================================================================================================" << endl;
 
-    cout << "Creating Goverment and its Departments:" << endl;
-    governmentObjects();
+    cout << "Appearance of the first 150 citizens" << endl;
 
     cout << "===========================================================================================================================================================================" << endl;
     
-    cout << "Appearance of the first 150 citizens" << endl;
+    cout << "Creating Goverment and its Departments:" << endl;
+    governmentObjects();
+
     citizenObjects();
     Citizen **first100 = AdultFactory->reproduce(150);
     {
@@ -123,123 +126,26 @@ void DemoMain()
     cout << "===========================================================================================================================================================================" << endl;
 
     cout << "Creating businesses to get the economy going..." << endl;
-
-    Business *first8Businesses[8];
-
-    {
-        first8Businesses[0] = new Automotive();
-        first8Businesses[1] = new Consulting();
-        first8Businesses[2] = new Entertainment();
-        first8Businesses[3] = new Food();
-        first8Businesses[4] = new Hospitality();
-        first8Businesses[5] = new Retail();
-        first8Businesses[6] = new Technology();
-        first8Businesses[7] = new Wellness();
-
-        first8Businesses[0]->linkWiseBucks(apps[3]);
-        first8Businesses[1]->linkWiseBucks(apps[2]);
-        first8Businesses[2]->linkWiseBucks(apps[2]);
-        first8Businesses[3]->linkWiseBucks(apps[1]);
-        first8Businesses[4]->linkWiseBucks(apps[1]);
-        first8Businesses[5]->linkWiseBucks(apps[5]);
-        first8Businesses[6]->linkWiseBucks(apps[1]);
-        first8Businesses[7]->linkWiseBucks(apps[2]);
-
-        for (Business *business : ((FinanceDept *)(Government::getInstance()->getDepartment("Finance")))->getBusinesses())
-        {
-            // NOT DESTRUCTED
-            business->buyProperty("Shop");
-        }
-
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 5; j++)
-            {
-                first8Businesses[i]->hireEmployee();
-            }
-        }
-    }
+    createBusinesses(); 
 
     cout << "===========================================================================================================================================================================" << endl;
     // Season and day simulation
-    {
-        std::string currentSeason = "";
-
-        for (int month = 1; month <= 12; ++month)
-        {
-
-            std::cout << endl;
-
-            // Determine the season based on the month
-            if (month >= 3 && month <= 5)
-            {
-                if (currentSeason != "Spring")
-                {
-
-                    cout << "===========================================================================================================================================================================" << endl;
-                    autumn();
-                    std::cout << endl;
-                    currentSeason = "Spring";
-                }
-            }
-            else if (month >= 6 && month <= 8)
-            {
-                if (currentSeason != "Summer")
-                {
-
-                    cout << "===========================================================================================================================================================================" << endl;
-                    winter();
-                    std::cout << endl;
-                    currentSeason = "Summer";
-                }
-            }
-            else if (month >= 9 && month <= 11)
-            {
-                if (currentSeason != "Autumn")
-                {
-
-                    cout << "===========================================================================================================================================================================" << endl;
-                    spring();
-                    std::cout << endl;
-                    currentSeason = "Autumn";
-                }
-            }
-            else
-            {
-                if (currentSeason != "Winter")
-                {
-
-                    cout << "===========================================================================================================================================================================" << endl;
-                    summer();
-                    if (monthsOfTheYear[month] == "December")
-                    {
-                        cout << " again";
-                    }
-                    cout << "! " << endl
-                         << endl;
-
-                    currentSeason = "Winter";
-                }
-            }
-
-            cout << monthsOfTheYear[month] << "\n";
-            cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
-            this_thread::sleep_for(chrono::milliseconds(5000));
-        }
-    }
+    simulation(); 
 
     cout << "===========================================================================================================================================================================" << endl;
 
     // DELETES
-
-    for (int i = 0; i < 8; i++)
     {
-        delete first8Businesses[i];
-        first8Businesses[i] = nullptr;
-    }
+        for (int i = 0; i < 8; i++)
+        {
+            delete first8Businesses[i];
+            first8Businesses[i] = nullptr;
+        }
 
-    delete[] first100;
-    first100 = nullptr;
+        delete[] first100;
+        first100 = nullptr;
+    }
+    
 }
 
 void performDailyActivities()
@@ -250,6 +156,7 @@ void performDailyActivities()
 
 void unleashDisease()
 {
+
 }
 
 void governmentObjects()
@@ -278,9 +185,13 @@ void utilResourceObjects()
     WaterResource = new Water();
 
     powerPlant = new PowerPlant("CityPower", static_cast<ResourceDepartment *>(ResourceDept), static_cast<Energy *>(EnergyResource), 20);
+    cout << endl; 
     waterSupply = new WaterSupply("CityWater", static_cast<ResourceDepartment *>(ResourceDept), static_cast<Water *>(WaterResource), 20);
+    cout << endl; 
     wasteManagement = new WasteManagement("CityWaste", static_cast<ResourceDepartment *>(ResourceDept));
+    cout << endl; 
     SewerSystem = new SewageSystem("CitySewage", static_cast<ResourceDepartment *>(ResourceDept));
+    cout << endl; 
 
     ((ResourceDepartment *)ResourceDept)->addUtility(powerPlant);
     ((ResourceDepartment *)ResourceDept)->addUtility(waterSupply);
@@ -317,7 +228,6 @@ void transportObjects()
 
 void healthcareObjects()
 {
-
     clinic = new Clinic();
     GH = new Hospital1();
     ICH = new Hospital2();
@@ -333,10 +243,110 @@ void citizenObjects()
     MinorFactory = new MinorPop();
 }
 
+void createBusinesses()
+{
+    first8Businesses[0] = new Automotive();
+    first8Businesses[1] = new Consulting();
+    first8Businesses[2] = new Entertainment();
+    first8Businesses[3] = new Food();
+    first8Businesses[4] = new Hospitality();
+    first8Businesses[5] = new Retail();
+    first8Businesses[6] = new Technology();
+    first8Businesses[7] = new Wellness();
+
+    first8Businesses[0]->linkWiseBucks(apps[3]);
+    first8Businesses[1]->linkWiseBucks(apps[2]);
+    first8Businesses[2]->linkWiseBucks(apps[2]);
+    first8Businesses[3]->linkWiseBucks(apps[1]);
+    first8Businesses[4]->linkWiseBucks(apps[1]);
+    first8Businesses[5]->linkWiseBucks(apps[5]);
+    first8Businesses[6]->linkWiseBucks(apps[1]);
+    first8Businesses[7]->linkWiseBucks(apps[2]);
+
+        for (Business *business : ((FinanceDept *)(Government::getInstance()->getDepartment("Finance")))->getBusinesses())
+        {
+            // NOT DESTRUCTED
+            business->buyProperty("Shop");
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                first8Businesses[i]->hireEmployee();
+            }
+        }
+}
+
+void simulation()
+{ 
+        std::string currentSeason = "";
+
+        for (int month = 1; month <= 12; ++month)
+        {
+
+            std::cout << endl;
+
+            // Determine the season based on the month
+            if (month >= 3 && month <= 5)
+            {
+                if (currentSeason != "Spring")
+                {
+
+                    cout << "===========================================================================================================================================================================" << endl;
+                    autumn();
+                    cout << endl;
+                    currentSeason = "Spring";
+                }
+            }
+            else if (month >= 6 && month <= 8)
+            {
+                if (currentSeason != "Summer")
+                {
+
+                    cout << "===========================================================================================================================================================================" << endl;
+                    winter();
+                    std::cout << endl;
+                    currentSeason = "Summer";
+                }
+            }
+            else if (month >= 9 && month <= 11)
+            {
+                if (currentSeason != "Autumn")
+                {
+
+                    cout << "===========================================================================================================================================================================" << endl;
+                    spring();
+                    std::cout << endl;
+                    currentSeason = "Autumn";
+                }
+            }
+            else
+            {
+                if (currentSeason != "Winter")
+                {
+
+                    cout << "===========================================================================================================================================================================" << endl;
+                    cout << "Summer has arrived!" << endl;
+                    if (monthsOfTheYear[month] == "December")
+                    {
+                        cout << "...Again!";
+                    }
+                    cout << endl;
+                    summer();
+                    currentSeason = "Winter";
+                }
+            }
+
+            cout << monthsOfTheYear[month] << "\n";
+            cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            this_thread::sleep_for(chrono::milliseconds(5000));
+        }
+
+}
+
 void summer()
 {
-    cout << "Summer has arrived!" << endl;
-
     for (int i = 0; i < 10; i++)
     {
         performDailyActivities();
@@ -345,7 +355,7 @@ void summer()
 
 void autumn()
 {
-    cout << "Autumn has arrived! " << endl;
+    cout << "Autumn has arrived! " << endl << endl;
     performDailyActivities();
 }
 

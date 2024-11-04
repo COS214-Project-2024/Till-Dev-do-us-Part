@@ -165,10 +165,11 @@ void Business::linkWiseBucks(WiseBucks* app)
     if (wiseBucksApp == nullptr)
     {
         wiseBucksApp = app; 
+        // cout << "WiseBucks App linked for " << name << endl; 
     }
     else
     {
-        cout << "WiseBucks App already linked" << endl; 
+        cout << "WiseBucks App already linked for " << name << endl; 
     }
 }
 
@@ -183,7 +184,7 @@ void Business::unlinkWiseBucks()
     }
     else 
     {
-        cout << "WiseBucks App has not been linked" << endl; 
+        cout << "WiseBucks App has not been linked for " << name << endl; 
     }
 }
 
@@ -223,7 +224,7 @@ void Business::handleAccounts()
     } 
     else 
     {
-        cout << "WiseBucks App has not been linked" << endl; 
+        cout << "WiseBucks App has not been linked for " << name << endl; 
     }
 }
 
