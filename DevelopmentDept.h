@@ -30,6 +30,7 @@ class DevelopmentDept : public Department
 {
 
     private:
+        ResourceDepartment* resourceDept;
         int land;
         map<std::string, float> priceList;
         map<std::string, float> buildingAreaList;
@@ -40,7 +41,7 @@ class DevelopmentDept : public Department
         vector<Industrial *> industrialSites;
 
     public : 
-        DevelopmentDept(float budget);
+        DevelopmentDept(float budget, ResourceDepartment*);
         ~DevelopmentDept();
         float getPrice(std::string buildingType);
         Building *build(std::string buildingType);

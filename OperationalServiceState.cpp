@@ -11,4 +11,3 @@ void OperationalServiceState::handleService(ServiceUtility *utility)
     // }
 }
 
-std::string OperationalServiceState::getStateName() const { return "Operational"; }

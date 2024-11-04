@@ -5,7 +5,7 @@ void OperationalProductionState::handleProduction(ProductionUtility *utility)
 {
     // Calculate maximum possible production based on resources and workers
     float resourceFactor = utility->getResource()->getCurrentAmount() / utility->getResource()->getInitialAmount();
-    float workerEfficiency = 100;                                                                    // Assume 100% efficiency for simplification, or set as needed
+    float workerEfficiency = 100; // Assume 100% efficiency for simplification
     float workerFactor = static_cast<float>(utility->getActiveWorkers()) / utility->getMaxWorkers(); // Ratio of active workers to total
     float capacity = utility->getProductionCapacity();
     float yield = capacity * resourceFactor * workerFactor * (workerEfficiency / 100.0f); // Adjusted yield calculation
