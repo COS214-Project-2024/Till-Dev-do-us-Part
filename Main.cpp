@@ -407,15 +407,6 @@ void globalCleanUp()
     delete AdultFactory;
     AdultFactory = nullptr;
 
-    delete ICH;
-    ICH = nullptr;
-
-    delete GH;
-    GH = nullptr;
-
-    delete clinic;
-    clinic = nullptr;
-
     delete WaterResource;
     WaterResource = nullptr;
 
