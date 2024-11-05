@@ -1,3 +1,12 @@
+#ifndef BUSINESS_H
+#define BUSINESS_H
+
+class Business{
+
+};
+
+#endif
+
 /**
  * @file Business.h
  * @brief Defines the Business class, representing a business entity that manages employees, income, property, and integrates with WiseBucks for tax handling.
