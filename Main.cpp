@@ -1,3 +1,6 @@
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest/doctest/doctest.h"
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -21,319 +24,167 @@
 #include "AirplaneModeFactory.h"
 #include "AirportFactory.h"
 #include "CarModeFactory.h"
-
 #include "Department.h"
 #include "TransportDept.h"
-
-// Include observer and mediator headers
 #include "CitizenObserver.h"
 #include "ConcreteTransportationMediator.h"
-
-// Include state pattern headers
 #include "NormalState.h"
 #include "CongestedState.h"
 #include "EmptyState.h"
-
-// Include iterator headers
 #include "QueueIterator.h"
 #include "StackIterator.h"
-
-// Include facility headers
 #include "Road.h"
 #include "Railway.h"
 #include "Airport.h"
 
-int main() {
-    // Factory Pattern - Create instances of each transport mode and facility
-    std::cout << "=== Factory Pattern ===" << std::endl;
-    // Making bus
-    ModeFactory* mainmee = new BusModeFactory();
-    StationFactory* stst= new BusStopFactory();
-    FacilitiesFactory* facil= new RoadFactory();
-    TransportDept* ment= new TransportDept(100000);
-
-    //Making Train
-    ModeFactory* stat= new TrainModeFactory();
-    StationFactory* gau= new TrainStationFactory();
-    FacilitiesFactory* rail= new RailwayFactory();
-
-    // Making taxi
-    ModeFactory* tax = new TaxiModeFactory();
-    StationFactory* rank= new TaxiRankFactory();
-
-    // Making airplane
-    ModeFactory* plane= new AirplaneModeFactory();
-    FacilitiesFactory* port= new AirportFactory();
-
-    // Car
-    ModeFactory* car = new CarModeFactory();
+TEST_CASE("Transport System Factory Creation") {
+    // Create factories
+    ModeFactory* busFactory = new BusModeFactory();
+    StationFactory* busStopFactory = new BusStopFactory();
+    FacilitiesFactory* roadFactory = new RoadFactory();
+    TransportDept* transportDept = new TransportDept(100000);
     
-    // Mediator
-    ConcreteTransportationMediator* medi= new ConcreteTransportationMediator();
-
-    // Buses
-    TransportMode* momo = mainmee->createMode();
-    TransportMode* nene = mainmee->createMode();
-    TransportMode* a = mainmee->createMode();
-    TransportMode* b = mainmee->createMode();
-    TransportMode* c = mainmee->createMode();
-    TransportMode* d = mainmee->createMode();
-    TransportMode* e = mainmee->createMode();
-    TransportMode* f = mainmee->createMode();
-    TransportMode* g = mainmee->createMode();
-    TransportMode* h = mainmee->createMode();
-    TransportMode* i = mainmee->createMode();
-
-    // Trains
-    TransportMode* t = stat->createMode();
-    TransportMode* r = stat->createMode();
-
-    // Taxis
-    TransportMode* x = tax->createMode();
-    TransportMode* m = tax->createMode();
-
-    // Airplanes
-    TransportMode* n = plane->createMode();
-    TransportMode* q = plane->createMode();
-
-    // Car
-    TransportMode* w = car ->createMode();
-    TransportMode* y = car ->createMode();
-
-
-
-    // Bus Stop
-    TransportStation* opop= stst->createStation();
-    TransportStation* p= stst->createStation();
-
-    // Train Station 
-    TransportStation* rosebank= gau->createStation();
-    TransportStation* hatfield= gau->createStation();
-
-
-    // Taxi Rank
-    TransportStation* springs= rank->createStation();
-    TransportStation* brakpan= rank->createStation();
-
-    // Facilities 
-    // Roads
-    TransportFacilities* roro= facil->createFacilities();
-    TransportFacilities* adad= facil->createFacilities();
-
-    // Railways
-    TransportFacilities* ai= rail->createFacilities();
-    TransportFacilities* ay= rail->createFacilities();
-
-    // Airport
-    TransportFacilities* rp= port->createFacilities();
-    TransportFacilities* rt= port->createFacilities();
-  
-    // add to dept
-    ment->addFacility(roro);
-    ment->addFacility(adad);
-    ment->addFacility(ai);
-    ment->addFacility(ay);
-    ment->addFacility(rp);
-    ment->addFacility(rt);
-
-
-    // set facil
-    // Buses
-    momo->SetFacilities(roro);
-    nene->SetFacilities(roro);
-    a->SetFacilities(roro);
-    b->SetFacilities(roro);
-    c->SetFacilities(roro);
-    d->SetFacilities(roro);
-    e->SetFacilities(roro);
-    f->SetFacilities(roro);
-    g->SetFacilities(roro);
-    h->SetFacilities(roro);
-    i->SetFacilities(roro);
-
-    // Trains
-    t->SetFacilities(ai);
-    r->SetFacilities(ai);
-
-    // Taxi
-    x->SetFacilities(ai);
-    m->SetFacilities(ai);
-
-    // Planes
-    n->SetFacilities(rp);
-    q->SetFacilities(rt);
-
-    // Cars
-    w->SetFacilities(roro);
-    y->SetFacilities(roro);
-
-    // set dept
-    // Buses
-    momo->SetTransDept(ment);
-    nene->SetTransDept(ment);
-    a->SetTransDept(ment);
-    b->SetTransDept(ment);
-    c->SetTransDept(ment);
-    d->SetTransDept(ment);
-    e->SetTransDept(ment);
-    f->SetTransDept(ment);
-    g->SetTransDept(ment);
-    h->SetTransDept(ment);
-    i->SetTransDept(ment);
-
-    // Trains
-    t->SetTransDept(ment);
-    r->SetTransDept(ment);
-
-    // Taxis
-    x->SetTransDept(ment);
-    m->SetTransDept(ment);
-
-    // Planes
-    n->SetTransDept(ment);
-    q->SetTransDept(ment);
-
-
-
+    SUBCASE("Bus Mode Creation") {
+        TransportMode* bus = busFactory->createMode();
+        CHECK(bus != nullptr);
+        CHECK(dynamic_cast<BusMode*>(bus) != nullptr);
+        delete bus;
+    }
     
-    if (momo == nullptr) {
-    std::cerr << "momo is nullptr!" << std::endl;
-    } 
-    else {
-    std::cout << "Transport Mode Name: " << momo->getName() << std::endl;
-
-    // Attempt to downcast to BusMode to call drive()
-    if (TransportMode* bus = dynamic_cast<BusMode*>(momo)) {
-        bus->SetMediator(medi);
-        bus->SetFacilities(roro);
-        bus->addStop(opop);
-        bus->addStop(p);
-        nene->SetMediator(medi);
-
-        
-        ((BusMode*)bus)->drive(); // Call drive() if momo is indeed a BusMode
-    } else {
-        std::cerr << "Error: momo is not a BusMode instance." << std::endl;
+    SUBCASE("Bus Stop Creation") {
+        TransportStation* busStop = busStopFactory->createStation();
+        CHECK(busStop != nullptr);
+        delete busStop;
     }
-
-    if (TransportMode* tray = dynamic_cast<TrainMode*>(t)) {
-        tray->SetMediator(medi);
-        tray->SetFacilities(ai);
-        tray->addStop(rosebank);
-        tray->addStop(hatfield);
-        r->SetMediator(medi);
-
-        
-        ((TrainMode*)tray)->drive(); // Call drive() if momo is indeed a BusMode
-    } else {
-        std::cerr << "Error: momo is not a BusMode instance." << std::endl;
+    
+    SUBCASE("Road Creation") {
+        TransportFacilities* road = roadFactory->createFacilities();
+        CHECK(road != nullptr);
+   
     }
-
-     if (TransportMode* axi = dynamic_cast<TaxiMode*>(x)) {
-        axi->SetMediator(medi);
-        axi->SetFacilities(rp);
-        axi->addStop(springs);
-        axi->addStop(brakpan);
-        m->SetMediator(medi);
-
-        
-        ((TrainMode*)axi)->drive(); // Call drive() if momo is indeed a BusMode
-    } else {
-        // std::cerr << "Error: taxi is not a BusMode instance." << std::endl;
-    }
-
-    if (TransportMode* play = dynamic_cast<AirplaneMode*>(n)) {
-        play->SetMediator(medi);
-        play->SetFacilities(rp);
-        // play->addStop(springs);
-        // play->addStop(brakpan);
-        q->SetMediator(medi);
-
-        
-        ((TrainMode*)play)->drive(); // Call drive() if momo is indeed a BusMode
-    } else {
-        // std::cerr << "Error: plane is not a BusMode instance." << std::endl;
-    }
-
-    if (TransportMode* cr = dynamic_cast<CarMode*>(w)) {
-        cr->SetMediator(medi);
-        cr->SetFacilities(roro);
-        // play->addStop(springs);
-        // play->addStop(brakpan);
-        y->SetMediator(medi);
-
-        
-        ((TrainMode*)cr)->drive(); // Call drive() if momo is indeed a BusMode
-    } else {
-        // std::cerr << "Error: car is not a BusMode instance." << std::endl;
-    }
+    
+    // Cleanup
+    delete busFactory;
+    delete busStopFactory;
+    delete roadFactory;
+    delete transportDept;
 }
 
-// Buses
-delete momo;
-delete nene;
-delete a;
-delete b;
-delete c;
-delete d;
-delete e;
-delete f;
-delete g;
-delete h;
-delete i;
+TEST_CASE("Train System Creation") {
+    ModeFactory* trainFactory = new TrainModeFactory();
+    StationFactory* trainStationFactory = new TrainStationFactory();
+    FacilitiesFactory* railwayFactory = new RailwayFactory();
+    
+    SUBCASE("Train Mode Creation") {
+        TransportMode* train = trainFactory->createMode();
+        CHECK(train != nullptr);
+        CHECK(dynamic_cast<TrainMode*>(train) != nullptr);
+        delete train;
+    }
+    
+    SUBCASE("Train Station Creation") {
+        TransportStation* trainStation = trainStationFactory->createStation();
+        CHECK(trainStation != nullptr);
+        delete trainStation;
+    }
+    
+    SUBCASE("Railway Creation") {
+        TransportFacilities* railway = railwayFactory->createFacilities();
+        CHECK(railway != nullptr);
+   
+    }
+    
+    // Cleanup
+    delete trainFactory;
+    delete trainStationFactory;
+    delete railwayFactory;
+}
 
-// Trains
-delete t;
-delete r;
+TEST_CASE("Transport Mode Integration") {
+    ModeFactory* busFactory = new BusModeFactory();
+    StationFactory* busStopFactory = new BusStopFactory();
+    FacilitiesFactory* roadFactory = new RoadFactory();
+    TransportDept* transportDept = new TransportDept(100000);
+    ConcreteTransportationMediator* mediator = new ConcreteTransportationMediator();
+    
+    SUBCASE("Bus Integration") {
+        TransportMode* bus = busFactory->createMode();
+        TransportFacilities* road = roadFactory->createFacilities();
+        TransportStation* busStop1 = busStopFactory->createStation();
+        TransportStation* busStop2 = busStopFactory->createStation();
+        
+        CHECK_NOTHROW(bus->SetMediator(mediator));
+        CHECK_NOTHROW(bus->SetFacilities(road));
+        CHECK_NOTHROW(bus->SetTransDept(transportDept));
+        CHECK_NOTHROW(bus->addStop(busStop1));
+        CHECK_NOTHROW(bus->addStop(busStop2));
+        
+        if (BusMode* busMode = dynamic_cast<BusMode*>(bus)) {
+            CHECK_NOTHROW(busMode->drive());
+        }
+        
+    
+    }
+    
+    // Cleanup
+    delete busFactory;
+    delete busStopFactory;
+    delete roadFactory;
+    delete transportDept;
+    delete mediator;
+}
 
-// Taxi 
-delete x;
-delete m;
+TEST_CASE("Transport Department Management") {
+    TransportDept* transportDept = new TransportDept(100000);
+    FacilitiesFactory* roadFactory = new RoadFactory();
+    FacilitiesFactory* railFactory = new RailwayFactory();
+    
+    SUBCASE("Facility Management") {
+        TransportFacilities* road = roadFactory->createFacilities();
+        TransportFacilities* railway = railFactory->createFacilities();
+        
+        CHECK_NOTHROW(transportDept->addFacility(road));
+        CHECK_NOTHROW(transportDept->addFacility(railway));
+        
 
-// Airplanes
-delete n;
-delete q;
+     }
+    
+//     // Cleanup
+     delete transportDept;
 
-// cars
-delete w;
-delete y;
+ }
 
-// Stops
-delete opop;
-delete p;
-delete rosebank;
-delete hatfield;
-delete springs;
-delete brakpan;
-
-//  Facilities already deleted 
-// delete roro;
-// delete adad;
-
-// Rest
-// Bus
-delete medi;
-delete ment;
-delete facil;
-delete stst;
-delete mainmee;
-
-// Train
-delete rail;
-delete gau;
-delete stat;
-
-// Taxi
-delete rank;
-delete tax;
-
-// Airplane
-delete port;
-delete plane;
-
-// Car
-delete car;
-
-
-    return 0;
+TEST_CASE("Multiple Transport Modes Integration") {
+    TransportDept* transportDept = new TransportDept(100000);
+    ConcreteTransportationMediator* mediator = new ConcreteTransportationMediator();
+    
+    // Create factories
+    ModeFactory* busFactory = new BusModeFactory();
+    ModeFactory* trainFactory = new TrainModeFactory();
+    ModeFactory* taxiFactory = new TaxiModeFactory();
+    
+    SUBCASE("Multi-mode Operation") {
+        TransportMode* bus = busFactory->createMode();
+        TransportMode* train = trainFactory->createMode();
+        TransportMode* taxi = taxiFactory->createMode();
+        
+        CHECK_NOTHROW(bus->SetMediator(mediator));
+        CHECK_NOTHROW(train->SetMediator(mediator));
+        CHECK_NOTHROW(taxi->SetMediator(mediator));
+        
+        CHECK_NOTHROW(bus->SetTransDept(transportDept));
+        CHECK_NOTHROW(train->SetTransDept(transportDept));
+        CHECK_NOTHROW(taxi->SetTransDept(transportDept));
+        
+        delete bus;
+        delete train;
+        delete taxi;
+    }
+    
+    // Cleanup
+    delete transportDept;
+    delete mediator;
+    delete busFactory;
+    delete trainFactory;
+    delete taxiFactory;
 }
