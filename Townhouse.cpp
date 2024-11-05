@@ -1,25 +1,43 @@
 #include "Townhouse.h"
 #include "Citizen.h"
 
-Townhouse::Townhouse():Residential("Townhouse"){
+/**
+ * @brief Constructs a Townhouse with predefined attributes.
+ * @author Katlego
+ */
+Townhouse::Townhouse() : Residential("Townhouse")
+{
     value = 7000;
     area = 200;
     capacity = 3;
 }
 
-Townhouse ::~Townhouse(){
+/**
+ * @brief Destructor for the Townhouse class, calls demolish() and prints a message.
+ */
+Townhouse::~Townhouse()
+{
     demolish();
     cout << "Townhouse demolished!" << endl;
 }
 
+/**
+ * @brief Demolishes the townhouse by clearing all occupants.
+ */
 void Townhouse::demolish()
 {
     cout << "Removing everyone from the Townhouse" << endl;
     occupants.clear();
 }
 
+/**
+ * @brief Uses the shower if water and electricity are sufficient.
+ * Reduces cleanliness and changes state if necessary.
+ * @return true if the shower was used successfully, false otherwise.
+ */
 bool Townhouse::useShower()
 {
+    // Checks if water and electricity can be used
     if (this->state->canUseWater() && this->state->canUseElectricity())
     {
         if (useWater(100) && useElectricity(50))
@@ -35,30 +53,29 @@ bool Townhouse::useShower()
                 cout << "Electricity: " << electricityUnits << "\n";
                 cout << "Water: " << waterUnits << "\n";
             }
-            else{
+            else
+            {
                 cleanliness -= 15;
             }
             return true;
         }
+        // Outputs insufficient water or electricity message
         cout << "Not enough water or electricity to use shower:" << endl;
         cout << "Required water to shower: 100" << endl;
         cout << "Required electricity to shower: 50" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        if (requestElectricity(50) && requestWater(100))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return requestElectricity(50) && requestWater(100);
     }
-
     cout << "Townhouse is in " << this->state->getName() << " and cannot use shower" << endl;
     return false;
 }
 
+/**
+ * @brief Uses the toilet if water and electricity are sufficient.
+ * Reduces cleanliness and changes state if necessary.
+ * @return true if the toilet was used successfully, false otherwise.
+ */
 bool Townhouse::useToilet()
 {
     if (this->state->canUseWater() && this->state->canUseElectricity())
@@ -75,7 +92,8 @@ bool Townhouse::useToilet()
                 cout << "Electricity: " << electricityUnits << "\n";
                 cout << "Water: " << waterUnits << "\n";
             }
-            else{
+            else
+            {
                 cleanliness -= 10;
             }
             cout << "Townhouse used toilet.";
@@ -85,20 +103,17 @@ bool Townhouse::useToilet()
         cout << "Required electricity for toilet: 3" << endl;
         cout << "Required water for toilet: 13" << endl;
         cout << "Current water: " << waterUnits << endl;
-        if (requestElectricity(3) && requestWater(13))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return requestElectricity(3) && requestWater(13);
     }
-
     cout << "Townhouse is in " << this->state->getName() << " and cannot use Toilet" << endl;
     return false;
 }
 
+/**
+ * @brief Uses the stove if electricity is sufficient.
+ * Reduces cleanliness and changes state if necessary.
+ * @return true if the stove was used successfully, false otherwise.
+ */
 bool Townhouse::useStove()
 {
     if (this->state->canUseElectricity())
@@ -115,7 +130,8 @@ bool Townhouse::useStove()
                 cout << "Electricity: " << electricityUnits << "\n";
                 cout << "Water: " << waterUnits << "\n";
             }
-            else{
+            else
+            {
                 cleanliness -= 15;
             }
             cout << "Used stove.";
@@ -124,20 +140,17 @@ bool Townhouse::useStove()
         cout << "Not enough electricity to use stove:" << endl;
         cout << "Required electricity for stove: 58" << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        if (requestElectricity(58))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return requestElectricity(58);
     }
-
-    cout << "Townhouse is in " << this->state->getName() << " and use stove" << endl;
+    cout << "Townhouse is in " << this->state->getName() << " and cannot use stove" << endl;
     return false;
 }
 
+/**
+ * @brief Cleans the townhouse if water and electricity are sufficient.
+ * Increases cleanliness and changes state if necessary.
+ * @return true if the townhouse was cleaned successfully, false otherwise.
+ */
 bool Townhouse::clean()
 {
     if (this->state->canUseWater() && this->state->canUseElectricity())
@@ -150,13 +163,11 @@ bool Townhouse::clean()
             }
             else
             {
-                if(cleanliness <=0 && cleanliness+30 >=0 && waterUnits > 0 && electricityUnits >0){
+                if (cleanliness <= 0 && cleanliness + 30 >= 0 && waterUnits > 0 && electricityUnits >0)
+                {
                     delete state;
                     state = new CompleteState();
                     cout << "Townhouse is now in Operational state:\n";
-                    cout << "Cleanliness: " << cleanliness << "\n";
-                    cout << "Electricity: " << electricityUnits << "\n";
-                    cout << "Water: " << waterUnits << "\n";
                 }
                 cleanliness += 30;
             }
@@ -168,20 +179,17 @@ bool Townhouse::clean()
         cout << "Required electricity to clean: 70" << endl;
         cout << "Current water: " << waterUnits << endl;
         cout << "Current electricity: " << electricityUnits << endl;
-        if (requestElectricity(50) && requestWater(100))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return requestElectricity(50) && requestWater(100);
     }
-
     cout << "Townhouse is in " << this->state->getName() << " and cannot be cleaned" << endl;
     return false;
 }
 
+/**
+ * @brief Adds a citizen to the townhouse as an occupant if there is capacity.
+ * @param c Pointer to the Citizen to be added.
+ * @return true if the occupant was added successfully, false if at capacity.
+ */
 bool Townhouse::addOccupant(Citizen *c)
 {
     if (c != nullptr && occupants.size() < capacity)
@@ -190,17 +198,18 @@ bool Townhouse::addOccupant(Citizen *c)
         cout << "Occupant added to Townhouse" << endl;
         return true;
     }
-
     return false;
 }
 
+/**
+ * @brief Removes a specific occupant from the townhouse.
+ * @param c Pointer to the Citizen to be removed.
+ * @return true if the occupant was removed successfully, false otherwise.
+ */
 bool Townhouse::removeOccupant(Citizen *c)
 {
-    vector<Citizen *>::iterator first = occupants.begin();
-    vector<Citizen *>::iterator last = occupants.end();
-
-    vector<Citizen *>::iterator it = find(first, last, c);
-    if (it != last)
+    vector<Citizen *>::iterator it = find(occupants.begin(), occupants.end(), c);
+    if (it != occupants.end())
     {
         occupants.erase(it);
         cout << "Occupant removed from the Townhouse" << endl;
@@ -210,9 +219,13 @@ bool Townhouse::removeOccupant(Citizen *c)
     return false;
 }
 
+/**
+ * @brief Creates a clone of the current townhouse.
+ * @return A pointer to a new cloned Townhouse object.
+ */
 Building *Townhouse::clone()
 {
-    Townhouse*newHouse = new Townhouse();
+    Townhouse *newHouse = new Townhouse();
     newHouse->cleanliness = this->cleanliness;
     newHouse->electricityUnits = this->electricityUnits;
     newHouse->waterUnits = this->waterUnits;
@@ -223,19 +236,19 @@ Building *Townhouse::clone()
     return newHouse;
 }
 
-void Townhouse::goToWork()
-{
-    for (vector<Citizen *>::iterator it = occupants.begin(); it < occupants.end(); it++)
-    {
-        ((Adult*)(*it))->goToWork();
-    }
-}
-
+/**
+ * @brief Checks if the townhouse is currently occupied.
+ * @return true if there are occupants, false otherwise.
+ */
 bool Townhouse::isOccupied()
 {
-    return occupants.size() > 0;
+    return !occupants.empty();
 }
 
+/**
+ * @brief Displays the current state of the townhouse, including cleanliness,
+ * water units, electricity units, value, area, and number of occupants.
+ */
 void Townhouse::display()
 {
     std::cout << "-----------------Townhouse-------------------" << std::endl;

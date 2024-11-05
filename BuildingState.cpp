@@ -1,13 +1,28 @@
 #include "BuildingState.h"
 
-BuildingState::BuildingState(string name){
+/**
+ * @brief Constructs a BuildingState object with a specified name.
+ *
+ * @param name The name of the building state.
+ */
+BuildingState::BuildingState(string name)
+{
     this->name = name;
 }
 
-string BuildingState::getName(){
+/**
+ * @brief Retrieves the name of the building state.
+ *
+ * @return string The name of the building state.
+ */
+string BuildingState::getName()
+{
     return this->name;
 }
 
-BuildingState::~BuildingState(){
-    
+/**
+ * @brief Virtual destructor for BuildingState, ensuring proper cleanup in derived classes.
+ */
+BuildingState::~BuildingState()
+{
 }

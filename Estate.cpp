@@ -164,14 +164,6 @@ bool Estate::addOccupant(Citizen *c)
     return false;
 }
 
-void Estate::goToWork(){
-    cout << "Taking citizens in estate to work\n" ;
-    for(vector<Residential*>::iterator it = buildings.begin(); it != buildings.end(); it++){
-        (*it)->goToWork();
-    }
-    cout << "Citizens are at work!";
-}
-
 int Estate::getNoBuildings(){
     return noBuildings;
 }

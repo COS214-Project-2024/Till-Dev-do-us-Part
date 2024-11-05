@@ -20,7 +20,6 @@ class Estate : public Residential
         virtual bool clean();
         bool addOccupant(Citizen *c);
         bool addHouse(Residential *);
-        virtual void goToWork();
         virtual int getNoBuildings();
         virtual bool removeOccupant(Citizen *c);
         bool removeBuilding(Residential *building);

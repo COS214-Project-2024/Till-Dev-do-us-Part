@@ -352,22 +352,6 @@ bool Suburb::useStove()
     return false;
 }
 
-void Suburb::goToWork()
-{
-    cleanliness = 0;
-    waterUnits = 0;
-    electricityUnits = 0;
-    for (vector<Residential *>::iterator it = buildings.begin(); it < buildings.end(); it++)
-    {
-        (*it)->goToWork();
-        cleanliness += (*it)->getCleanliness();
-        waterUnits += (*it)->getWater();
-        electricityUnits += (*it)->getElectricity();
-    }
-
-    cleanliness /= buildings.size();
-    cout << "Took all citizens in the Suburb to work\n";
-}
 
 bool Suburb::isOccupied()
 {

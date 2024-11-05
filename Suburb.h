@@ -29,7 +29,6 @@ class Suburb : public Residential
         virtual bool useShower();
         virtual bool useToilet();
         virtual bool useStove();
-        virtual void goToWork();
         virtual bool isOccupied();
         virtual float getCleanliness();
         virtual float getWater();

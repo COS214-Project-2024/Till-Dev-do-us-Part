@@ -1,29 +1,51 @@
 #include "Office.h"
 
-Office::Office():Commercial("Office"){
+/**
+ * @file Office.cpp
+ * @brief Implementation of the Office class, representing an office space within a commercial building.
+ */
+
+/**
+ * @brief Constructs an Office object with default values.
+ */
+Office::Office() : Commercial("Office")
+{
     area = 800;
     value = 12000;
-    capacity =1;
+    capacity = 1;
     occupant = nullptr;
 }
 
-Office::~Office(){
+/**
+ * @brief Destroys the Office object, demolishing the office and removing the occupant.
+ */
+Office::~Office()
+{
     demolish();
     cout << "Office demolished!" << endl;
 }
 
-void Office::demolish(){
+/**
+ * @brief Demolishes the Office, removing any occupant present.
+ */
+void Office::demolish()
+{
     cout << "Removing occupant from the Office" << endl;
     occupant = nullptr;
 }
 
+/**
+ * @brief Cleans the Office if enough water and electricity are available.
+ *
+ * @return true if the cleaning was successful, false otherwise.
+ */
 bool Office::clean()
 {
     if (this->state->canUseWater() && this->state->canUseElectricity())
     {
         if (useWater(150) && useElectricity(40))
         {
-            cout << "Office cleaned.";
+            cout << "Office cleaned.\n";
             if (cleanliness + 30 >= 100)
             {
                 cleanliness = 100;
@@ -62,7 +84,14 @@ bool Office::clean()
     return false;
 }
 
-bool Office::addOccupant(Citizen *c){
+/**
+ * @brief Adds an occupant to the Office.
+ *
+ * @param c Pointer to the Citizen to be added as an occupant.
+ * @return true if the occupant was successfully added, false if the office already has an occupant.
+ */
+bool Office::addOccupant(Citizen *c)
+{
     if (c != nullptr)
     {
         if (occupant == nullptr)
@@ -78,10 +107,16 @@ bool Office::addOccupant(Citizen *c){
         }
     }
 
-    cout << "Cannot add a non-existent citizen to Oddice" << endl;
+    cout << "Cannot add a non-existent citizen to Office" << endl;
     return false;
 }
 
+/**
+ * @brief Removes the specified occupant from the Office.
+ *
+ * @param c Pointer to the Citizen to be removed.
+ * @return true if the occupant was successfully removed, false otherwise.
+ */
 bool Office::removeOccupant(Citizen *c)
 {
     if (c != nullptr)
@@ -111,6 +146,11 @@ bool Office::removeOccupant(Citizen *c)
     return false;
 }
 
+/**
+ * @brief Creates a clone of the Office object.
+ *
+ * @return A pointer to a new Building object that is a clone of the Office.
+ */
 Building *Office::clone()
 {
     Office *newBuilding = new Office();
@@ -124,6 +164,11 @@ Building *Office::clone()
     return newBuilding;
 }
 
+/**
+ * @brief Checks if the Office currently has an occupant.
+ *
+ * @return true if the Office has an occupant, false otherwise.
+ */
 bool Office::isOccupied()
 {
     return occupant != nullptr;

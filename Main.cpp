@@ -1,7 +1,7 @@
 #include "Main.h"
 
-// SIMULATION DISPLAY
-#include "display.h"
+// // SIMULATION DISPLAY
+// #include "display.h"
 
 // DECLARING GLOBAL VARIABLES
 Government *Gov;
@@ -29,7 +29,7 @@ void createBusinesses();
 void healthcareObjects();
 void citizenObjects();
 
-// SIMULATION
+// // SIMULATION
 
 void performDailyActivities();
 void inflation();
