@@ -1,23 +1,43 @@
-run: main
-		./main
-		make c
+# Makefile for compiling C++ files in a folder
 
-main: *.o
-		g++ -std=c++11 -o main *.o
+# Compiler settings
+CXX := g++ -g
+CXXFLAGS := -std=c++17
 
-*.o: *.cpp
-		g++ -std=c++11 -c -w *.cpp
+# Source files (both .cpp and .h)
+SRC := $(wildcard *.cpp)
+HDR := $(wildcard *.h)
 
-debugcpp: debugo
-		g++ -std=c++11 -ggdb3 -o main *.o
+# Object files
+OBJ := $(SRC:.cpp=.o)
 
-debugo: *.cpp
-		g++ -std=c++11 -ggdb3 -c -w *.cpp
+# Output binary
+TARGET := my_program
 
-c:
-		rm *.o main
+# Default target
+all: $(TARGET)
 
-v: 
-		make debugcpp
-		valgrind --tool=memcheck --leak-check=yes --track-origins=yes --log-file=valg.txt ./main
-		make c
+# Link object files to create the binary
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# Compile .cpp files to object files
+%.o: %.cpp $(HDR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+
+# Clean up generated files
+clean:
+	rm -f $(OBJ) $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
+
+doxygen:
+	doxygen dconfig
+
+valgrind: $(TARGET)
+	valgrind --leak-check=full ./$(TARGET)
+
+gdb: $(TARGET)
+	gdb ./$(TARGET)

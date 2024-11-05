@@ -1,11 +1,11 @@
-#ifndef BUSINESS_H
-#define BUSINESS_H
+// #ifndef BUSINESS_H
+// #define BUSINESS_H
 
-class Business{
+// class Business{
 
-};
+// };
 
-#endif
+// #endif
 
 /**
  * @file Business.h
