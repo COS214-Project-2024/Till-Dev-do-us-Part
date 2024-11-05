@@ -14,8 +14,10 @@
 #ifndef ADULT_H
 #define ADULT_H
 
-#include "Building.h"
 #include "Citizen.h"
+#include "Building.h"
+
+class Business;
 
 /**
  * @class Adult

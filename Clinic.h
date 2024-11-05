@@ -8,7 +8,8 @@
  * @class Clinic
  * @brief A healthcare facility that provides admission and treatment for patients.
  */
-class Clinic : public HealthcareFacility {
+class Clinic : public HealthcareFacility
+{
 public:
     /**
      * @brief Default constructor initializes Clinic.

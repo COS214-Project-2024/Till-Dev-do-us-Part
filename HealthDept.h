@@ -8,9 +8,10 @@
  * @class HealthDept
  * @brief Represents a health department responsible for managing healthcare facilities and patient admissions.
  */
-class HealthDept : public Department {
+class HealthDept : public Department
+{
 private:
-    std::map<std::string, HealthcareFacility*> facilities; /**< Map of facility names to their corresponding healthcare facilities. */
+    std::map<std::string, HealthcareFacility *> facilities; /**< Map of facility names to their corresponding healthcare facilities. */
 
 public:
     /**
@@ -24,13 +25,13 @@ public:
      * @param name Name of the facility.
      * @param facility Pointer to the HealthcareFacility instance.
      */
-    void addFacility(std::string name, HealthcareFacility* facility);
+    void addFacility(std::string name, HealthcareFacility *facility);
 
     /**
      * @brief Admits a patient to the appropriate healthcare facility.
      * @param c Pointer to the Citizen instance to admit.
      */
-    void admitPatient(Citizen* c);
+    void admitPatient(Citizen *&c);
 
     /**
      * @brief Calculates and displays the total number of deaths reported by all facilities.
@@ -41,8 +42,8 @@ public:
      * @brief Destructor for HealthDept, clears all allocated facilities.
      */
     ~HealthDept();
-    
-    std::map<std::string, HealthcareFacility*> getFacilities()
+
+    std::map<std::string, HealthcareFacility *> getFacilities()
     {
         return facilities;
     }

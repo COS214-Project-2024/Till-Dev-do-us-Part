@@ -7,10 +7,11 @@
  * @class HealthcareFacility
  * @brief Abstract class for healthcare facilities providing patient admission and treatment.
  */
-class HealthcareFacility {
+class HealthcareFacility
+{
 protected:
-    HealthcareFacility* successor; /**< Pointer to the next facility in the chain of responsibility. */
-    int deathtoll; /**< Tracks the number of deaths in the facility. */
+    HealthcareFacility *successor; /**< Pointer to the next facility in the chain of responsibility. */
+    int deathtoll;                 /**< Tracks the number of deaths in the facility. */
 
 public:
     /**
@@ -33,19 +34,19 @@ public:
      * @brief Discharges a patient after treatment.
      * @param c Pointer to the Citizen being discharged.
      */
-    void dischargePatient(Citizen* c);
+    void dischargePatient(Citizen *c);
 
     /**
      * @brief Treats a patient and determines the outcome.
      * @param c Pointer to the Citizen being treated.
      */
-    void treatPatient(Citizen*& c);
+    void treatPatient(Citizen *&c);
 
     /**
      * @brief Sets the successor facility in the chain of responsibility.
      * @param s Pointer to the successor HealthcareFacility.
      */
-    void addSuccessor(HealthcareFacility* s);
+    void addSuccessor(HealthcareFacility *s);
 
     /**
      * @brief Generates a random outcome value for treatment.

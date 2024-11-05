@@ -3,8 +3,6 @@
 // #include "doctest/doctest/doctest.h"
 // #include "Main.h"
 
-// //BOITUMELO MTSATSE
-
 // #include "HealthDept.h"
 // #include "Clinic.h"
 // #include "Hospital1.h"
@@ -198,11 +196,6 @@
 // }
 
 
-
-
-
-
-// //DRIYA GOVENDER
 // TEST_SUITE("Economy Tests") 
 // {
 //     TEST_CASE("Testing Tax Calculators") 
@@ -531,7 +524,6 @@
 
 // }        
 
-// //KARABO SEROTHOANE
 // TEST_SUITE("CITIZEN TESTS") {
 
 //     Government* Gov;
@@ -608,16 +600,6 @@
 
 // }
 
-// //KATLEGO MOSITI
-
-
-// //PABALLO DIYASE
-
-
-// //RETHABILE BORE
-
-
-// //THENDO MBEDZI
 // TEST_SUITE("Resource Management System Tests") {
 //     TEST_CASE("Water Resource Tests") {
 //         Water* water = new Water();
