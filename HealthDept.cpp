@@ -15,9 +15,9 @@ HealthDept::HealthDept(float budget)
  * @param name The name of the facility.
  * @param facility Pointer to the HealthcareFacility being added.
  */
-void HealthDept::addFacility(std::string name, HealthcareFacility* facility)
+void HealthDept::addFacility(std::string name, HealthcareFacility *facility)
 {
-    if(budget <= 0)
+    if (budget <= 0)
     {
         std::cout << "No budget to build Health Facility\n";
         return;
@@ -30,12 +30,12 @@ void HealthDept::addFacility(std::string name, HealthcareFacility* facility)
  * @brief Admits a patient to an available healthcare facility.
  * @param c Pointer to the Citizen being admitted.
  */
-void HealthDept::admitPatient(Citizen* c)
+void HealthDept::admitPatient(Citizen *&c)
 {
     auto clinicIt = facilities.find("Clinic");
     if (clinicIt != facilities.end())
     {
-        HealthcareFacility* clinic = clinicIt->second;
+        HealthcareFacility *clinic = clinicIt->second;
         clinic->admitPatient(c);
         return;
     }
@@ -47,9 +47,9 @@ void HealthDept::admitPatient(Citizen* c)
 void HealthDept::totalDeaths()
 {
     int totalDeaths = 0;
-    for(auto& facilityPair : facilities)
+    for (auto &facilityPair : facilities)
     {
-        HealthcareFacility* facility = facilityPair.second;
+        HealthcareFacility *facility = facilityPair.second;
         totalDeaths += facility->getDeathToll();
     }
     std::cout << "The Health Department has reported a total death toll of " << totalDeaths << " in 2024\n\n";
@@ -60,7 +60,7 @@ void HealthDept::totalDeaths()
  */
 HealthDept::~HealthDept()
 {
-    for (auto& facilityPair : facilities)
+    for (auto &facilityPair : facilities)
     {
         // Deletion logic if needed
     }

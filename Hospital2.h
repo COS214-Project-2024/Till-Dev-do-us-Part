@@ -8,7 +8,8 @@
  * @class Hospital2
  * @brief Represents an advanced healthcare facility for critically ill patients.
  */
-class Hospital2 : public HealthcareFacility {
+class Hospital2 : public HealthcareFacility
+{
 public:
     /**
      * @brief Default constructor initializes Hospital2.

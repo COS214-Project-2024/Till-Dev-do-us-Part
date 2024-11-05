@@ -239,9 +239,8 @@ bool House::addOccupant(Citizen *c)
             // cout << "Occupant added to House" << endl;
             return true;
         }
-        else
-        {
-            cout << "Occupant could not be added to House, House at capacity" << endl;
+        else{
+            // cout << "Occupant could not be added to House, House at capacity" << endl;
             return false;
         }
     }

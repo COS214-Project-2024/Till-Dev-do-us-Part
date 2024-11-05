@@ -21,7 +21,7 @@ void Clinic::admitPatient(Citizen*& c)
     //     c = nullptr; // Patient is dead
     //     return;
     // }
-    if(c->getHealth()>=50)
+    if (c->getHealth() >= 50)
     {
         return;
     }

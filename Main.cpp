@@ -11,6 +11,8 @@ Population *AdultFactory, *MinorFactory;
 ProductionUtility *powerPlant, *waterSupply;
 ServiceUtility *wasteManagement, *SewerSystem;
 Department *DevDept, *FinDept, *SoAffDept, *TransDept, *ResourceDept, *healthDept;
+ParkFactory* parkManu; MonumentFactory* monuManu; CulturalFactory* culManu; FactoryFactory* factManu;
+Building* park, *monument, *cultcenter, *factory; 
 TaxCalculator *taxes[6];
 WiseBucks *apps[6];
 Business *first8Businesses[8];
@@ -101,22 +103,73 @@ void DemoMain()
 
     morePeople = AdultFactory->reproduce(200);
 
+    for (int i = 0; i < 200; i++)
+    {
+        ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addCitizen(morePeople[i]);
+        ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->addToUnemployed(morePeople[i]);
+    }
+
     for (int j = 0; j < 50; j++){
 
         Building* h = ((Adult*)first100[j])->getHouse();
         int num = 0;
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 100; i++)
         {
-            if(num<5 && !((Adult*)morePeople[i])->hasHouse()){
+            if(num<4 && !((Adult*)morePeople[i])->hasHouse()){
                 ((Adult*)morePeople[i])->setHouse(h);
                 h->addOccupant(morePeople[i]);
                 num++;
             }
             else
-                continue;
+                break;
         }
     }
+    
+    Policy* healthcarePolicy = new Policy("Universal Healthcare", " UH01 ", " Provide accessible healthcare to all citizens. ");
+    Policy* crime = new Policy(" Crime Policy "," CP01"," Anyone who commits crime will be hanged in public. ");
+    Policy* healthcarePolicy2 = new Policy("Universal Healthcare", " UH02 ", " Sick people will not be attended to for free ");
+
+    std::cout << "\n--- Enacting Healthcare Policy ---\n";
+    Gov->enactPolicy(healthcarePolicy);
+    Gov->enactPolicy(crime);
+
+    Caretaker caretaker;
+    caretaker.saveMemento(Gov->createMemento());
+
+    Gov->enactPolicy(healthcarePolicy2);
+
+    //Save state of policies with Memento
+  
+    if(((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->getSatisfactionLevel()<50)
+    {
+        cout << "Citizens are not happy with new policy, reverting to previouse one"; 
+
+        // std::cout << "\n--- Reverting Universal Healthcare Policy ---\n";
+        // Gov->revertPolicy("Universal Healthcare");
+
+        std::cout << "\n--- Restoring Policies from Memento ---\n";
+        Gov->setMemento(caretaker.getMemento());
+    }
+ 
+    // Revert a policy and check remaining policies
+  
+
+    // std::cout << "\n--- Current Policies ---\n";
+
+    // for (const auto& policy : government->getPolicies()) {
+    //     std::cout << "Policy: " << policy->getName() << " - " << policy->getDescription() << "\n";
+    // }
+
+ 
+    std::cout << "\n--- Policies after Reversion ---\n";
+    for (const auto& policy : Gov->getPolicies()) {
+        std::cout << "Policy: " << policy->getName() << " - " << policy->getDescription() << "\n";
+    }
+
+     // Restore previous policies using Memento
+    std::cout << "\n--- Restoring Policies from Memento ---\n";
+    Gov->setMemento(caretaker.getMemento());
 
     simulation(); 
 
@@ -174,16 +227,46 @@ void performDailyActivities()
 {
     ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->sendAdultsToWork();
     ((FinanceDept *)(Government::getInstance()->getDepartment("Finance")))->getCRS()->settleTax();
+
+    cout << "Tax Collection Complete " << endl;
+    ((FinanceDept *)(Government::getInstance()->getDepartment("Finance")))->getCRS()->distributeTax();
 }
 
 void unleashDisease()
 {
-    cout << "THERE HAS BEEN AN OUTBREAK OF COS VIRUS" << endl;
-    for (int i = 0; i < 150; i++)
+    string diseaseName="";
+    cout << "Name your disease: " << endl;
+    cin>> diseaseName;
+
+    cout << "THERE HAS BEEN AN OUTBREAK OF " << (diseaseName) << endl;
+    cout << "hereee" << endl;
+
+    for (int i = 0; i < 100; i++)
     {
-       clinic->admitPatient(first100[i]);
+        morePeople[i]->setHealth((i%50));
     }
-    
+    // cout << "hereee2" << endl;
+
+
+    for (int i = 0; i < 50; i++)
+    {
+        first100[i]->setHealth((i%50));
+    }
+
+    // cout << "hereee3" << endl;
+
+
+    // for (int i = 0; i < 50; i++)
+    // {
+    //     clinic->admitPatient(first100[i]);
+    // }
+    // cout << "hereee4" << endl;
+
+
+    // for (int i = 0; i < 100; i++)
+    // {
+    //     clinic->admitPatient(morePeople[i]);
+    // }
 }
 
 void governmentObjects()
@@ -220,15 +303,23 @@ void utilResourceObjects()
     SewerSystem = new SewageSystem("CitySewage", static_cast<ResourceDepartment *>(ResourceDept), apps[4]);
     cout << endl; 
 
-    // ((ResourceDepartment *)ResourceDept)->addUtility(powerPlant);
-    // ((ResourceDepartment *)ResourceDept)->addUtility(waterSupply);
-    // ((ResourceDepartment *)ResourceDept)->addUtility(wasteManagement);
-    // ((ResourceDepartment *)ResourceDept)->addUtility(SewerSystem);
+    ((ResourceDepartment *)ResourceDept)->addUtility(powerPlant);
+    ((ResourceDepartment *)ResourceDept)->addUtility(waterSupply);
+    ((ResourceDepartment *)ResourceDept)->addUtility(wasteManagement);
+    ((ResourceDepartment *)ResourceDept)->addUtility(SewerSystem);
 }
 
 void buildingObjects()
 {
-    // Implementation required
+    parkManu = new ParkFactory();
+    culManu = new CulturalFactory();
+    monuManu = new MonumentFactory();
+    factManu = new FactoryFactory();
+
+    park = parkManu->build();
+    cultcenter = culManu->build();
+    monument = monuManu->build();
+    factory = factManu->build();
 }
 
 void financeObjects()
@@ -260,13 +351,7 @@ void healthcareObjects()
     ICH = new Hospital2();
 
     clinic->addSuccessor(GH);
-    clinic->addSuccessor(ICH);
-
-
-    for (int i = 0; i < 150; i++)
-    {
-        clinic->admitPatient(first100[i]);
-    }
+    GH->addSuccessor(ICH);
 }
 
 void citizenObjects()
@@ -385,25 +470,62 @@ void simulation()
 void summer()
 {
     cout << "Summer has arrived! " << endl << endl;
-
     performDailyActivities();
+    inflation();
 }
 
 void autumn()
 {
     performDailyActivities();
+    strike();
 }
 
 void winter()
 {
     performDailyActivities();
-    // unleashDisease();
+    unleashDisease();
 }
 
 void spring()
 {
     performDailyActivities();
     ((SocialAffairsDept *)(Gov->getDepartment("SocialAffairs")))->growPopulation(100);
+}
+
+void strike(){
+
+    // "The Citizens are angry!"; 
+
+    // cout << R"(Π🔥_
+    //       /🔥/_＼
+    //      |🔥 田｜門 🔥) \t";
+
+    // cout << R"(Π🔥_
+    //     /🔥/_＼
+    //     |🔥 田｜門 🔥)"
+    // << endl;
+
+
+    // ((Park*)park)->~Park();
+    // ((Factory*)factory)->~Factory();
+    // ((Monument*)monument)->~Monument();
+    // ((CulturalCenter*) cultcenter)->~CulturalCenter();
+
+    delete park;
+    delete factory;
+    delete monument;
+    delete cultcenter;
+
+}
+
+void inflation(){
+
+    cout << " Inflation has struck the city...";
+    
+    for (int i = 0; i < 50; i++)
+    {
+        ((Adult*)first100[i])->spendMoney(500);
+    }
 }
 
 void globalCleanUp()
@@ -433,18 +555,6 @@ void globalCleanUp()
     delete EnergyResource;
     EnergyResource = nullptr;
 
-    Gov->removeDepartment("SocialAffairs");
-    delete SoAffDept;
-    SoAffDept = nullptr;
-
-    Gov->removeDepartment("Health");
-    delete healthDept;
-    healthDept = nullptr;
-
-    Gov->removeDepartment("Transport");
-    delete TransDept;
-    TransDept = nullptr;
-
     delete ICH;
     ICH = nullptr;
 
@@ -460,30 +570,30 @@ void globalCleanUp()
     delete EnergyResource;
     EnergyResource = nullptr;
 
-    Gov->removeDepartment("SocialAffairs");
-    delete SoAffDept;
-    SoAffDept = nullptr;
+    // Gov->removeDepartment("SocialAffairs");
+    // delete SoAffDept;
+    // SoAffDept = nullptr;
 
-    Gov->removeDepartment("Health");
-    delete healthDept;
-    healthDept = nullptr;
+    // Gov->removeDepartment("Health");
+    // delete healthDept;
+    // healthDept = nullptr;
 
-    Gov->removeDepartment("Transport");
-    delete TransDept;
-    TransDept = nullptr;
+    // Gov->removeDepartment("Transport");
+    // delete TransDept;
+    // TransDept = nullptr;
 
-    Gov->removeDepartment("Development");
-    delete DevDept;
-    DevDept = nullptr;
+    // Gov->removeDepartment("Development");
+    // delete DevDept;
+    // DevDept = nullptr;
 
-    Gov->removeDepartment("Finance");
-    delete FinDept;
-    FinDept = nullptr;
+    // Gov->removeDepartment("Finance");
+    // delete FinDept;
+    // FinDept = nullptr;
 
-    Gov->removeDepartment("Resources");
-    delete ResourceDept;
-    ResourceDept = nullptr;
+    // Gov->removeDepartment("Resources");
+    // delete ResourceDept;
+    // ResourceDept = nullptr;
 
-    delete Gov;
+    Government::deleteInstance();
     Gov = nullptr;
 }

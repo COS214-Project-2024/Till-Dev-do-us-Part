@@ -51,7 +51,7 @@ void Adult::react() {
     Feeling* newMood = mood->reaction();  
     delete mood;  
     mood = newMood;  
-    std::cout << "Person is feeling " << mood->getName() << std::endl;
+    // std::cout << "Person is feeling " << mood->getName() << std::endl;
 }
 
 /**
