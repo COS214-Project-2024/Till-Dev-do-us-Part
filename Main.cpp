@@ -80,7 +80,7 @@ void DemoMain()
     // cout << "  WELCOME TO THE GREATEST CITY IN 214" << endl;
     // cout << "~ created by TDP - Till Dev do us Part ~" << endl;
 
-    // displayIntro();
+    displayIntro();
 
     cout << "===========================================================================================================================================================================" << endl;
 
@@ -245,7 +245,7 @@ void unleashDisease()
     {
         morePeople[i]->setHealth((i%50));
     }
-    cout << "hereee2" << endl;
+    // cout << "hereee2" << endl;
 
 
     for (int i = 0; i < 50; i++)
@@ -253,7 +253,7 @@ void unleashDisease()
         first100[i]->setHealth((i%50));
     }
 
-    cout << "hereee3" << endl;
+    // cout << "hereee3" << endl;
 
 
     // for (int i = 0; i < 50; i++)
