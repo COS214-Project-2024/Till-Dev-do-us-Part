@@ -15,10 +15,11 @@
  * @param resource Pointer to the resources used by the utility
  * @param maxWorkers Maximum number of workers for the utility
  */
-Utility::Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int maxWorkers)
+Utility::Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int maxWorkers, WiseBucks* app)
     : name(name), resDept(resDept), resource(resource), MaxWorkers(maxWorkers)
 {
     UtilityBus = new Wellness("Utility", MaxWorkers);
+    UtilityBus->linkWiseBucks(app);
     std::cout << "Buying Property for Utilities" << std::endl;
     UtilityBus->buyProperty("Plant");
     std::cout << "Hiring Employees for Utilities" << std::endl;

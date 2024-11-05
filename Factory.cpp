@@ -5,10 +5,10 @@
  */
 Factory::Factory() : Industrial("Factory")
 {
-    area = 1300;   /**< Area of the factory in square units. */
-    capacity = 15; /**< Maximum number of occupants allowed in the factory. */
-    value = 50000; /**< Monetary value of the factory. */
-    cout << "Factory created" << endl;
+    area = 1300;
+    capacity = 15;
+    value=50000;
+    // cout << "Factory created" << endl;
 }
 
 /**

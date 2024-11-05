@@ -24,6 +24,7 @@ FinanceDept::FinanceDept(float budget)
 void FinanceDept::newBusiness(Business* business)
 {
     businesses.push_back(business); 
+    // cout << "New business added to vector" << endl; 
 }
 
 /**

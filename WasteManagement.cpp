@@ -11,8 +11,8 @@
  * @param name Name of the waste management utility
  * @param department Pointer to the Resource Department
  */
-WasteManagement::WasteManagement(std::string name, ResourceDepartment *department)
-    : ServiceUtility(name, department)
+WasteManagement::WasteManagement(std::string name, ResourceDepartment *department,WiseBucks* app)
+    : ServiceUtility(name, department,app)
 {
     setServState(new OperationalServiceState); // Set the initial service state to operational
 }

@@ -261,7 +261,7 @@ bool CBD::addBuilding(Building *building)
                 waterUnits += building->getWater();
                 electricityUnits += building->getElectricity();
                 cleanliness = (cleanliness + building->getCleanliness()) / noBuildings;
-                cout << "Building added to the CBD" << endl;
+                // cout << "Building added to the CBD" << endl;
                 return true;
             }
             else

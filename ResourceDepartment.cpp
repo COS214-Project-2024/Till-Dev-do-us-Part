@@ -94,6 +94,7 @@ void ResourceDepartment::addUtility(Utility *utility)
 {
     utilities.push_back(utility);
     std::cout << "ResourceDepartment: Added utility." << std::endl;
+    std::cout << "Budget: " << budget - 2000 << std::endl;
 }
 
 /**
@@ -157,7 +158,8 @@ bool ResourceDepartment::processResourceRequest(string utiName, float amount)
                 }
                 else
                 {
-                    prodUtility->startProduction(); // Restart production if insufficient
+                    prodUtility->incrementRequestCounter(); 
+                    // prodUtility->startProduction(); // Restart production if insufficient
                     std::cout << utiName << " production restarted due to insufficient resources." << std::endl;
                 }
             }

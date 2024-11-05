@@ -41,7 +41,7 @@ public:
      * @param resource Pointer to the resources used by the utility
      * @param maxWorkers Maximum number of workers for the utility
      */
-    Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int maxWorkers);
+    Utility(const std::string &name, ResourceDepartment *resDept, Resources *resource, int maxWorkers,WiseBucks* app);
 
     /**
      * @brief Virtual destructor for Utility.

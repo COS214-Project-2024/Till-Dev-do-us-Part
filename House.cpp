@@ -236,7 +236,7 @@ bool House::addOccupant(Citizen *c)
         if (occupants.size() < capacity)
         {
             occupants.push_back(c);
-            cout << "Occupant added to House" << endl;
+            // cout << "Occupant added to House" << endl;
             return true;
         }
         else

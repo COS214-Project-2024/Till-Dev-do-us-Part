@@ -1,46 +1,40 @@
-#include <string>
 #include "Clinic.h"
 #include <iostream>
-#include <random>
 
-
-Clinic::Clinic() 
+/**
+ * @brief Default constructor for Clinic, sets successor to nullptr and initializes death toll.
+ */
+Clinic::Clinic()
 {
-    successor=nullptr;
-    deathtoll=0;
+    successor = nullptr;
+    deathtoll = 0;
 }
 
-void Clinic::admitPatient(Citizen* c) {///take in citizen
-    if(c->getHealth()<=0)
+/**
+ * @brief Attempts to admit a patient to the clinic based on health status.
+ * @param c Pointer to the Citizen being admitted.
+ */
+void Clinic::admitPatient(Citizen*& c)
+{
+    // if(c->getHealth() <= 0)
+    // {
+    //     c = nullptr; // Patient is dead
+    //     return;
+    // }
+    if(c->getHealth()>=50)
     {
-        c=nullptr;///dead!!
+        return;
     }
-    if (c->getHealth()<50 && c->getHealth()>=30) {
+    else if (c->getHealth() < 50 && c->getHealth() >= 30)
+    {
         std::cout << "Patient admitted\n";
         treatPatient(c);
-    } else {
-        if(successor!=nullptr)
+    }
+    else
+    {
+        if (successor != nullptr)
         {
             successor->admitPatient(c);
         }
-
     }
 }
-
-// void Clinic::treatPatient(Citizen* c)
-// {
-//     int outcome=generateRandomValue();
-//     if(outcome==1 || outcome==2)
-//     {
-//         dischargePatient(c);
-//     }
-//     else
-//     {
-        
-//     }
-    
-// }
-
-
-
-
